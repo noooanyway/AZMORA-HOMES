@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { company, contacts, preview } from '../lib/site';
+
+const fields = [
+  { label: 'Responsável pelo tratamento', value: company.legalName, placeholder: 'Entidade responsável a definir' },
+  { label: 'Morada', value: company.registeredAddress, placeholder: 'Morada da empresa a definir' },
+  { label: 'Contacto de privacidade', value: company.privacyEmail, placeholder: 'Email de privacidade a definir', email: true },
+  { label: 'Fundamento jurídico', value: company.privacyBasis, placeholder: 'Fundamento jurídico a validar' },
+  { label: 'Prazo ou critério de conservação', value: company.privacyRetention, placeholder: 'Prazo ou critério de conservação a definir' },
+  { label: 'Prestadores que recebem os pedidos', value: company.privacyProvider, placeholder: 'Prestador de formulários e email a confirmar' },
+  { label: 'Transferências internacionais', value: company.privacyTransfers, placeholder: 'Localização e garantias do tratamento externo a validar' },
+].filter(({ value }) => value || preview);
+---
+
+<Layout title="Privacidade" description="Informação sobre os dados usados pela Azmora Homes para responder a pedidos e guardar preferências no navegador.">
+  <div class="wrap page prose legal-page">
+    <p class="kicker"><i></i> PRIVACIDADE</p>
+    <h1>Política de <em>privacidade.</em></h1>
+    <p class="intro">Esta página explica que dados são utilizados quando envia um pedido e como funcionam os favoritos e a comparação de casas.</p>
+    {preview && <p class="legal-draft">Versão de antevisão. Os campos assinalados serão preenchidos antes do lançamento.</p>}
+
+    <section>
+      <h2>Pedidos de contacto</h2>
+      <p>O formulário recolhe nome, email, motivo e mensagem, bem como as casas selecionadas. Se os indicar, são também recebidos o telefone, a tipologia pretendida e a localidade de destino. Estes dados servem para identificar o pedido, responder e acompanhar a consulta sobre as casas.</p>
+      <p>Quando o envio está ativo, o pedido é encaminhado pelo serviço de formulários para a caixa de atendimento. O email indicado pelo visitante permite responder ao pedido. Os dados do formulário não são publicados no catálogo.</p>
+      {contacts.whatsapp && <p>Ao escolher o WhatsApp, abre um serviço externo. O WhatsApp trata os dados da conversa segundo as suas próprias condições de privacidade.</p>}
+      {fields.length > 0 && (
+        <dl class="business-details business-details-legal">
+          {fields.map(({ label, value, placeholder, email }) => (
+            <div>
+              <dt>{label}</dt>
+              <dd>{value ? email ? <a href={'mailto:' + value}>{value}</a> : value : <span class="business-placeholder">{placeholder}</span>}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </section>
+
+    <section>
+      <h2>Favoritos e comparação</h2>
+      <p>Os favoritos e a seleção para comparação são guardados no armazenamento local do navegador, sem conta de utilizador. Pode limpar as seleções no site ou apagar os dados do site nas definições do navegador. Se optar por enviar um pedido sobre essas casas, as referências escolhidas seguem no pedido.</p>
+    </section>
+
+    <section>
+      <h2>Os seus direitos</h2>
+      <p>Pode pedir acesso, retificação ou apagamento dos seus dados, limitação do tratamento, oposição ou portabilidade, quando aplicável. Para exercer estes direitos, utilize o contacto de privacidade indicado nesta página. Também pode apresentar uma reclamação à <a class="under" href="https://www.cnpd.pt/cidadaos/participacoes/">Comissão Nacional de Proteção de Dados</a>.</p>
+    </section>
+  </div>
+</Layout>

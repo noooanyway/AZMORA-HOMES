@@ -1,0 +1,27 @@
+{
+  "name": "azmora-homes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "catalog:validate": "node scripts/catalog.mjs",
+    "catalog:import": "node scripts/catalog.mjs --import"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.5",
+    "@fontsource/dm-sans": "^5.2.0",
+    "@fontsource/instrument-serif": "^5.2.0",
+    "astro": "^5.16.0",
+    "lucide-astro": "^0.468.0",
+    "typescript": "^5.9.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.1",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^0.14.1"
+  }
+}

@@ -1,0 +1,103 @@
+---
+import { Armchair, Bath, BedDouble, CookingPot, House as HouseIcon, List, MoveDiagonal, Ruler, SlidersHorizontal, Tag, Thermometer, Trees } from 'lucide-astro';
+import { clean, houseMeasure, specs, type House } from '../lib/catalog';
+
+const { h } = Astro.props as { h: House };
+const values = specs(h);
+const reference = h.model_measure_reference;
+const showBathroomNote = h.bathrooms == null && Boolean(h.bathroom_layout);
+const measurements = ([
+  { field: 'length', label: 'Comprimento', announced: 'anunciado', Icon: Ruler },
+  { field: 'width', label: 'Largura', announced: 'anunciada', Icon: Ruler },
+  { field: 'area', label: 'Área', announced: 'anunciada', Icon: MoveDiagonal },
+] as const).map(({ field, label, announced, Icon }) => {
+  const { value, source } = houseMeasure(h, field);
+  return { label: `${label} ${source === 'reference' ? 'de referência' : announced}`, value: value ?? 'A confirmar', Icon, source };
+});
+const specifications = [
+  { label: 'Marca', value: values.Marca, Icon: Tag },
+  { label: 'Modelo / referência', value: h.model ?? 'A confirmar', Icon: HouseIcon },
+  { label: 'Tipologia', value: values.Tipologia, Icon: HouseIcon },
+  { label: 'Quartos', value: values.Quartos, Icon: BedDouble },
+  ...(h.bedroom_sleeping_places != null
+    ? [{ label: 'Lugares para dormir nos quartos', value: String(h.bedroom_sleeping_places), Icon: BedDouble }]
+    : []),
+  { label: 'Casas de banho', value: values['Casas de banho'], Icon: Bath },
+  ...measurements,
+  { label: 'Condição', value: values['Condição'], Icon: SlidersHorizontal },
+];
+
+// The categories organise the unit's existing descriptions. Keep every entry
+// intact so shared rooms and equipment are never inferred or counted twice.
+const categories = [
+  { label: 'Zona de estar e refeições', Icon: Armchair, pattern: /\b(sala|sofa|refeicoes|janelas|mobiliario)\b/ },
+  { label: 'Cozinha e arrumação', Icon: CookingPot, pattern: /\b(cozinha|placa|fogao|despensa|loica)\b/ },
+  { label: 'Quartos e camas', Icon: BedDouble, pattern: /\b(quartos?|camas?|beliche)\b/ },
+  { label: 'Zona de banho e WC', Icon: Bath, pattern: /\b(duche|wc|sanita|banho|sanitarias)\b/ },
+  { label: 'Climatização', Icon: Thermometer, pattern: /\b(aquecimento|radiadores|ar condicionado)\b/ },
+  { label: 'Exterior e acessos', Icon: Trees, pattern: /\b(exterior(?:es)?|terraco|deck|alpendre)\b/ },
+];
+const other = { label: 'Outros detalhes', Icon: List };
+const grouped = [...categories, other].map(({ label, Icon }) => ({ label, Icon, entries: [] as string[] }));
+for (const description of h.equipment_summary) {
+  const index = categories.findIndex(({ pattern }) => pattern.test(clean(description)));
+  grouped[index < 0 ? categories.length : index].entries.push(description);
+}
+---
+
+<section class="section house-profile" aria-labelledby="house-spec-title">
+  <div class="house-profile-heading">
+    <h2 id="house-spec-title">Ficha <em>técnica</em></h2>
+    {h.description_azmora && <p>{h.description_azmora}</p>}
+  </div>
+
+  <div class="house-profile-grid">
+    <section class="house-specifications" aria-labelledby="specifications-title">
+      <h3 id="specifications-title">Especificações</h3>
+      <div class="house-spec-panel">
+        <dl>
+          {specifications.map(({ label, value, Icon }) => (
+            <div class="house-spec-row">
+              <dt><Icon size={16} aria-hidden="true" />{label}</dt>
+              <dd class:list={{ 'spec-value-pending': /a confirmar|por confirmar/i.test(value) }}>
+                {value}{label === 'Casas de banho' && showBathroomNote && <sup>*</sup>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        {showBathroomNote && (
+          <p class="house-area-note" id="nota-casas-de-banho">
+            * {h.bathroom_layout}
+          </p>
+        )}
+        {h.area_m2 != null && (
+          <p class="house-area-note">Área indicada no anúncio. O critério de medição e a área útil interior estão por confirmar.</p>
+        )}
+        {measurements.some(({ source }) => source === 'reference') && (
+          <p class="house-area-note">Valores de referência de modelos ou versões comparáveis, por confirmar nesta unidade.{reference?.note && ` ${reference.note}`}</p>
+        )}
+      </div>
+    </section>
+
+    <section class="house-equipment" aria-labelledby="equipment-title">
+      <h3 id="equipment-title">Distribuição e equipamento</h3>
+      {h.equipment_summary.length ? (
+        <div class="house-equipment-list">
+          {grouped.filter(({ entries }) => entries.length).map(({ label, Icon, entries }) => (
+            <section class="house-equipment-row">
+              <div class="house-equipment-label">
+                <span class="house-spec-icon"><Icon size={20} aria-hidden="true" /></span>
+                <h4>{label}</h4>
+              </div>
+              {entries.length === 1 ? <p>{entries[0]}</p> : (
+                <ul>{entries.map((entry) => <li>{entry}</li>)}</ul>
+              )}
+            </section>
+          ))}
+        </div>
+      ) : (
+        <p>Equipamento por confirmar.</p>
+      )}
+    </section>
+  </div>
+</section>

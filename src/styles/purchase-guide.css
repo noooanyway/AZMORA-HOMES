@@ -1,0 +1,63 @@
+.purchase-heading,
+.purchase-panels,
+.purchase-callouts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 30px);
+}
+.purchase-heading { align-items: end; margin-bottom: 25px; }
+.purchase-heading h2 { margin-top: 8px; }
+.purchase-heading > p { max-width: 46ch; color: var(--muted); }
+.purchase-panel, .purchase-callouts > aside {
+  background: #eeeee5;
+  padding: clamp(18px, 2.3vw, 32px);
+  border: 1px solid var(--line);
+}
+.purchase-panel-dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+.purchase-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font: 600 clamp(1.7rem, 3vw, 2.45rem)/1.1 var(--sans);
+  letter-spacing: -.035em;
+}
+.purchase-panel-note { margin-bottom: 8px; font-size: .9rem; }
+.purchase-guide svg { flex: none; }
+.purchase-panel ul { list-style: none; margin: 0; padding: 0; }
+.purchase-panel li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  padding: 12px 0;
+}
+.purchase-panel li + li { border-top: 1px solid var(--line); }
+.purchase-panel-dark li + li { border-color: #ffffff42; }
+.purchase-panel li p { margin-top: 2px; }
+.purchase-process { margin-top: clamp(28px, 4vw, 52px); }
+.purchase-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  padding: 0;
+  margin: 16px 0 24px;
+  list-style-position: inside;
+}
+.purchase-steps li { padding-top: 14px; border-top: 1px solid var(--line); }
+.purchase-steps li::marker { font-weight: 600; color: var(--rust); }
+.purchase-steps svg { vertical-align: middle; margin-inline-start: 8px; }
+.purchase-steps h4 { margin: 10px 0 5px; font-size: 1rem; }
+.purchase-steps p { color: var(--muted); }
+.purchase-callouts > aside { display: flex; gap: 12px; align-items: flex-start; }
+.purchase-callouts h3 { font-size: clamp(1.55rem, 2.5vw, 2rem); }
+.purchase-callouts p { margin: 6px 0; }
+@media (max-width: 850px) {
+  .purchase-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .purchase-heading, .purchase-panels, .purchase-callouts { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 460px) {
+  .purchase-steps { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+}

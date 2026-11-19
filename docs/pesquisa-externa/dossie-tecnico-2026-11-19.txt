@@ -1,0 +1,812 @@
+AZMORA HOMES — DOSSIÊ DE FICHAS TÉCNICAS DAS 16 CASAS DA EXPOSUL
+Pesquisa complementar na Internet | 19 de novembro de 2026
+ATUALIZAÇÃO 2: tipologias fornecidas pelo utilizador e verificação adicional de fontes públicas
+Formato: TXT, português de Portugal | Destino: consulta técnica e integração controlada no Codex
+
+===============================================================================
+LEITURA OBRIGATÓRIA — COMO INTERPRETAR A INFORMAÇÃO
+===============================================================================
+
+A = DADO DA UNIDADE: indicado no anúncio específico da Exposul; é a base mais
+    fiável de que dispomos para preencher a ficha pública, sujeito a confirmação
+    comercial e eventual erro no próprio anúncio.
+B = FICHA DE MODELO: documentação do fabricante de uma gama, modelo e ano
+    identificados; aplica-se à versão documentada, NÃO necessariamente à casa
+    concreta da Exposul.
+C = OUTRO EXEMPLAR: anúncio de outro revendedor/proprietário; comprova que
+    essa configuração existe, mas não prova os dados da casa da Exposul.
+P = PENDENTE: informação da unidade em venda que não foi possível validar.
+
+IMPORTANTE:
+• Não misturar dados de unidades distintas da mesma marca/modelo. As referências
+  001 e 007, 002 e 009, 008 e 011 são ANÚNCIOS DIFERENTES.
+• T2/T3, neste catálogo, significam 2/3 QUARTOS. Não significam 2/3 casas de banho.
+• Compartimento de duche e WC separado NÃO equivalem automaticamente a duas
+  casas de banho completas. Na ausência de contagem expressa, usar «zona de
+  duche e WC independente» e manter o número de casas de banho por confirmar.
+• «Área de implantação», «área útil/interior», «área anunciada» e «terraço»
+  podem usar critérios distintos. Não converter uma na outra sem fonte.
+• O número do ano encontrado num anúncio de outro exemplar NÃO identifica o ano
+  de fabrico da unidade Exposul. Do mesmo modo, características «de série» dos
+  catálogos antigos podem ter sido alteradas ou retiradas.
+• Os valores de venda encontrados em sites externos pertencem a OUTROS anúncios,
+  muitas vezes vendidos. Não são preços Exposul nem preços de revenda Azmora.
+• Não foi possível obter ficha de origem específica, completa e inequivocamente
+  correspondente às 16 unidades da Exposul. Este relatório é completo quanto ao
+  que foi documentado e às lacunas, não uma certificação técnica das 16 unidades.
+• A descrição A tem por base as fichas Exposul consultadas e o relatório de
+  pendências fornecido pelo utilizador. As referências B/C foram pesquisadas
+  separadamente na Internet, com as fontes identificadas abaixo.
+
+
+===============================================================================
+ATUALIZAÇÃO 2 — TIPOS DE CASA VERIFICADOS NAS CAPTURAS DO UTILIZADOR
+===============================================================================
+
+As capturas do catálogo Azmora Homes indicam as seguintes tipologias para as
+16 referências. ESTA TABELA É O REFERENCIAL DOS FILTROS T2/T3 NO SITE:
+
+ID            MARCA / MODELO                   TIPO    QUARTOS   ORIGEM
+exposul-001   O'Hara 734 com terraço           T2      2        Captura + Exposul
+exposul-002   IRM Super Mercure                T2      2        Captura + Exposul
+exposul-003   IRM Super Venus                  T2      2        Captura + Exposul
+exposul-004   Rideau Panama Duo                T2      2        Captura + Exposul
+exposul-005   Willerby Granada XL              T3      3        Captura + Exposul
+exposul-006   Trigano Evolution                T2      2        Captura + Exposul
+exposul-007   O'Hara 734 (madeira)             T2      2        Captura + Exposul
+exposul-008   IRM Super Octália                T3      3        Captura + Exposul
+exposul-009   IRM Super Mercure                T2      2        Captura + Exposul
+exposul-010   Atlas Nevada Super               T3      3        Captura + Exposul
+exposul-011   IRM Super Octália 36,8 m²        T3      3        Captura + Exposul
+exposul-012   O'Hara 784                       T2      2        Captura + Exposul
+exposul-013   Willerby Salisbury               T2      2        Captura + Exposul
+exposul-014   Trigano n.º 18                   T3      3        Captura + Exposul
+exposul-015   O'Hara 834                       T2      2        Captura do catálogo Azmora
+exposul-016   O'Hara T2 7,5 x 4 m             T2      2        Captura + Exposul
+
+TOTAL: 11 casas T2 e 5 casas T3.
+
+IMPORTANTE: esta confirmação resolve a TIPOLOGIA PARA O SITE. Não resolve por
+si só o submodelo, o ano, as dimensões exteriores, o tipo de área ou o número
+de casas de banho completas de uma unidade específica.
+
+As capturas de vendedores externos enviadas pelo utilizador são evidência de
+OUTROS ANÚNCIOS, não das casas com referência exposul-001 a exposul-016.
+
+===============================================================================
+RESUMO COMPARATIVO — O QUE SE DESCOBRIU
+===============================================================================
+
+ID  MODELO                         UNIDADE EXPOSUL     REFERÊNCIA EXTERNA (B/C)
+001 O'Hara 734 c/terraço, T2      Medidas: P           734 2009: 7,30 x 4,00 m; 27,30 m²
+002 IRM Super Mercure, T2         Medidas: P           2007: 7,32 x 4,00 m; 27,50 m²
+003 IRM Super Venus, T2           Medidas: P           Várias: 6,12–6,30 x 4,00 m
+004 Rideau Panama Duo, T2         Medidas: P           2020: 8,25 x 4,00 m; 23 m² + 9 m²
+005 Willerby Granada XL, T3       Comprimento: 12,5 m  Outros: 37–40 x 12 pés, variáveis
+006 Trigano Evolution, T2         Medidas: P           Evo 27, Evo 29, Evo 31, etc.
+007 O'Hara 734, T2                Medidas: P           734 2009: 7,30 x 4,00 m; 27,30 m²
+008 IRM Super Octália, T3         Medidas: P           2010: 9,09 x 4,00 m; 34,20 m²
+009 IRM Super Mercure, T2         Medidas: P           2007: 7,32 x 4,00 m; 27,50 m²
+010 Atlas Nevada Super, T3        Medidas: P           2007: 36 x 12 pés (~10,97 x 3,66 m)
+011 IRM Super Octália, T3         Área: 36,8 m²; 2012  Outras versões: 9,09 x 4,00 m
+012 O'Hara 784, T2                Medidas: P           2006: 7,80 x 4,00 m; outras 7,9 x 4
+013 Willerby Salisbury, T2        Medidas: P           Exemplar 2006: 35 x 12 pés
+014 Trigano n.º 18, T3            Medidas: P           SUBMODELO NÃO IDENTIFICADO
+015 O'Hara 834, T2                Medidas: P           O'Phéa 834 2Ch: 8,30 x 4,00 m
+016 O'Hara T2, 30 m²              7,5 x 4 m; 30 m²     SUBMODELO NÃO IDENTIFICADO
+
+«P» = PENDENTE, não preencher a ficha pública com a coluna da direita.
+
+===============================================================================
+FICHA 01 / 16 — EXPOSUL-001 — O'HARA 734 COM TERRAÇO — T2
+===============================================================================
+
+A | Fabricante/marca: O'Hara. Família/modelo anunciado: 734. Tipologia: T2;
+    dois quartos (um de casal, um com duas camas individuais).
+A | Zona social: sala e zona de refeições com banco corrido, comunicando com a
+    cozinha. Cozinha com placa a gás, exaustor, lava-loiça e frigorífico.
+A | Climatização: ar condicionado identificado no anúncio.
+A | Zona sanitária: cabine de duche e lavatório; sanita em compartimento separado.
+A | Exterior: terraço frontal coberto, com acesso direto ao interior.
+B | Ficha O'Hara O'PHÉA 734 2ch, edição 08/2009: comprimento 7,30 m,
+    largura 4,00 m, altura 3,40 m e superfície anunciada de 27,30 m².
+    Capacidade standard indicada: 4–6 pessoas (inclui cama extraível na sala);
+    cozinha em L e 2 quartos. A ficha assinala opção de beliche no segundo quarto
+    e a possibilidade de cama de bebé no quarto principal. Estas opções não são
+    equipamentos confirmados desta unidade Exposul.
+C | Outro O'Hara 734 com terraço integrado, anunciado por revendedor francês:
+    7,30 x 4,00 m, 2 quartos e terraço integrado; outro exemplar de 2003 com
+    7,30 x 4,00 m e deck coberto. São EXEMPLARES DIFERENTES.
+VERIFICAÇÃO NOVA [B]: Ficha de origem O'Phéa 734, agosto de 2009,
+    consultada e conferida com a planta: 7,30 x 4,00 m, altura 3,40 m,
+    superfície anunciada 27,30 m²; 4/6 dormidas no modelo de fábrica.
+    A imagem de uma casa 'OHARA T2' de 8,4 x 4 m enviada pelo utilizador é
+    OUTRO anúncio de modelo não identificável como 734. NÃO usar 33,6 m² aqui.
+    Ficha: https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+
+P | Confirmar comprimento e largura da própria casa; superfície INTERIOR e
+    área do terraço, separadamente; se o terraço está incluído no preço;
+    ano, estado, número de instalações sanitárias, configuração da sala,
+    caixilharia/vidros, isolamento, garantia, stock e preço Azmora.
+PUBLICAÇÃO: usar os dados A; conservar 7,30 x 4,00 m / 27,30 m² como referência
+    interna até haver identificação de variante/ano e validação física.
+FONTES:
+  [A] https://www.exposul.pt/shop/o-hara-734-c-terraco-t2-38
+  [B] https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+  [C] https://www.msmh.fr/en-stock/ohara-734-terrasse-integree
+  [C] https://lespinsdesel.fr/cession/mobil-home-a-vendre/ohara/mobil-home-a-vendre-o-hara-modele-734-C10-occasion.html
+
+-------------------------------------------------------------------------------
+FICHA 02 / 16 — EXPOSUL-002 — IRM SUPER MERCURE — T2 (ANÚNCIO /37)
+-------------------------------------------------------------------------------
+
+A | IRM Super Mercure; T2; dois quartos. O relatório do projeto para ESTE anúncio
+    regista placa a gás com quatro queimadores, sofá de canto, aquecimento
+    elétrico e sanita em compartimento separado.
+A | A configuração exata das camas, eletrodomésticos e características de
+    isolamento desta unidade ainda não está completamente inventariada.
+B | FICHA ORIGINAL IRM SUPER MERCURE 2007: 7,32 x 4,00 m (dimensões externas,
+    com caleiras); superfície de implantação declarada 27,50 m² (calculada com
+    medidas exteriores de referência da caixa); 2 quartos; 4 a 6 dormidas,
+    usando cama extraível da sala. Cama de casal de 140 x 190 cm e duas camas
+    de 80 x 190 cm; cabine de duche 80 x 80 cm, lavatório e WC separado.
+B | Construção da versão 2007: chassis de aço galvanizado, piso multicamada com
+    45 mm de espessura, paredes com 50 mm, cobertura com isolamento; caixilharia
+    com vidro duplo 4-16-4 de baixa emissividade; cozinha com placa a gás de
+    4 queimadores, pequeno frigorífico 120 L e aquecimento elétrico na sala.
+    Trata-se da configuração da ficha 2007, não da unidade Exposul.
+C | OUTRO IRM Super Mercure vendido por Mobile Home Discount: 7,5 x 4 m,
+    área anunciada 30 m², 2 quartos, 1 zona de duche, WC separado, cozinha
+    com frigorífico, exaustor, fogão, forno e esquentador. O anúncio aparece
+    como VENDIDO e com €13.997 no cabeçalho, mas €14.000 no texto.
+    NENHUM destes valores é o preço da Exposul/Azmora; as medidas também não
+    são automaticamente aplicáveis à exposul-002.
+VERIFICAÇÃO NOVA [C]: Outros DOIS anúncios de IRM Super Mercure:
+    - Mobile Home Discount, usado e VENDIDO: 7,50 x 4,00 m = 30 m² anunciados,
+      T2, chuveiro/lavatório + WC de serviço; cozinha com frigorífico, fogão,
+      forno, exaustor e esquentador. O cabeçalho apresenta 13.997 €, mas o
+      corpo refere 14.000 €; NÃO transplantar preço nem equipamento.
+    - Green Village, outro exemplar usado de 2006: 7,40 x 4,00 m,
+      29,60 m² anunciados, T2 e 1 casa de banho indicada pelo revendedor.
+    Isto prova que o nome Super Mercure cobre metragens diferentes.
+    https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+    https://www.greenvillagemobilehomes.com/catalogo/super-mercure-2
+
+P | Ano, dimensões, área com critério, estado, identificação de chassis,
+    frigorífico e forno reais, climatização, capacidade de dormidas, preço,
+    disponibilidade, transporte, garantia e instalação.
+PUBLICAÇÃO: manter apenas A; a ficha de 2007 e o anúncio de terceiros são B/C.
+FONTES:
+  [A] https://www.exposul.pt/shop/irm-super-mercure-t2-37
+  [B] https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf
+  [C] https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+  [C] https://www.greenvillagemobilehomes.com/fr/catalogo/marca/irm/super-mercure
+
+-------------------------------------------------------------------------------
+FICHA 03 / 16 — EXPOSUL-003 — IRM SUPER VENUS — T2
+-------------------------------------------------------------------------------
+
+A | IRM Super Venus; T2, dois quartos (um de casal e outro com duas camas
+    individuais). Sala, zona de refeições com banco corrido, mesa e cadeiras,
+    mobiliário e arrumações. Cozinha com frigorífico, placa a gás, exaustor
+    e lava-loiça. Duche/lavatório e sanita independente.
+B/C | Este modelo surge com METRAGENS DIFERENTES nos exemplares pesquisados:
+    • Exemplar de 2005: 6,12 x 4,00 m, 2 quartos; cama de casal de 140 x 190 cm
+      e duas camas de 80 x 190 cm; cozinha com placa gás, frigorífico e lava-loiça.
+    • Exemplar 2006: 6,24 x 4,00 m, 2 quartos, 4–6 dormidas anunciadas,
+      uma zona de duche, sala ao centro e cobertura de duas águas.
+    • Exemplar 2010: 6,30 x 4,00 m; 25 m² anunciados; 2 quartos; cozinha em L;
+      algumas unidades têm isolamento reforçado e vidro duplo.
+    • Green Village mostra exemplares 6,30 x 4,00 m e 25,20 m² de 2009/2010.
+    Esta variação impede a escolha de uma medida exata sem o ano da casa Exposul.
+VERIFICAÇÃO NOVA [C]: Green Village, exemplar Super Venus de 2010:
+    6,30 x 4,00 m; área anunciada de 25,20 m²; T2; 1 casa de banho no
+    sistema do vendedor. Outro anúncio francês de 2006 indica 6,24 x 4,00 m
+    e 4/6 dormidas. Dados de exemplares distintos; a unidade Exposul-003
+    continua sem dimensões ou ano identificados.
+    https://www.greenvillagemobilehomes.com/catalogo/super-venus-2-quartos-25-20-m2-2
+    https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38219
+
+P | Ano, medida exata, área útil, número de instalações sanitárias, sistema
+    de aquecimento/ar condicionado, tipo de vidro, eletrodomésticos concretos,
+    estado, preço e disponibilidade.
+PUBLICAÇÃO: utilizar A; manter o intervalo 6,12–6,30 x 4,00 m como pesquisa.
+FONTES:
+  [A] https://www.exposul.pt/shop/irm-super-venus-t2-35
+  [C] https://www.entre-mobil-home.com/mobil-home-occasion-50451-irm-62-pas-de-calais.html
+  [C] https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38219
+  [C] https://www.lebonmobilhome.fr/hebergements/irm-super-venus-2-chambres/
+  [C] https://www.greenvillagemobilehomes.com/catalogo/super-venus-2-quartos-25-20-m2-2
+
+-------------------------------------------------------------------------------
+FICHA 04 / 16 — EXPOSUL-004 — RIDEAU PANAMA DUO — T2
+-------------------------------------------------------------------------------
+
+A | Marca Rideau, modelo Panama Duo, 2 quartos; deck/terraço frontal coberto,
+    cozinha em L, quarto de casal, zona de duche e WC separado, segundo os
+    dados preservados na ficha desta unidade Exposul.
+B | FICHA OFICIAL MOBIL-HOME RIDEAU, COLEÇÃO 2020: 8,25 x 4,00 m de dimensão
+    exterior; 23 m² de espaço interior declarados e terraço coberto integrado
+    de 9 m²; 2 quartos; 4 pessoas de base, até 6 com opção de cama convertível.
+    A ficha mostra alternativas de orientação do terraço e diferentes opções
+    de revestimento exterior.
+B | Distribuição 2020: cozinha de canto com placa de 4 queimadores, exaustor,
+    lava-loiça, frigorífico baixo e espaço para máquina de lavar louça; zona
+    de refeições; 2 quartos com arrumação; duche 80 x 80 cm, lavatório e WC.
+    Determinados acabamentos, eletrodomésticos maiores e packs são opcionais.
+VERIFICAÇÃO NOVA [B]: Ficha oficial PANAMA duo, coleção Rideau 2020,
+    fotografada e conferida com planta. Versão documentada: 8,25 x 4,00 m,
+    23 m² de espaço interior, terraço INTEGRADO COBERTO de 9 m², 2 quartos,
+    4 pessoas (até 6 com cama extra opcional). Duche de 80 x 80 cm.
+    Estrutura declarada na versão 2020: chassis galvanizado, pavimento
+    hidrófugo 71 mm, cobertura metálica galvanizada, caixilharia PVC com
+    vidro duplo 4/16/4, iluminação LED, convector de 1000 W na sala e
+    termoacumulador eletrónico. CONFIRMAR se a unidade concreta é desta
+    geração e mantém estes equipamentos; não assumir pacotes opcionais.
+    https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf
+
+P | Validar se a casa Exposul pertence à geração 2020, se o terraço coincide
+    em dimensões e orientação; confirmar equipamento real, ano, estado,
+    dimensões totais, área útil, caixilharia, isolamento, climatização,
+    capacidade de dormidas, preço e disponibilidade.
+PUBLICAÇÃO: A pode ser usado; B é ficha de origem da versão 2020, NÃO uma ficha
+    certificada da unidade à venda.
+FONTES:
+  [A] https://www.exposul.pt/shop/rideau-panama-duo-t2-36
+  [B] https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf
+
+-------------------------------------------------------------------------------
+FICHA 05 / 16 — EXPOSUL-005 — WILLERBY GRANADA XL — T3
+-------------------------------------------------------------------------------
+
+A | Marca Willerby; modelo comercial anunciado Granada XL; 3 quartos;
+    comprimento anunciado 12,5 m; 2 casas de banho indicadas pela Exposul:
+    ambas com sanita e lavatório, pelo menos uma com duche.
+A | Sala de estar com sofá de canto e janelas panorâmicas; sala de refeições;
+    cozinha com placa a gás, forno duplo, exaustor, lava-loiça, frigorífico,
+    bancada e arrumação. Quarto principal e dois quartos com duas camas
+    individuais; aquecimento por radiadores; duas portas exteriores.
+C | A GRANADA/GRANADA XL NÃO TEM DIMENSÃO FIXA. Documentação histórica e
+    anúncios mostram, entre outros, um Granada XL de 38 x 12 pés com DOIS
+    quartos (revisão de 2010), Granadas de 2008 com 38 x 12 pés e TRÊS
+    quartos, e outras configurações de 37 x 12 ou 40 x 12 pés. Um exemplar
+    Granada T3 de 2008, com 38 x 12 pés, inclui vidros duplos, aquecimento
+    central, frigorífico/congelador integrado e isolamento de inverno.
+    Conversão aproximada 38 x 12 pés = 11,58 x 3,66 m; 40 x 12 = 12,19 x 3,66.
+    NENHUMA prova que a largura da unidade Exposul seja 3,66 m.
+VERIFICAÇÃO NOVA [C]: Existem Granada XL 38 x 12 pés (11,58 x 3,66 m)
+    com DOIS quartos em anúncios antigos; outros Granada/Granada XL com TRÊS
+    quartos apresentam outras dimensões. O anúncio Exposul-005 é T3 e
+    afirma 12,5 m de comprimento, 3 quartos e 2 casas de banho.
+    Não usar 38 x 12 nem as dimensões de um Granada XL T2 como se fossem
+    correspondência exata. O comprimento do fornecedor prevalece.
+    https://staticcaravanbuyer.com/blog/willerby-granada-static-caravan-guide/
+
+P | Largura e área da casa da Exposul; ano e variante, dimensões medidas;
+    confirmar se uma ou ambas as casas de banho têm duche; tipo de radiadores,
+    isolamento, vidros, condições de utilização, estado, preço e stock.
+PUBLICAÇÃO: usar comprimento 12,5 m anunciado e dados A. Não substituir por
+    as dimensões de um Granada 2 quartos apenas pelo nome «XL».
+FONTES:
+  [A] https://www.exposul.pt/shop/willerby-granada-xl-t3-34
+  [C] https://theleisurecompany.co.uk/holiday-homes/caravan/willerby-granada-2008/5543
+  [C] https://www.autotrader.co.uk/caravans/used-caravans/static-caravan/willerby/granada
+  [C] https://staticcaravanbuyer.com/blog/willerby-granada-static-caravan-guide/
+
+-------------------------------------------------------------------------------
+FICHA 06 / 16 — EXPOSUL-006 — TRIGANO EVOLUTION — T2
+-------------------------------------------------------------------------------
+
+A | Trigano, família Evolution; 2 quartos. Quarto principal com cama de casal,
+    segundo quarto com cama individual e beliche, correspondendo a cinco
+    lugares de dormir indicados nos quartos. Sala/cozinha/refeições em espaço
+    aberto; sofá de canto e bancada de apoio; cozinha com placa a gás de quatro
+    queimadores, exaustor, lava-loiça e frigorífico.
+A | Despensa independente com prateleiras junto à cozinha; aquecimento elétrico;
+    zona de duche/lavatório e WC separado.
+B | O catálogo TRIGANO EVOLUTION 2013 distingue vários submodelos T2:
+    • EVOLUTION 27: 7,2 x 4,0 m, 27 m², 2 quartos, 4–6 dormidas.
+    • EVOLUTION 29: aprox. 30 m², 2 quartos, despensa junto à cozinha;
+      confirmação dimensional depende da variante do catálogo.
+    • EVOLUTION 31 2CH: 7,8 x 4,0 m, 31 m², 2 quartos, 4–6 dormidas;
+      duas portas envidraçadas na fachada e despensa junto à cozinha.
+    • EVOLUTION 31 TI: 7,8 x 4,0 m, 31 m² anunciados, 2 quartos e terraço
+      integrado (a implantação é diferente).
+    Estes são SUBMODELOS DIFERENTES, não quatro medidas da mesma unidade.
+B/C | A ficha Trigano EVO 31 2ch do catálogo apresenta cozinha com placa a gás,
+    frigorífico, lava-loiça, despensa, sala e duche 80 x 80 cm, mas esta
+    configuração só pode ser atribuída se o submodelo correto for identificado.
+VERIFICAÇÃO NOVA [C]: Outra Trigano Evolution 29 (ANO 2026!) aparece
+    com 7,40 x 4,00 m, T2, 1 zona de duche, 4/6 dormidas, despensa e
+    outras características particulares (máquina de lavar louça, estores,
+    placa vitrocerâmica). É geração diferente, pelo que esses equipamentos
+    NÃO pertencem comprovadamente à Trigano Evolution Exposul-006.
+    O catálogo da Exposul confirma 5 lugares de dormir NOS QUARTOS desta
+    unidade, não capacidade legal/total certificada.
+    https://www.mobilhomedoccasion.com/mobil-home-trigano-evolution-29-7-4m-t38510
+
+P | Submodelo Evolution (27/29/31/31 TI/outro), ano, dimensões, área útil,
+    identificação da placa/chassis, capacidade, equipamento que efetivamente
+    permanece, estado, preço e stock.
+PUBLICAÇÃO: utilizar A; NÃO usar 7,8 x 4 como dado desta casa sem submodelo.
+FONTES:
+  [A] https://www.exposul.pt/shop/trigano-evolution-casa-movel-t2-33
+  [B] https://prokcssmedia.blob.core.windows.net/sys-master-images/h36/hc0/8812554485790/FR0881273_6254.pdf
+  [C] https://www.mobilhome-cotedopale.com/89-mobil-home-trigano-2-chambres.html
+
+-------------------------------------------------------------------------------
+FICHA 07 / 16 — EXPOSUL-007 — O'HARA 734 — T2 (COM DECK DE MADEIRA)
+-------------------------------------------------------------------------------
+
+A | O'Hara 734, dois quartos; quarto de casal e quarto com duas camas
+    individuais. Exterior com revestimento de madeira e deck coberto com
+    iluminação e acesso direto ao interior.
+A | Cozinha com placa ELÉTRICA de quatro zonas, exaustor, lava-loiça e
+    frigorífico. Cabine de duche, lavatório e WC separado.
+    ATENÇÃO: esta casa NÃO é a exposul-001. A 001 tem placa a GÁS e ar
+    condicionado anunciados; esses detalhes NÃO devem ser atribuídos à 007.
+B | Ficha original O'Hara O'Phéa 734 2ch (2009): 7,30 x 4,00 m, altura 3,40 m,
+    área anunciada de 27,30 m², 4–6 dormidas na configuração dessa época.
+C | Existem unidades 734 de 2003 e 2016 com 7,30 x 4,00 m; os acabamentos,
+    terraços e equipamentos mudam entre exemplares.
+VERIFICAÇÃO NOVA [B]: O'Phéa 734 2ch, 2009, mede 7,30 x 4,00 m
+    e anuncia 27,30 m²; fotografia e planta de fábrica NÃO reproduzem
+    necessariamente a casa Exposul-007 revestida em madeira. A unidade 007
+    anuncia PLACA ELÉTRICA; a 001 anuncia PLACA A GÁS. Continuar separadas.
+    https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+
+P | Ano, referência da subversão, dimensões medidas, área útil/implantação,
+    se o deck entra na metragem, composição/condição do revestimento,
+    isolamento, climatização, estado, preço e disponibilidade.
+PUBLICAÇÃO: A; guardar medidas B como hipótese de consulta, não como certeza.
+FONTES:
+  [A] https://www.exposul.pt/shop/o-hara-734-t2-32
+  [B] https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+  [C] https://www.greenvillagemobilehomes.com/fr/catalogo/o-hara-2-quartos-29-2-m2-unidade-2
+
+-------------------------------------------------------------------------------
+FICHA 08 / 16 — EXPOSUL-008 — IRM SUPER OCTÁLIA — T3 (ANÚNCIO /31)
+-------------------------------------------------------------------------------
+
+A | Marca IRM, Super Octália, 3 quartos: principal com cama de casal e 2 quartos
+    com duas camas individuais cada (6 lugares de dormir nos quartos).
+A | Sala, área de refeições e cozinha integrada em U; placa a gás, exaustor,
+    lava-loiça e frigorífico com congelador; ar condicionado na zona social;
+    cabine de duche, lavatório e sanita separada. Portas envidraçadas de
+    ligação ao exterior.
+B | Ficha ORIGINAL IRM SUPER OCTALIA 3 — 2010: 9,09 x 4,00 m, superfície de
+    implantação declarada de 34,20 m² (não é o produto 9,09 x 4),
+    3 quartos, 6–8 dormidas com cama extraível na sala.
+B | A variante 2010 apresenta uma cama dupla de 140 x 190 cm, dois quartos
+    com duas camas de 80 x 190 cm, duche 80 x 80 cm; frigorífico/congelador
+    de 215 L no catálogo, placa a gás 4 bocas, exaustor e mesa extensível.
+    Isolamento reforçado descrito para essa variante: 120 mm na cobertura,
+    50 mm nas paredes e 64 mm no pavimento. Estas medidas são da VERSÃO 2010,
+    não uma inspeção à unidade 008.
+VERIFICAÇÃO NOVA [B]: Ficha original IRM Super Octalia 3 da geração 2010:
+    9,09 x 4,00 m (exterior, com caleiras), área de implantação declarada
+    34,20 m², 3 quartos e 6/8 dormidas (incluindo cama auxiliar da sala).
+    Na versão 2010 aparecem frigorífico-congelador 215 L, duche 80 x 80 cm,
+    isolamento 120 mm cobertura / 50 mm paredes / 64 mm chão.
+    A unidade 008 é T3, mas NÃO tem ano nem dimensões da versão identificados;
+    NÃO copiar 2012 e 36,8 m² da unidade 011.
+    https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+
+P | Ano e subversão, medidas reais, área útil, vidros, isolamento efetivo,
+    estado, quantidade de WC completos, climatização restante, preço e stock.
+PUBLICAÇÃO: A. NÃO transferir «2012» ou «36,8 m²» da exposul-011 para a 008.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-04-2024-octalia-irm-super-octalia-t3-31
+  [B] https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+
+-------------------------------------------------------------------------------
+FICHA 09 / 16 — EXPOSUL-009 — IRM SUPER MERCURE — T2 (ANÚNCIO /30)
+-------------------------------------------------------------------------------
+
+A | IRM Super Mercure, dois quartos, um deles com duas camas individuais.
+    Sala com sofá de canto, zona de refeições, cozinha com placa a gás de quatro
+    queimadores, exaustor, lava-loiça e armários. Aquecimento elétrico;
+    cabine de duche/lavatório e sanita separada.
+B | Modelo IRM Super Mercure 2007: 7,32 x 4,00 m; 27,50 m² declarados;
+    2 quartos, 4–6 lugares com cama extraível no salão; cozinha com placa
+    gás 4 queimadores, frigorífico pequeno, 1 banho/duche e WC separado;
+    chassis galvanizado, vidro duplo e especificações de isolamento da versão.
+C | Outro Super Mercure de vendedor português: 7,5 x 4 m, 30 m², dois quartos
+    e 1 zona de duche + WC separado. É OUTRO anúncio e está vendido.
+VERIFICAÇÃO NOVA [C]: A ficha de OUTRO Super Mercure da Green Village,
+    2006, apresenta 7,40 x 4,00 m, 29,60 m², T2; o anúncio de OUTRO exemplar
+    no Mobile Home Discount apresenta 7,50 x 4,00 m, 30 m². Não copiar
+    medidas, preços nem a existência de forno/frigorífico para a 009.
+    https://www.greenvillagemobilehomes.com/catalogo/super-mercure-2
+    https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+
+P | Confirmar se o frigorífico consta desta unidade (não explicitamente
+    confirmado para a /30), configuração do quarto principal, medidas,
+    área, ano, estado, aquecimento concreto, preço e stock.
+PUBLICAÇÃO: A; não copiar eletrodomésticos nem metragem da 002 ou de terceiros.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-02-2026-irm-super-mercure-t2-30
+  [B] https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf
+  [C] https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+
+-------------------------------------------------------------------------------
+FICHA 10 / 16 — EXPOSUL-010 — ATLAS NEVADA SUPER — T3
+-------------------------------------------------------------------------------
+
+A | Atlas Nevada Super; 3 quartos: quarto principal com cama de casal e dois
+    com duas camas individuais. Sala ampla com sofá de canto e mesa de refeições;
+    cozinha integrada com placa a gás, lava-loiça, frigorífico, exaustor,
+    bancada e armários. Aquecimento por radiadores.
+A | Cabine de duche e instalações sanitárias em compartimento separado;
+    duas portas de acesso ao exterior; espaços de arrumação.
+C | Exemplar de 2007 Atlas Nevada SUPER de revendedor britânico: 36 x 12 pés,
+    aproximadamente 10,97 x 3,66 m, 3 quartos, até 8 dormidas anunciadas,
+    dois espaços sanitários no exemplar, vidros simples e lareira a gás.
+    Outro anúncio de Atlas Nevada 2007 indica igualmente 36 x 12 pés e T3.
+    ATENÇÃO: 36 x 12 pés é a medida de OUTRAS unidades de 2007, não uma ficha
+    comprovada do imóvel 010; «2 casas de banho» não foi validado na Exposul.
+VERIFICAÇÃO NOVA [C]: Revendedor GB Statics anuncia um Atlas Nevada
+    SUPER de 2007, 36 x 12 pés (cerca de 10,97 x 3,66 m), 3 quartos,
+    2 casas de banho segundo esse anúncio, VIDRO SIMPLES e aquecimento a gás.
+    Isso NÃO confirma duas casas de banho, vidros simples nem as medidas da
+    unidade 010 da Exposul, que anuncia radiadores. Não generalizar.
+    https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/
+
+P | Ano, comprimento, largura, área com critério, composição exata de banho/WC,
+    tipo de radiadores, vidro simples/duplo, isolamento, condição,
+    equipamentos efetivos, preço e disponibilidade.
+PUBLICAÇÃO: A; C apenas para comparação e pedido de confirmação.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-04-2026-atlas-nevada-super-atlas-nevada-super-t3-29
+  [C] https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/
+  [C] https://perthshire-caravans.com/caravan/7688-2007-atlas-nevada-super/
+  [C] https://bridlingtoncaravans.com/2007-atlas-nevada-4507.html
+
+-------------------------------------------------------------------------------
+FICHA 11 / 16 — EXPOSUL-011 — IRM SUPER OCTÁLIA T3 36,8 M²
+-------------------------------------------------------------------------------
+
+A | IRM Super Octália, T3, três quartos; ANO ANUNCIADO 2012; ÁREA ANUNCIADA
+    36,8 m². Sala ampla, cozinha com fogão e arrumação, camas de casal e
+    individuais, roupeiros, cabine de duche/lavatório e WC separado.
+    O tipo de área (útil, implantação, outra) não está explicitado.
+B | A ficha IRM Super Octalia 3 de 2010 indica 9,09 x 4,00 m e 34,20 m² de
+    implantação; é uma VERSÃO ANTERIOR e não pode substituir a área Exposul.
+C | Um anúncio de outro vendedor para Super Octália T3 de 2012 descreve
+    aproximadamente 9,10 x 4,00 m e cerca de 36 m², com 3 quartos e cozinha
+    equipada. É compatível em termos gerais, mas NÃO verifica as medidas
+    precisas da casa Exposul-011.
+VERIFICAÇÃO NOVA [A/B]: O anúncio Exposul-011 apresenta 2012 e
+    36,8 m². A ficha de fábrica de SUPER OCTALIA 3 de 2010 indica 9,09 x 4 m,
+    34,20 m²; portanto, a ficha 2010 NÃO é prova das medidas exteriores nem
+    da área interior da unidade Exposul de 2012.
+    Uma captura enviada de OUTRO anúncio de Octália 2012 refere 9,10 x 4 m,
+    aproximadamente 36 m² e vidros duplos; é apenas C (outra unidade).
+    https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+
+P | Medição direta do comprimento/largura; confirmar se 36,8 m² inclui
+    saliências/terraço; verificar ano 2012 pela placa/chassis; estado,
+    contagem de sanitários, isolamento, tipo de vidros, inventário de cozinha,
+    climatização, preço e disponibilidade.
+PUBLICAÇÃO: «2012» e «36,8 m² anunciados» podem constar com etiqueta clara;
+    não publicar 9,09 x 4 m como se fossem dimensões deste exemplar.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-04-2024-irm-super-octalia-t3-36-8m2-8
+  [B] https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+
+-------------------------------------------------------------------------------
+FICHA 12 / 16 — EXPOSUL-012 — O'HARA 784 — T2
+-------------------------------------------------------------------------------
+
+A | Marca O'Hara, modelo 784, T2, 2 quartos (1 casal; 1 com duas camas
+    individuais); sala, zona de refeições, cozinha com fogão, frigorífico e
+    arrumação; cabine de duche, lavatório, WC separado; alpendre em madeira.
+B/C | Ficha de OUTRA UNIDADE O'PHÉA 784 T, ano 2006: 7,80 x 4,00 m;
+    sala ao centro; terraço anunciado para o exemplar de 3,00 x 4,50 m;
+    cozinha com placa a gás 4 bocas, frigorífico e lavatório; quarto principal
+    com cama de 140 cm, segundo quarto com duas camas de 80 cm; convetores
+    elétricos nos quartos/sala e aquecimento de água a gás. Não é um documento
+    sobre a unidade da Exposul.
+C | Outros exemplares Ophéa 784: 2005 com 7,90 x 4,00 m, vidro duplo,
+    aquecimento elétrico, 2 quartos e WC separado; há anúncios portugueses
+    de O'Hara 784 com 7,50 x 4,00 m. Logo, a designação «784» não permite
+    certificar automaticamente a medida da unidade 012.
+VERIFICAÇÃO NOVA [C]: Outra O'Hara 784 T de 2007 aparece com
+    7,80 x 4,00 m, alpendre integrado e 2 quartos. Há também exemplares
+    com 7,84 x 4 m e um anúncio enviado pelo utilizador com 7,50 x 4 m;
+    são OUTRAS unidades e diferentes critérios de indicação de modelo.
+    O exemplar 012 tem T2 confirmado pela Exposul e pela captura, mas
+    comprimento e área continuam pendentes.
+    https://www.mobilhomekheops.fr/annonces-mobil-home/o-hara-784-t.html
+    https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-784-n9/
+
+P | Ano e variante 784/784T, comprimento/largura reais, área interior,
+    dimensões e inclusão do alpendre, tipo de placa e aquecimento,
+    vidro simples/duplo, estado, preço e disponibilidade.
+PUBLICAÇÃO: apenas dados A; não copiar a metragem nem o equipamento da unidade
+    de 2006, cuja ficha inclui até informação sobre um terreno específico.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-07-2025-o-hara-784-mobile-home-o-hara-784-10
+  [C] https://www.camping-lepanorama.fr/IMG/pdf/o_hara_ophea_784_t_2006_79.pdf
+  [C] https://www.espace-loisirsph.com/occasions/ohara/ophea-2ch-1
+
+-------------------------------------------------------------------------------
+FICHA 13 / 16 — EXPOSUL-013 — WILLERBY SALISBURY — T2
+-------------------------------------------------------------------------------
+
+A | Willerby Salisbury, T2, 2 quartos. Dados associados à unidade Exposul
+    anteriormente registados: sala com duas zonas, janelas grandes e arrumação
+    no quarto principal. Restante equipamento da casa ainda NÃO está
+    inventariado com segurança.
+C | Exemplar Salisbury de 2006 (Willerby, vendido em parque britânico):
+    35 x 12 pés, aproximadamente 10,67 x 3,66 m, 2 quartos, sala e refeições
+    abertas, cozinha ampla, espaço para frigorífico/micro-ondas, muito arrumo
+    no quarto principal e roupeiro no outro quarto.
+B | O FABRICANTE WILLERBY vende Salisbury ATUAIS em várias dimensões, incluindo
+    35 x 12 e 38 x 12 pés (2 quartos), mas o design e equipamentos atuais
+    (micro-ondas integrado, cozinha contemporânea, etc.) NÃO se aplicam por
+    defeito à casa usada da Exposul, cujo ano não foi apurado.
+VERIFICAÇÃO NOVA [C]: Outro Willerby Salisbury de 2006 identificado
+    por Salop Leisure: 35 x 12 pés (10,67 x 3,66 m), dois quartos, sala
+    aberta e zona de refeições, dois sofás, cozinha ampla, arrumação no
+    quarto principal e segundo quarto. A edição 2026 do fabricante também
+    tem Salisbury 35 x 12 com 2 quartos, mas é outra geração, com isolamento
+    e equipamento contemporâneos. Nenhum dos dois fixa o ano da Exposul-013.
+    https://www.salopleisure.co.uk/willerby-salisbury-833
+    https://www.willerby.com/holiday-homes/salisbury?variation=35x12-2
+
+P | Ano, geração/versão, medidas, área, lugares de dormir, detalhes da cozinha,
+    número de compartimentos sanitários, aquecimento, vidros/isolamento,
+    inventário do recheio, estado, preço e stock.
+PUBLICAÇÃO: A apenas. Não colocar características de um Salisbury 2026
+    num provável Salisbury antigo sem identificação.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-13-2023-willerby-salisbury-willerby-salisbury-t2-16
+  [C] https://www.salopleisure.co.uk/willerby-salisbury-833
+  [B] https://www.willerby.com/holiday-homes/salisbury?variation=35x12-2
+
+-------------------------------------------------------------------------------
+FICHA 14 / 16 — EXPOSUL-014 — TRIGANO N.º 18 — T3
+-------------------------------------------------------------------------------
+
+A | Marca Trigano; tipologia T3, 3 quartos; cozinha com armários; WC separado.
+    O anúncio chama à unidade «n.º 18», mas NÃO identifica, com segurança,
+    um modelo comercial do fabricante. É plausível ser um número de stock,
+    mas isso permanece hipótese, não facto confirmado.
+B | Catálogo original TRIGANO EVOLUTION de 2013, a título de comparação:
+    • Evolution 31 3ch: 7,80 x 4,00 m, 31 m² anunciados, 3 quartos,
+      6–8 lugares (com cama auxiliar, conforme versão);
+    • Evolution 33 3ch: 8,30 x 4,00 m, 33 m², 3 quartos;
+    • Evolution 36 TI: 9,00 x 4,00 m, 36 m² e 3 quartos, noutra planta.
+    O nome «Trigano n.º 18» não demonstra que seja ALGUM destes submodelos.
+C | Mobile Home Discount anuncia OUTRO Trigano Evo 31 T3 com 8 x 4 m,
+    32 m², 3 quartos, 1 zona de duche + WC separado. Esse anúncio está vendido
+    e não identifica a unidade Exposul.
+VERIFICAÇÃO NOVA [C]: OUTRO anúncio Mobile Home Discount apresenta
+    Trigano EVO 31 T3 de 8,00 x 4,00 m e 32 m². No catálogo Trigano 2013,
+    EVOLUTION 31 3ch tem 7,80 x 4,00 m; existem variantes Evolution 33 e
+    Evolution 36 TI. Nada comprova que «n.º 18» seja EVO 31.
+    Referência de modelo comercial, comprimento, largura, área e ano
+    MANTÊM-SE INDETERMINADOS para a exposul-014.
+    https://mobilehomediscount.pt/property/trigano-evo-31-t3/
+    https://prokcssmedia.blob.core.windows.net/sys-master-images/h36/hc0/8812554485790/FR0881273_6254.pdf
+
+P | Nome exato do modelo na placa/chassis, ano, dimensões, área útil, planta,
+    camas, cozinhas e eletrodomésticos, número de sanitários, aquecimento,
+    estado, preço e disponibilidade. É um dos CASOS MAIS URGENTES.
+PUBLICAÇÃO: manter «Trigano n.º 18 — T3», sem inventar submodelo ou metragem.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-12-2025-trigano-no18-trigano-no18-casa-movel-t3-11
+  [B] https://prokcssmedia.blob.core.windows.net/sys-master-images/h36/hc0/8812554485790/FR0881273_6254.pdf
+  [C] https://mobilehomediscount.pt/property/trigano-evo-31-t3/
+
+-------------------------------------------------------------------------------
+FICHA 15 / 16 — EXPOSUL-015 — O'HARA 834 — T2
+-------------------------------------------------------------------------------
+
+A | O'Hara 834, indicado no material do projeto como T2 (dois quartos);
+    máquina de lavar loiça, beliche, cabine de duche e WC separado associados
+    à ficha anterior da unidade. A própria tipologia deverá ser confirmada
+    pela Exposul, porque existem versões 834 T2 e T3.
+B | A base de fichas de modelo O'Hara O'PHÉA 834 2CH apresenta 8,30 x 4,00 m,
+    2 quartos, uma zona de duche e capacidade de dormidas 4–6. Planta com
+    organização central segundo a referência pesquisada.
+C | Outro O'Hara 834 usado, com revestimento em madeira e 2 quartos:
+    8,30 x 4,00 m e cerca de 31 m² anunciados. Outro anúncio do mesmo nome
+    de 2005, também T2, indica 8,3 x 3,8 m. Existem ainda O'Hara 834 de 3
+    quartos. Assim, mesmo a metragem aparentemente típica tem variantes.
+TIPOLOGIA NA CAPTURA: T2 — 2 quartos. Este é o valor a manter no
+    filtro da Azmora. Encontrei OUTRO O'Hara 834 T2 de 2010, com
+    8,30 x 4,00 m e 4/6 lugares, e OUTRO exemplar de 2004 de 8,34 x 4 m.
+    Existem também unidades 834 T3; NÃO as confundir.
+    A máquina de lavar loiça e beliche existentes no relatório de origem
+    pertencem à descrição anterior da Exposul, mas devem ser verificados
+    fisicamente antes de apresentação como equipamentos garantidos.
+    https://www.mobilhomedoccasion.com/mobil-home-o-hara-834-2ch-8-3m-o37706
+    https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-834-n64/
+
+P | Fotografia da placa, variante 2ch/3ch, ano, dimensões reais, área útil,
+    confirmação da máquina de lavar louça e do beliche, números de WC/duche,
+    equipamentos adicionais, tipo de vidro, isolamento, estado, preço e stock.
+PUBLICAÇÃO: reservar dados mais específicos até confirmar a configuração
+    de dois quartos da unidade exata.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-08-2025-o-hara-834-mobile-home-o-hara-834-7
+  [B] https://www.cotedumobilhome.com/modele/34-ophea-834-2ch-2-pentes-83m
+  [C] https://www.lebonmobilhome.fr/hebergements/ohara-834/
+  [C] https://www.entre-mobil-home.com/mobil-home-occasion-96631-ohara-34-herault.html
+
+-------------------------------------------------------------------------------
+FICHA 16 / 16 — EXPOSUL-016 — O'HARA T2 7,5 M x 4 M / 30 M²
+-------------------------------------------------------------------------------
+
+A | O'Hara, T2 (2 quartos): um de casal e um com duas camas individuais;
+    sala com cozinha equipada com fogão, frigorífico e arrumação; cabine de
+    duche e lavatório, sanita separada.
+A | O TÍTULO DO ANÚNCIO ESPECIFICA comprimento 7,5 m, largura 4,0 m e área
+    de 30 m². Estas grandezas são anunciadas, não medidas presencialmente.
+    O endereço do anúncio menciona «7-4x4», divergindo do título «7,5x4».
+B/C | Não foi identificada com segurança a designação comercial do modelo
+    O'Hara apenas a partir de T2 + 30 m²; há diferentes O'Hara antigas com
+    dois quartos e dimensões próximas. A correspondência com 734, 784 ou
+    outra variante seria especulativa.
+TIPOLOGIA NA CAPTURA: T2, 2 quartos, 30 m² anunciados.
+    Comprimento 7,5 m e largura 4 m expressamente no título Exposul.
+    ATENÇÃO à discrepância '7-4x4' no slug da URL Exposul: não inferir que
+    o submodelo seja 734 ou 784. A área 30 m² é a multiplicação das
+    dimensões publicadas (implantação nominal), não área útil certificada.
+    O modelo exato e o ano de fabrico continuam por encontrar.
+    https://www.exposul.pt/shop/cjc-11-2025-o-hara-7-4x4-o-hara-t2-7-5mx4m-30m2-9
+
+P | Modelo e ano pela placa/chassis, medida real do comprimento (7,4 ou 7,5),
+    confirmação do critério dos 30 m², número de compartimentos sanitários,
+    isolamento, aquecimento, estado, preço e disponibilidade.
+PUBLICAÇÃO: usar T2 / 2 quartos / «7,5 x 4 m e 30 m² anunciados» com fonte
+    Exposul; assinalar discrepância no registo interno até validação.
+FONTES:
+  [A] https://www.exposul.pt/shop/cjc-11-2025-o-hara-7-4x4-o-hara-t2-7-5mx4m-30m2-9
+
+===============================================================================
+PENDÊNCIAS COMUNS — PEDIDO QUE O RUBEN DEVE FAZER À EXPOSUL
+===============================================================================
+
+Enviar esta lista por cada ID/unidade, de preferência em CSV/Excel:
+
+1. Referência interna Exposul e fotografia da placa de identificação/chassis.
+2. Marca, modelo comercial exato, subversão e ano de fabrico.
+3. Comprimento, largura e altura EXTERIORES medidos (esclarecer caleiras).
+4. Área útil INTERIOR, área de implantação e área de terraço, separadas.
+5. Quartos, número de camas, lugares de dormir e possibilidade de cama extra.
+6. N.º de zonas de banho com duche/banheira, sanitas e WC independentes.
+7. Equipamento incluído efetivamente: fogão/placa, forno, frigorífico,
+   micro-ondas, exaustor, máquina de lavar, ar condicionado, aquecimento,
+   aquecimento de água; tipo de abastecimento/energia.
+8. Vidros simples/duplos, isolamento térmico, estrutura e estado da cobertura.
+9. Mobiliário e equipamentos incluídos na entrega; defeitos e reparações.
+10. Estado (usada, renovada, nova), disponibilidade, localização e fotografias
+    atuais da unidade concreta.
+11. Condições de transporte, descarga, instalação, ligação a água/eletricidade,
+    serviço de montagem, garantia aplicável e preço/IVA de revenda Azmora.
+
+PRIORIDADES DE IDENTIFICAÇÃO:
+• 014 Trigano n.º 18: sem identificação comercial do submodelo.
+• 016 O'Hara T2 de 30 m²: sem identificação comercial; discrepância 7,4/7,5 m.
+• 005 Willerby Granada XL T3: confirmar largura e variante; «XL» também
+  surge noutros exemplares T2.
+• 015 O'Hara 834: confirmar T2 e variante; existem modelos 834 T3.
+• 006 Trigano Evolution T2: identificar Evo 27/29/31/outra.
+• 008 e 011 Super Octália: NÃO cruzar dimensão ou ano de uma com a outra.
+
+===============================================================================
+FONTES PRINCIPAIS DE DOCUMENTAÇÃO DE ORIGEM E DE COMPARAÇÃO
+===============================================================================
+
+Fabricantes/catálogos históricos:
+• O'Hara O'Phéa 734 2ch (2009):
+  https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+• IRM Super Mercure (2007):
+  https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf
+• IRM Super Octalia 3 (2010):
+  https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+• Rideau Panama Duo (2020):
+  https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf
+• Trigano Evolution (catálogo 2013, vários submodelos):
+  https://prokcssmedia.blob.core.windows.net/sys-master-images/h36/hc0/8812554485790/FR0881273_6254.pdf
+• Willerby Salisbury (gama atual, apenas comparação de versões):
+  https://www.willerby.com/holiday-homes/salisbury?variation=35x12-2
+
+Outros exemplares/documentação de terceiros:
+• IRM Super Venus: https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38219
+• IRM Super Venus: https://www.lebonmobilhome.fr/hebergements/irm-super-venus-2-chambres/
+• O'Hara Ophéa 784 (2006): https://www.camping-lepanorama.fr/IMG/pdf/o_hara_ophea_784_t_2006_79.pdf
+• O'Hara Ophéa 834 2ch: https://www.cotedumobilhome.com/modele/34-ophea-834-2ch-2-pentes-83m
+• Atlas Nevada Super: https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/
+• Willerby Salisbury antiga: https://www.salopleisure.co.uk/willerby-salisbury-833
+• Willerby Granada T3: https://theleisurecompany.co.uk/holiday-homes/caravan/willerby-granada-2008/5543
+• Mobile Home Discount, Mercure usado: https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+• Mobile Home Discount, Trigano Evo31 T3: https://mobilehomediscount.pt/property/trigano-evo-31-t3/
+
+===============================================================================
+NOTA DE INTEGRAÇÃO PARA O CODEX — NÃO SALTAR
+===============================================================================
+
+1. ASSOCIAR pelos IDs exposul-001 ... exposul-016 e respetivas URLs;
+   não atualizar registos por simples igualdade do nome.
+2. Os dados A podem enriquecer as fichas públicas se confirmados no catálogo
+   Exposul atual; manter as indicações de área «anunciada» onde aplicável.
+3. Todos os valores B e C ficam em pesquisa interna, não no catálogo comercial,
+   até o modelo/ano/variante e a correspondência com a unidade serem validados.
+4. Campos desconhecidos devem ficar null ou «A confirmar», sem inventar.
+5. Preservar fotografias, preços comerciais autorizados e funcionalidades
+   já existentes. Nunca publicar preços retirados de outros vendedores.
+6. Gerar relatório por ID com a lista de dúvidas remanescentes e o estado
+   da validação junto da Exposul.
+
+FIM DO DOSSIÊ — 16 FICHAS.
+
+
+===============================================================================
+VERIFICAÇÃO FINAL DESTA ATUALIZAÇÃO — O QUE FALTA, POR ANÚNCIO
+===============================================================================
+
+001 T2 O'Hara 734 c/terraço: medidas reais, área/terraço separados, ano,
+    estado, isolamento, preço, stock e garantia.
+002 T2 IRM Super Mercure /37: medidas reais, área, ano, equipamento completo,
+    climatização efetiva, estado e dados comerciais.
+003 T2 IRM Super Venus: dimensões e área da unidade, ano, aquecimento,
+    vidros, estado e dados comerciais.
+004 T2 Rideau Panama Duo: ano/geração, dimensões e área INTERIOR e terraço,
+    opções presentes, estado e dados comerciais.
+005 T3 Willerby Granada XL: largura, área, ano e variante, composição da
+    segunda casa de banho, estado e dados comerciais.
+006 T2 Trigano Evolution: submodelo 27/29/31/outra versão, medidas, ano,
+    área, estado e dados comerciais.
+007 T2 O'Hara 734 revestida a madeira: medidas, terraço, ano, isolamento,
+    equipamentos presentes, estado e dados comerciais.
+008 T3 IRM Super Octália /31: medidas, área, ano, vidros, isolamento real,
+    sanitários, estado e dados comerciais.
+009 T2 IRM Super Mercure /30: medidas, área, ano, configuração do primeiro
+    quarto, frigorífico/forno, estado e dados comerciais.
+010 T3 Atlas Nevada Super: ano, medidas, área, número efetivo de casas de
+    banho, tipo de aquecimento/vidros, estado e dados comerciais.
+011 T3 IRM Super Octália 36,8 m²: dimensões exteriores, confirmação do
+    critério da área, ano de placa, estado e dados comerciais.
+012 T2 O'Hara 784: dimensões da própria unidade (com/sem alpendre), área,
+    ano, aquecimento, estado e dados comerciais.
+013 T2 Willerby Salisbury: geração e ano, dimensões, área, planta, cozinha,
+    aquecimento, WC, estado e dados comerciais.
+014 T3 Trigano n.º 18: MODELO COMERCIAL NÃO IDENTIFICADO, ano, medidas,
+    área, configuração da cozinha e do duche, estado e dados comerciais.
+015 T2 O'Hara 834: versão exata, ano, medidas, área, máquina de lavar louça,
+    beliche, isolamento, estado e dados comerciais.
+016 T2 O'Hara não identificada: MODELO COMERCIAL NÃO IDENTIFICADO,
+    comprimento 7,4/7,5 m a medir, ano, critério 30 m², estado e dados
+    comerciais.
+
+PARA CODEx / SISTEMA DE DADOS:
+- É aceitável preencher o tipo/numQuartos conforme as 16 capturas.
+- Só preencher medidas/áreas/anos específicos quando o ID Exposul estiver
+  ligado a evidência da unidade (fonte A); não basta corresponder nome/ano.
+- Guardar fichas B e C num campo privado de investigação, com fonte e ano.
+- Nunca copiar preços, garantias, disponibilidade, entrega ou estado de
+  OUTROS vendedores, mesmo quando o modelo tem o mesmo nome.
+- Manter no website 'Preço sob consulta' até validação da Azmora Homes.
+- Especificações técnicas publicadas não constituem garantia de que a
+  unidade conserva os equipamentos originalmente fornecidos em fábrica.
+
+FONTES NOVAS VERIFICADAS NESTA ATUALIZAÇÃO:
+https://www.greenvillagemobilehomes.com/catalogo/super-mercure-2
+https://www.greenvillagemobilehomes.com/catalogo/super-venus-2-quartos-25-20-m2-2
+https://mobilehomediscount.pt/property/irm-super-mercure-t2-5/
+https://www.salopleisure.co.uk/willerby-salisbury-833
+https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/
+https://www.mobilhomedoccasion.com/mobil-home-o-hara-834-2ch-8-3m-o37706
+https://www.mobilhomedoccasion.com/mobil-home-trigano-evolution-29-7-4m-t38510
+https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38219
+https://www.mobilhomekheops.fr/annonces-mobil-home/o-hara-784-t.html
+https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf
+https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf
+https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf
+https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf
+
+FIM DA ATUALIZAÇÃO 2 — FICHAS 16/16, TIPOLOGIAS 16/16.

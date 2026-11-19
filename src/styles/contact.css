@@ -1,0 +1,64 @@
+#contact.contact-grid {
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.55fr);
+  align-items: start;
+  gap: clamp(24px, 5vw, 72px);
+}
+.contact-intro { padding-top: clamp(8px, 2vw, 28px); }
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e6ebe1;
+  margin-bottom: 16px;
+}
+.contact-intro h2, .contact-form h2 { font-size: clamp(1.65rem, 3.2vw, 2.55rem); }
+.contact-intro p { margin: 14px 0; max-width: 40ch; }
+.contact-form { min-width: 0; }
+.contact-form h2 { margin-bottom: 15px; }
+.contact-form label small { font-size: .75rem; font-weight: 400; }
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+.contact-form-grid label { margin-block: 8px; }
+.contact-form select, .contact-form input {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+}
+.contact-form select {
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+#lead-form .consent { align-items: flex-start; gap: 10px; }
+.contact-form .consent input { flex: none; width: 19px; min-height: 19px; margin-top: 2px; }
+.contact-form .consent a { text-decoration: underline; }
+.contact-form-note {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: .9rem;
+}
+.contact-houses { list-style: none; padding: 0; margin: 8px 0 12px; }
+.contact-houses li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--paper);
+  padding: 2px 0 2px 12px;
+  font-size: .9rem;
+}
+.contact-houses li + li { margin-top: 6px; }
+.contact-houses button { flex: none; width: 44px; height: 44px; font-size: 1.2rem; }
+.contact-form-status:empty { display: none; }
+.contact-form-status { margin: 12px 0 0; font-size: .9rem; font-weight: 600; }
+.contact-form-status[data-state='error'] { color: #80321e; }
+@media (max-width: 760px) {
+  #contact.contact-grid, .contact-form-grid { grid-template-columns: minmax(0, 1fr); }
+}

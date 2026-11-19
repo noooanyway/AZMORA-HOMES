@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/site';
+---
+
+<Layout title="Comparar casas"
+  ><div class="wrap page" id="comparison">
+    <p class="kicker"><i></i> A SUA SELEÇÃO</p><h1>
+      Casas lado <em>a lado.</em>
+    </h1><p>Compare as características de duas ou três unidades.</p><div
+      class="table-scroll"
+      id="tablehost"
+    >
+    </div><div class="empty" id="cmpempty">
+      <p>Escolha pelo menos duas casas no catálogo para começar.</p><a
+        class="btn outline"
+        href={url('casas/')}>Escolher casas</a>
+    </div><a class="btn primary" id="cmpcontact" hidden
+      >Pedir informações sobre a seleção</a>
+  </div></Layout
+>

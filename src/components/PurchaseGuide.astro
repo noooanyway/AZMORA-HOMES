@@ -1,0 +1,94 @@
+---
+import {
+  Armchair, CircleCheck, CircleX, FileText, Handshake, House, MapPin, MessageSquare,
+  Plug, ReceiptText, Ship, Shovel, Snowflake, Warehouse,
+} from 'lucide-astro';
+import LiftIcon from './LiftIcon.astro';
+import { url } from '../lib/site';
+import '../styles/purchase-guide.css';
+
+const panels = [
+  {
+    title: 'O que inclui',
+    Badge: CircleCheck,
+    note: 'O orçamento confirma o que está incluído para a casa e o destino escolhidos.',
+    items: [
+      { Icon: Warehouse, title: 'Casa móvel em segunda mão', text: 'A referência da unidade, a tipologia, as divisões, as medidas e o estado de conservação confirmado.' },
+      { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'O inventário da unidade, incluindo o mobiliário, a cozinha e os eletrodomésticos que a acompanham.' },
+      { Icon: Snowflake, title: 'Climatização e água quente', text: 'Os equipamentos existentes na unidade, como aquecimento, ar condicionado ou esquentador.' },
+      { Icon: Ship, title: 'Transporte marítimo', text: 'A disponibilidade para o destino, o porto comercial e os custos de envio e taxas portuárias previstos.' },
+      { Icon: ReceiptText, title: 'IVA e valor final', text: 'O tratamento do IVA, os encargos incluídos e a validade do orçamento.' },
+    ],
+  },
+  {
+    title: 'O que não inclui',
+    Badge: CircleX,
+    note: 'Confirme no orçamento se estes serviços têm de ser contratados à parte.',
+    items: [
+      { Icon: MapPin, title: 'Transporte por estrada', text: 'O percurso do porto ou local de recolha até ao terreno e quem o organiza.' },
+      { Icon: LiftIcon, title: 'Descarga e posicionamento', text: 'A descarga, o eventual uso de grua, a colocação e o nivelamento da casa.' },
+      { Icon: Shovel, title: 'Preparação do terreno', text: 'O acesso ao local, a base de apoio e os trabalhos necessários antes da entrega.' },
+      { Icon: Plug, title: 'Ligações às redes', text: 'Quem assegura as ligações de água, eletricidade, saneamento e gás, quando aplicável.' },
+      { Icon: FileText, title: 'Licenças e autorizações', text: 'Os procedimentos que a Câmara Municipal indicar para instalar e utilizar a casa no terreno.' },
+    ],
+  },
+];
+const steps = [
+  { Icon: House, title: 'Escolha a casa', text: 'Consulte a ficha e compare as características e o equipamento.' },
+  { Icon: MessageSquare, title: 'Peça um orçamento', text: 'Indique a referência da casa e a localidade ou ilha de destino.' },
+  { Icon: Handshake, title: 'Confirme as condições', text: 'Peça por escrito o valor final, a disponibilidade e as condições de reserva.' },
+  { Icon: Ship, title: 'Combine a entrega', text: 'Confirme o destino, o acesso ao terreno e quem trata de cada etapa do transporte e colocação.' },
+];
+---
+
+<section class="section purchase-guide" id="como-funciona" aria-labelledby="purchase-title">
+  <div class="purchase-heading">
+    <div>
+      <p class="kicker"><i></i> ORÇAMENTO E ENTREGA</p>
+      <h2 id="purchase-title">O que entra no <em>orçamento?</em></h2>
+    </div>
+    <p>O equipamento varia de casa para casa e a entrega depende do destino. Veja o que pedir no orçamento e o que convém confirmar antes de avançar.</p>
+  </div>
+
+  <div class="purchase-panels">
+    {panels.map(({ title, Badge, note, items }, index) => (
+      <section class:list={['purchase-panel', { 'purchase-panel-dark': index === 1 }]}>
+        <h3><Badge size={38} strokeWidth={1.5} aria-hidden="true" />{title}</h3>
+        <p class="purchase-panel-note">{note}</p>
+        <ul role="list">
+          {items.map(({ Icon, title, text }) => (
+            <li><Icon size={30} strokeWidth={1.6} aria-hidden="true" /><div><strong>{title}</strong><p>{text}</p></div></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <section class="purchase-process" aria-labelledby="purchase-process-title">
+    <h3 id="purchase-process-title">Como funciona a compra</h3>
+    <ol class="purchase-steps">
+      {steps.map(({ Icon, title, text }) => (
+        <li><Icon size={24} aria-hidden="true" /><h4>{title}</h4><p>{text}</p></li>
+      ))}
+    </ol>
+  </section>
+
+  <div class="purchase-callouts">
+    <aside>
+      <Ship size={25} aria-hidden="true" />
+      <div>
+        <h3>Açores e Madeira</h3>
+        <p>Para um pedido de entrega, indique a ilha e a localidade de destino. A rota marítima, o porto e os custos são confirmados no orçamento.</p>
+        <a class="under" href={url('contactos/?motivo=transporte')}>Pedir informação sobre transporte</a>
+      </div>
+    </aside>
+    <aside>
+      <MapPin size={25} aria-hidden="true" />
+      <div>
+        <h3>Antes de preparar o terreno</h3>
+        <p>Confirme com a Câmara Municipal se pode instalar a casa no local para o uso pretendido. Valide também os acessos e as ligações.</p>
+        <a class="under" href={url('termos/#terreno')}>Ver o que confirmar</a>
+      </div>
+    </aside>
+  </div>
+</section>
