@@ -1,0 +1,21 @@
+{
+  "legalName": "",
+  "taxId": "",
+  "registration": "",
+  "registeredAddress": "",
+  "visitAddress": "",
+  "phone": "",
+  "openingHours": "",
+  "privacyEmail": "",
+  "privacyBasis": "",
+  "privacyRetention": "",
+  "privacyProvider": "",
+  "privacyTransfers": "",
+  "ralName": "",
+  "ralUrl": "",
+  "complaintsUrl": "",
+  "social": {
+    "instagram": "",
+    "facebook": ""
+  }
+}

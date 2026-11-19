@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Photo from '../components/Photo.astro';
+import PurchaseGuide from '../components/PurchaseGuide.astro';
 import { url, houses, brands, detail } from '../lib/site';
 import { name } from '../lib/catalog';
 import { Search, SlidersHorizontal } from 'lucide-astro';
@@ -19,10 +20,10 @@ const featured = [
   ><section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="kicker"><i></i> CATÁLOGO DE CASAS MÓVEIS</p><h1>
+        <p class="kicker"><i></i> CASAS MÓVEIS EM SEGUNDA MÃO</p><h1>
           Outra forma <br />de <em>habitar.</em>
         </h1><p class="intro">
-          Descubra casas móveis, explore cada detalhe e compare os espaços que
+          Descubra casas móveis usadas, explore cada detalhe e compare os espaços que
           fazem sentido para si.
         </p><a class="btn cream" href={url('casas/')}>Explorar as casas</a>
       </div>{
@@ -84,36 +85,7 @@ const featured = [
           ))}
         </div>
       )
-    }<section class="section" id="como-funciona">
-      <p class="kicker"><i></i> COMO FUNCIONA</p><h2>
-        Da pesquisa à <em>escolha.</em>
-      </h2><div class="steps">
-        {
-          [
-            [
-              'Explore as casas',
-              'Filtre por tipologia, marca e pelas características de que precisa.',
-            ],
-            [
-              'Compare os detalhes',
-              'Guarde as suas favoritas e compare até três casas lado a lado.',
-            ],
-            [
-              'Peça informações',
-              'Selecione uma unidade para preparar um pedido com a referência certa.',
-            ],
-          ].map(([t, s], i) => (
-            <div>
-              <>
-                <small>0{i + 1}</small>
-                <h3>{t}</h3>
-                <p>{s}</p>
-              </>
-            </div>
-          ))
-        }
-      </div>
-    </section><section class="section faq">
+    }<PurchaseGuide /><section class="section faq">
       <h2>Perguntas frequentes</h2><details>
         <summary>Como confirmo o preço e a disponibilidade?</summary><p>
           Consulte a ficha da unidade e prepare o seu pedido de informação para
@@ -123,6 +95,9 @@ const featured = [
         <summary>Onde ficam guardadas as minhas favoritas?</summary><p>
           Neste navegador, disponíveis na página Favoritos sem criar conta.
         </p>
+      </details><details>
+        <summary>Posso instalar uma casa móvel no meu terreno?</summary>
+        <p>Antes de reservar ou comprar, confirme com a Câmara Municipal se o terreno admite a instalação para o uso que pretende e quais os procedimentos aplicáveis. Verifique ainda o acesso ao local e as ligações necessárias. <a class="under" href={url('termos/#terreno')}>Ver o que confirmar</a></p>
       </details><a class="under" href={url('contactos/')}
         >Contactar a Azmora Homes</a>
     </section>

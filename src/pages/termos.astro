@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BusinessDetails from '../components/BusinessDetails.astro';
+import { company, preview } from '../lib/site';
+---
+
+<Layout title="Informação legal" description="Identificação da Azmora Homes, condições do catálogo, verificação do terreno e informação para consumidores.">
+  <div class="wrap page prose legal-page">
+    <p class="kicker"><i></i> INFORMAÇÃO LEGAL</p>
+    <h1>Informação <em>legal.</em></h1>
+    <p class="intro">Identificação da empresa e informações a ter em conta antes de avançar com a compra de uma casa móvel.</p>
+    {preview && <p class="legal-draft">Versão de antevisão. Os campos assinalados serão preenchidos antes do lançamento.</p>}
+
+    <section>
+      <h2>Identificação da empresa</h2>
+      <BusinessDetails mode="legal" />
+    </section>
+
+    <section>
+      <h2>Catálogo, pedidos e orçamentos</h2>
+      <p>Cada ficha corresponde a uma unidade. As medidas de referência de um modelo e os valores anunciados para uma unidade são identificados em separado. Confirme o inventário, as medidas, o estado, o preço e a disponibilidade da unidade no orçamento.</p>
+      <p>Enviar um pedido, adicionar uma casa aos favoritos ou compará-la não constitui reserva, compra nem compromisso de venda. Confirme por escrito o que está incluído no preço, o IVA, a validade do orçamento e as condições de transporte, instalação e garantia antes de avançar.</p>
+    </section>
+
+    <section id="terreno">
+      <h2>Antes de instalar num terreno</h2>
+      <p>Antes de reservar ou comprar, confirme com a Câmara Municipal do local se a instalação é admissível para o terreno e para o uso pretendido. Peça indicação dos procedimentos aplicáveis. O facto de a casa ser móvel não dispensa, por si só, a verificação das regras urbanísticas.</p>
+      <p>Confirme também o percurso de acesso para o transporte, as condições de descarga e colocação e a viabilidade das ligações de água, eletricidade e saneamento. A ficha da casa e o pedido de orçamento não confirmam a viabilidade do terreno.</p>
+      <p><a class="under" href="https://cnt.dgterritorio.gov.pt/sites/default/files/Recomendacao%201_2019_CNT_0.PDF">Orientação da Comissão Nacional do Território sobre estruturas amovíveis</a></p>
+    </section>
+
+    <section>
+      <h2>Reclamações e resolução de litígios</h2>
+      <p><a class="under" href={company.complaintsUrl || 'https://www.livroreclamacoes.pt/Inicio/'}>Livro de Reclamações Eletrónico</a></p>
+      {preview && !company.complaintsUrl && <p class="business-placeholder">Aplicabilidade e ligação da Azmora no Livro de Reclamações a confirmar.</p>}
+      {company.ralName ? (
+        <p>Entidade de resolução alternativa de litígios de consumo: {company.ralUrl ? <a class="under" href={company.ralUrl}>{company.ralName}</a> : company.ralName}.</p>
+      ) : preview ? <p class="business-placeholder">Entidade de resolução alternativa de litígios e respetiva ligação a definir.</p> : null}
+      <p><a class="under" href="https://www.asae.gov.pt/perguntas-frequentes1/area-economica/resolucao-alternativa-de-litigios-de-consumo.aspx">Informação da ASAE sobre resolução alternativa de litígios</a></p>
+    </section>
+  </div>
+</Layout>

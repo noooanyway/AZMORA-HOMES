@@ -2,8 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import Photo from '../../components/Photo.astro';
 import Card from '../../components/Card.astro';
-import { url, houses } from '../../lib/site';
-import { specs, price, status, type House } from '../../lib/catalog';
+import HouseHighlights from '../../components/HouseHighlights.astro';
+import HouseTechnical from '../../components/HouseTechnical.astro';
+import '../../styles/house-detail.css';
+import { url, houses, priceRequest } from '../../lib/site';
+import { houseReference, price, status, type House } from '../../lib/catalog';
 import {
   Heart,
   Columns2,
@@ -16,6 +19,7 @@ export function getStaticPaths() {
   return houses.map((h) => ({ params: { id: h.id }, props: { h } }));
 }
 const { h } = Astro.props as { h: House };
+const reference = houseReference(h);
 const related = houses
   .filter((p) => p.id !== h.id)
   .sort((a, b) => Number(b.brand === h.brand) - Number(a.brand === h.brand))
@@ -23,14 +27,14 @@ const related = houses
 ---
 
 <Layout
-  title={h.name_for_site + ' · ' + h.id}
+  title={h.name_for_site}
   description={h.description_azmora || undefined}
   ><div class="wrap page">
     <nav class="crumb">
-      <a href={url()}>Início</a> / <a href={url('casas/')}>Casas</a> / {h.id}
-    </nav><p class="kicker"><i></i>{h.brand} · {h.id}</p><h1>
+      <a href={url()}>Início</a> / <a href={url('casas/')}>Casas</a>
+    </nav><p class="kicker"><i></i>{reference}{h.typology && ' · ' + h.typology}</p><h1>
       {h.name_for_site}
-    </h1><div class="details">
+    </h1><HouseHighlights h={h} /><div class="details">
       <div>
         <div class="main-photo" id="gallery">
           {
@@ -38,7 +42,7 @@ const related = houses
               <button
                 class="zoom"
                 data-photo="0"
-                aria-label="Ampliar fotografia"
+                aria-label={`Ampliar fotografia de ${h.name_for_site}`}
               >
                 <>
                   <Photo h={h} hero />
@@ -57,7 +61,7 @@ const related = houses
               {h.media.map((m, i) => (
                 <button
                   data-photo={i}
-                  aria-label={'Ampliar fotografia ' + (i + 1)}
+                  aria-label={`Ampliar fotografia ${i + 1} de ${h.name_for_site}`}
                 >
                   <img src={url(m.small || m.src)} alt={m.alt} loading="lazy" />
                 </button>
@@ -68,40 +72,15 @@ const related = houses
       </div><aside class="summary">
         <p class="eyebrow">INFORMAÇÃO COMERCIAL</p><h2>{price(h)}</h2><p>
           {status(h)}
-        </p>{h.description_azmora && <p>{h.description_azmora}</p>}<a
+        </p><a
           class="btn primary"
-          href={url('contactos/?casas=' + h.id)}>Pedir informações</a
-        ><div class="actions">
+          href={priceRequest(h)}>Pedir preço e disponibilidade</a
+        ><a class="under summary-guide-link" href={url('#como-funciona')}>Como funciona a compra</a><div class="actions">
           <button data-fav={h.id}><Heart size={16} />Favoritos</button><button
             data-compare={h.id}><Columns2 size={16} />Comparar</button>
         </div>
       </aside>
-    </div><section class="section">
-      <h2>Ficha <em>técnica</em></h2><dl class="specs">
-        {
-          Object.entries(specs(h))
-            .filter(([k]) => !['Disponibilidade', 'Preço'].includes(k))
-            .map(([k, v]) => (
-              <div>
-                <>
-                  <dt>{k}</dt>
-                  <dd>{v}</dd>
-                </>
-              </div>
-            ))
-        }
-      </dl><h3>Equipamento</h3>{
-        h.equipment_summary.length ? (
-          <ul>
-            {h.equipment_summary.map((t) => (
-              <li>{t}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>Equipamento por confirmar.</p>
-        )
-      }
-    </section>{
+    </div><HouseTechnical h={h} />{
       related.length > 0 && (
         <section>
           <>
@@ -120,7 +99,7 @@ const related = houses
       <dialog
         id="lightbox"
         data-unit={h.id}
-        aria-label="Galeria de fotografias"
+        aria-label={`Galeria de ${h.name_for_site}`}
       >
         <div>
           <>

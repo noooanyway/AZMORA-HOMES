@@ -57,7 +57,7 @@ function checkReference(file, value) {
   const current = new URL(file.replace(/index\.html$/, ''), base);
   let url;
   try {
-    url = new URL(value.replaceAll('&amp;', '&'), current);
+    url = new URL(value.replace(/&(?:amp|#38|#x26);/gi, '&'), current);
   } catch {
     errors.add(file + ' → URL inválido ' + value);
     return;

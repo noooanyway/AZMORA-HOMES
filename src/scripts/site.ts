@@ -3,6 +3,7 @@ import {
   sorted,
   specs,
   name,
+  houseReference,
   toggle,
   type House,
 } from '../lib/catalog';
@@ -117,7 +118,7 @@ function render() {
     const th = document.createElement('th');
     const a = document.createElement('a');
     a.href = base + 'casas/' + h.id + '/';
-    a.textContent = h.name_for_site;
+    a.textContent = h.name_for_site + ' · ' + houseReference(h);
     th.append(a, removeButton(h.id));
     head.append(th);
   });
@@ -140,7 +141,6 @@ document.addEventListener('click', (e) => {
   }
   if (b.dataset.open) {
     const d = $<HTMLDialogElement>('#' + b.dataset.open);
-    if (d?.id === 'filters') syncFilters();
     d?.showModal();
   }
   if (b.hasAttribute('data-close')) b.closest('dialog')?.close();
@@ -179,6 +179,18 @@ function syncFilters() {
   );
 }
 if (filterForm) {
+  const filterPanel = $('#filters')!;
+  const filterToggle = $('#filter-toggle')!;
+  function setFiltersOpen(open: boolean) {
+    filterPanel.hidden = !open;
+    filterToggle.setAttribute('aria-expanded', String(open));
+  }
+  filterToggle.onclick = () => setFiltersOpen(filterPanel.hidden);
+  filterPanel.onkeydown = (event) => {
+    if (event.key !== 'Escape') return;
+    setFiltersOpen(false);
+    filterToggle.focus();
+  };
   const q = $<HTMLInputElement>('[name=q]')!,
     sort = $<HTMLSelectElement>('[name=sort]')!,
     results = $('#results')!;
@@ -223,6 +235,7 @@ if (filterForm) {
         ' ×';
       b.onclick = () => {
         params.delete(k);
+        syncFilters();
         update();
       };
       chips.append(b);
@@ -244,11 +257,15 @@ if (filterForm) {
     params.set('sort', sort.value);
     update();
   };
+  function applyFilters() {
+    if (!filterForm?.checkValidity()) return;
+    new FormData(filterForm).forEach((v, k) => params.set(k, String(v)));
+    update();
+  }
+  filterForm.onchange = applyFilters;
   filterForm.onsubmit = (e) => {
     e.preventDefault();
-    new FormData(filterForm).forEach((v, k) => params.set(k, String(v)));
-    $<HTMLDialogElement>('#filters')!.close();
-    update();
+    applyFilters();
   };
   all('[data-reset]').forEach(
     (b) =>
@@ -256,7 +273,6 @@ if (filterForm) {
         for (const k of [...keysFilter, 'q']) params.delete(k);
         syncFilters();
         update();
-        $<HTMLDialogElement>('#filters')?.close();
       }),
   );
   all('[data-view]').forEach(
@@ -266,18 +282,21 @@ if (filterForm) {
         update();
       }),
   );
+  syncFilters();
+  setFiltersOpen(keysFilter.some((key) => Boolean(params.get(key))));
   update(false);
 }
 const light = $<HTMLDialogElement>('#lightbox');
 if (light) {
-  const media = units.get(light.dataset.unit!)!.media;
+  const unit = units.get(light.dataset.unit!)!;
+  const { media } = unit;
   let ix = 0;
   const show = (i: number) => {
     ix = (i + media.length) % media.length;
     const img = $<HTMLImageElement>('#enlarged')!;
     img.src = base + media[ix].src;
     img.alt = media[ix].alt;
-    $('#position')!.textContent = ix + 1 + ' / ' + media.length;
+    $('#position')!.textContent = `${unit.name_for_site} · ${ix + 1} / ${media.length}`;
   };
   all('[data-photo]').forEach(
     (b) =>
@@ -292,30 +311,4 @@ if (light) {
     if (e.key === 'ArrowLeft') show(ix - 1);
     if (e.key === 'ArrowRight') show(ix + 1);
   };
-}
-const contactPage = $('#contact');
-if (contactPage) {
-  const ids = [...new Set((params.get('casas') || '').split(','))].filter(
-    (id) => units.has(id),
-  );
-  const msgs = ids.map((id) => {
-    const h = units.get(id)!;
-    const a = document.createElement('a');
-    a.href = base + 'casas/' + id + '/';
-    a.textContent = h.name_for_site + ' · ' + id;
-    $('#selected')!.append(a);
-    return a.textContent + ' ' + a.href;
-  });
-  const msg = msgs.length
-    ? 'Gostaria de receber informações sobre:\n' + msgs.join('\n')
-    : 'Gostaria de receber informações sobre as casas móveis.';
-  const area = $<HTMLTextAreaElement>('textarea');
-  if (area) area.value = msg;
-  const wa = $<HTMLAnchorElement>('#whatsapp');
-  if (wa)
-    wa.href =
-      'https://wa.me/' +
-      contactPage.dataset.wa!.replace(/\D/g, '') +
-      '?text=' +
-      encodeURIComponent(msg);
 }

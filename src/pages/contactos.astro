@@ -1,67 +1,102 @@
 ---
+import { Mail } from 'lucide-astro';
 import Layout from '../layouts/Layout.astro';
-import { contacts, url } from '../lib/site';
+import BusinessDetails from '../components/BusinessDetails.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { contacts, detail, houses, url } from '../lib/site';
+import { houseReference } from '../lib/catalog';
+import '../styles/contact.css';
+
+const topics = [
+  ['contacto', 'Pedido de contacto'],
+  ['preco', 'Preço e disponibilidade'],
+  ['visita', 'Informações sobre visitas'],
+  ['transporte', 'Transporte e instalação'],
+  ['ficha', 'Características de uma casa'],
+  ['escolha', 'Ajuda a escolher uma casa'],
+  ['outro', 'Outro assunto'],
+];
+const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => house.typology ?? [])])].sort();
 ---
 
-<Layout title="Contactos"
-  ><div class="wrap page">
-    <p class="kicker"><i></i> CONTACTOS</p><h1>
-      Vamos falar de <em>casas.</em>
-    </h1><div class="contact-grid" id="contact" data-wa={contacts.whatsapp}>
-      <div>
-        <h2>O seu pedido</h2><p>
-          Indique o que gostaria de saber sobre a casa ou seleção que escolheu.
-        </p><div id="selected"></div>{
-          contacts.email && (
-            <p>
-              <a href={'mailto:' + contacts.email}>{contacts.email}</a>
-            </p>
-          )
-        }{
-          contacts.whatsapp && (
-            <a class="btn primary" id="whatsapp">
-              Conversar no WhatsApp
-            </a>
-          )
-        }{
-          !contacts.email && !contacts.whatsapp && !contacts.form && (
-            <p class="note">
-              Os contactos comerciais da Azmora Homes estão a ser confirmados. O
-              envio de pedidos ficará disponível aqui.
-            </p>
-          )
-        }
-      </div><form
-        action={contacts.form || undefined}
-        method="post"
-        class="lead"
-      >
-        <fieldset disabled={!contacts.form}>
-          <legend>Pedido de informação</legend><label
-            >Nome<input required name="nome" autocomplete="name" /></label
-          ><label
-            >Email<input
-              required
-              name="email"
-              autocomplete="email"
-              type="email"
-            /></label
-          ><label
-            >Mensagem<textarea required name="mensagem" rows="4"
-            ></textarea></label
-          ><label class="trap" aria-hidden="true"
-            >Website<input
-              name="_gotcha"
-              tabindex="-1"
-              autocomplete="off"
-            /></label
-          ><label class="consent"
-            ><input required type="checkbox" />Li a informação de privacidade.</label
-          ><button class="btn primary"
-            >{contacts.form ? 'Enviar pedido' : 'Envio indisponível'}</button>
-        </fieldset><a class="under" href={url('privacidade/')}
-          >Informação de privacidade</a>
+<Layout title="Contacte-nos" description="Peça informações sobre uma casa móvel, confirme preço e disponibilidade ou diga-nos o que procura.">
+  <div class="wrap page">
+    <p class="kicker"><i></i> CONTACTE-NOS</p>
+    <h1>Vamos falar de <em>casas.</em></h1>
+    <div class="contact-grid" id="contact" data-wa={contacts.whatsapp}>
+      <aside class="contact-intro">
+        <span class="contact-icon"><Mail size={24} aria-hidden="true" /></span>
+        <h2>Como podemos ajudar?</h2>
+        <p>Escolha o motivo do contacto e a casa que lhe interessa. Se ainda estiver a explorar, basta indicar a tipologia que procura e contar-nos um pouco sobre o seu projeto.</p>
+        <BusinessDetails />
+        <SocialLinks whatsappOnly />
+      </aside>
+
+      <form action={contacts.form || undefined} method="post" class="lead contact-form" id="lead-form" data-enabled={contacts.form ? 'true' : 'false'}>
+        <h2>Enviar um pedido</h2>
+        {!contacts.form && <p class="contact-form-note" id="lead-unavailable">O formulário está disponível para consulta. O envio por email ainda não está ativo.</p>}
+        <noscript><p class="contact-form-note">Ative o JavaScript para usar o formulário.</p></noscript>
+
+        <label>
+          Motivo do contacto
+          <select name="motivo" required id="lead-topic">
+            <option value="">Selecione um motivo</option>
+            {topics.map(([value, label]) => <option value={value}>{label}</option>)}
+          </select>
+        </label>
+
+        {houses.length > 0 && (
+          <div class="contact-selection">
+            <label for="lead-house"><span>Casa de interesse <small>(opcional)</small></span></label>
+            <select id="lead-house">
+              <option value="">Escolher uma casa</option>
+              {houses.map((house) => (
+                <option value={house.id} data-reference={houseReference(house)} data-url={detail(house)}>
+                  {houseReference(house)} · {house.name_for_site}
+                </option>
+              ))}
+            </select>
+            <ul class="contact-houses" id="selected" aria-label="Casas selecionadas"></ul>
+          </div>
+        )}
+
+        <div class="contact-form-grid">
+          <label><span>Tipologia pretendida <small>(opcional)</small></span>
+            <select name="tipologia">
+              <option value="">Sem preferência</option>
+              {typologies.map((type) => (
+                <option value={type}>{type}{/^T[1-9]\d*$/.test(type) && ` · ${type.slice(1)} ${type === 'T1' ? 'quarto' : 'quartos'}`}</option>
+              ))}
+            </select>
+          </label>
+          <label><span>Localidade de destino <small>(opcional)</small></span>
+            <input name="localidade" autocomplete="address-level2" maxlength="100" placeholder="Ex.: Lagos" />
+          </label>
+          <label>Nome <input name="nome" autocomplete="name" required maxlength="120" /></label>
+          <label>Email <input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+        </div>
+        <label><span>Telefone <small>(opcional)</small></span>
+          <input name="telefone" type="tel" autocomplete="tel" maxlength="32" />
+        </label>
+        <label>Mensagem
+          <textarea name="message" id="lead-message" rows="5" maxlength="4000" required placeholder="Diga-nos o que gostaria de saber."></textarea>
+        </label>
+        <label class="trap" aria-hidden="true">Website
+          <input name="_gotcha" tabindex="-1" autocomplete="off" />
+        </label>
+        <label class="consent">
+          <input required type="checkbox" name="privacidade" value="Li e concordo" />
+          <span>Li e concordo com a <a href={url('privacidade/')}>Política de Privacidade</a> para efeitos da resposta ao meu pedido.</span>
+        </label>
+        <button class="btn primary" type="submit" disabled aria-describedby={contacts.form ? undefined : 'lead-unavailable'}>
+          {contacts.form ? 'Enviar pedido por email' : 'Envio ainda indisponível'}
+        </button>
+        <p id="lead-status" class="contact-form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
-  </div></Layout
->
+  </div>
+</Layout>
+
+<script>
+  import '../scripts/contact';
+</script>

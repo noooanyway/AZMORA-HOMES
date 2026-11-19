@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Card from '../../components/Card.astro';
 import Filters from '../../components/Filters.astro';
 import { houses } from '../../lib/site';
-import { Search, SlidersHorizontal, Grid2X2, List, X } from 'lucide-astro';
+import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-astro';
 ---
 
 <Layout title="Catálogo de casas móveis"
@@ -11,7 +11,7 @@ import { Search, SlidersHorizontal, Grid2X2, List, X } from 'lucide-astro';
     <p class="kicker"><i></i> CATÁLOGO</p><h1>Explore as <em>casas.</em></h1><p
       class="intro"
     >
-      Preços e disponibilidade sob consulta.
+      Casas móveis em segunda mão. Preços e disponibilidade sob consulta.
     </p><section id="catalog">
       <div class="toolbar">
         <label class="search"
@@ -21,8 +21,9 @@ import { Search, SlidersHorizontal, Grid2X2, List, X } from 'lucide-astro';
             aria-label="Pesquisar casas"
             placeholder="Pesquisar marca, modelo ou referência"
           /></label
-        ><button class="btn outline" data-open="filters"
-          ><SlidersHorizontal size={16} />Filtros</button
+        ><button type="button" class="btn outline" id="filter-toggle"
+          aria-controls="filters" aria-expanded="false"
+          ><SlidersHorizontal size={16} />Filtros<ChevronDown class="filter-chevron" size={15} /></button
         ><label class="sort"
           ><select aria-label="Ordenar casas" name="sort"
             ><option value="">Ordem do catálogo</option><option value="nome"
@@ -48,16 +49,15 @@ import { Search, SlidersHorizontal, Grid2X2, List, X } from 'lucide-astro';
           ><button class="icon" data-view="list" aria-label="Vista em lista"
             ><List size={20} /></button>
         </div>
-      </div><dialog id="filters">
-        <button class="icon close" data-close aria-label="Fechar filtros"
-          ><X /></button
-        ><h2>Filtrar casas</h2><form id="filterform">
-          <Filters /><div class="actions">
-            <button type="button" class="btn outline" data-reset>Limpar</button
-            ><button class="btn primary">Aplicar filtros</button>
-          </div>
+      </div><section id="filters" class="filter-panel" aria-labelledby="filter-heading" hidden>
+        <div class="filter-head">
+          <h2 id="filter-heading">Filtrar casas</h2>
+          <button type="button" class="btn outline" data-reset>Limpar filtros</button>
+        </div>
+        <form id="filterform">
+          <Filters />
         </form>
-      </dialog><div class="result-line">
+      </section><div class="result-line">
         <strong id="count" aria-live="polite">{houses.length} casas</strong><div
           id="chips"
         >

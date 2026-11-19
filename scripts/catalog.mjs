@@ -13,6 +13,7 @@ function positive(value, key) {
 }
 function validate(items) {
   const ids = new Set();
+  const mediaSlugs = new Set();
   for (const row of items) {
     assert(/^([a-z0-9]+-)*[a-z0-9]+$/.test(row.id) && !ids.has(row.id), 'ID inválido/repetido: ' + row.id);
     ids.add(row.id);
@@ -26,10 +27,15 @@ function validate(items) {
     assert(typeof row.publish === 'boolean' && typeof row.catalogue_preview_allowed === 'boolean', 'Publicação inválida');
     assert(Array.isArray(row.equipment_summary) && row.equipment_summary.every(s => typeof s === 'string'), 'Equipamentos inválidos');
     assert(Array.isArray(row.media), 'Galeria inválida');
+    if (row.media.length) {
+      assert(typeof row.media_slug === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.media_slug) && !mediaSlugs.has(row.media_slug), 'Pasta de fotografias inválida ou repetida: ' + row.id);
+      mediaSlugs.add(row.media_slug);
+    }
     for (const photo of row.media) {
       assert(photo.alt?.trim(), 'Falta descrição de imagem');
       for (const img of [photo.src,photo.small,...(photo.cover?[photo.cover]:[])]) {
-        assert(typeof img==='string' && img.startsWith('images/casas/' + row.id + '/') && !img.includes('..') && !img.includes('\\') && existsSync(path.join('public',img)), 'Imagem inválida: ' + img);
+        const prefix = `images/casas/${row.media_slug}/${row.media_slug}-`;
+        assert(typeof img === 'string' && img.startsWith(prefix) && /^\d+(?:-(?:small|cover))?\.(?:webp|avif)$/.test(img.slice(prefix.length)) && existsSync(path.join('public', img)), 'Imagem inválida: ' + img);
       }
     }
   }

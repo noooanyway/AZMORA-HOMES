@@ -21,50 +21,58 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "terraço frontal coberto",
-      "ar condicionado",
-      "cozinha com placa a gás, frigorífico e exaustor",
-      "quarto de casal",
-      "quarto com duas camas individuais",
-      "duche e sanita em divisão independente"
+      "Terraço frontal coberto com acesso direto ao interior",
+      "Ar condicionado",
+      "Sala e zona de refeições com banco corrido, ligadas à cozinha. Cozinha com placa a gás, exaustor, lava-loiça e frigorífico",
+      "Quarto de casal e quarto com duas camas individuais",
+      "Duche e lavatório, com sanita em divisão separada"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-001/01.webp",
-        "small": "images/casas/exposul-001/01-small.webp",
+        "src": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-01.webp",
+        "small": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-01-small.webp",
         "alt": "Fachada e terraço coberto — O’Hara 734",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-001/01-cover.avif"
+        "cover": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-001/02.webp",
-        "small": "images/casas/exposul-001/02-small.webp",
+        "src": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-02.webp",
+        "small": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-02-small.webp",
         "alt": "Cozinha e zona de refeições — O’Hara 734",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-001/03.webp",
-        "small": "images/casas/exposul-001/03-small.webp",
+        "src": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-03.webp",
+        "small": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-03-small.webp",
         "alt": "Quarto com duas camas — O’Hara 734",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-001/04.webp",
-        "small": "images/casas/exposul-001/04-small.webp",
+        "src": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-04.webp",
+        "small": "images/casas/ohara-734-com-terraco-t2/ohara-734-com-terraco-t2-04-small.webp",
         "alt": "Casa de banho com cabine de duche — O’Hara 734",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "O’Hara 734 T2 com zona exterior coberta e dois quartos.",
+    "description_azmora": "O’Hara 734 com dois quartos, sala e zona de refeições ligadas à cozinha. O terraço frontal coberto tem acesso direto ao interior e a casa dispõe de ar condicionado.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Duche e lavatório numa divisão; sanita separada.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,30–7,50 m",
+      "width": "4,00 m",
+      "area": "≈ 29–30 m²",
+      "note": "A área de referência é da versão padrão do 734. A área interior e a do terraço desta unidade devem ser medidas separadamente."
+    },
+    "media_slug": "ohara-734-com-terraco-t2"
   },
   {
     "id": "exposul-002",
@@ -93,36 +101,44 @@
       "aquecimento elétrico",
       "WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-002/01.webp",
-        "small": "images/casas/exposul-002/01-small.webp",
+        "src": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-01.webp",
+        "small": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-01-small.webp",
         "alt": "Fachada com portadas azuis — IRM Super Mercure",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-002/01-cover.avif"
+        "cover": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-002/03.webp",
-        "small": "images/casas/exposul-002/03-small.webp",
+        "src": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-03.webp",
+        "small": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-03-small.webp",
         "alt": "Sala e mesa de refeições — IRM Super Mercure",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-002/04.webp",
-        "small": "images/casas/exposul-002/04-small.webp",
+        "src": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-04.webp",
+        "small": "images/casas/irm-super-mercure-t2/irm-super-mercure-t2-04-small.webp",
         "alt": "Quarto com camas individuais — IRM Super Mercure",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "A sala abre para a cozinha e reúne um sofá de canto e uma mesa de refeições. O duche e a sanita ficam em divisões separadas.",
+    "description_azmora": "IRM Super Mercure de dois quartos, com sofá de canto na zona de estar, placa a gás de quatro queimadores e aquecimento elétrico. O WC fica numa divisão separada.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "WC separado. A composição da zona de banho está por confirmar.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,20–7,50 m",
+      "width": "4,00 m",
+      "area": "≈ 26–30 m²"
+    },
+    "media_slug": "irm-super-mercure-t2"
   },
   {
     "id": "exposul-003",
@@ -146,48 +162,58 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "cozinha com frigorífico, placa a gás e exaustor",
-      "quarto de casal",
-      "quarto com duas camas individuais",
-      "duche e WC independente"
+      "Cozinha com frigorífico, placa a gás, exaustor e lava-loiça",
+      "Zona de refeições com banco corrido, mesa e cadeiras",
+      "Quarto de casal e quarto com duas camas individuais",
+      "Mobiliário e arrumação integrados",
+      "Duche e lavatório, com WC independente"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-003/01.webp",
-        "small": "images/casas/exposul-003/01-small.webp",
+        "src": "images/casas/irm-super-venus-t2/irm-super-venus-t2-01.webp",
+        "small": "images/casas/irm-super-venus-t2/irm-super-venus-t2-01-small.webp",
         "alt": "Entrada com degraus — IRM Super Venus",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-003/01-cover.avif"
+        "cover": "images/casas/irm-super-venus-t2/irm-super-venus-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-003/02.webp",
-        "small": "images/casas/exposul-003/02-small.webp",
+        "src": "images/casas/irm-super-venus-t2/irm-super-venus-t2-02.webp",
+        "small": "images/casas/irm-super-venus-t2/irm-super-venus-t2-02-small.webp",
         "alt": "Porta de entrada e janelas — IRM Super Venus",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-003/03.webp",
-        "small": "images/casas/exposul-003/03-small.webp",
+        "src": "images/casas/irm-super-venus-t2/irm-super-venus-t2-03.webp",
+        "small": "images/casas/irm-super-venus-t2/irm-super-venus-t2-03-small.webp",
         "alt": "Quarto com arrumação sobre a cama — IRM Super Venus",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-003/04.webp",
-        "small": "images/casas/exposul-003/04-small.webp",
+        "src": "images/casas/irm-super-venus-t2/irm-super-venus-t2-04.webp",
+        "small": "images/casas/irm-super-venus-t2/irm-super-venus-t2-04-small.webp",
         "alt": "Cama junto à janela — IRM Super Venus",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "Casa móvel compacta com dois quartos e zona social integrada.",
+    "description_azmora": "IRM Super Venus com um quarto de casal e outro com duas camas individuais. A zona de refeições tem banco corrido, mesa e cadeiras, junto à cozinha equipada e à arrumação integrada.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "6,06–6,30 m",
+      "width": "4,00 m",
+      "area": "24,24 ou 25,20 m²",
+      "note": "Os valores referem-se a outros anúncios Super Venus. A versão desta unidade ainda não foi identificada."
+    },
+    "media_slug": "irm-super-venus-t2"
   },
   {
     "id": "exposul-004",
@@ -216,43 +242,52 @@
       "quarto de casal",
       "duche e WC separados"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-004/01.webp",
-        "small": "images/casas/exposul-004/01-small.webp",
+        "src": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-01.webp",
+        "small": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-01-small.webp",
         "alt": "Exterior com alpendre frontal — Rideau Panama Duo",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-004/01-cover.avif"
+        "cover": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-004/02.webp",
-        "small": "images/casas/exposul-004/02-small.webp",
+        "src": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-02.webp",
+        "small": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-02-small.webp",
         "alt": "Banco de canto e mesa de refeições — Rideau Panama Duo",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-004/03.webp",
-        "small": "images/casas/exposul-004/03-small.webp",
+        "src": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-03.webp",
+        "small": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-03-small.webp",
         "alt": "Cozinha em L — Rideau Panama Duo",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-004/04.webp",
-        "small": "images/casas/exposul-004/04-small.webp",
+        "src": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-04.webp",
+        "small": "images/casas/rideau-panama-duo-t2/rideau-panama-duo-t2-04-small.webp",
         "alt": "Quarto com beliche — Rideau Panama Duo",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "O deck frontal coberto prolonga a zona de estar. No interior, a cozinha em L fica junto à mesa com banco corrido.",
+    "description_azmora": "Rideau Panama Duo de dois quartos, com deck frontal coberto. A cozinha em L fica junto à zona de refeições e o duche e o WC ocupam divisões separadas.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Zona de duche e WC separado.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "8,20–8,60 m",
+      "width": "4,00 m",
+      "area": "≈ 23 m² interiores + 9 m² de alpendre",
+      "note": "A área interior e a área do alpendre são apresentadas separadamente."
+    },
+    "media_slug": "rideau-panama-duo-t2"
   },
   {
     "id": "exposul-005",
@@ -276,49 +311,57 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "dois WC",
-      "janelas panorâmicas",
-      "cozinha com forno duplo, placa a gás e frigorífico",
-      "aquecimento por radiadores",
-      "duas portas de acesso"
+      "Quarto principal e dois quartos com duas camas individuais cada",
+      "Duas casas de banho com sanita e lavatório, pelo menos uma com cabine de duche",
+      "Sala de estar com janelas panorâmicas e sofá de canto, e zona de refeições",
+      "Cozinha com bancada e arrumação, placa a gás, forno duplo, exaustor, lava-loiça e frigorífico",
+      "Aquecimento por radiadores",
+      "Duas portas exteriores"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-005/01.webp",
-        "small": "images/casas/exposul-005/01-small.webp",
+        "src": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-01.webp",
+        "small": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-01-small.webp",
         "alt": "Fachada e acessos exteriores — Willerby Granada XL",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-005/01-cover.avif"
+        "cover": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-005/02.webp",
-        "small": "images/casas/exposul-005/02-small.webp",
+        "src": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-02.webp",
+        "small": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-02-small.webp",
         "alt": "Cozinha e armários de madeira — Willerby Granada XL",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-005/03.webp",
-        "small": "images/casas/exposul-005/03-small.webp",
+        "src": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-03.webp",
+        "small": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-03-small.webp",
         "alt": "Sala e zona de refeições — Willerby Granada XL",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-005/04.webp",
-        "small": "images/casas/exposul-005/04-small.webp",
+        "src": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-04.webp",
+        "small": "images/casas/willerby-granada-xl-t3/willerby-granada-xl-t3-04-small.webp",
         "alt": "Quarto principal — Willerby Granada XL",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "Modelo de grandes dimensões, com três quartos, duas casas de banho e zona social ampla.",
+    "description_azmora": "Willerby Granada XL com três quartos, duas casas de banho e 12,5 m de comprimento anunciados. A sala tem janelas panorâmicas e sofá de canto. A cozinha inclui forno duplo e a casa dispõe de aquecimento por radiadores.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "As duas casas de banho têm sanita e lavatório. Pelo menos uma tem cabine de duche.",
+    "model_measure_reference": {
+      "width": "≈ 3,70 m",
+      "area": "≈ 42–46 m²",
+      "note": "Os 12,5 m indicados na tabela são o comprimento anunciado para esta unidade. A largura e a área neste bloco são referências da gama."
+    },
+    "media_slug": "willerby-granada-xl-t3"
   },
   {
     "id": "exposul-006",
@@ -342,50 +385,60 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "despensa independente",
-      "quarto de casal",
-      "quarto com cama individual e beliche",
-      "cozinha com placa a gás de quatro queimadores",
-      "WC separado",
-      "aquecimento elétrico"
+      "Quarto de casal e quarto com cama individual e beliche (cinco lugares de dormir nos quartos)",
+      "Sala, refeições e cozinha em espaço aberto, com sofá de canto e bancada de apoio. Cozinha com placa a gás de quatro queimadores, exaustor, lava-loiça e frigorífico",
+      "Despensa independente com prateleiras",
+      "Duche e lavatório, com WC separado",
+      "Aquecimento elétrico",
+      "Mesa na zona de refeições"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-006/01.webp",
-        "small": "images/casas/exposul-006/01-small.webp",
+        "src": "images/casas/trigano-evolution-t2/trigano-evolution-t2-01.webp",
+        "small": "images/casas/trigano-evolution-t2/trigano-evolution-t2-01-small.webp",
         "alt": "Exterior e porta de entrada — Trigano Evolution",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-006/01-cover.avif"
+        "cover": "images/casas/trigano-evolution-t2/trigano-evolution-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-006/02.webp",
-        "small": "images/casas/exposul-006/02-small.webp",
+        "src": "images/casas/trigano-evolution-t2/trigano-evolution-t2-02.webp",
+        "small": "images/casas/trigano-evolution-t2/trigano-evolution-t2-02-small.webp",
         "alt": "Bancada e lava-loiça — Trigano Evolution",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-006/03.webp",
-        "small": "images/casas/exposul-006/03-small.webp",
+        "src": "images/casas/trigano-evolution-t2/trigano-evolution-t2-03.webp",
+        "small": "images/casas/trigano-evolution-t2/trigano-evolution-t2-03-small.webp",
         "alt": "Zona de duche — Trigano Evolution",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-006/04.webp",
-        "small": "images/casas/exposul-006/04-small.webp",
+        "src": "images/casas/trigano-evolution-t2/trigano-evolution-t2-04.webp",
+        "small": "images/casas/trigano-evolution-t2/trigano-evolution-t2-04-small.webp",
         "alt": "WC independente — Trigano Evolution",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "Casa móvel com dois quartos e despensa junto à cozinha.",
+    "description_azmora": "Trigano Evolution com zona de estar e cozinha em espaço aberto, despensa independente e aquecimento elétrico. Os dois quartos têm cinco lugares para dormir.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Duche e lavatório numa divisão; sanita separada.",
+    "bedroom_sleeping_places": 5,
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,70–8,50 m",
+      "width": "4,00 m",
+      "area": "≈ 27–33 m²",
+      "note": "Existem vários submodelos Evolution. A versão desta unidade está por identificar."
+    },
+    "media_slug": "trigano-evolution-t2"
   },
   {
     "id": "exposul-007",
@@ -409,47 +462,59 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "revestimento exterior em madeira",
-      "deck coberto",
-      "cozinha com placa elétrica de quatro zonas e frigorífico"
+      "Revestimento exterior em madeira",
+      "Deck coberto com iluminação e acesso direto",
+      "Quarto de casal e quarto com duas camas individuais",
+      "Cozinha com placa elétrica de quatro zonas, exaustor, lava-loiça e frigorífico",
+      "Duche e lavatório, com WC separado",
+      "Banco corrido na zona de refeições"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-007/01.webp",
-        "small": "images/casas/exposul-007/01-small.webp",
+        "src": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-01.webp",
+        "small": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-01-small.webp",
         "alt": "Fachada de madeira e terraço coberto — O’Hara 734",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-007/01-cover.avif"
+        "cover": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-007/02.webp",
-        "small": "images/casas/exposul-007/02-small.webp",
+        "src": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-02.webp",
+        "small": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-02-small.webp",
         "alt": "Quarto com cama de casal — O’Hara 734",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-007/03.webp",
-        "small": "images/casas/exposul-007/03-small.webp",
+        "src": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-03.webp",
+        "small": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-03-small.webp",
         "alt": "WC separado — O’Hara 734",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-007/04.webp",
-        "small": "images/casas/exposul-007/04-small.webp",
+        "src": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-04.webp",
+        "small": "images/casas/ohara-734-deck-de-madeira-t2/ohara-734-deck-de-madeira-t2-04-small.webp",
         "alt": "Cozinha e zona de refeições — O’Hara 734",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "O’Hara 734 com revestimento de madeira e deck coberto.",
+    "description_azmora": "O’Hara 734 de dois quartos, com revestimento exterior em madeira e deck coberto iluminado. A zona de refeições tem banco corrido e a cozinha está equipada com placa elétrica de quatro zonas.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,50–7,80 m",
+      "width": "4,00 m",
+      "area": "≈ 22,5 m² interiores + 6,7 m² de terraço",
+      "note": "A referência descreve outra configuração com madeira e terraço. A área interior e a área do terraço desta unidade não foram medidas."
+    },
+    "media_slug": "ohara-734-deck-de-madeira-t2"
   },
   {
     "id": "exposul-008",
@@ -473,48 +538,60 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "cozinha em U",
-      "frigorífico com congelador",
-      "ar condicionado na zona social",
-      "três quartos"
+      "Um quarto de casal e dois quartos com duas camas individuais cada (seis lugares de dormir nos quartos)",
+      "Sala e zona de refeições ligadas à cozinha em U, equipada com placa a gás, exaustor, lava-loiça e frigorífico com congelador",
+      "Ar condicionado na zona social",
+      "Duche e lavatório, com WC separado",
+      "Portas envidraçadas de acesso ao exterior",
+      "Sofá de canto na zona de estar"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-008/01.webp",
-        "small": "images/casas/exposul-008/01-small.webp",
+        "src": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-01.webp",
+        "small": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-01-small.webp",
         "alt": "Fachada e portas envidraçadas — IRM Super Octália",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-008/01-cover.avif"
+        "cover": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-008/02.webp",
-        "small": "images/casas/exposul-008/02-small.webp",
+        "src": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-02.webp",
+        "small": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-02-small.webp",
         "alt": "Sala com sofá de canto — IRM Super Octália",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-008/03.webp",
-        "small": "images/casas/exposul-008/03-small.webp",
+        "src": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-03.webp",
+        "small": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-03-small.webp",
         "alt": "Quarto principal — IRM Super Octália",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-008/04.webp",
-        "small": "images/casas/exposul-008/04-small.webp",
+        "src": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-04.webp",
+        "small": "images/casas/irm-super-octalia-t3/irm-super-octalia-t3-04-small.webp",
         "alt": "Quarto com duas camas — IRM Super Octália",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "Casa móvel familiar T3, com zona social ampla e cozinha em U.",
+    "description_azmora": "IRM Super Octália com três quartos e seis lugares para dormir nos quartos. A zona social tem sofá de canto, ar condicionado, portas envidraçadas e cozinha em U.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
+    "bedroom_sleeping_places": 6,
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "9,09–9,20 m",
+      "width": "4,00 m",
+      "area": "≈ 34–36,8 m²",
+      "note": "O intervalo descreve a gama Super Octália. O valor de 36,8 m² anunciado para outra unidade não confirma a área desta casa."
+    },
+    "media_slug": "irm-super-octalia-t3"
   },
   {
     "id": "exposul-009",
@@ -538,48 +615,57 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "sofá de canto",
-      "placa a gás com quatro queimadores",
-      "aquecimento elétrico",
-      "cabine de duche e WC separado"
+      "Dois quartos, um deles com duas camas individuais",
+      "Zona social em plano aberto com sofá de canto e zona de refeições",
+      "Cozinha com armários, placa a gás de quatro queimadores, exaustor e lava-loiça",
+      "Aquecimento elétrico",
+      "Cabine de duche e lavatório, com sanita em divisão independente"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-009/01.webp",
-        "small": "images/casas/exposul-009/01-small.webp",
+        "src": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-01.webp",
+        "small": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-01-small.webp",
         "alt": "Fachada com portadas verdes — IRM Super Mercure",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-009/01-cover.avif"
+        "cover": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-009/02.webp",
-        "small": "images/casas/exposul-009/02-small.webp",
+        "src": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-02.webp",
+        "small": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-02-small.webp",
         "alt": "Cozinha aberta sobre a sala — IRM Super Mercure",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-009/03.webp",
-        "small": "images/casas/exposul-009/03-small.webp",
+        "src": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-03.webp",
+        "small": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-03-small.webp",
         "alt": "Quarto com duas camas — IRM Super Mercure",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-009/04.webp",
-        "small": "images/casas/exposul-009/04-small.webp",
+        "src": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-04.webp",
+        "small": "images/casas/irm-super-mercure-t2-segunda-unidade/irm-super-mercure-t2-segunda-unidade-04-small.webp",
         "alt": "WC independente — IRM Super Mercure",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "Casa móvel T2 com cozinha integrada e aquecimento elétrico.",
+    "description_azmora": "IRM Super Mercure de dois quartos, com sala e cozinha abertas, sofá de canto, placa a gás e aquecimento elétrico. Um dos quartos tem duas camas individuais.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC independente.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,20–7,50 m",
+      "width": "4,00 m",
+      "area": "≈ 26–30 m²"
+    },
+    "media_slug": "irm-super-mercure-t2-segunda-unidade"
   },
   {
     "id": "exposul-010",
@@ -603,49 +689,58 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "cozinha equipada com frigorífico e placa a gás",
-      "aquecimento por radiadores",
-      "duas portas de acesso",
-      "três quartos",
-      "duche e instalações sanitárias separadas"
+      "Quarto principal com cama de casal e dois quartos com duas camas individuais cada",
+      "Cozinha integrada com bancada e armários, placa a gás, lava-loiça, frigorífico e exaustor",
+      "Sala ampla com sofá de canto, mesa de refeições e espaços de arrumação",
+      "Aquecimento por radiadores",
+      "Cabine de duche e instalações sanitárias separadas",
+      "Duas portas exteriores"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-010/01.webp",
-        "small": "images/casas/exposul-010/01-small.webp",
+        "src": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-01.webp",
+        "small": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-01-small.webp",
         "alt": "Fachada lateral — Atlas Nevada Super",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-010/01-cover.avif"
+        "cover": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-010/02.webp",
-        "small": "images/casas/exposul-010/02-small.webp",
+        "src": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-02.webp",
+        "small": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-02-small.webp",
         "alt": "Cozinha com placa e bancada — Atlas Nevada Super",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-010/03.webp",
-        "small": "images/casas/exposul-010/03-small.webp",
+        "src": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-03.webp",
+        "small": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-03-small.webp",
         "alt": "Quarto junto à janela — Atlas Nevada Super",
         "width": 1080,
         "height": 1440
       },
       {
-        "src": "images/casas/exposul-010/04.webp",
-        "small": "images/casas/exposul-010/04-small.webp",
+        "src": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-04.webp",
+        "small": "images/casas/atlas-nevada-super-t3/atlas-nevada-super-t3-04-small.webp",
         "alt": "Quarto com arrumação superior — Atlas Nevada Super",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "Modelo T3 com sala ampla, três quartos e aquecimento por radiadores.",
+    "description_azmora": "Atlas Nevada Super com três quartos, sala ampla, cozinha equipada e aquecimento por radiadores. Duas portas ligam a casa ao exterior.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e instalações sanitárias separadas.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "11,00–11,30 m",
+      "width": "≈ 3,70 m",
+      "area": "≈ 40–42 m²"
+    },
+    "media_slug": "atlas-nevada-super-t3"
   },
   {
     "id": "exposul-011",
@@ -669,48 +764,55 @@
     "area_m2": 36.8,
     "year": 2012,
     "equipment_summary": [
-      "três quartos",
-      "cozinha equipada",
-      "cabine de duche",
-      "WC separado"
+      "Três quartos com camas de casal e individuais, e roupeiros",
+      "Sala ampla e cozinha equipada com fogão e arrumação",
+      "Cabine de duche e lavatório, com WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-011/01.webp",
-        "small": "images/casas/exposul-011/01-small.webp",
+        "src": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-01.webp",
+        "small": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-01-small.webp",
         "alt": "Entrada com portas envidraçadas — IRM Super Octália",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-011/01-cover.avif"
+        "cover": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-011/02.webp",
-        "small": "images/casas/exposul-011/02-small.webp",
+        "src": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-02.webp",
+        "small": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-02-small.webp",
         "alt": "Fachada lateral e degraus — IRM Super Octália",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-011/03.webp",
-        "small": "images/casas/exposul-011/03-small.webp",
+        "src": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-03.webp",
+        "small": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-03-small.webp",
         "alt": "Mesa de refeições junto à cozinha — IRM Super Octália",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-011/04.webp",
-        "small": "images/casas/exposul-011/04-small.webp",
+        "src": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-04.webp",
+        "small": "images/casas/irm-super-octalia-t3-36-8-m2/irm-super-octalia-t3-36-8-m2-04-small.webp",
         "alt": "Quarto com camas individuais — IRM Super Octália",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "IRM Super Octália de 2012 com três quartos e 36,8 m² anunciados.",
+    "description_azmora": "IRM Super Octália com três quartos e 36,8 m² anunciados. A sala comunica com a cozinha, que tem fogão e arrumação, e o WC é separado da zona de duche.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "9,09 m",
+      "width": "4,00 m",
+      "note": "Os 36,8 m² da tabela são a área anunciada. Os 9,09 m × 4,00 m correspondem à referência da versão documentada em 2010."
+    },
+    "media_slug": "irm-super-octalia-t3-36-8-m2"
   },
   {
     "id": "exposul-012",
@@ -734,49 +836,57 @@
     "area_m2": null,
     "year": null,
     "equipment_summary": [
-      "alpendre em madeira",
-      "dois quartos",
-      "cozinha equipada com fogão e frigorífico",
-      "cabine de duche",
-      "WC separado"
+      "Alpendre de madeira",
+      "Quarto de casal e quarto com duas camas individuais",
+      "Sala, zona de refeições e cozinha com fogão, frigorífico e arrumação",
+      "Cabine de duche e lavatório, com WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-012/01.webp",
-        "small": "images/casas/exposul-012/01-small.webp",
+        "src": "images/casas/ohara-784-t2/ohara-784-t2-01.webp",
+        "small": "images/casas/ohara-784-t2/ohara-784-t2-01-small.webp",
         "alt": "Exterior e alpendre de madeira — O’Hara 784",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-012/01-cover.avif"
+        "cover": "images/casas/ohara-784-t2/ohara-784-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-012/02.webp",
-        "small": "images/casas/exposul-012/02-small.webp",
+        "src": "images/casas/ohara-784-t2/ohara-784-t2-02.webp",
+        "small": "images/casas/ohara-784-t2/ohara-784-t2-02-small.webp",
         "alt": "Empena e vista lateral — O’Hara 784",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-012/03.webp",
-        "small": "images/casas/exposul-012/03-small.webp",
+        "src": "images/casas/ohara-784-t2/ohara-784-t2-03.webp",
+        "small": "images/casas/ohara-784-t2/ohara-784-t2-03-small.webp",
         "alt": "Cozinha com frigorífico — O’Hara 784",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-012/04.webp",
-        "small": "images/casas/exposul-012/04-small.webp",
+        "src": "images/casas/ohara-784-t2/ohara-784-t2-04.webp",
+        "small": "images/casas/ohara-784-t2/ohara-784-t2-04-small.webp",
         "alt": "Bancada e armários de cozinha — O’Hara 784",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "O’Hara 784 com dois quartos e alpendre em madeira.",
+    "description_azmora": "O’Hara 784 com dois quartos e alpendre em madeira. A zona de refeições comunica com a cozinha, equipada com fogão, frigorífico e arrumação.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,80–8,00 m",
+      "width": "4,00 m",
+      "area": "≈ 30–31,4 m²",
+      "note": "A área do alpendre e a sua inclusão na medição ainda estão por confirmar."
+    },
+    "media_slug": "ohara-784-t2"
   },
   {
     "id": "exposul-013",
@@ -804,43 +914,50 @@
       "janelas amplas",
       "arrumação no quarto principal"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-013/01.webp",
-        "small": "images/casas/exposul-013/01-small.webp",
+        "src": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-01.webp",
+        "small": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-01-small.webp",
         "alt": "Exterior e entrada — Willerby Salisbury",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-013/01-cover.avif"
+        "cover": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-013/02.webp",
-        "small": "images/casas/exposul-013/02-small.webp",
+        "src": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-02.webp",
+        "small": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-02-small.webp",
         "alt": "Sala com sofá e mesa — Willerby Salisbury",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-013/03.webp",
-        "small": "images/casas/exposul-013/03-small.webp",
+        "src": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-03.webp",
+        "small": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-03-small.webp",
         "alt": "Zona de estar e refeições — Willerby Salisbury",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-013/04.webp",
-        "small": "images/casas/exposul-013/04-small.webp",
+        "src": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-04.webp",
+        "small": "images/casas/willerby-salisbury-t2/willerby-salisbury-t2-04-small.webp",
         "alt": "Cozinha com janela — Willerby Salisbury",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "A sala distribui-se entre estar e refeições, com janelas amplas. Os dois quartos ficam separados da zona social.",
+    "description_azmora": "Willerby Salisbury com dois quartos, sala dividida em duas zonas e janelas amplas. O quarto principal tem arrumação.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "10,70–11,60 m",
+      "width": "≈ 3,70 m",
+      "area": "≈ 37–42 m²"
+    },
+    "media_slug": "willerby-salisbury-t2"
   },
   {
     "id": "exposul-014",
@@ -868,43 +985,52 @@
       "três quartos",
       "WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-014/01.webp",
-        "small": "images/casas/exposul-014/01-small.webp",
+        "src": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-01.webp",
+        "small": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-01-small.webp",
         "alt": "Exterior com portadas azuis — Trigano n.º 18",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-014/01-cover.avif"
+        "cover": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-014/02.webp",
-        "small": "images/casas/exposul-014/02-small.webp",
+        "src": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-02.webp",
+        "small": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-02-small.webp",
         "alt": "Cozinha junto à entrada — Trigano n.º 18",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-014/03.webp",
-        "small": "images/casas/exposul-014/03-small.webp",
+        "src": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-03.webp",
+        "small": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-03-small.webp",
         "alt": "Quarto principal — Trigano n.º 18",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-014/04.webp",
-        "small": "images/casas/exposul-014/04-small.webp",
+        "src": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-04.webp",
+        "small": "images/casas/trigano-numero-18-t3/trigano-numero-18-t3-04-small.webp",
         "alt": "Quarto com duas camas — Trigano n.º 18",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "A casa organiza três quartos em torno de uma sala com ligação direta à cozinha. Dispõe de casa de banho e WC separado.",
+    "description_azmora": "Trigano de três quartos, com cozinha equipada com armários e WC separado. A designação «n.º 18» identifica o anúncio e o modelo de fábrica está por confirmar.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "WC separado. A configuração do duche está por confirmar.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "7,80–9,10 m",
+      "width": "4,00 m",
+      "area": "≈ 31–36 m²",
+      "note": "Referência genérica de outras Trigano T3. O modelo comercial deste exemplar ainda não foi identificado."
+    },
+    "media_slug": "trigano-numero-18-t3"
   },
   {
     "id": "exposul-015",
@@ -933,43 +1059,51 @@
       "cabine de duche",
       "WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-015/01.webp",
-        "small": "images/casas/exposul-015/01-small.webp",
+        "src": "images/casas/ohara-834-t2/ohara-834-t2-01.webp",
+        "small": "images/casas/ohara-834-t2/ohara-834-t2-01-small.webp",
         "alt": "Exterior e portas envidraçadas — O’Hara 834",
         "width": 690,
         "height": 517,
-        "cover": "images/casas/exposul-015/01-cover.avif"
+        "cover": "images/casas/ohara-834-t2/ohara-834-t2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-015/02.webp",
-        "small": "images/casas/exposul-015/02-small.webp",
+        "src": "images/casas/ohara-834-t2/ohara-834-t2-02.webp",
+        "small": "images/casas/ohara-834-t2/ohara-834-t2-02-small.webp",
         "alt": "Sala e zona de refeições — O’Hara 834",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-015/03.webp",
-        "small": "images/casas/exposul-015/03-small.webp",
+        "src": "images/casas/ohara-834-t2/ohara-834-t2-03.webp",
+        "small": "images/casas/ohara-834-t2/ohara-834-t2-03-small.webp",
         "alt": "Quarto de casal — O’Hara 834",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-015/04.webp",
-        "small": "images/casas/exposul-015/04-small.webp",
+        "src": "images/casas/ohara-834-t2/ohara-834-t2-04.webp",
+        "small": "images/casas/ohara-834-t2/ohara-834-t2-04-small.webp",
         "alt": "Armário e arrumação — O’Hara 834",
         "width": 1080,
         "height": 1440
       }
     ],
-    "description_azmora": "A zona de refeições comunica com a cozinha equipada com máquina de lavar loiça. Um quarto tem cama de casal e o outro inclui beliche.",
+    "description_azmora": "O’Hara 834 de dois quartos, com beliche, máquina de lavar loiça, cabine de duche e WC separado.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e WC separado.",
+    "bathroom_count_minimum": 1,
+    "model_measure_reference": {
+      "length": "8,30–8,34 m",
+      "width": "4,00 m",
+      "area": "≈ 33 m²"
+    },
+    "media_slug": "ohara-834-t2"
   },
   {
     "id": "exposul-016",
@@ -993,47 +1127,49 @@
     "area_m2": 30,
     "year": null,
     "equipment_summary": [
-      "dois quartos",
-      "cozinha com fogão e frigorífico",
-      "cabine de duche",
-      "WC separado"
+      "Quarto de casal e quarto com duas camas individuais",
+      "Sala com cozinha equipada com fogão, frigorífico e arrumação",
+      "Cabine de duche e lavatório, com WC separado"
     ],
-    "condition": null,
+    "condition": "Usada",
     "availability": "por_confirmar",
     "public_price_eur": null,
     "media": [
       {
-        "src": "images/casas/exposul-016/01.webp",
-        "small": "images/casas/exposul-016/01-small.webp",
+        "src": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-01.webp",
+        "small": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-01-small.webp",
         "alt": "Fachada com portadas azuis — O’Hara T2",
         "width": 1600,
         "height": 1200,
-        "cover": "images/casas/exposul-016/01-cover.avif"
+        "cover": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-01-cover.avif"
       },
       {
-        "src": "images/casas/exposul-016/02.webp",
-        "small": "images/casas/exposul-016/02-small.webp",
+        "src": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-02.webp",
+        "small": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-02-small.webp",
         "alt": "Sala junto à cozinha — O’Hara T2",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-016/03.webp",
-        "small": "images/casas/exposul-016/03-small.webp",
+        "src": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-03.webp",
+        "small": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-03-small.webp",
         "alt": "Bancada e placa de cozinha — O’Hara T2",
         "width": 1600,
         "height": 1200
       },
       {
-        "src": "images/casas/exposul-016/04.webp",
-        "small": "images/casas/exposul-016/04-small.webp",
+        "src": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-04.webp",
+        "small": "images/casas/ohara-t2-30-m2/ohara-t2-30-m2-04-small.webp",
         "alt": "Quarto de casal — O’Hara T2",
         "width": 1600,
         "height": 1200
       }
     ],
-    "description_azmora": "O’Hara T2 com 7,5 × 4 metros, conforme a designação no catálogo.",
+    "description_azmora": "O’Hara T2 com dois quartos e cozinha equipada com fogão, frigorífico e arrumação. O anúncio indica 7,5 × 4 m e 30 m². O submodelo não está identificado.",
     "publish": false,
-    "catalogue_preview_allowed": true
+    "catalogue_preview_allowed": true,
+    "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
+    "bathroom_count_minimum": 1,
+    "media_slug": "ohara-t2-30-m2"
   }
 ]
