@@ -1,0 +1,482 @@
+{
+  "data_pesquisa": "2026-11-19",
+  "nota": "Fontes externas descrevem modelos ou unidades comparáveis, NÃO a unidade Exposul. Não importar dimensões, ano, área ou equipamento para fichas comerciais sem validação individual.",
+  "registos": [
+    {
+      "id": "exposul-001",
+      "name": "O’Hara 734 c/ Terraço — T2",
+      "exposul_url": "https://www.exposul.pt/shop/o-hara-734-c-terraco-t2-38",
+      "modelo_externo_pesquisado": "O’Hara O’Phéa 734 (ficha 08/2009)",
+      "dimensoes_referencia": "7,30 × 4,00 m",
+      "area_referencia": "27,30 m² (critério ficha)",
+      "anos_documentados_noutras_unidades": "2009",
+      "tipo_fonte": "Ficha de fabricante",
+      "alerta_diferencas": "Existem exemplares 7,34 × 4,00 e até anúncios com largura diferente; terraço/acabamentos desta unidade podem ser específicos.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha técnica O’Hara 734 (2009)",
+          "url": "https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf"
+        },
+        {
+          "titulo": "Exemplar 734 (2006)",
+          "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-734-n7/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A placa identifica a variante O’Phéa 734 e o ano? Medir o corpo e o conjunto com terraço e indicar que área exclui o terraço."
+      }
+    },
+    {
+      "id": "exposul-002",
+      "name": "IRM Super Mercure — T2 (anúncio 37)",
+      "exposul_url": "https://www.exposul.pt/shop/irm-super-mercure-t2-37",
+      "modelo_externo_pesquisado": "IRM Super Mercure (ficha 2007)",
+      "dimensoes_referencia": "7,32 × 4,00 m",
+      "area_referencia": "27,50 m² (base descrita)",
+      "anos_documentados_noutras_unidades": "2007",
+      "tipo_fonte": "Ficha de fabricante",
+      "alerta_diferencas": "O modelo existe com outras dimensões/anos; não corresponde necessariamente à unidade 002. Não copiar equipamento opcional.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha fabricante Super Mercure 2007",
+          "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf"
+        },
+        {
+          "titulo": "Revendedor Super Mercure 2005",
+          "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/irm-super-mercure-n4/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A placa do anúncio 37 identifica a versão e o ano do Super Mercure? Enviar medidas e planta desta unidade, com o inventário atual da cozinha e do aquecimento."
+      }
+    },
+    {
+      "id": "exposul-003",
+      "name": "IRM Super Venus — T2",
+      "exposul_url": "https://www.exposul.pt/shop/irm-super-venus-t2-35",
+      "modelo_externo_pesquisado": "IRM Super Venus (2004–2010)",
+      "dimensoes_referencia": "6,24 × 4,00 m; também 6,06 × 4,00 m",
+      "area_referencia": "24,24 m² para exemplar 6,06 × 4,00",
+      "anos_documentados_noutras_unidades": "2004–2010, de outras unidades",
+      "tipo_fonte": "Anúncios de exemplares diferentes",
+      "alerta_diferencas": "Há pelo menos duas medidas publicadas. Não escolher nenhuma sem medir a casa Exposul.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Anúncio IRM Venus 2006 6,24 × 4",
+          "url": "https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38219"
+        },
+        {
+          "titulo": "Anúncio IRM Venus 6,06 × 4",
+          "url": "https://www.caravanocio.com/mobilhomes/irm-super-venus/399"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é o comprimento exterior medido desta Super Venus? Enviar placa e indicar se a área documentada é interior ou de implantação."
+      }
+    },
+    {
+      "id": "exposul-004",
+      "name": "Rideau Panama Duo — T2",
+      "exposul_url": "https://www.exposul.pt/shop/rideau-panama-duo-t2-36",
+      "modelo_externo_pesquisado": "Rideau Panama Duo (catálogos 2016 e 2020)",
+      "dimensoes_referencia": "8,55 × 4,00 m (2016); 8,25 × 4,00 m (2020)",
+      "area_referencia": "23 m² interiores; 9 m² terraço integrado",
+      "anos_documentados_noutras_unidades": "2016 / 2020",
+      "tipo_fonte": "Fichas de fabricante, versões distintas",
+      "alerta_diferencas": "Duas dimensões diferentes em catálogos oficiais; não definir área total ou dimensão da unidade Exposul sem identificar versão.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha fabricante Rideau Panama Duo 2020",
+          "url": "https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf"
+        },
+        {
+          "titulo": "Catálogo fabricante de 2016",
+          "url": "https://www.mobilhome-rideau.com/media/dossier_de_presse_2015_mhrideau__073226500_1743_30092015.pdf"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "alta_para_a_ficha_do_fabricante_de_2020",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": "Conferida a ficha do fabricante para a coleção 2020.",
+        "pergunta_para_exposul": "Qual é o código de versão e de que ano é esta Panama Duo? Medir o comprimento incluindo e excluindo o deck e confirmar área interior, área do terraço e opções instaladas."
+      }
+    },
+    {
+      "id": "exposul-005",
+      "name": "Willerby Granada XL — T3",
+      "exposul_url": "https://www.exposul.pt/shop/willerby-granada-xl-t3-34",
+      "modelo_externo_pesquisado": "Willerby Granada 3 quartos (2017/2018); Granada XL 2010 é outra variante",
+      "dimensoes_referencia": "40 × 12,5 pés (~12,19 × 3,81 m) em 2017/2018",
+      "area_referencia": "Não confirmado",
+      "anos_documentados_noutras_unidades": "2017 / 2018 (comparáveis)",
+      "tipo_fonte": "Catálogo Willerby e anúncios",
+      "alerta_diferencas": "A Exposul indica 12,5 m de comprimento. Um modelo 40 pés tem ~12,19 m: não substituir. Granada XL noutros anos tem 2 quartos.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Catálogo Willerby Granada 3 quartos",
+          "url": "https://redgatesholidaypark.com/admin/resources/documents/granada.pdf"
+        },
+        {
+          "titulo": "Exemplar Granada 2018 3 quartos",
+          "url": "https://www.nationwidecaravanninguk.com/caravan-details?caravanid=2321"
+        },
+        {
+          "titulo": "Granada XL 2010, 2 quartos",
+          "url": "https://www.mcdonnellcaravans.co.uk/journal/caravan/2010-willerby-granada-xl/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A placa confirma Granada XL e o ano? Os 12,5 m anunciados medem só o corpo ou incluem saliências? Indicar a largura, a planta de três quartos e a configuração do segundo WC."
+      }
+    },
+    {
+      "id": "exposul-006",
+      "name": "Trigano Evolution — T2",
+      "exposul_url": "https://www.exposul.pt/shop/trigano-evolution-casa-movel-t2-33",
+      "modelo_externo_pesquisado": "Trigano Evolution, variantes EVO 31 e EVO 31 TI",
+      "dimensoes_referencia": "7,80 × 3,80 m ou 7,80 × 4,00 m (exemplares)",
+      "area_referencia": "~29–31 m², critério variável",
+      "anos_documentados_noutras_unidades": "2009 de exemplos",
+      "tipo_fonte": "Anúncios de variantes",
+      "alerta_diferencas": "Evolution é uma gama, não submodelo único; não atribuir dimensões/ano ao anúncio 006. Existem variantes com distribuição diferente.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Exemplar EVO 31 TI 7,80 × 3,80",
+          "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/trigano-evo-31-ti-h007/"
+        },
+        {
+          "titulo": "Exemplar EVO 31 TI 7,80 × 4",
+          "url": "https://www.mobilhomedoccasion.com/mobil-home-trigano-evolution-31-ti-7-8m-t38354"
+        },
+        {
+          "titulo": "Gama oficial Trigano Evolution",
+          "url": "https://pro.residences-trigano.com/nos-mobil-homes/evolution"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": "Conferida a página de gama do fabricante, que não identifica a unidade.",
+        "pergunta_para_exposul": "Qual é o código completo da variante Evolution nesta placa? Enviar planta e dimensões do corpo medido, incluindo largura, e indicar o que é original ou foi alterado."
+      }
+    },
+    {
+      "id": "exposul-007",
+      "name": "O’Hara 734 — T2 (madeira)",
+      "exposul_url": "https://www.exposul.pt/shop/o-hara-734-t2-32",
+      "modelo_externo_pesquisado": "O’Hara O’Phéa 734 (referência de fábrica 2009)",
+      "dimensoes_referencia": "7,30 × 4,00 m (2009); 7,34 × 4,00 m noutros anúncios",
+      "area_referencia": "27,30 m² na ficha 2009",
+      "anos_documentados_noutras_unidades": "2009 / outros exemplares",
+      "tipo_fonte": "Ficha fabricante e anúncios",
+      "alerta_diferencas": "Anúncio 007 tem revestimento de madeira e placa elétrica: não confundir com 001, não atribuir planta ou equipamento da ficha automaticamente.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha técnica O’Hara O’Phéa 734",
+          "url": "https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf"
+        },
+        {
+          "titulo": "Exemplar O’Hara G734 2009",
+          "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-g734-s2/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é a variante e ano do chassis do anúncio 32? Confirmar a extensão do deck, o comprimento do corpo e se o revestimento e a instalação elétrica são originais."
+      }
+    },
+    {
+      "id": "exposul-008",
+      "name": "IRM Super Octália — T3 (anúncio 31)",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-04-2024-octalia-irm-super-octalia-t3-31",
+      "modelo_externo_pesquisado": "IRM Super Octalia 3 (ficha 2010); exemplares 2008/2012",
+      "dimensoes_referencia": "9,09 × 4,00 m (2010); 9,12 × 4,00 m em outros",
+      "area_referencia": "34,20 m² na ficha 2010; outros anunciam ~36 m²",
+      "anos_documentados_noutras_unidades": "2008–2012 (outras unidades)",
+      "tipo_fonte": "Ficha de fabricante e anúncios",
+      "alerta_diferencas": "O anúncio 008 é diferente do 011. Nem 2012 nem 36,8 m² se aplicam ao 008.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha fabricante Super Octalia 3 — 2010",
+          "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf"
+        },
+        {
+          "titulo": "Exemplar IRM Octalia 2012 9,12 × 4",
+          "url": "https://zen-mobilhome.com/mobilhome/irm-octalia-2611028/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é o ano e variante na placa do anúncio 31? Enviar medidas e área desta unidade com o critério de medição e a planta de três quartos, identificadas pelo respetivo chassis."
+      }
+    },
+    {
+      "id": "exposul-009",
+      "name": "IRM Super Mercure — T2 (anúncio 30)",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-02-2026-irm-super-mercure-t2-30",
+      "modelo_externo_pesquisado": "IRM Super Mercure (ficha 2007)",
+      "dimensoes_referencia": "7,32 × 4,00 m",
+      "area_referencia": "27,50 m²",
+      "anos_documentados_noutras_unidades": "2007",
+      "tipo_fonte": "Ficha de fabricante",
+      "alerta_diferencas": "Não equiparar anúncio 009 ao 002; manter diferenças de equipamento e acrescentar dimensões só se verificadas na unidade.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha fabricante Super Mercure 2007",
+          "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf"
+        },
+        {
+          "titulo": "Exemplar Super Mercure Résidentiel 2005",
+          "url": "https://mobil-park.fr/les-occasions/irm-super-mercure-residentiel"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é a variante e o ano gravados na placa do anúncio 30? Enviar medidas e fotos da configuração sanitária e da cozinha, identificadas para este chassis."
+      }
+    },
+    {
+      "id": "exposul-010",
+      "name": "Atlas Nevada Super — T3",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-04-2026-atlas-nevada-super-atlas-nevada-super-t3-29",
+      "modelo_externo_pesquisado": "Atlas Nevada Super (exemplar de 2007)",
+      "dimensoes_referencia": "36 × 12 pés (~10,97 × 3,66 m)",
+      "area_referencia": "Não confirmado",
+      "anos_documentados_noutras_unidades": "2007 (exemplar)",
+      "tipo_fonte": "Anúncio da mesma denominação",
+      "alerta_diferencas": "Existe também Atlas Nevada 35 × 12 pés. Exemplar 2007 não é a unidade da Exposul; WC e equipamentos podem diferir.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Atlas Nevada Super 36×12 3 quartos, 2007",
+          "url": "https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/"
+        },
+        {
+          "titulo": "Atlas Nevada 35×12 3 quartos",
+          "url": "https://www.donamottparks.com/home/atlas-nevada-35ft-x-12ft-2007-3-bed"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A chapa identifica Nevada Super ou outra variante? Medir o corpo em metros e descrever quantas instalações sanitárias completas existem."
+      }
+    },
+    {
+      "id": "exposul-011",
+      "name": "IRM Super Octália — T3 36,8 m² (anúncio 8)",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-04-2024-irm-super-octalia-t3-36-8m2-8",
+      "modelo_externo_pesquisado": "IRM Super Octalia 3 (ficha 2010) e outro Octalia 2012",
+      "dimensoes_referencia": "9,09 × 4,00 m ficha 2010; 9,12 × 4,00 m de outro 2012",
+      "area_referencia": "34,20 m² ficha 2010; 36 m² noutro anúncio; Exposul anuncia 36,8 m²",
+      "anos_documentados_noutras_unidades": "2010 / 2012",
+      "tipo_fonte": "Ficha fabricante e exemplar 2012",
+      "alerta_diferencas": "Manter os 36,8 m² e o ano 2012 anunciados na Exposul. Não substituir por 34,20/36 m² de outras unidades.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "IRM Super Octalia 2010 ficha fabricante",
+          "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf"
+        },
+        {
+          "titulo": "Outro Octalia de 2012",
+          "url": "https://zen-mobilhome.com/mobilhome/irm-octalia-2611028/"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Pode confirmar o ano anunciado de 2012 com a chapa e indicar como foram medidos os 36,8 m²? Enviar comprimento e largura medidos, ainda que o ano coincida com o de outro exemplar."
+      }
+    },
+    {
+      "id": "exposul-012",
+      "name": "O’Hara 784 — T2",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-07-2025-o-hara-784-mobile-home-o-hara-784-10",
+      "modelo_externo_pesquisado": "O’Hara O’Phéa 784 T (2006 e 2008 comparáveis)",
+      "dimensoes_referencia": "7,80 × 4,00 m; também 7,84 × 3,80 m",
+      "area_referencia": "~31 m² anunciados noutro exemplar",
+      "anos_documentados_noutras_unidades": "2006 e 2008 em exemplares",
+      "tipo_fonte": "Ficha de uma unidade e outros anúncios",
+      "alerta_diferencas": "O nome Exposul 'O’Hara 784' não prova a variante 'O’Phéa 784 T'. Terraço de outra unidade não implica mesmo terraço.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Ficha de um O’Hara O’Phéa 784 T 2006",
+          "url": "https://www.camping-lepanorama.fr/IMG/pdf/o_hara_ophea_784_t_2006_79.pdf"
+        },
+        {
+          "titulo": "Outro O’Hara 784 T vendido em Portugal",
+          "url": "https://www.greenvillagemobilehomes.com/en/catalogo/o-phea-784-t?dest=pt"
+        },
+        {
+          "titulo": "O’Hara 784 T 2008 7,84×3,80",
+          "url": "https://www.camping-lepanorama.fr/IMG/pdf/Mobil_home_du_Panorama_RAPIDHOME_O_HARA.pdf"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A placa identifica 784 T ou outra configuração 784? Medir o corpo e o alpendre separadamente e confirmar o ano e a planta."
+      }
+    },
+    {
+      "id": "exposul-013",
+      "name": "Willerby Salisbury — T2",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-13-2023-willerby-salisbury-willerby-salisbury-t2-16",
+      "modelo_externo_pesquisado": "Willerby Salisbury antiga 2 quartos (2007–2009)",
+      "dimensoes_referencia": "35 × 12 pés (~10,67 × 3,66 m); 37 × 12 pés (~11,28 × 3,66 m)",
+      "area_referencia": "Não confirmado",
+      "anos_documentados_noutras_unidades": "2007–2009 (outras unidades)",
+      "tipo_fonte": "Anúncios de exemplares usados",
+      "alerta_diferencas": "Não usar características do Salisbury atualmente vendido pelo fabricante; é uma geração mais recente.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Salisbury 2007 35 × 12 pés",
+          "url": "https://www.cosgrovepark.co.uk/pre-owned-holiday-homes/2007-willerby-salisbury-35-x-12.aspx"
+        },
+        {
+          "titulo": "Salisbury 2009 37 × 12 pés",
+          "url": "https://www.nbcp.co.uk/stock-no-20"
+        },
+        {
+          "titulo": "Salisbury 2007 35 × 12, 2 quartos",
+          "url": "https://www.sambeckcaravans.co.uk/usedcaravans/car_Salisbury--Willerby_8357_0_index.php"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é o ano e a variante Salisbury da chapa? Enviar comprimento, largura e planta da configuração de dois quartos, evitando usar a ficha da geração atual."
+      }
+    },
+    {
+      "id": "exposul-014",
+      "name": "Trigano n.º 18 — T3",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-12-2025-trigano-no18-trigano-no18-casa-movel-t3-11",
+      "modelo_externo_pesquisado": "Trigano não identificado: «n.º 18» pode ser referência interna",
+      "dimensoes_referencia": "Sem correspondência segura",
+      "area_referencia": "Sem correspondência segura",
+      "anos_documentados_noutras_unidades": "Desconhecido",
+      "tipo_fonte": "Pesquisa inconclusiva",
+      "alerta_diferencas": "Não foi encontrada ficha técnica que ligue 'n.º 18' a um modelo Trigano concreto. Pedir placa do fabricante, VIN/chassis, planta e medidas.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Referência Exposul (unidade concreta)",
+          "url": "https://www.exposul.pt/shop/cjc-12-2025-trigano-no18-trigano-no18-casa-movel-t3-11"
+        },
+        {
+          "titulo": "Gama Trigano, insuficiente para identificar versão",
+          "url": "https://pro.residences-trigano.com/nos-mobil-homes/evolution"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "insuficiente_para_identificar_variante",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": "Conferida a página de gama do fabricante, que não identifica a unidade.",
+        "pergunta_para_exposul": "O n.º 18 é uma referência de stock? Enviar fotografia da placa com fabricante, modelo, ano e número de chassis, planta, medidas e inventário da própria unidade."
+      }
+    },
+    {
+      "id": "exposul-015",
+      "name": "O’Hara 834 — T2",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-08-2025-o-hara-834-mobile-home-o-hara-834-7",
+      "modelo_externo_pesquisado": "O’Hara O’Phéa 834 2CH (exemplar de 2006)",
+      "dimensoes_referencia": "8,30 × 4,00 m",
+      "area_referencia": "Não confirmado, área de implantação matemática ~33,2 m² (não publicar)",
+      "anos_documentados_noutras_unidades": "2006 (exemplar)",
+      "tipo_fonte": "Anúncio de exemplar",
+      "alerta_diferencas": "Confirmar primeiro a versão 834 e T2; máquina de lavar loiça, beliche e equipamentos são da unidade Exposul, não da fonte externa.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "O’Hara 834 T2 em Portugal, exemplar de 2006",
+          "url": "https://www.mobilehome.pt/property/ohara-834-t2-2006/"
+        },
+        {
+          "titulo": "Ficha comparável O’Phéa 834 2CH",
+          "url": "https://www.cotedumobilhome.com/modele/34-ophea-834-2ch-2-pentes-83m"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "moderada_para_comparacao_documental",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "A placa identifica 834 2CH ou outra variante 834? Confirmar ano, medidas e área documentada, e enviar a planta correspondente às camas instaladas."
+      }
+    },
+    {
+      "id": "exposul-016",
+      "name": "O’Hara T2 7,5 × 4 m — 30 m²",
+      "exposul_url": "https://www.exposul.pt/shop/cjc-11-2025-o-hara-7-4x4-o-hara-t2-7-5mx4m-30m2-9",
+      "modelo_externo_pesquisado": "O’Hara T2 sem submodelo identificado",
+      "dimensoes_referencia": "7,50 × 4,00 m (já indicado pela Exposul)",
+      "area_referencia": "30 m² (já anunciado pela Exposul)",
+      "anos_documentados_noutras_unidades": "Desconhecido",
+      "tipo_fonte": "Sem ficha externa identificável",
+      "alerta_diferencas": "Não usar ficha O’Hara 734 apenas por proximidade de medidas. Confirmar comprimento 7,5 vs texto de URL '7-4x4'.",
+      "pode_aplicar_a_unidade_exposul": false,
+      "novos_campos_da_unidade_exposul_confirmados_na_pesquisa_externa": [],
+      "fontes_externas": [
+        {
+          "titulo": "Unidade Exposul, medidas anunciadas",
+          "url": "https://www.exposul.pt/shop/cjc-11-2025-o-hara-7-4x4-o-hara-t2-7-5mx4m-30m2-9"
+        }
+      ],
+      "avaliacao_interna": {
+        "confianca_como_referencia": "insuficiente_para_identificar_variante",
+        "confianca_na_correspondencia_da_unidade": "nao_demonstrada",
+        "verificacao_direta": null,
+        "pergunta_para_exposul": "Qual é a designação da placa? Confirmar por medição se o corpo tem 7,5 m ou se a referência 7,4 do URL corresponde a outra medida. Especificar se os 30 m² incluem anexos."
+      }
+    }
+  ]
+}

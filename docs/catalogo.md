@@ -8,3 +8,5 @@ A descrição da O’Hara 834 (exposul-015) identifica dois quartos, máquina de
 
 Para rever uma atualização manual, executar `npm run catalog:import -- ficheiro.json` ou indicar um CSV com o cabeçalho do kit. O comando apresenta diferenças. Acrescentar `--apply` apenas após revisão. O importador só lê identificação, características físicas e texto técnico. Preserva fotografias e decisões comerciais. Novas unidades começam por confirmar, sem preço e fora do catálogo público. Dados vazios no ficheiro importado preservam valores já confirmados. Executar `npm run catalog:validate` depois de editar.
 As capas dispõem ainda de uma versão AVIF até 960 px, gerada a partir da primeira fotografia da respetiva unidade para reduzir o tempo de carregamento.
+
+Os ficheiros e as pastas públicas usam o nome da casa. Quando há dois exemplares do mesmo modelo, os nomes de galeria são distintos. O ID da unidade continua guardado no manifesto para verificar a origem e a associação de cada fotografia.

@@ -49,6 +49,8 @@ Ajustar a porta a partir do URL indicado pelo Astro. Se necessário, definir `CH
 
 Para ativar os canais confirmados em produção, preencher as variáveis de repositório em **Settings → Secrets and variables → Actions → Variables**. `PUBLIC_CONTACT_EMAIL` recebe o email comercial, `PUBLIC_WHATSAPP` recebe o número da Azmora em formato internacional e `PUBLIC_FORM_ENDPOINT` recebe o endereço público do serviço de formulários. Estes valores tornam-se públicos no site; o serviço externo guarda eventuais segredos e trata a proteção contra abuso. Repetir o workflow depois de alterar os valores.
 
+O [guia de lançamento](LANCAMENTO_AZMORA.md) descreve a configuração do destinatário, o formato do assunto e os pedidos a testar antes de abrir o formulário ao público.
+
 O workflow é manual, executa a verificação TypeScript e os testes e valida os caminhos sob `/AZMORA-HOMES/` antes de entregar o artefacto ao Pages. Para um domínio próprio, adaptar `SITE_URL` e `BASE_PATH`, bem como o domínio definido nas configurações do Pages.
 
 Referência: [publicar Astro em GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).

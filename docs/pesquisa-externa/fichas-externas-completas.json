@@ -1,0 +1,971 @@
+{
+  "projeto": "Azmora Homes",
+  "data": "2026-11-19",
+  "n_fichas": 16,
+  "restricao": "Não foi pesquisado o site da Exposul. Fontes externas são específicas de variantes; não atribuir automaticamente à unidade.",
+  "casas": [
+    {
+      "id": "exposul-001",
+      "nome": "O’Hara 734 com Terraço",
+      "tipologia": "T2",
+      "descricao_curta": "O’Hara de dois quartos com terraço frontal coberto e ar condicionado, pensada para conjugar um interior funcional com espaço exterior de convívio.",
+      "descricao_comercial": "Esta O’Hara 734 T2 combina uma distribuição interior prática com um terraço frontal coberto, permitindo aproveitar uma zona exterior de convívio diretamente ligada à casa. A sala e a área de refeições comunicam com a cozinha, criando um espaço central funcional para o dia a dia. A zona de refeições inclui banco corrido, e a cozinha apresenta placa a gás, exaustor, lava-loiça e frigorífico. O ar condicionado instalado na zona habitacional acrescenta conforto nos dias mais quentes.\n\nNa área privada encontram-se dois quartos: um quarto de casal e um segundo quarto com duas camas individuais, ambos com soluções de arrumação. A zona sanitária está dividida em dois compartimentos: um com cabine de duche e lavatório e outro com a sanita, o que facilita a utilização por diferentes ocupantes. O terraço coberto é o principal destaque desta unidade, oferecendo uma extensão exterior para refeições ou descanso.\n\nO terraço coberto permite separar o espaço de descanso exterior do interior; o ar condicionado identificado nesta unidade é um diferenciador face a muitos exemplares antigos.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + 2 camas individuais",
+          "Terraço frontal coberto",
+          "Banco corrido na zona de refeições",
+          "Placa a gás, exaustor, lava-loiça e frigorífico",
+          "Ar condicionado",
+          "Cabine de duche e lavatório; WC em divisão separada"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,30–7,50 m",
+          "largura": "4,00 m",
+          "area": "cerca de 29–30 m² (O’Hara 734 padrão, sem garantia de aplicar à versão com terraço)",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "O valor de 29–30 m² refere-se à versão padrão do modelo. Na unidade com terraço integrado a área interior pode ser inferior; não assumir os 22,5 + 6,7 m² da variante em madeira."
+        },
+        "notas_externas": [
+          "Ficha O’Phéa 734 2CH: 7,30 m de comprimento, 4,00 m de largura e 3,40 m de altura. Área indicada pelo fabricante: 27,30 m², sob o seu próprio critério de medição. [S01]",
+          "A planta histórica mostra sala/refeições centrais, quartos em extremos opostos, compartimento de duche/lavatório e WC separado. A ficha descreve possibilidade de espaço para berço e uma opção de cama superior no quarto secundário. [S01]",
+          "Exemplares 734T com terraço integrado foram anunciados com 7,30 × 4,00 m, mas com terraços de dimensões variáveis; há também exemplares 734 de 7,34 × 4,00 m. [S02][S29]",
+          "A ficha histórica não confirma material de caixilharia, espessuras de isolamento ou o tipo de ar condicionado desta unidade."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S01",
+            "titulo": "O’Hara — ficha O’Phéa 734 2CH",
+            "tipo": "Ficha de fabricante, geração histórica",
+            "url": "https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S02",
+            "titulo": "O’Hara 734T em parque, 7,30 × 4 m e terraço integrado",
+            "tipo": "Outro exemplar",
+            "url": "https://www.camping-leboisjoli.com/212-devenez-proprietaire/28877-o-hara-734t.html"
+          },
+          {
+            "id": "S29",
+            "titulo": "O’Hara 734 de 2006 — 7,34 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-734-n7/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Medidas exteriores do corpo da casa e com o terraço",
+        "Área interior e área do terraço, medidas separadamente",
+        "Ano e código de versão do chassis",
+        "Tipo de caixilharia, vidros e isolamento instalados",
+        "Inventário final e funcionamento do ar condicionado",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-002",
+      "nome": "IRM Super Mercure",
+      "tipologia": "T2",
+      "descricao_curta": "IRM Super Mercure T2 com dois quartos, sofá de canto, placa a gás e aquecimento elétrico; proposta compacta e funcional.",
+      "descricao_comercial": "Esta IRM Super Mercure T2 apresenta uma organização compacta, com dois quartos e uma zona social pensada para aproveitar o espaço disponível. A informação registada para esta unidade identifica uma sala com sofá de canto, cozinha com placa a gás de quatro queimadores e aquecimento elétrico, proporcionando as funções essenciais para uma utilização de férias ou estadias de curta duração.\n\nA casa dispõe também de um WC separado, permitindo alguma independência entre a utilização sanitária e os restantes espaços. A proposta distingue-se pelo formato T2, pela sala com sofá de canto e pela presença de aquecimento elétrico, reunindo elementos práticos numa unidade compacta.\n\nA distribuição central da linha Super Mercure deixa a zona social entre os quartos; esta unidade tem aquecimento elétrico mencionado no inventário.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos",
+          "Sofá de canto",
+          "Placa a gás com quatro queimadores",
+          "Aquecimento elétrico",
+          "WC separado"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,20–7,50 m",
+          "largura": "4,00 m",
+          "area": "cerca de 26–30 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Valores gerais Super Mercure; há versões diferentes e a unidade 002 não é a 009."
+        },
+        "notas_externas": [
+          "Ficha Super Mercure 2007: 7,32 × 4,00 m de dimensão exterior; 27,50 m² de área segundo o critério IRM; dois quartos e lotação de 4 a 6 pessoas mediante cama extra na sala. [S03]",
+          "Quarto principal na versão 2007 com cama de 140 × 190 cm; quarto de crianças com duas camas de 80 × 190 cm; sofá-cama de gaveta na sala. [S03]",
+          "Cozinha da versão 2007: placa de quatro queimadores, frigorífico de bancada de cerca de 120 l, lava-loiça, móveis de arrumação e espaço para micro-ondas. [S03]",
+          "Construção da versão 2007: chassis em aço galvanizado, paredes com cerca de 50 mm, cobertura em chapa metálica e janelas de vidro duplo 4-16-4; convetor da sala de 1000 W, outros convetores como opção. [S03]",
+          "As dimensões e a lotação não estão confirmadas para o anúncio 002; há outras versões da mesma família. [S30]"
+        ],
+        "fontes_externas": [
+          {
+            "id": "S03",
+            "titulo": "IRM — Super Mercure 2007",
+            "tipo": "Ficha de fabricante, versão de 2007",
+            "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf"
+          },
+          {
+            "id": "S30",
+            "titulo": "IRM Super Mercure 2007 de 7,32 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://www.mobilhomedoccasion.com/mobil-home-irm-super-mercure-7-32m-i37976"
+          }
+        ]
+      },
+      "pendencias": [
+        "Dimensões e área reais",
+        "Ano do exemplar e variante",
+        "Configuração das camas e funcionamento do duche",
+        "Frigorífico, forno e esquentador efetivamente incluídos",
+        "Potência/quantidade dos aparelhos de aquecimento",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-003",
+      "nome": "IRM Super Venus",
+      "tipologia": "T2",
+      "descricao_curta": "IRM Super Venus T2 com dois quartos, cozinha equipada e arrumação integrada, adequada a quem procura uma casa móvel compacta.",
+      "descricao_comercial": "A IRM Super Venus T2 é uma casa móvel de dois quartos com uma distribuição interior compacta e prática. A sala articula-se com uma zona de refeições composta por banco corrido, mesa e cadeiras e com uma cozinha equipada com frigorífico, placa a gás, exaustor e lava-loiça. O mobiliário e as arrumações integradas ajudam a aproveitar o espaço sem comprometer a circulação entre as diferentes divisões.\n\nA zona dos quartos inclui um quarto de casal e um segundo quarto com duas camas individuais, permitindo acomodar quatro pessoas nas camas descritas. Na parte sanitária existe um compartimento com duche e lavatório e um WC independente, uma organização conveniente numa casa de dimensões reduzidas. É uma opção orientada para quem privilegia uma casa de dois quartos com cozinha equipada e compartimentos bem definidos.\n\nOs catálogos Super Venus mostram versões substancialmente mais curtas do que as gamas Mercure; o tamanho exato faz diferença no transporte e na implantação.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + 2 camas individuais",
+          "Banco corrido, mesa e cadeiras na zona de refeições",
+          "Frigorífico, placa a gás, exaustor e lava-loiça",
+          "Mobiliário e arrumações integrados",
+          "Duche e lavatório separados do WC"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,20–7,50 m",
+          "largura": "3,80–4,00 m",
+          "area": "cerca de 27–29 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "O intervalo foi fornecido no novo texto, mas CONTRADIZ outras fichas Super Venus com cerca de 6,06–6,30 m e 21,7–25,2 m². Não publicar este intervalo sem identificação da versão."
+        },
+        "notas_externas": [
+          "Ficha oficial Super Venus 2010: dimensão exterior 6,24 × 4,00 m; área segundo o critério IRM 22,90 m²; 2 quartos e 4 camas fixas. [S04]",
+          "Planta 2010: quarto principal com cama 140 × 190 cm, quarto secundário com duas camas 80 × 190 cm, sala com banco, cozinha em L, duche/lavatório e WC separado. [S04]",
+          "Versão 2010: cobertura com 120 mm de lã mineral, paredes com 50 mm, piso ISOTHERM de 64 mm, vidro duplo 4-16-4 de baixa emissividade, convetor de 1000 W na sala; aquecimento adicional opcional. [S04]",
+          "Outras unidades Super Venus de 2009–2010 são vendidas com 6,30 × 4,00 m e 25,20 m²; os critérios e versões diferem. [S05][S31]",
+          "A faixa de 7,20–7,50 m que apareceu numa pesquisa anterior não é fiável para este modelo. NÃO a usar como dimensão recomendada."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S04",
+            "titulo": "IRM — Super Venus 2010",
+            "tipo": "Ficha de fabricante, versão de 2010",
+            "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2022/05/FICHE-SUPER-VENUS-2010.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S05",
+            "titulo": "Green Village — Super Venus 2010 de 25,20 m²",
+            "tipo": "Outro exemplar usado",
+            "url": "https://www.greenvillagemobilehomes.com/catalogo/super-venus-2-quartos-25-20-m2-2"
+          },
+          {
+            "id": "S31",
+            "titulo": "IRM Super Venus de 2010 de 6,24 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://www.mobilhomedoccasion.com/mobil-home-irm-super-venus-6-24m-i38213"
+          }
+        ]
+      },
+      "pendencias": [
+        "Confirmar se o exemplar é 6,24 m ou 6,30 m, ou outra variante",
+        "Área exata e respetivo critério",
+        "Ano do chassis",
+        "Estado do isolamento e tipo de vidro",
+        "Equipamentos de aquecimento efetivamente instalados",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-004",
+      "nome": "Rideau Panama Duo",
+      "tipologia": "T2",
+      "descricao_curta": "Rideau Panama Duo T2 com alpendre integrado e coberto, numa planta que valoriza a ligação da sala ao exterior.",
+      "descricao_comercial": "A Rideau Panama Duo T2 destaca-se pela relação entre o interior e o exterior, graças ao deck frontal coberto integrado na apresentação da unidade. Este espaço pode funcionar como prolongamento da zona de estar, para refeições ou momentos de descanso ao ar livre. A distribuição interior conhecida inclui cozinha organizada em L e dois quartos, estando identificado um quarto de casal.\n\nA zona sanitária é composta por duche e WC em compartimentos separados, uma solução prática para utilização familiar. O formato Panama Duo é especialmente interessante para quem procura uma casa móvel com zona exterior protegida e ligação funcional ao interior. O deck coberto é o elemento mais característico desta unidade.\n\nA terraça integrada, separada da área interior, é o elemento de identidade mais forte; convém apresentar ambas as áreas em vez de um único número ambíguo.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos",
+          "Deck frontal coberto",
+          "Cozinha em L",
+          "Quarto de casal",
+          "Duche e WC em divisões separadas"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "8,20–8,60 m",
+          "largura": "4,00 m",
+          "area": "cerca de 23 m² interiores + 9 m² de alpendre coberto integrado",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Área interior e alpendre são grandezas diferentes. Documentação de 2016 e 2020 apresenta diferentes comprimentos."
+        },
+        "notas_externas": [
+          "Ficha Rideau 2020: 8,25 × 4,00 m de dimensão total, 23 m² interiores e terraço coberto integrado de 9 m²; 4 lugares fixos e opção de 2 dormidas adicionais. [S06]",
+          "Catálogo Rideau 2016: Panama Duo de 8,55 × 4,00 m, 23 m² interiores e terraço de 9 m². O mesmo nome comercial teve diferentes comprimentos. [S07]",
+          "Distribuição ilustrada em 2020: dois quartos, zona de estar/refeições ligada ao terraço, cozinha de canto, compartimento de duche e WC separado. [S06]",
+          "Equipamento de série 2020: placa a gás de quatro queimadores, frigorífico de bancada, exaustor, duche de 80 × 80 cm, convetor de 1000 W na sala, iluminação LED, janelas PVC de vidro duplo 4/16/4 e termoacumulador elétrico. [S06]",
+          "Construção 2020: chassis metálico galvanizado a quente, pavimento hidrófugo de 71 mm, cobertura metálica dupla inclinação, paredes com estrutura de madeira e revestimentos exteriores selecionáveis; elementos de conforto adicionais são opcionais. [S06]"
+        ],
+        "fontes_externas": [
+          {
+            "id": "S06",
+            "titulo": "Rideau — Panama Duo 2020",
+            "tipo": "Ficha original fabricante",
+            "url": "https://www.mobilhome-rideau.com/media/fiche_panama_duo_1.pdf"
+          },
+          {
+            "id": "S07",
+            "titulo": "Rideau — catálogo Panorama/Panama Duo 2016",
+            "tipo": "Catálogo original fabricante",
+            "url": "https://www.mobilhome-rideau.com/media/dossier_de_presse_2015_mhrideau__073226500_1743_30092015.pdf"
+          }
+        ]
+      },
+      "pendencias": [
+        "Ano e comprimento da versão Panama Duo à venda",
+        "Comprovar área interior e área do terraço",
+        "Confirmar presença de termoacumulador, aquecimento e opções de cozinha",
+        "Estado do deck, guarda-corpos e materiais exteriores",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-005",
+      "nome": "Willerby Granada XL",
+      "tipologia": "T3",
+      "descricao_curta": "Willerby Granada XL T3 de três quartos, duas instalações sanitárias e ampla sala panorâmica, com cozinha equipada e radiadores.",
+      "descricao_comercial": "A Willerby Granada XL T3 é uma das casas de maior dimensão deste catálogo, com 12,5 metros de comprimento anunciados, três quartos e duas instalações sanitárias. A sala tem uma configuração ampla, com grandes janelas panorâmicas, sofá de canto e móveis de apoio. Junto à zona de estar existe um espaço de refeições com mesa e cadeiras, oferecendo áreas distintas para convívio e refeições.\n\nA cozinha dispõe de bancada generosa, armários e gavetas, placa a gás, forno duplo, exaustor, lava-loiça e frigorífico. Na zona privada encontram-se um quarto principal e dois quartos secundários com duas camas individuais cada, acompanhados por soluções de arrumação. A unidade tem duas instalações sanitárias com sanita e lavatório; uma delas inclui cabine de duche. O aquecimento é feito por radiadores e existem duas portas de acesso ao exterior. A combinação de três quartos, duas instalações sanitárias e sala panorâmica distingue esta casa das opções mais compactas.\n\nÉ uma das unidades mais amplas deste catálogo e distingue-se por três quartos, duas instalações sanitárias e acesso por duas portas exteriores.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "3 quartos (principal + 2 quartos com 2 camas individuais)",
+          "12,5 m de comprimento anunciados",
+          "2 instalações sanitárias com sanita e lavatório; pelo menos 1 cabine de duche",
+          "Sala panorâmica, sofá de canto e zona de refeições",
+          "Placa a gás, forno duplo, exaustor, lava-loiça, frigorífico",
+          "Aquecimento por radiadores",
+          "2 portas exteriores"
+        ],
+        "anunciados": {
+          "comprimento": "12,5 m (anunciado pela Exposul)"
+        }
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "11,60–12,50 m",
+          "largura": "cerca de 3,70 m",
+          "area": "cerca de 42–46 m² (referência geral da gama)",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "O anúncio Exposul confirma 12,5 m de comprimento. A largura e a área deste exemplar continuam sem confirmação; diferentes séries Granada XL existem com outras tipologias."
+        },
+        "notas_externas": [
+          "Brochura Willerby Granada apresenta uma versão de três quartos de 40 × 12,5 pés, com até oito dormidas, distinta de outras versões Granada. [S08]",
+          "Existe também Granada XL de 38 × 12 pés com dois quartos e seis dormidas, documentada em 2010. O nome Granada XL não identifica por si só uma planta T3 de 40 pés. [S09][S35]",
+          "Exemplar Granada 2018 de 40 × 12,5 pés e três quartos: sala e cozinha em plano aberto, vários espaços de arrumação e possibilidade de WC privativo no quarto principal, dependendo da versão. [S10]",
+          "A brochura ilustra dispositivos/opções como sofá convertível, portas de correr, TV, micro-ondas e máquina de lavar; não são prova de inclusão na casa da Azmora. [S08]",
+          "A Exposul anunciou 12,5 m de comprimento para a unidade 005; não substituir por 12,19 m calculados dos 40 pés de um exemplar distinto."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S08",
+            "titulo": "Willerby — Granada 3 quartos, brochure",
+            "tipo": "Brochura do fabricante (Granada, não necessariamente XL)",
+            "url": "https://redgatesholidaypark.com/admin/resources/documents/granada.pdf"
+          },
+          {
+            "id": "S09",
+            "titulo": "Willerby Granada XL (2010, dois quartos)",
+            "tipo": "Artigo histórico independente",
+            "url": "https://www.leisuredays.co.uk/news/the-willerby-granada-xl-holiday-home-144/"
+          },
+          {
+            "id": "S10",
+            "titulo": "Granada 40×12,5 de três quartos (2018)",
+            "tipo": "Outro exemplar comercial",
+            "url": "https://www.nationwidecaravanninguk.com/caravan-details?caravanid=2321"
+          },
+          {
+            "id": "S35",
+            "titulo": "Willerby Granada — guia de versões históricas",
+            "tipo": "Análise de mercado sobre variantes Granada/Granada XL",
+            "url": "https://staticcaravanbuyer.com/blog/willerby-granada-static-caravan-guide/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Ano e subversão exata Granada XL",
+        "Largura medida e área com critério claro",
+        "Composição completa das duas instalações sanitárias",
+        "Tipo de caldeira e fonte de energia dos radiadores",
+        "Vidros duplos, lareira e isolamento confirmados na unidade",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-006",
+      "nome": "Trigano Evolution",
+      "tipologia": "T2",
+      "descricao_curta": "Trigano Evolution T2 com zona de estar e cozinha abertas, despensa independente e cinco lugares de dormir nos dois quartos.",
+      "descricao_comercial": "A Trigano Evolution T2 apresenta uma sala, zona de refeições e cozinha em espaço aberto, com uma organização dirigida à funcionalidade do dia a dia. A sala integra sofá de canto e a área de refeições dispõe de mesa e cadeiras. A cozinha conta com placa a gás de quatro queimadores, exaustor, lava-loiça, frigorífico, bancada e balcão de apoio. Um dos seus elementos mais diferenciadores é a despensa independente, equipada com prateleiras para alimentos, utensílios e outros artigos.\n\nA distribuição de dormidas inclui um quarto principal com cama de casal e um segundo quarto com uma cama individual e beliche, correspondendo a cinco lugares de dormir nos quartos. Na zona sanitária existe cabine de duche e lavatório, com sanita em compartimento separado. A casa apresenta ainda aquecimento elétrico. É uma unidade interessante para quem dá prioridade à capacidade de arrumação e a uma distribuição de camas adaptada a famílias.\n\nA despensa independente e a disposição de camas com beliche fazem desta unidade uma opção diferente dos T2 com apenas quatro camas fixas.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + quarto com 1 cama individual e 1 beliche",
+          "5 lugares de dormir nos quartos",
+          "Sala e cozinha em open space, sofá de canto, mesa",
+          "Placa a gás 4 queimadores, exaustor, lava-loiça e frigorífico",
+          "Despensa independente com prateleiras",
+          "Duche e lavatório; WC separado",
+          "Aquecimento elétrico"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,70–8,50 m",
+          "largura": "4,00 m",
+          "area": "cerca de 27–33 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Evolution/Evo é uma gama de submodelos; a ficha Exposul 006 não identifica o submodelo."
+        },
+        "notas_externas": [
+          "Evolution é uma gama e não um único modelo. O fabricante apresenta EVO 24 (6,4 × 4 m), EVO 29 (7,7 × 4 m) e EVO 33 (8,5 × 4 m) de dois quartos. [S11]",
+          "A ficha de um Evolution 31 TI documenta 7,80 × 4,00 m e dois quartos; é apenas um submodelo comparável. [S12]",
+          "Na gama Evolution, climatização, eletrodomésticos e outras opções variam muito; o fabricante apresenta a personalização como uma característica da linha. [S11]",
+          "Não atribuir a este anúncio uma planta EVO 29/EVO 33 sem fotografias da placa de identificação."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S11",
+            "titulo": "Trigano — Evolution gama e dimensões",
+            "tipo": "Fabricante, gama atual (não identifica exemplar antigo)",
+            "url": "https://pro.residences-trigano.com/nos-mobil-homes/evolution"
+          },
+          {
+            "id": "S12",
+            "titulo": "Trigano — Evolution 31 TI 7,80 × 4 m",
+            "tipo": "Ficha de modelo de revendedor/cotação",
+            "url": "https://www.cotedumobilhome.com/modele/299-evolution-31-ti-2-pentes-78m"
+          }
+        ]
+      },
+      "pendencias": [
+        "Código do submodelo Evolution",
+        "Comprimento, largura e área",
+        "Ano do chassis",
+        "Confirmar a composição de beliche/cama individual",
+        "Estado da despensa, equipamentos e sistema de aquecimento",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-007",
+      "nome": "O’Hara 734 — exterior em madeira",
+      "tipologia": "T2",
+      "descricao_curta": "O’Hara 734 T2 com exterior revestido a madeira, deck coberto iluminado e cozinha com placa elétrica.",
+      "descricao_comercial": "Esta O’Hara 734 T2 distingue-se pelo revestimento exterior em madeira e pelo deck coberto, que inclui iluminação e acesso direto ao interior. O conjunto cria uma apresentação semelhante à de um pequeno chalé, com uma zona exterior adequada a refeições, descanso ou convívio. No interior, a zona social reúne sala, cozinha e espaço de refeições; a organização inclui mesa, banco corrido e cadeiras, permitindo aproveitar o espaço central.\n\nA cozinha desta unidade está equipada com placa ELÉTRICA de quatro zonas, exaustor, lava-loiça e frigorífico. A zona de dormir conta com um quarto principal com cama de casal e um segundo quarto com duas camas individuais. Existe ainda cabine de duche e lavatório, com sanita numa divisão independente. O revestimento em madeira e o conjunto de zona exterior coberta com cozinha elétrica dão a esta unidade uma combinação própria de estética natural e funcionalidade.\n\nO revestimento de madeira e a placa elétrica distinguem este anúncio 007 da unidade 001, mesmo partilhando a designação O’Hara 734.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + 2 camas individuais",
+          "Revestimento exterior em madeira",
+          "Deck coberto com iluminação",
+          "Zona de refeições com banco corrido",
+          "Placa ELÉTRICA de 4 zonas, exaustor, lava-loiça e frigorífico",
+          "Duche e lavatório, WC separado"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,50–7,80 m",
+          "largura": "4,00 m",
+          "area": "cerca de 22,5 m² interiores + 6,7 m² de terraço coberto (versão 734 madeira/terraço de referência)",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Dados indicativos da variante descrita no novo texto. O deck/revestimento podem ter sido adaptados; não confirmar estas áreas para a unidade 007 sem medição."
+        },
+        "notas_externas": [
+          "Ficha O’Phéa 734 2CH: 7,30 × 4,00 m, 27,30 m² segundo critério do fabricante e 4 a 6 dormidas conforme opções. [S01]",
+          "Várias O’Hara 734 T incluem decks/terraços de dimensões distintas, documentados por revendedores; o deck pode ser uma adaptação posterior. [S02]",
+          "A planta genérica tem sala central, dois quartos nas extremidades e sanitários separados; confirmar antes de publicar como planta desta unidade. [S01]",
+          "Não inferir que a unidade em madeira tenha placa a gás, ar condicionado ou os 6,7 m² de terraço indicados noutro exemplar."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S01",
+            "titulo": "O’Hara — ficha O’Phéa 734 2CH",
+            "tipo": "Ficha de fabricante, geração histórica",
+            "url": "https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S02",
+            "titulo": "O’Hara 734T em parque, 7,30 × 4 m e terraço integrado",
+            "tipo": "Outro exemplar",
+            "url": "https://www.camping-leboisjoli.com/212-devenez-proprietaire/28877-o-hara-734t.html"
+          }
+        ]
+      },
+      "pendencias": [
+        "Medida efetiva da casa e do deck",
+        "Área interior versus deck",
+        "Material e estado do revestimento exterior",
+        "Ano, origem e adaptação do revestimento",
+        "Aquecimento, isolamento e caixilharia nesta unidade",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-008",
+      "nome": "IRM Super Octália",
+      "tipologia": "T3",
+      "descricao_curta": "IRM Super Octália T3 de três quartos, com cozinha em U, seis camas fixas e ar condicionado na zona social.",
+      "descricao_comercial": "Esta IRM Super Octália T3 oferece três quartos e uma zona social central, reunindo sala, cozinha e refeições num espaço aberto. A sala inclui sofá de canto e áreas de arrumação; a zona de refeições situa-se junto às portas envidraçadas de acesso ao exterior, favorecendo a luz natural. A cozinha em U tem uma superfície de trabalho generosa, armários, placa a gás, exaustor, lava-loiça e frigorífico com congelador.\n\nOs três quartos estão distribuídos por um quarto de casal e dois quartos com duas camas individuais cada, proporcionando seis lugares de dormir em camas fixas. A zona de banho inclui cabine de duche e lavatório, com sanita numa divisão separada. A unidade dispõe também de ar condicionado na zona social. É uma solução familiar em que sobressaem a cozinha em U, os seis lugares de dormir descritos e a climatização da área comum.\n\nA cozinha em U e o ar condicionado descritos na unidade são diferenciais claros face a fichas da gama que oferecem vários equipamentos apenas como opcionais.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "3 quartos: 1 casal + 2 quartos com 2 camas individuais",
+          "6 lugares de dormir nos quartos",
+          "Sala com sofá de canto e portas envidraçadas",
+          "Cozinha em U, placa a gás, exaustor, lava-loiça, frigorífico/congelador",
+          "Ar condicionado na zona social",
+          "Duche/lavatório e WC independente"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "9,09–9,20 m",
+          "largura": "4,00 m",
+          "area": "cerca de 34–36,8 m² (várias versões Super Octália)",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "A área de 36,8 m² e o ano 2012 pertencem ao anúncio 011, NÃO ao 008."
+        },
+        "notas_externas": [
+          "Super Octalia 3 — ficha IRM 2010: 9,09 × 4,00 m, 34,20 m² segundo critério IRM, 3 quartos e 6 a 8 dormidas com cama na sala. [S13]",
+          "Na versão 2010, quartos: cama principal 140 × 190 cm e quatro camas de 80 × 190 cm; sofá-cama de gaveta 130 × 210 cm na sala. [S13]",
+          "Versão IRM 2010: frigorífico-congelador de duas portas, placa de quatro queimadores, exaustor, duche 80 × 80 cm, WC separado; ligações de duche e aquecimento variam por configuração. [S13]",
+          "Construção da versão de 2010: piso ISOTHERM 64 mm, paredes 50 mm, cobertura com isolamento 120 mm e vidros duplos; não comprovado para este exemplar. [S13]",
+          "Há unidades de 2012 com 9,12 × 4,00 m e cerca de 36 m², o que demonstra alterações entre séries. [S14]"
+        ],
+        "fontes_externas": [
+          {
+            "id": "S13",
+            "titulo": "IRM — Super Octalia 3 (2010)",
+            "tipo": "Ficha original fabricante, ano 2010",
+            "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S14",
+            "titulo": "IRM — Octalia 2012, 9,12 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://zen-mobilhome.com/mobilhome/irm-octalia-2611028/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Ano e medidas desta Super Octália (não confundir com 011)",
+        "Área e critério",
+        "Sistema adicional de aquecimento",
+        "Vidros, isolamento, revestimento e estado dos equipamentos",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-009",
+      "nome": "IRM Super Mercure — segunda unidade",
+      "tipologia": "T2",
+      "descricao_curta": "Segunda IRM Super Mercure T2, com zona social em open space, placa a gás, aquecimento elétrico e WC independente.",
+      "descricao_comercial": "Esta segunda IRM Super Mercure T2 tem uma distribuição interior organizada em torno de uma zona social em plano aberto, com sala, refeições e cozinha. A sala conta com sofá de canto e móveis de apoio, enquanto a cozinha disponibiliza bancada, armários, placa a gás de quatro queimadores, exaustor e lava-loiça. O aquecimento elétrico é um elemento identificado nesta unidade.\n\nA zona privada é composta por dois quartos; a descrição do fornecedor identifica um deles com duas camas individuais e soluções de arrumação. A configuração do outro quarto deverá ser confirmada antes de ser detalhada. Na área sanitária existe uma cabine de duche e lavatório, com sanita em divisão independente. A combinação de sala integrada, aquecimento elétrico e instalações sanitárias separadas torna esta unidade prática para casais e famílias pequenas.\n\nEmbora partilhe o nome com a casa 002, a ficha da unidade 009 apresenta equipamento próprio, sendo essencial manter fotografias e inventário separados.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos; um deles com 2 camas individuais",
+          "Sofá de canto e zona de refeições",
+          "Placa a gás de 4 queimadores, exaustor e lava-loiça",
+          "Aquecimento elétrico",
+          "Cabine de duche, lavatório e sanita em divisão separada"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,20–7,50 m",
+          "largura": "4,00 m",
+          "area": "cerca de 26–30 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Mesmo intervalo de referência Super Mercure, mas outro exemplar, com ficha Exposul própria."
+        },
+        "notas_externas": [
+          "Super Mercure 2007: planta com 2 quartos em extremidades opostas, sala central, espaço para cozinha/refeições, WC separado e cabine de duche. [S03]",
+          "A ficha de 2007 documenta 7,32 × 4,00 m, área de 27,50 m², 4 a 6 dormidas e possibilidade de sofá-cama de gaveta na sala. [S03]",
+          "A versão 2007 prevê placa a gás e frigorífico; o forno e os convetores suplementares não devem ser tidos como presentes nesta unidade. [S03]",
+          "As dimensões iguais noutro anúncio Super Mercure não comprovam o tamanho da 009. [S30]"
+        ],
+        "fontes_externas": [
+          {
+            "id": "S03",
+            "titulo": "IRM — Super Mercure 2007",
+            "tipo": "Ficha de fabricante, versão de 2007",
+            "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2022/01/super-mercure.fiche-produitpdf.pdf"
+          },
+          {
+            "id": "S30",
+            "titulo": "IRM Super Mercure 2007 de 7,32 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://www.mobilhomedoccasion.com/mobil-home-irm-super-mercure-7-32m-i37976"
+          }
+        ]
+      },
+      "pendencias": [
+        "Medidas, área e ano da unidade 009",
+        "Modelo exato/versão de fábrica",
+        "Cama do quarto principal e restantes camas",
+        "Frigorífico, forno, esquentador e equipamentos efetivamente incluídos",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-010",
+      "nome": "Atlas Nevada Super",
+      "tipologia": "T3",
+      "descricao_curta": "Atlas Nevada Super T3 com três quartos, ampla sala, cozinha equipada, radiadores e duas portas exteriores.",
+      "descricao_comercial": "A Atlas Nevada Super T3 é uma casa móvel de três quartos com sala de estar ampla e luminosidade proporcionada por várias janelas. A área social integra um sofá de canto, móveis de apoio e uma zona de refeições, mantendo ligação à cozinha. Esta dispõe de bancada, armários, placa a gás, lava-loiça, frigorífico e exaustor, com um balcão a estabelecer a separação funcional entre as duas zonas.\n\nNa área privada existe um quarto principal com espaço para cama de casal e dois quartos com duas camas individuais cada, acompanhados de arrumação integrada. A zona sanitária é apresentada com cabine de duche, lavatórios e compartimentos sanitários separados, mas a contagem exata de WC deve ser confirmada. A casa tem aquecimento por radiadores e duas portas de acesso ao exterior. O ponto forte desta unidade é combinar três quartos, área social espaçosa e aquecimento distribuído pelas divisões.\n\nA organização britânica oferece uma zona social generosa e uma configuração familiar de três quartos, mas o sistema de climatização e os sanitários variam entre versões.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "3 quartos: principal + 2 com camas individuais",
+          "Sala, sofá de canto, zona de refeições",
+          "Cozinha com placa a gás, lava-loiça, frigorífico e exaustor",
+          "Cabine de duche e instalações sanitárias separadas",
+          "Aquecimento por radiadores",
+          "Duas portas exteriores"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "11,00–11,30 m",
+          "largura": "cerca de 3,70 m",
+          "area": "cerca de 40–42 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Existem versões Atlas Nevada de 35–37 pés; medidas de outro ano não provam o tamanho da unidade 010."
+        },
+        "notas_externas": [
+          "Exemplar Atlas Nevada Super de 2007: 36 × 12 pés (~10,97 × 3,66 m), três quartos; o anúncio menciona 2 instalações sanitárias, janela simples e lareira a gás. [S16]",
+          "Outro exemplar Atlas Nevada de 2007: 35 × 12 pés (~10,67 × 3,66 m), três quartos, vidro duplo e aquecimento central. [S17]",
+          "Dois exemplares da mesma família documentam diferenças importantes no comprimento, envidraçado e aquecimento; não extrapolar para a unidade Azmora.",
+          "As áreas brutas calculadas a partir de pés não equivalem a uma área útil interior certificada."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S16",
+            "titulo": "Atlas Nevada Super 2007 36×12 pés, T3",
+            "tipo": "Outro exemplar britânico (vidro simples)",
+            "url": "https://www.gbstatics.co.uk/static-caravan-for-sale/2007-atlas-nevada-36-12-3/"
+          },
+          {
+            "id": "S17",
+            "titulo": "Atlas Nevada 2007 35×12 pés, T3",
+            "tipo": "Outro exemplar britânico (vidro duplo)",
+            "url": "https://www.donamottparks.com/home/atlas-nevada-35ft-x-12ft-2007-3-bed"
+          }
+        ]
+      },
+      "pendencias": [
+        "Dimensões exatas e área interior",
+        "Ano e variante Nevada/Nevada Super",
+        "Distribuição e número total de sanitários",
+        "Origem dos radiadores, caldeira e lareira",
+        "Vidros simples ou duplos e conservação do isolamento",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-011",
+      "nome": "IRM Super Octália — 36,8 m²",
+      "tipologia": "T3",
+      "descricao_curta": "IRM Super Octália T3 com área anunciada de 36,8 m² e ano anunciado de 2012, repartida por três quartos e zona social central.",
+      "descricao_comercial": "Esta IRM Super Octália T3 é anunciada pela Exposul com 36,8 m² e ano de 2012. A distribuição interior inclui três quartos, com camas de casal e camas individuais, além de roupeiros e soluções de arrumação. A sala proporciona um espaço de convívio ligado à cozinha, que inclui fogão e armários para organização de utensílios e alimentos.\n\nA zona sanitária tem cabine de duche e lavatório, com WC em compartimento separado. A combinação de três quartos e uma área anunciada de 36,8 m² torna esta unidade interessante para famílias que procuram mais capacidade de alojamento numa casa móvel de dimensão moderada. A distribuição entre áreas de convívio, quartos e compartimentos sanitários torna esta unidade especialmente orientada para uma utilização familiar.\n\nEsta unidade tem dois elementos comerciais concretos já declarados no anúncio — área e ano — que não devem ser copiados para a Octália 008.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "3 quartos",
+          "Área anunciada: 36,8 m² (critério de medição não indicado)",
+          "Ano anunciado: 2012",
+          "Camas individuais e de casal, roupeiros",
+          "Sala e cozinha com fogão e arrumação",
+          "Cabine de duche e lavatório; WC separado"
+        ],
+        "anunciados": {
+          "area": "36,8 m² (anunciada pela Exposul)",
+          "ano": "2012 (anunciado pela Exposul)"
+        }
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "9,09–9,20 m",
+          "largura": "4,00 m",
+          "area": "cerca de 34–36,8 m² (gama); a Exposul anuncia 36,8 m² nesta unidade",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "O comprimento de 9,20 m resulta também da hipótese 36,8 ÷ 4 e NÃO é uma medição da unidade. Manter área Exposul 36,8 m²."
+        },
+        "notas_externas": [
+          "A ficha IRM de 2010 documenta versão de 9,09 × 4,00 m e 34,20 m² (critério IRM), com 3 quartos e até 8 dormidas. [S13]",
+          "Outro Octalia 2012 anuncia 9,12 × 4,00 m e cerca de 36 m². [S14]",
+          "Um anúncio independente de Octalia T3 de 9,2 × 4 m usa 36,8 m², mas não prova que a unidade da Azmora tenha 9,20 m. [S32]",
+          "A área de 36,8 m² pode corresponder a uma medição exterior e não à área interior: não converter automaticamente 36,8 ÷ 4 em comprimento medido.",
+          "A lista de opções de 2010 (forno, lavadora, sofá-cama, aquecimento) não pode ser tomada como inventário do exemplar de 2012."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S13",
+            "titulo": "IRM — Super Octalia 3 (2010)",
+            "tipo": "Ficha original fabricante, ano 2010",
+            "url": "https://www.lebonmobilhome.fr/wp-content/uploads/2024/10/FICHE-SUPER-OCTALIA-3-2010.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S14",
+            "titulo": "IRM — Octalia 2012, 9,12 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://zen-mobilhome.com/mobilhome/irm-octalia-2611028/"
+          },
+          {
+            "id": "S32",
+            "titulo": "Mobile Home Discount — outro Octalia T3 de 36,8 m²",
+            "tipo": "Outro exemplar comercial; não comprova ref. 011",
+            "url": "https://mobilehomediscount.pt/property/irm-octalia-t3/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Medir comprimento e largura efetivos",
+        "Esclarecer se 36,8 m² é área de implantação ou área interior",
+        "Validar ano 2012 na placa",
+        "Inventário dos equipamentos e climatização",
+        "Estado de conservação e configuração sanitária",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-012",
+      "nome": "O’Hara 784 com alpendre",
+      "tipologia": "T2",
+      "descricao_curta": "O’Hara 784 T2 com alpendre em madeira, dois quartos, sala de refeições e cozinha com fogão e frigorífico.",
+      "descricao_comercial": "Esta O’Hara 784 T2 apresenta um alpendre em madeira que acrescenta uma zona exterior protegida para descanso e convívio. No interior existe uma sala luminosa com área de estar e mesa de refeições, articulada com a cozinha. O equipamento descrito inclui fogão, frigorífico, armários e espaços de arrumação para o uso diário.\n\nA parte privada está organizada em dois quartos: um com cama de casal e outro com duas camas individuais. Na zona sanitária encontra-se uma cabine de duche e lavatório, com sanita em divisão independente. A O’Hara 784 procura equilibrar as funções interiores com a utilização do espaço exterior, destacando-se neste exemplar o alpendre de madeira. As dimensões do corpo da casa e as do alpendre devem ser apresentadas separadamente quando o fornecedor as confirmar.\n\nO modelo combina a dimensão intermédia da família O’Hara com uma área exterior de alpendre, que merece destaque na galeria e uma medição independente.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + 2 camas individuais",
+          "Alpendre em madeira",
+          "Sala com área de refeições",
+          "Fogão e frigorífico, arrumação na cozinha",
+          "Cabine de duche, lavatório e WC separado"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,80–8,00 m",
+          "largura": "4,00 m",
+          "area": "cerca de 30–31,4 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "A unidade Exposul tem alpendre, cuja área e inclusão na medição precisam de confirmação."
+        },
+        "notas_externas": [
+          "Exemplar O’Phéa 784 T de 2006: 7,80 × 4,00 m, sala central, terraço referido separadamente, cozinha com lava-loiça, placa a gás de 4 queimadores, frigorífico e armários. [S18]",
+          "No mesmo exemplar de 2006: quarto de casal com cama 140 cm e duas mesas de cabeceira; quarto secundário com 2 camas de 80 cm; 4 convetores elétricos e aquecimento da água a gás. [S18]",
+          "Outra ficha técnica 784 T confirma a família de 7,80 × 4,00 m e 4–6 dormidas, conforme a configuração. [S19]",
+          "O alpendre no exemplar de 2006 pode ser acrescentado; não confundir a área da estrutura com a dimensão do corpo da casa."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S18",
+            "titulo": "O’Hara O’Phéa 784 T, ano 2006",
+            "tipo": "Ficha histórica de outro exemplar",
+            "url": "https://www.camping-lepanorama.fr/IMG/pdf/o_hara_ophea_784_t_2006_79.pdf"
+          },
+          {
+            "id": "S19",
+            "titulo": "O’Hara 784 T 7,80 × 4 m, tipologia 2 quartos",
+            "tipo": "Ficha técnica de referência",
+            "url": "https://www.gcu.asso.fr/sites/default/files/fichiers/pdf/locatifs/fiche-technique/OPhea784-2Ch_FT.pdf"
+          }
+        ]
+      },
+      "pendencias": [
+        "Confirmar se é O’Phéa 784 T ou outra 784",
+        "Medidas da casa e do alpendre separadas",
+        "Área interior documentada",
+        "Ano do exemplar e climatização incluída",
+        "Planta e conjunto atual de móveis",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-013",
+      "nome": "Willerby Salisbury",
+      "tipologia": "T2",
+      "descricao_curta": "Willerby Salisbury T2 com dois quartos, sala ampla e janelas generosas, numa configuração britânica de linhas tradicionais.",
+      "descricao_comercial": "A Willerby Salisbury T2 é uma casa móvel de fabrico britânico com dois quartos, apresentada com uma zona social dividida em áreas distintas e com janelas amplas que favorecem a iluminação natural. A ficha atualmente registada identifica também soluções de arrumação no quarto principal, um elemento importante para uma utilização organizada do espaço.\n\nCom a combinação de dois quartos, janelas amplas e uma zona de estar organizada em áreas distintas, esta Salisbury apresenta-se como uma proposta para quem valoriza a separação funcional dos espaços. As soluções de arrumação do quarto principal acrescentam utilidade à organização do interior.\n\nO principal interesse do Salisbury é a zona social relativamente ampla para um T2; a ficha concreta do anúncio ainda precisa de identificação para podermos detalhar cozinha e aquecimento.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos",
+          "Sala com duas zonas",
+          "Janelas amplas",
+          "Arrumação no quarto principal"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "10,70–11,60 m",
+          "largura": "cerca de 3,70 m",
+          "area": "cerca de 37–42 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "São versões Willerby Salisbury de comprimentos distintos; não há prova da variante do anúncio 013."
+        },
+        "notas_externas": [
+          "Exemplar usado Salisbury de 2006 com 35 pés de comprimento e dois quartos; outras unidades de 2009 são de 37 × 12 pés. [S20][S21]",
+          "Salisbury Select histórico de 35 × 12 pés oferece cozinha com fogão a gás/forno/grelhador, aquecimento na zona social e possibilidade de vidros duplos e aquecimento central como opcionais. [S22]",
+          "A Salisbury atualmente comercializada pelo fabricante tem outras soluções e não deve servir de ficha da versão antiga. [S28]",
+          "As áreas de 37–42 m² publicadas para semelhantes são aproximadas e não se devem anunciar como área útil desta unidade."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S20",
+            "titulo": "Willerby Salisbury (2006) 35 pés e dois quartos",
+            "tipo": "Outro exemplar usado",
+            "url": "https://www.salopleisure.co.uk/willerby-salisbury-833"
+          },
+          {
+            "id": "S21",
+            "titulo": "Willerby Salisbury (2009) 37×12 pés",
+            "tipo": "Outro exemplar usado",
+            "url": "https://www.nbcp.co.uk/stock-no-20"
+          },
+          {
+            "id": "S22",
+            "titulo": "Willerby Salisbury Select (histórico)",
+            "tipo": "Material histórico com equipamento opcional",
+            "url": "https://doczz.net/doc/3648789/salisburyselect---willerby-holiday-homes"
+          },
+          {
+            "id": "S28",
+            "titulo": "Willerby Salisbury novo, página oficial",
+            "tipo": "Fabricante, geração atual distinta das antigas",
+            "url": "https://www.willerby.com/holiday-homes/salisbury"
+          }
+        ]
+      },
+      "pendencias": [
+        "Ano e variante Salisbury exata",
+        "Comprimento, largura e área real",
+        "Número de WC e organização do duche",
+        "Equipamento de cozinha, micro-ondas e frigorífico",
+        "Vidros, lareira, caldeira e radiadores confirmados",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-014",
+      "nome": "Trigano n.º 18",
+      "tipologia": "T3",
+      "descricao_curta": "Trigano T3 com três quartos, cozinha com arrumação e WC separado; o nome de fábrica continua por identificar.",
+      "descricao_comercial": "A Trigano n.º 18 é uma casa móvel T3 apresentada no catálogo da Exposul com três quartos. A informação disponível identifica uma cozinha com armários de arrumação e uma sanita em compartimento separado, indicando uma distribuição interior com as funções essenciais de cozinha, dormida e instalações sanitárias.\n\nA presença de três quartos permite organizar espaços de dormida distintos, enquanto os armários da cozinha oferecem arrumação para utensílios e artigos essenciais. O WC em compartimento independente é outra característica identificada nesta unidade. Trata-se de uma opção T3 cuja descrição pode ser desenvolvida com mais detalhe à medida que o inventário técnico seja disponibilizado.\n\nA referência «n.º 18» aparenta ser um identificador de inventário e não permite atribuir planta, dimensões, cozinha ou isolamento de qualquer gama específica.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "3 quartos (T3)",
+          "Cozinha com armários de arrumação",
+          "Sanita em divisão separada"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,80–9,10 m",
+          "largura": "4,00 m",
+          "area": "cerca de 31–36 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Referência MUITO genérica de outras Trigano T3; «n.º 18» não identifica o modelo e a correspondência Evo/Samba não foi comprovada."
+        },
+        "notas_externas": [
+          "A fabricante Trigano vende várias configurações T3: EVO 33 de 8,5 × 4 m, EVO 35 de 9 × 4 m, além de outras gamas. [S11][S24]",
+          "Outro Trigano Sympa usado de 2007 tem três quartos e sala/cozinha centrais; o modelo Sympa não está associado à unidade 014. [S23]",
+          "Há também Trigano MH3 de cerca de 8,5 × 4 m em anúncios independentes. Sem número de chassis não se pode concluir que se trata de MH3, Sympa ou EVO. [S33]",
+          "Não existem medidas, ano, lotação ou isolamento específicos fiavelmente pesquisáveis a partir de “Trigano n.º 18”."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S11",
+            "titulo": "Trigano — Evolution gama e dimensões",
+            "tipo": "Fabricante, gama atual (não identifica exemplar antigo)",
+            "url": "https://pro.residences-trigano.com/nos-mobil-homes/evolution"
+          },
+          {
+            "id": "S23",
+            "titulo": "Trigano Sympa 2007 de três quartos",
+            "tipo": "Outro modelo da marca, não identificado como n.º 18",
+            "url": "https://www.mobilhome-cotedopale.com/137-mobil-home-trigano-modele-sympa.html"
+          },
+          {
+            "id": "S24",
+            "titulo": "Trigano EVO 33 T3 (8,50 × 4 m)",
+            "tipo": "Gama fabricante (exemplo não relacionado com ref. 014)",
+            "url": "https://pro.residences-trigano.com/nos-mobil-homes/evolution"
+          },
+          {
+            "id": "S33",
+            "titulo": "Trigano MH3, T3, 8,5 × 4 m",
+            "tipo": "Outro modelo Trigano, não igualado a n.º 18",
+            "url": "https://veringindu.com/produit/mobil-home-doccasion-trigano-mh3-3-chambres/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Foto legível da chapa e código do modelo",
+        "Ano de fabrico",
+        "Dimensões e área da casa concreta",
+        "Configuração das camas e sanitários",
+        "Inventário de eletrodomésticos, aquecimento e vidro",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-015",
+      "nome": "O’Hara 834",
+      "tipologia": "T2",
+      "descricao_curta": "O’Hara 834 T2 com dois quartos, cabine de duche e máquina de lavar loiça identificada no equipamento da unidade.",
+      "descricao_comercial": "A O’Hara 834 T2 apresenta dois quartos e uma organização orientada para a utilização prática do espaço interior. Entre os equipamentos registados para esta unidade encontra-se uma máquina de lavar loiça, um elemento diferenciador numa casa móvel desta categoria. A informação disponível menciona ainda beliche na zona dos quartos, sendo necessário confirmar a sua disposição relativamente às restantes camas.\n\nA zona sanitária inclui cabine de duche e WC em divisão separada. A organização em dois quartos e a presença de um beliche ajudam a responder a diferentes necessidades de dormida. A máquina de lavar loiça acrescenta conveniência à utilização quotidiana, enquanto a separação entre duche e WC reforça a funcionalidade dos espaços sanitários.\n\nA máquina de lavar loiça é um ponto de interesse comercial efetivo deste exemplar, embora nem todas as O’Hara 834 a incluam.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos (tipologia indicada no catálogo)",
+          "Beliche (localização e outras camas a confirmar)",
+          "Máquina de lavar loiça",
+          "Cabine de duche e WC separado"
+        ],
+        "anunciados": {}
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "8,30–8,34 m",
+          "largura": "4,00 m",
+          "area": "cerca de 33 m²",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Faixa conhecida em versões O’Hara 834 T2, mas falta identificar a configuração da unidade 015."
+        },
+        "notas_externas": [
+          "Ficha O’Phéa 834 2CH: 8,30 × 4,00 m, planta central, 2 quartos e 4–6 dormidas consoante os equipamentos. [S25]",
+          "Existe também variante 834 2CH/2S com duas salas de água, o que prova que o número de sanitários não pode ser determinado só pelo nome 834. [S26]",
+          "Outro exemplar comercial O’Hara 834 apresenta 8,34 × 4,00 m e área declarada de 33,36 m², ilustrando a pequena diferença entre versões. [S27]",
+          "A existência de beliche na unidade 015 deve prevalecer sobre camas da planta de outra 834. Não inferir tipo de caixilharia ou isolamento."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S25",
+            "titulo": "O’Hara O’Phéa 834 2CH de 8,30 × 4 m",
+            "tipo": "Ficha técnica de modelo",
+            "url": "https://www.cotedumobilhome.com/modele/34-ophea-834-2ch-2-pentes-83m"
+          },
+          {
+            "id": "S26",
+            "titulo": "O’Hara O’Phéa 834 2CH/2S de 8,30 × 4 m",
+            "tipo": "Variante com duas salas de água (não assumir)",
+            "url": "https://www.cotedumobilhome.com/modele/41-ophea-834-2ch2s-2-pentes-83m"
+          },
+          {
+            "id": "S27",
+            "titulo": "O’Hara 834 8,34 × 4 m",
+            "tipo": "Outro exemplar comercial",
+            "url": "https://www.lacentraledumobilhome.com/mobilhome.php?id=1652"
+          },
+          {
+            "id": "S34",
+            "titulo": "O’Hara 834 — exemplo 2006 T2 vendido em Portugal",
+            "tipo": "Outro exemplar português",
+            "url": "https://www.mobilehome.pt/property/ohara-834-t2-2006/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Variante exata (834 2CH, 2S, outra)",
+        "Dimensão exterior e área medida",
+        "Ano de fabrico",
+        "Localização do beliche, camas fixas e lotação real",
+        "Funcionamento da máquina de lavar loiça, restantes eletrodomésticos e sanitários",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    },
+    {
+      "id": "exposul-016",
+      "nome": "O’Hara T2 — 7,5 × 4 m (30 m²)",
+      "tipologia": "T2",
+      "descricao_curta": "O’Hara T2 anunciada com 7,50 × 4,00 m e 30 m², dois quartos e cozinha equipada; submodelo exato ainda desconhecido.",
+      "descricao_comercial": "Esta O’Hara T2 é anunciada pela Exposul com 7,5 metros de comprimento, 4 metros de largura e 30 m² de área, oferecendo uma distribuição compacta para dois quartos. A zona social integra sala luminosa e cozinha, com fogão, frigorífico e armários de arrumação. O conjunto privilegia uma utilização simples e funcional, com os espaços essenciais organizados numa planta de dimensões contidas.\n\nA zona privada inclui um quarto com cama de casal e um segundo quarto com duas camas individuais. A área sanitária dispõe de cabine de duche e lavatório, com WC em divisão independente. Com dois quartos, cozinha equipada com os eletrodomésticos essenciais e instalações sanitárias organizadas em compartimentos distintos, esta unidade destaca-se pela utilização funcional do espaço. As dimensões e área apresentadas correspondem aos valores anunciados pelo fornecedor.\n\nÉ uma das poucas casas do conjunto que já têm medidas comerciais próprias; o principal trabalho é identificar o submodelo e esclarecer o critério de área.",
+      "confirmado_unidade_projeto": {
+        "equipamentos": [
+          "2 quartos: casal + 2 camas individuais",
+          "Comprimento anunciado: 7,5 m; largura anunciada: 4 m",
+          "Área anunciada: 30 m² (critério a confirmar)",
+          "Sala e cozinha com fogão, frigorífico e armários",
+          "Cabine de duche, lavatório e WC separado"
+        ],
+        "anunciados": {
+          "comprimento": "7,5 m (anunciado pela Exposul; URL sugere 7,4 m)",
+          "largura": "4 m (anunciada pela Exposul)",
+          "area": "30 m² (anunciada pela Exposul)"
+        }
+      },
+      "referencia_modelo": {
+        "dimensoes_utilizador": {
+          "comprimento": "7,50 m",
+          "largura": "4,00 m",
+          "area": "30 m² (valor anunciado pela Exposul)",
+          "estatuto": "indicativo; não confirmado para este anúncio",
+          "nota": "Valores anunciados para esta unidade: conferir medição e área (implantação ou interior). O URL menciona 7,4 m; não inferir que o submodelo é 734."
+        },
+        "notas_externas": [
+          "A O’Phéa 734 2CH de referência tem 7,30 × 4,00 m e 27,30 m² pelo critério do fabricante, não coincidindo exatamente com as medidas anunciadas para a 016. [S01]",
+          "Existem exemplares 734 anunciados com 7,34 × 4,00 m e diferentes equipamentos, mas isso não demonstra que a 016 seja uma 734 ou 744. [S29]",
+          "Não foi encontrada documentação externa fiável que permita identificar o submodelo do anúncio 016 somente com a referência “O’Hara T2 7,5 × 4 m”.",
+          "A correspondência 7,50 × 4,00 = 30 m² é aritmética, mas não determina que os 30 m² sejam área interior útil."
+        ],
+        "fontes_externas": [
+          {
+            "id": "S01",
+            "titulo": "O’Hara — ficha O’Phéa 734 2CH",
+            "tipo": "Ficha de fabricante, geração histórica",
+            "url": "https://www.gdmhloisirs.com/wp-content/uploads/2024/10/Fiche_7342ch.pdf-72DPI.pdf"
+          },
+          {
+            "id": "S29",
+            "titulo": "O’Hara 734 de 2006 — 7,34 × 4 m",
+            "tipo": "Outro exemplar",
+            "url": "https://espace-mobilhomes.fr/acheter-mobil-home-d-occasion/ohara-734-n7/"
+          }
+        ]
+      },
+      "pendencias": [
+        "Nome técnico do modelo na chapa",
+        "Esclarecer divergência 7,4/7,5 m",
+        "Confirmar se 30 m² são interiores ou implantação",
+        "Ano, isolamento, caixilharia e climatização",
+        "Composição sanitária e inventário final",
+        "Condição, IVA, preço de revenda, stock, transporte, instalação e garantia."
+      ],
+      "regra_publicacao": "Mostrar na ficha pública apenas dados ligados à unidade. Fontes externas de outras variantes não preenchem dados específicos automaticamente."
+    }
+  ]
+}

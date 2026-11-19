@@ -24,7 +24,7 @@ npm run preview
 
 ## Editar o catálogo
 
-O ficheiro `src/data/houses.json` contém os campos de apresentação e os estados de revisão. A referência identifica a unidade mesmo quando há modelos repetidos. Usar `npm run catalog:import -- caminho/ficheiro.csv` para rever uma importação antes de aplicar alterações. As fotografias WebP estão em `public/images/casas/<id>/`. O [registo de fontes e fotografias](docs/catalogo.md) explica a recolha e o manifesto.
+O ficheiro `src/data/houses.json` contém os campos de apresentação e os estados de revisão. A referência identifica a unidade mesmo quando há modelos repetidos. Usar `npm run catalog:import -- caminho/ficheiro.csv` para rever uma importação antes de aplicar alterações. As fotografias estão em `public/images/casas/<media_slug>/`, com ficheiros cujo nome começa pelo nome da casa e termina com o número da fotografia e a variante. O [registo de fontes e fotografias](docs/catalogo.md) explica a recolha e o manifesto.
 
 Os componentes de apresentação estão em `src/components/`, as rotas em `src/pages/` e os estilos em `src/styles/`. A lógica de pesquisa, ordenação e comparação está em `src/lib/catalog.ts`. O JavaScript do navegador guarda apenas IDs de seleção em localStorage.
 
