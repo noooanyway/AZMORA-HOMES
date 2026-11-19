@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Photo from '../components/Photo.astro';
+import { url, houses, brands, detail } from '../lib/site';
+import { name } from '../lib/catalog';
+import { Search, SlidersHorizontal } from 'lucide-astro';
+const hero =
+  houses.find((h) => h.id.endsWith('-007') && h.media.length) ||
+  houses.find((h) => h.media.length);
+const types = [...new Set(houses.map((h) => h.typology).filter(Boolean))];
+const featured = [
+  ...houses.filter((h) => h.media.length),
+  ...houses.filter((h) => !h.media.length),
+].slice(0, 3);
+---
+
+<Layout title="Casas móveis para descobrir"
+  ><section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker"><i></i> CATÁLOGO DE CASAS MÓVEIS</p><h1>
+          Outra forma <br />de <em>habitar.</em>
+        </h1><p class="intro">
+          Descubra casas móveis, explore cada detalhe e compare os espaços que
+          fazem sentido para si.
+        </p><a class="btn cream" href={url('casas/')}>Explorar as casas</a>
+      </div>{
+        hero ? (
+          <figure class="hero-image">
+            <>
+              <Photo h={hero} hero />
+              <figcaption>
+                <>
+                  <span>EM DESTAQUE</span>
+                  <a href={detail(hero)}>
+                    {name(hero)} · {hero.typology}
+                  </a>
+                </>
+              </figcaption>
+            </>
+          </figure>
+        ) : (
+          <div class="landscape" aria-hidden="true">
+            <>
+              <div class="sun" />
+              <div class="ridges" />
+            </>
+          </div>
+        )
+      }
+    </div>
+  </section><div class="wrap">
+    <form class="quick" action={url('casas/')}>
+      <div class="quick-title">
+        <SlidersHorizontal size={22} /><strong>Encontre a sua casa</strong>
+      </div><label
+        >Fabricante<select name="brand"
+          ><option value="">Todas</option>{
+            brands.map((b) => <option>{b}</option>)
+          }</select
+        ></label
+      ><label
+        >Tipologia<select name="typology"
+          ><option value="">Todas</option>{
+            types.map((t) => <option>{t}</option>)
+          }</select
+        ></label
+      ><button class="btn primary"><Search size={17} />Pesquisar</button>
+    </form><section class="section">
+      <p class="kicker"><i></i> A NOSSA SELEÇÃO</p><div class="section-heading">
+        <h2>Casas em <em>destaque</em></h2><a class="under" href={url('casas/')}
+          >Ver catálogo completo</a>
+      </div><div class="cards">{featured.map((h) => <Card h={h} />)}</div>{
+        !featured.length && (
+          <p>Estamos a preparar a próxima seleção de casas.</p>
+        )
+      }<p class="muted">Preços e disponibilidade sob consulta.</p>
+    </section>{
+      brands.length > 0 && (
+        <div class="brands">
+          {brands.map((b) => (
+            <a href={url('casas/?brand=' + encodeURIComponent(b))}>{b}</a>
+          ))}
+        </div>
+      )
+    }<section class="section" id="como-funciona">
+      <p class="kicker"><i></i> COMO FUNCIONA</p><h2>
+        Da pesquisa à <em>escolha.</em>
+      </h2><div class="steps">
+        {
+          [
+            [
+              'Explore as casas',
+              'Filtre por tipologia, marca e pelas características de que precisa.',
+            ],
+            [
+              'Compare os detalhes',
+              'Guarde as suas favoritas e compare até três casas lado a lado.',
+            ],
+            [
+              'Peça informações',
+              'Selecione uma unidade para preparar um pedido com a referência certa.',
+            ],
+          ].map(([t, s], i) => (
+            <div>
+              <>
+                <small>0{i + 1}</small>
+                <h3>{t}</h3>
+                <p>{s}</p>
+              </>
+            </div>
+          ))
+        }
+      </div>
+    </section><section class="section faq">
+      <h2>Perguntas frequentes</h2><details>
+        <summary>Como confirmo o preço e a disponibilidade?</summary><p>
+          Consulte a ficha da unidade e prepare o seu pedido de informação para
+          a Azmora Homes.
+        </p>
+      </details><details>
+        <summary>Onde ficam guardadas as minhas favoritas?</summary><p>
+          Neste navegador, disponíveis na página Favoritos sem criar conta.
+        </p>
+      </details><a class="under" href={url('contactos/')}
+        >Contactar a Azmora Homes</a>
+    </section>
+  </div></Layout
+>

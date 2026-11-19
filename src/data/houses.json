@@ -1,0 +1,1039 @@
+[
+  {
+    "id": "exposul-001",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/o-hara-734-c-terraco-t2-38",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "O’hara 734 C/Terraço - T2",
+    "brand": "O’Hara",
+    "model": "734",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "terraço frontal coberto",
+      "ar condicionado",
+      "cozinha com placa a gás, frigorífico e exaustor",
+      "quarto de casal",
+      "quarto com duas camas individuais",
+      "duche e sanita em divisão independente"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-001/01.webp",
+        "small": "images/casas/exposul-001/01-small.webp",
+        "alt": "Fachada e terraço coberto — O’Hara 734",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-001/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-001/02.webp",
+        "small": "images/casas/exposul-001/02-small.webp",
+        "alt": "Cozinha e zona de refeições — O’Hara 734",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-001/03.webp",
+        "small": "images/casas/exposul-001/03-small.webp",
+        "alt": "Quarto com duas camas — O’Hara 734",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-001/04.webp",
+        "small": "images/casas/exposul-001/04-small.webp",
+        "alt": "Casa de banho com cabine de duche — O’Hara 734",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "O’Hara 734 T2 com zona exterior coberta e dois quartos.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-002",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/irm-super-mercure-t2-37",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "IRM Super Mercure - T2",
+    "brand": "IRM",
+    "model": "Super Mercure",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "placa a gás com quatro queimadores",
+      "sofá de canto",
+      "aquecimento elétrico",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-002/01.webp",
+        "small": "images/casas/exposul-002/01-small.webp",
+        "alt": "Fachada com portadas azuis — IRM Super Mercure",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-002/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-002/03.webp",
+        "small": "images/casas/exposul-002/03-small.webp",
+        "alt": "Sala e mesa de refeições — IRM Super Mercure",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-002/04.webp",
+        "small": "images/casas/exposul-002/04-small.webp",
+        "alt": "Quarto com camas individuais — IRM Super Mercure",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "A sala abre para a cozinha e reúne um sofá de canto e uma mesa de refeições. O duche e a sanita ficam em divisões separadas.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-003",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/irm-super-venus-t2-35",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "IRM Super Venus - T2",
+    "brand": "IRM",
+    "model": "Super Venus",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "cozinha com frigorífico, placa a gás e exaustor",
+      "quarto de casal",
+      "quarto com duas camas individuais",
+      "duche e WC independente"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-003/01.webp",
+        "small": "images/casas/exposul-003/01-small.webp",
+        "alt": "Entrada com degraus — IRM Super Venus",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-003/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-003/02.webp",
+        "small": "images/casas/exposul-003/02-small.webp",
+        "alt": "Porta de entrada e janelas — IRM Super Venus",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-003/03.webp",
+        "small": "images/casas/exposul-003/03-small.webp",
+        "alt": "Quarto com arrumação sobre a cama — IRM Super Venus",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-003/04.webp",
+        "small": "images/casas/exposul-003/04-small.webp",
+        "alt": "Cama junto à janela — IRM Super Venus",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "Casa móvel compacta com dois quartos e zona social integrada.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-004",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/rideau-panama-duo-t2-36",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Rideau Panama Duo - T2",
+    "brand": "Rideau",
+    "model": "Panama Duo",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "deck frontal coberto",
+      "cozinha em L",
+      "quarto de casal",
+      "duche e WC separados"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-004/01.webp",
+        "small": "images/casas/exposul-004/01-small.webp",
+        "alt": "Exterior com alpendre frontal — Rideau Panama Duo",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-004/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-004/02.webp",
+        "small": "images/casas/exposul-004/02-small.webp",
+        "alt": "Banco de canto e mesa de refeições — Rideau Panama Duo",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-004/03.webp",
+        "small": "images/casas/exposul-004/03-small.webp",
+        "alt": "Cozinha em L — Rideau Panama Duo",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-004/04.webp",
+        "small": "images/casas/exposul-004/04-small.webp",
+        "alt": "Quarto com beliche — Rideau Panama Duo",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "O deck frontal coberto prolonga a zona de estar. No interior, a cozinha em L fica junto à mesa com banco corrido.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-005",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/willerby-granada-xl-t3-34",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Willerby Granada XL - T3",
+    "brand": "Willerby",
+    "model": "Granada XL",
+    "typology": "T3",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "dimensions_m": {
+      "length": 12.5,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "dois WC",
+      "janelas panorâmicas",
+      "cozinha com forno duplo, placa a gás e frigorífico",
+      "aquecimento por radiadores",
+      "duas portas de acesso"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-005/01.webp",
+        "small": "images/casas/exposul-005/01-small.webp",
+        "alt": "Fachada e acessos exteriores — Willerby Granada XL",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-005/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-005/02.webp",
+        "small": "images/casas/exposul-005/02-small.webp",
+        "alt": "Cozinha e armários de madeira — Willerby Granada XL",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-005/03.webp",
+        "small": "images/casas/exposul-005/03-small.webp",
+        "alt": "Sala e zona de refeições — Willerby Granada XL",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-005/04.webp",
+        "small": "images/casas/exposul-005/04-small.webp",
+        "alt": "Quarto principal — Willerby Granada XL",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "Modelo de grandes dimensões, com três quartos, duas casas de banho e zona social ampla.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-006",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/trigano-evolution-casa-movel-t2-33",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Trigano Evolution – Casa Móvel T2",
+    "brand": "Trigano",
+    "model": "Evolution",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "despensa independente",
+      "quarto de casal",
+      "quarto com cama individual e beliche",
+      "cozinha com placa a gás de quatro queimadores",
+      "WC separado",
+      "aquecimento elétrico"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-006/01.webp",
+        "small": "images/casas/exposul-006/01-small.webp",
+        "alt": "Exterior e porta de entrada — Trigano Evolution",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-006/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-006/02.webp",
+        "small": "images/casas/exposul-006/02-small.webp",
+        "alt": "Bancada e lava-loiça — Trigano Evolution",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-006/03.webp",
+        "small": "images/casas/exposul-006/03-small.webp",
+        "alt": "Zona de duche — Trigano Evolution",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-006/04.webp",
+        "small": "images/casas/exposul-006/04-small.webp",
+        "alt": "WC independente — Trigano Evolution",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "Casa móvel com dois quartos e despensa junto à cozinha.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-007",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/o-hara-734-t2-32",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "O’hara 734 - T2",
+    "brand": "O’Hara",
+    "model": "734",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "revestimento exterior em madeira",
+      "deck coberto",
+      "cozinha com placa elétrica de quatro zonas e frigorífico"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-007/01.webp",
+        "small": "images/casas/exposul-007/01-small.webp",
+        "alt": "Fachada de madeira e terraço coberto — O’Hara 734",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-007/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-007/02.webp",
+        "small": "images/casas/exposul-007/02-small.webp",
+        "alt": "Quarto com cama de casal — O’Hara 734",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-007/03.webp",
+        "small": "images/casas/exposul-007/03-small.webp",
+        "alt": "WC separado — O’Hara 734",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-007/04.webp",
+        "small": "images/casas/exposul-007/04-small.webp",
+        "alt": "Cozinha e zona de refeições — O’Hara 734",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "O’Hara 734 com revestimento de madeira e deck coberto.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-008",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-04-2024-octalia-irm-super-octalia-t3-31",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "IRM Super Octália - T3",
+    "brand": "IRM",
+    "model": "Super Octália",
+    "typology": "T3",
+    "bedrooms": 3,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "cozinha em U",
+      "frigorífico com congelador",
+      "ar condicionado na zona social",
+      "três quartos"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-008/01.webp",
+        "small": "images/casas/exposul-008/01-small.webp",
+        "alt": "Fachada e portas envidraçadas — IRM Super Octália",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-008/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-008/02.webp",
+        "small": "images/casas/exposul-008/02-small.webp",
+        "alt": "Sala com sofá de canto — IRM Super Octália",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-008/03.webp",
+        "small": "images/casas/exposul-008/03-small.webp",
+        "alt": "Quarto principal — IRM Super Octália",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-008/04.webp",
+        "small": "images/casas/exposul-008/04-small.webp",
+        "alt": "Quarto com duas camas — IRM Super Octália",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "Casa móvel familiar T3, com zona social ampla e cozinha em U.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-009",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-02-2026-irm-super-mercure-t2-30",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "IRM Super Mercure T2",
+    "brand": "IRM",
+    "model": "Super Mercure",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "sofá de canto",
+      "placa a gás com quatro queimadores",
+      "aquecimento elétrico",
+      "cabine de duche e WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-009/01.webp",
+        "small": "images/casas/exposul-009/01-small.webp",
+        "alt": "Fachada com portadas verdes — IRM Super Mercure",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-009/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-009/02.webp",
+        "small": "images/casas/exposul-009/02-small.webp",
+        "alt": "Cozinha aberta sobre a sala — IRM Super Mercure",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-009/03.webp",
+        "small": "images/casas/exposul-009/03-small.webp",
+        "alt": "Quarto com duas camas — IRM Super Mercure",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-009/04.webp",
+        "small": "images/casas/exposul-009/04-small.webp",
+        "alt": "WC independente — IRM Super Mercure",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "Casa móvel T2 com cozinha integrada e aquecimento elétrico.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-010",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-04-2026-atlas-nevada-super-atlas-nevada-super-t3-29",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Atlas Nevada Super - T3",
+    "brand": "Atlas",
+    "model": "Nevada Super",
+    "typology": "T3",
+    "bedrooms": 3,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "cozinha equipada com frigorífico e placa a gás",
+      "aquecimento por radiadores",
+      "duas portas de acesso",
+      "três quartos",
+      "duche e instalações sanitárias separadas"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-010/01.webp",
+        "small": "images/casas/exposul-010/01-small.webp",
+        "alt": "Fachada lateral — Atlas Nevada Super",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-010/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-010/02.webp",
+        "small": "images/casas/exposul-010/02-small.webp",
+        "alt": "Cozinha com placa e bancada — Atlas Nevada Super",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-010/03.webp",
+        "small": "images/casas/exposul-010/03-small.webp",
+        "alt": "Quarto junto à janela — Atlas Nevada Super",
+        "width": 1080,
+        "height": 1440
+      },
+      {
+        "src": "images/casas/exposul-010/04.webp",
+        "small": "images/casas/exposul-010/04-small.webp",
+        "alt": "Quarto com arrumação superior — Atlas Nevada Super",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "Modelo T3 com sala ampla, três quartos e aquecimento por radiadores.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-011",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-04-2024-irm-super-octalia-t3-36-8m2-8",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "IRM Super Octália T3 36,8m²",
+    "brand": "IRM",
+    "model": "Super Octália",
+    "typology": "T3",
+    "bedrooms": 3,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": 36.8,
+    "year": 2012,
+    "equipment_summary": [
+      "três quartos",
+      "cozinha equipada",
+      "cabine de duche",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-011/01.webp",
+        "small": "images/casas/exposul-011/01-small.webp",
+        "alt": "Entrada com portas envidraçadas — IRM Super Octália",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-011/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-011/02.webp",
+        "small": "images/casas/exposul-011/02-small.webp",
+        "alt": "Fachada lateral e degraus — IRM Super Octália",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-011/03.webp",
+        "small": "images/casas/exposul-011/03-small.webp",
+        "alt": "Mesa de refeições junto à cozinha — IRM Super Octália",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-011/04.webp",
+        "small": "images/casas/exposul-011/04-small.webp",
+        "alt": "Quarto com camas individuais — IRM Super Octália",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "IRM Super Octália de 2012 com três quartos e 36,8 m² anunciados.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-012",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-07-2025-o-hara-784-mobile-home-o-hara-784-10",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Mobile Home O’Hara 784",
+    "brand": "O’Hara",
+    "model": "784",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "alpendre em madeira",
+      "dois quartos",
+      "cozinha equipada com fogão e frigorífico",
+      "cabine de duche",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-012/01.webp",
+        "small": "images/casas/exposul-012/01-small.webp",
+        "alt": "Exterior e alpendre de madeira — O’Hara 784",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-012/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-012/02.webp",
+        "small": "images/casas/exposul-012/02-small.webp",
+        "alt": "Empena e vista lateral — O’Hara 784",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-012/03.webp",
+        "small": "images/casas/exposul-012/03-small.webp",
+        "alt": "Cozinha com frigorífico — O’Hara 784",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-012/04.webp",
+        "small": "images/casas/exposul-012/04-small.webp",
+        "alt": "Bancada e armários de cozinha — O’Hara 784",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "O’Hara 784 com dois quartos e alpendre em madeira.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-013",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-13-2023-willerby-salisbury-willerby-salisbury-t2-16",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Willerby Salisbury T2",
+    "brand": "Willerby",
+    "model": "Salisbury",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "sala com duas zonas",
+      "janelas amplas",
+      "arrumação no quarto principal"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-013/01.webp",
+        "small": "images/casas/exposul-013/01-small.webp",
+        "alt": "Exterior e entrada — Willerby Salisbury",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-013/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-013/02.webp",
+        "small": "images/casas/exposul-013/02-small.webp",
+        "alt": "Sala com sofá e mesa — Willerby Salisbury",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-013/03.webp",
+        "small": "images/casas/exposul-013/03-small.webp",
+        "alt": "Zona de estar e refeições — Willerby Salisbury",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-013/04.webp",
+        "small": "images/casas/exposul-013/04-small.webp",
+        "alt": "Cozinha com janela — Willerby Salisbury",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "A sala distribui-se entre estar e refeições, com janelas amplas. Os dois quartos ficam separados da zona social.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-014",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-12-2025-trigano-no18-trigano-no18-casa-movel-t3-11",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Trigano nº18 – Casa Móvel T3",
+    "brand": "Trigano",
+    "model": "n.º 18",
+    "typology": "T3",
+    "bedrooms": 3,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "cozinha com armários",
+      "três quartos",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-014/01.webp",
+        "small": "images/casas/exposul-014/01-small.webp",
+        "alt": "Exterior com portadas azuis — Trigano n.º 18",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-014/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-014/02.webp",
+        "small": "images/casas/exposul-014/02-small.webp",
+        "alt": "Cozinha junto à entrada — Trigano n.º 18",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-014/03.webp",
+        "small": "images/casas/exposul-014/03-small.webp",
+        "alt": "Quarto principal — Trigano n.º 18",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-014/04.webp",
+        "small": "images/casas/exposul-014/04-small.webp",
+        "alt": "Quarto com duas camas — Trigano n.º 18",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "A casa organiza três quartos em torno de uma sala com ligação direta à cozinha. Dispõe de casa de banho e WC separado.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-015",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-08-2025-o-hara-834-mobile-home-o-hara-834-7",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "Mobile Home O’hara 834",
+    "brand": "O’Hara",
+    "model": "834",
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": null,
+      "width": null
+    },
+    "area_m2": null,
+    "year": null,
+    "equipment_summary": [
+      "máquina de lavar loiça",
+      "beliche",
+      "cabine de duche",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-015/01.webp",
+        "small": "images/casas/exposul-015/01-small.webp",
+        "alt": "Exterior e portas envidraçadas — O’Hara 834",
+        "width": 690,
+        "height": 517,
+        "cover": "images/casas/exposul-015/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-015/02.webp",
+        "small": "images/casas/exposul-015/02-small.webp",
+        "alt": "Sala e zona de refeições — O’Hara 834",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-015/03.webp",
+        "small": "images/casas/exposul-015/03-small.webp",
+        "alt": "Quarto de casal — O’Hara 834",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-015/04.webp",
+        "small": "images/casas/exposul-015/04-small.webp",
+        "alt": "Armário e arrumação — O’Hara 834",
+        "width": 1080,
+        "height": 1440
+      }
+    ],
+    "description_azmora": "A zona de refeições comunica com a cozinha equipada com máquina de lavar loiça. Um quarto tem cama de casal e o outro inclui beliche.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  },
+  {
+    "id": "exposul-016",
+    "reference_azmora": null,
+    "source": {
+      "supplier": "Exposul",
+      "url": "https://www.exposul.pt/shop/cjc-11-2025-o-hara-7-4x4-o-hara-t2-7-5mx4m-30m2-9",
+      "catalog_url": "https://www.exposul.pt/shop/category/casas-moveis-1",
+      "date_checked": "2026-11-19"
+    },
+    "name_for_site": "O’hara T2 7,5mx4m 30m²",
+    "brand": "O’Hara",
+    "model": null,
+    "typology": "T2",
+    "bedrooms": 2,
+    "bathrooms": null,
+    "dimensions_m": {
+      "length": 7.5,
+      "width": 4
+    },
+    "area_m2": 30,
+    "year": null,
+    "equipment_summary": [
+      "dois quartos",
+      "cozinha com fogão e frigorífico",
+      "cabine de duche",
+      "WC separado"
+    ],
+    "condition": null,
+    "availability": "por_confirmar",
+    "public_price_eur": null,
+    "media": [
+      {
+        "src": "images/casas/exposul-016/01.webp",
+        "small": "images/casas/exposul-016/01-small.webp",
+        "alt": "Fachada com portadas azuis — O’Hara T2",
+        "width": 1600,
+        "height": 1200,
+        "cover": "images/casas/exposul-016/01-cover.avif"
+      },
+      {
+        "src": "images/casas/exposul-016/02.webp",
+        "small": "images/casas/exposul-016/02-small.webp",
+        "alt": "Sala junto à cozinha — O’Hara T2",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-016/03.webp",
+        "small": "images/casas/exposul-016/03-small.webp",
+        "alt": "Bancada e placa de cozinha — O’Hara T2",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "images/casas/exposul-016/04.webp",
+        "small": "images/casas/exposul-016/04-small.webp",
+        "alt": "Quarto de casal — O’Hara T2",
+        "width": 1600,
+        "height": 1200
+      }
+    ],
+    "description_azmora": "O’Hara T2 com 7,5 × 4 metros, conforme a designação no catálogo.",
+    "publish": false,
+    "catalogue_preview_allowed": true
+  }
+]

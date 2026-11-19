@@ -1,0 +1,56 @@
+---
+import { houses } from '../lib/site';
+import { status } from '../lib/catalog';
+const facets = [
+  ['brand', 'Marca'],
+  ['typology', 'Tipologia'],
+  ['bedrooms', 'Quartos'],
+  ['availability', 'Disponibilidade'],
+  ['condition', 'Condição'],
+] as const;
+---
+
+{
+  facets.map(([key, label]) => {
+    const vals = [
+      ...new Set(houses.map((h) => h[key]).filter((v) => v != null)),
+    ].sort();
+    return (
+      vals.length > 0 && (
+        <label>
+          {label}
+          <select name={key}>
+            <option value="">Todas as opções</option>
+            {vals.map((v) => (
+              <option value={v}>
+                {key === 'availability'
+                  ? status(houses.find((h) => h.availability === v)!)
+                  : v}
+              </option>
+            ))}
+          </select>
+        </label>
+      )
+    );
+  })
+}{
+  houses.some((h) => h.area_m2 != null) && (
+    <label>
+      Área mínima (m²)
+      <input
+        type="number"
+        min="0"
+        step="any"
+        name="area"
+        placeholder="Sem mínimo"
+      />
+    </label>
+  )
+}{
+  houses.some((h) => h.public_price_eur != null) && (
+    <label>
+      Preço máximo (€)
+      <input type="number" min="0" name="price" placeholder="Sem máximo" />
+    </label>
+  )
+}

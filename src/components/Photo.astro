@@ -1,0 +1,37 @@
+---
+import { url } from '../lib/site';
+import type { House } from '../lib/catalog';
+import { Image as ImageIcon } from 'lucide-astro';
+const { h, hero = false } = Astro.props as { h: House; hero?: boolean };
+const m = h.media[0];
+---
+
+{
+  m ? (
+    <img
+      src={url(hero ? m.src : m.small || m.src)}
+      srcset={
+        m.small && m.small !== m.src
+          ? url(m.small) + ' 640w, ' + url(m.cover || m.src) + ' ' + (m.cover ? Math.min(960, m.width) : m.width) + 'w'
+          : undefined
+      }
+      sizes={
+        hero
+          ? '(max-width: 700px) 100vw, 60vw'
+          : '(max-width: 700px) 100vw, 33vw'
+      }
+      alt={m.alt}
+      loading={hero ? 'eager' : 'lazy'}
+      fetchpriority={hero ? 'high' : undefined}
+      width={m.width}
+      height={m.height}
+    />
+  ) : (
+    <div class="no-photo">
+      <>
+        <ImageIcon size={28} stroke-width={1} />
+        <span>Fotografia por disponibilizar</span>
+      </>
+    </div>
+  )
+}

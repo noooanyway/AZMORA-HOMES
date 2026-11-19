@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Photo from '../../components/Photo.astro';
+import Card from '../../components/Card.astro';
+import { url, houses } from '../../lib/site';
+import { specs, price, status, type House } from '../../lib/catalog';
+import {
+  Heart,
+  Columns2,
+  Expand,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-astro';
+export function getStaticPaths() {
+  return houses.map((h) => ({ params: { id: h.id }, props: { h } }));
+}
+const { h } = Astro.props as { h: House };
+const related = houses
+  .filter((p) => p.id !== h.id)
+  .sort((a, b) => Number(b.brand === h.brand) - Number(a.brand === h.brand))
+  .slice(0, 3);
+---
+
+<Layout
+  title={h.name_for_site + ' · ' + h.id}
+  description={h.description_azmora || undefined}
+  ><div class="wrap page">
+    <nav class="crumb">
+      <a href={url()}>Início</a> / <a href={url('casas/')}>Casas</a> / {h.id}
+    </nav><p class="kicker"><i></i>{h.brand} · {h.id}</p><h1>
+      {h.name_for_site}
+    </h1><div class="details">
+      <div>
+        <div class="main-photo" id="gallery">
+          {
+            h.media.length ? (
+              <button
+                class="zoom"
+                data-photo="0"
+                aria-label="Ampliar fotografia"
+              >
+                <>
+                  <Photo h={h} hero />
+                  <span>
+                    <Expand size={17} /> Ampliar
+                  </span>
+                </>
+              </button>
+            ) : (
+              <Photo h={h} />
+            )
+          }
+        </div>{
+          h.media.length > 0 && (
+            <div class="thumbs">
+              {h.media.map((m, i) => (
+                <button
+                  data-photo={i}
+                  aria-label={'Ampliar fotografia ' + (i + 1)}
+                >
+                  <img src={url(m.small || m.src)} alt={m.alt} loading="lazy" />
+                </button>
+              ))}
+            </div>
+          )
+        }
+      </div><aside class="summary">
+        <p class="eyebrow">INFORMAÇÃO COMERCIAL</p><h2>{price(h)}</h2><p>
+          {status(h)}
+        </p>{h.description_azmora && <p>{h.description_azmora}</p>}<a
+          class="btn primary"
+          href={url('contactos/?casas=' + h.id)}>Pedir informações</a
+        ><div class="actions">
+          <button data-fav={h.id}><Heart size={16} />Favoritos</button><button
+            data-compare={h.id}><Columns2 size={16} />Comparar</button>
+        </div>
+      </aside>
+    </div><section class="section">
+      <h2>Ficha <em>técnica</em></h2><dl class="specs">
+        {
+          Object.entries(specs(h))
+            .filter(([k]) => !['Disponibilidade', 'Preço'].includes(k))
+            .map(([k, v]) => (
+              <div>
+                <>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </>
+              </div>
+            ))
+        }
+      </dl><h3>Equipamento</h3>{
+        h.equipment_summary.length ? (
+          <ul>
+            {h.equipment_summary.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Equipamento por confirmar.</p>
+        )
+      }
+    </section>{
+      related.length > 0 && (
+        <section>
+          <>
+            <h2>Outras casas</h2>
+            <div class="cards">
+              {related.map((h) => (
+                <Card h={h} />
+              ))}
+            </div>
+          </>
+        </section>
+      )
+    }
+  </div>{
+    h.media.length > 0 && (
+      <dialog
+        id="lightbox"
+        data-unit={h.id}
+        aria-label="Galeria de fotografias"
+      >
+        <div>
+          <>
+            <button class="icon close" data-close aria-label="Fechar galeria">
+              <X />
+            </button>
+            <img id="enlarged" alt="" />
+            <div class="actions">
+              <>
+                <button class="icon" id="prev" aria-label="Fotografia anterior">
+                  <ChevronLeft />
+                </button>
+                <span id="position" aria-live="polite" />
+                <button class="icon" id="next" aria-label="Fotografia seguinte">
+                  <ChevronRight />
+                </button>
+              </>
+            </div>
+          </>
+        </div>
+      </dialog>
+    )
+  }</Layout
+>

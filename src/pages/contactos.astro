@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { contacts, url } from '../lib/site';
+---
+
+<Layout title="Contactos"
+  ><div class="wrap page">
+    <p class="kicker"><i></i> CONTACTOS</p><h1>
+      Vamos falar de <em>casas.</em>
+    </h1><div class="contact-grid" id="contact" data-wa={contacts.whatsapp}>
+      <div>
+        <h2>O seu pedido</h2><p>
+          Indique o que gostaria de saber sobre a casa ou seleção que escolheu.
+        </p><div id="selected"></div>{
+          contacts.email && (
+            <p>
+              <a href={'mailto:' + contacts.email}>{contacts.email}</a>
+            </p>
+          )
+        }{
+          contacts.whatsapp && (
+            <a class="btn primary" id="whatsapp">
+              Conversar no WhatsApp
+            </a>
+          )
+        }{
+          !contacts.email && !contacts.whatsapp && !contacts.form && (
+            <p class="note">
+              Os contactos comerciais da Azmora Homes estão a ser confirmados. O
+              envio de pedidos ficará disponível aqui.
+            </p>
+          )
+        }
+      </div><form
+        action={contacts.form || undefined}
+        method="post"
+        class="lead"
+      >
+        <fieldset disabled={!contacts.form}>
+          <legend>Pedido de informação</legend><label
+            >Nome<input required name="nome" autocomplete="name" /></label
+          ><label
+            >Email<input
+              required
+              name="email"
+              autocomplete="email"
+              type="email"
+            /></label
+          ><label
+            >Mensagem<textarea required name="mensagem" rows="4"
+            ></textarea></label
+          ><label class="trap" aria-hidden="true"
+            >Website<input
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+            /></label
+          ><label class="consent"
+            ><input required type="checkbox" />Li a informação de privacidade.</label
+          ><button class="btn primary"
+            >{contacts.form ? 'Enviar pedido' : 'Envio indisponível'}</button>
+        </fieldset><a class="under" href={url('privacidade/')}
+          >Informação de privacidade</a>
+      </form>
+    </div>
+  </div></Layout
+>

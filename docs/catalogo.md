@@ -1,0 +1,10 @@
+# Catálogo e fotografias
+
+Em 19 de novembro de 2026, as 16 fichas individuais referidas no kit responderam por HTTPS. Cada registo de `src/data/houses.json` mantém o ID de unidade da seed. Em `docs/fontes-verificadas.json` constam os títulos confirmados e a página de origem. Para atualizar, consultar a ficha individual. Duas casas do mesmo modelo podem ter equipamento, estado ou imagens diferentes.
+
+As galerias contêm 63 fotografias da Exposul, recolhidas dos elementos de imagem de cada ficha individual e inspecionadas em folha de contacto. Há três ou quatro vistas por casa. A segunda foto da galeria IRM Super Mercure (exposul-002) repetia o enquadramento da capa e foi omitida. Todos os ficheiros são locais. Cada foto está disponível em duas dimensões WebP. `docs/media-manifest.json` identifica a página, URL exato da imagem, data, ordem original, texto alternativo e resolução principal. A autorização de reutilização da Exposul foi comunicada pela Azmora.
+
+A descrição da O’Hara 834 (exposul-015) identifica dois quartos, máquina de lavar loiça e WC separado. A ficha foi atualizada para T2. As características de Super Mercure, Panama Duo, Salisbury e Trigano n.º 18 foram completadas a partir dos textos das respetivas unidades. Todos os preços, estados comerciais e campos de publicação mantêm as decisões do kit.
+
+Para rever uma atualização manual, executar `npm run catalog:import -- ficheiro.json` ou indicar um CSV com o cabeçalho do kit. O comando apresenta diferenças. Acrescentar `--apply` apenas após revisão. O importador só lê identificação, características físicas e texto técnico. Preserva fotografias e decisões comerciais. Novas unidades começam por confirmar, sem preço e fora do catálogo público. Dados vazios no ficheiro importado preservam valores já confirmados. Executar `npm run catalog:validate` depois de editar.
+As capas dispõem ainda de uma versão AVIF até 960 px, gerada a partir da primeira fotografia da respetiva unidade para reduzir o tempo de carregamento.

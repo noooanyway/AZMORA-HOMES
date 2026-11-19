@@ -1,0 +1,51 @@
+name: Publicar no GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      catalog_mode:
+        description: Modo do catálogo a publicar
+        required: true
+        type: choice
+        default: production
+        options:
+          - production
+          - preview
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CATALOG_MODE: ${{ inputs.catalog_mode }}
+      SITE_URL: https://noooanyway.github.io
+      BASE_PATH: /AZMORA-HOMES/
+      PUBLIC_CONTACT_EMAIL: ${{ vars.PUBLIC_CONTACT_EMAIL }}
+      PUBLIC_WHATSAPP: ${{ vars.PUBLIC_WHATSAPP }}
+      PUBLIC_FORM_ENDPOINT: ${{ vars.PUBLIC_FORM_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v6
+        with:
+          node-version: '24'
+          build-cmd: npm run catalog:validate && npm run check && npm test && npm run build && node scripts/verify-output.mjs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - name: Publicar artefacto verificado
+        id: publish
+        uses: actions/deploy-pages@v5
