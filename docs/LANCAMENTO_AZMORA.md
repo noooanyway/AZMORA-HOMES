@@ -4,8 +4,8 @@ A [lista de placeholders](PLACEHOLDERS_AZMORA.md) indica os dados por preencher,
 
 ## Ativar o formulário de contacto
 
-1. Criar um formulário no [Formspree](https://formspree.io/) e confirmar o endereço comercial que deve receber as notificações.
-2. Copiar o endereço público do formulário, no formato `https://formspree.io/f/...`, para `PUBLIC_FORM_ENDPOINT` em `.env` local ou nas variáveis do workflow GitHub Pages. Definir `PUBLIC_CONTACT_EMAIL` se o endereço também for para aparecer no site. O destinatário é configurado no Formspree.
+1. O formulário [Azmora Homes no Formspree](https://formspree.io/f/xkjrzaav) já está ligado ao site. Na configuração de notificações, confirmar que `azmorahomes@gmail.com` é o destinatário verificado.
+2. O endereço público e o formulário estão configurados em `src/data/company.json`. As variáveis opcionais `PUBLIC_CONTACT_EMAIL` e `PUBLIC_FORM_ENDPOINT`, em `.env` ou no GitHub Actions, permitem substituir estes valores.
 3. Na versão publicada, testar um pedido a partir de uma ficha e confirmar a entrega e a opção de responder para o email do cliente. Repetir com um pedido geral e um pedido com várias casas. Confirmar as definições de spam e as regras de privacidade e retenção.
 
 O assunto segue o formato `[Azmora Homes] Preço e disponibilidade — IRM Super Venus - T2` ou `[Azmora Homes] Pedido de contacto — Pedido geral`. Sem uma casa escolhida, usa a tipologia pretendida ou «Pedido geral». O email inclui os nomes e links das casas, a mensagem, os dados de contacto e os campos opcionais que o visitante preencher. O campo `subject` preenche o assunto no Formspree. [Documentação do assunto no Formspree](https://help.formspree.io/articles/building-your-form/email-subject-line)

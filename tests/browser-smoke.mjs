@@ -2,6 +2,7 @@ import { chromium } from 'playwright-core';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 const data = JSON.parse(readFileSync('src/data/houses.json', 'utf8'));
+const company = JSON.parse(readFileSync('src/data/company.json', 'utf8'));
 const exe = process.env.CHROME_BIN;
 const browser = await chromium.launch({
   channel: exe ? undefined : 'chrome',
@@ -68,7 +69,10 @@ try {
   assert.equal(await page.locator('#saved [data-card]:visible').count(), 1);
   await page.locator('#favcontact').click();
   assert.equal(new URL(page.url()).searchParams.get('casas'), 'exposul-001');
-  assert.ok(await page.locator('#lead-form button[type=submit]').isDisabled());
+  const form = page.locator('#lead-form');
+  const endpoint = process.env.PUBLIC_FORM_ENDPOINT || company.formEndpoint;
+  assert.equal(await form.getAttribute('action'), endpoint);
+  assert.ok(await form.locator('button[type=submit]').isEnabled());
   await page.goto(root + 'casas/');
   for (let i = 1; i <= 4; i++)
     await page.locator('#results [data-compare="exposul-00' + i + '"]').click();
@@ -149,6 +153,32 @@ try {
   await page.goto(root + 'favoritos/');
   await page.locator('#saved [data-fav="exposul-001"]').click();
   assert.ok(await page.locator('#favempty').isVisible());
+  let notification;
+  await page.route(endpoint, async (route) => {
+    const request = route.request();
+    notification = await new Response(request.postDataBuffer(), {
+      headers: { 'Content-Type': request.headers()['content-type'] },
+    }).formData();
+    await route.fulfill({ json: { ok: true } });
+  });
+  await page.goto(root + 'contactos/?casas=' + data[0].id + '&motivo=preco');
+  assert.ok(await page.locator('a[href="mailto:azmorahomes@gmail.com"]').first().isVisible());
+  await page.locator('[name=nome]').fill('Teste Azmora');
+  await page.locator('[name=email]').fill('teste@example.com');
+  await page.locator('[name=localidade]').fill('Ponta Delgada');
+  await page.locator('[name=message]').fill('Teste de preço e disponibilidade. Pode ignorar.');
+  await page.locator('#lead-form button[type=submit]').click();
+  assert.equal(notification, undefined);
+  await page.locator('[name=privacidade]').check();
+  await page.locator('#lead-form button[type=submit]').click();
+  await page.locator('#lead-status[data-state=success]').waitFor();
+  assert.equal(notification.get('subject'), '[Azmora Homes] Preço e disponibilidade — ' + data[0].name_for_site);
+  assert.equal(notification.get('email'), 'teste@example.com');
+  assert.equal(notification.get('nome'), 'Teste Azmora');
+  assert.equal(notification.get('motivo'), 'Preço e disponibilidade');
+  assert.equal(notification.get('localidade'), 'Ponta Delgada');
+  assert.equal(notification.get('message'), 'Teste de preço e disponibilidade. Pode ignorar.');
+  assert.equal(notification.get('casas'), data[0].name_for_site + ' · ' + root + 'casas/' + data[0].id + '/');
   assert.deepEqual(errors, []);
   console.log(
     'OK browser · desktop/mobile 360 px, filtros partilháveis, lista, ordenação, favoritos persistentes, comparação 2–3, contacto, ficha, galeria quando disponível, navegação e teclado.',

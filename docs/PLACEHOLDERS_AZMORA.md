@@ -11,14 +11,12 @@ Os campos em falta aparecem na antevisão como «a definir», «a confirmar» ou
 | Morada para visitas e forma de marcação | `visitAddress` | Contacte-nos |
 | Telemóvel comercial e indicativo | `phone` | Contacte-nos, rodapé e Informação legal |
 | Horário de atendimento | `openingHours` | Contacte-nos |
-| Email comercial público | `PUBLIC_CONTACT_EMAIL` nas variáveis de publicação ou `.env` | Contacte-nos, rodapé e Informação legal |
 | Número do WhatsApp Business com indicativo internacional | `PUBLIC_WHATSAPP` nas variáveis de publicação ou `.env` | Ícone do WhatsApp no rodapé e em Contacte-nos |
 | Endereços dos perfis de Instagram e Facebook | `social.instagram` e `social.facebook` em `src/data/company.json` | Ícones no rodapé |
-| Serviço de envio e caixa que recebe os pedidos | `PUBLIC_FORM_ENDPOINT` no workflow ou `.env` e destinatário no serviço de formulários | O botão de envio fica desativado até existir endereço configurado |
+| Receção das notificações do formulário | Validar a entrega em `azmorahomes@gmail.com` e a opção de resposta para o email do cliente | Formulário Contacte-nos, ligado ao Formspree |
 | Email para exercer direitos de privacidade | `privacyEmail` | Privacidade |
 | Fundamento jurídico por finalidade | `privacyBasis` | Privacidade |
 | Prazo ou critério de conservação | `privacyRetention` | Privacidade |
-| Prestador do formulário e caixa de email | `privacyProvider` | Privacidade |
 | Localização do tratamento e garantias de eventuais transferências internacionais | `privacyTransfers` | Privacidade |
 | Entidade de resolução alternativa de litígios aplicável e ligação | `ralName` e `ralUrl` | Informação legal |
 | Aplicabilidade e ligação da Azmora no Livro de Reclamações | `complaintsUrl` | Informação legal mostra entretanto a ligação geral oficial |

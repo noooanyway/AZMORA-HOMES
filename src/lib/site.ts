@@ -13,7 +13,7 @@ export const priceRequest = (h: House) =>
 export const brands = [...new Set(houses.map((h) => h.brand))].sort();
 export const company = business;
 export const contacts = {
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL || '',
+  email: import.meta.env.PUBLIC_CONTACT_EMAIL || company.email,
   whatsapp: import.meta.env.PUBLIC_WHATSAPP || '',
-  form: import.meta.env.PUBLIC_FORM_ENDPOINT || '',
+  form: import.meta.env.PUBLIC_FORM_ENDPOINT || company.formEndpoint,
 };
