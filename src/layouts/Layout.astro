@@ -8,6 +8,7 @@ import { Heart, Menu, X, Columns2 } from 'lucide-astro';
 import headingFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import italicFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 import bodyFont from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2?url';
+import favicon from '../assets/azmora-favicon.png';
 import Brand from '../components/Brand.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
@@ -34,7 +35,7 @@ const nav = [
     ><meta charset="utf-8" /><meta
       name="viewport"
       content="width=device-width,initial-scale=1"
-    /><link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={italicFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="icon" href={url('simbolo.svg')} type="image/svg+xml" /><title>
+    /><link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={italicFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="icon" href={favicon.src} type="image/png" sizes="64x64" /><title>
       {title} · Azmora Homes
     </title><meta name="description" content={description} /><meta
       name="robots"

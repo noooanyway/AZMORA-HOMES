@@ -132,24 +132,18 @@ header {
 }
 .brand {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: inherit;
+  flex-shrink: 0;
+  width: 82px;
 }
-.brand:hover {
-  text-decoration: none;
-}
-.brand > span {
-  font-family: var(--serif);
-  font-size: 2.45rem;
-  line-height: 0.86;
-  letter-spacing: -0.035em;
-}
-.brand small {
+.brand svg {
   display: block;
-  font: 600 0.57rem/1 var(--sans);
-  letter-spacing: 0.2em;
-  margin: 6px 0 0 2px;
+  width: 100%;
+  height: auto;
+}
+.footer-brand .brand {
+  --brand-ink: #f7f6ef;
+  --brand-accent: #df9672;
+  width: 126px;
 }
 .desktop {
   display: flex;
@@ -1001,6 +995,9 @@ dialog nav a {
   }
   .head {
     height: 66px;
+  }
+  .head .brand {
+    width: 67px;
   }
   .desktop,
   .top-contact,

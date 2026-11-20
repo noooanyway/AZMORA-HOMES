@@ -43,12 +43,6 @@ export const clean = (t: unknown) =>
     .toLowerCase()
     .trim();
 export const num = (n: number) => n.toLocaleString('pt-PT');
-export function houseReference(h: Pick<House, 'id' | 'reference_azmora'>) {
-  const match = /^exposul-(\d+)$/.exec(h.id);
-  return match
-    ? `Exposul ${String(Number(match[1])).padStart(2, '0')}`
-    : h.reference_azmora || h.id;
-}
 export function houseMeasure(h: House, field: 'area' | 'length' | 'width') {
   const announced = field === 'area' ? h.area_m2 : h.dimensions_m[field];
   if (announced != null) {
@@ -100,24 +94,17 @@ export const specs = (h: House): Record<string, string> => ({
 });
 export function matches(h: House, p: URLSearchParams) {
   const query = clean(p.get('q'));
-  const reference = /^exposul[ -]+(\d+)$/.exec(query);
   const full = clean(
     [
       h.name_for_site,
       h.model,
       h.brand,
       h.typology,
-      h.id,
-      h.reference_azmora,
-      houseReference(h),
-      'Exposul',
       ...h.equipment_summary,
     ].join(' '),
   );
   return (
-    (reference
-      ? houseReference(h) === `Exposul ${String(Number(reference[1])).padStart(2, '0')}`
-      : query.split(/\s+/).every((w) => full.includes(w))) &&
+    query.split(/\s+/).every((w) => full.includes(w)) &&
     (
       ['brand', 'typology', 'bedrooms', 'availability', 'condition'] as const
     ).every((k) => !p.get(k) || String(h[k]) === p.get(k)) &&

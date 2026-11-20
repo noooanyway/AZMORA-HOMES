@@ -4,7 +4,6 @@ import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { contacts, detail, houses, url } from '../lib/site';
-import { houseReference } from '../lib/catalog';
 import '../styles/contact.css';
 
 const topics = [
@@ -34,7 +33,7 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
 
       <form action={contacts.form || undefined} method="post" class="lead contact-form" id="lead-form" data-enabled={contacts.form ? 'true' : 'false'}>
         <h2>Enviar um pedido</h2>
-        {!contacts.form && <p class="contact-form-note" id="lead-unavailable">O formulário está disponível para consulta. O envio por email ainda não está ativo.</p>}
+        {!contacts.form && <p class="contact-form-note" id="lead-unavailable">O envio pelo formulário ainda não está ativo.{contacts.email && <> Pode <a href={`mailto:${contacts.email}`}>enviar-nos um email diretamente</a>.</>}</p>}
         <noscript><p class="contact-form-note">Ative o JavaScript para usar o formulário.</p></noscript>
 
         <label>
@@ -51,8 +50,8 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
             <select id="lead-house">
               <option value="">Escolher uma casa</option>
               {houses.map((house) => (
-                <option value={house.id} data-reference={houseReference(house)} data-url={detail(house)}>
-                  {houseReference(house)} · {house.name_for_site}
+                <option value={house.id} data-url={detail(house)}>
+                  {house.name_for_site}
                 </option>
               ))}
             </select>

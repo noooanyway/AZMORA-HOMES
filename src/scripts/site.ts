@@ -3,7 +3,6 @@ import {
   sorted,
   specs,
   name,
-  houseReference,
   toggle,
   type House,
 } from '../lib/catalog';
@@ -118,7 +117,7 @@ function render() {
     const th = document.createElement('th');
     const a = document.createElement('a');
     a.href = base + 'casas/' + h.id + '/';
-    a.textContent = h.name_for_site + ' · ' + houseReference(h);
+    a.textContent = h.name_for_site;
     th.append(a, removeButton(h.id));
     head.append(th);
   });

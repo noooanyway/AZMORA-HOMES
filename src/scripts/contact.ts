@@ -56,7 +56,7 @@ function renderSelection() {
     const remove = document.createElement('button');
     remove.type = 'button';
     remove.textContent = '×';
-    remove.setAttribute('aria-label', `Remover ${option.dataset.reference}`);
+    remove.setAttribute('aria-label', `Remover ${option.text.trim()}`);
     remove.onclick = () => {
       selected.delete(option.value);
       renderSelection();
@@ -85,10 +85,10 @@ form.addEventListener('submit', async (event) => {
   const data = new FormData(form);
   if (data.get('_gotcha')) return;
 
-  const references = selectedOptions().map((option) => option.dataset.reference!);
-  const summary = references.length <= 3
-    ? references.join(', ')
-    : `${references.slice(0, 3).join(', ')} +${references.length - 3}`;
+  const houseNames = selectedOptions().map((option) => option.text.trim());
+  const summary = houseNames.length <= 2
+    ? houseNames.join(', ')
+    : `${houseNames[0]} e mais ${houseNames.length - 1} casas`;
   const preference = String(data.get('tipologia') ?? '');
   const context = summary || preference || 'Pedido geral';
   data.set('subject', `[Azmora Homes] ${topicLabel()} — ${context}`);
