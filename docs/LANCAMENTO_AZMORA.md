@@ -19,10 +19,10 @@ O assunto segue o formato `[Azmora Homes] Preço e disponibilidade — IRM Super
 ## Decisões comerciais antes de abrir ao público
 
 - Definir quem recebe os pedidos, em quanto tempo se responde e quem mantém o catálogo atualizado.
-- Para cada unidade selecionada, confirmar o preço e o que inclui, situação comercial, estado, inventário, medidas e fotografias atuais. Definir o tratamento de IVA e a validade de um orçamento.
+- Para cada unidade selecionada, confirmar o preço e o que inclui, situação comercial, estado, inventário, medidas e fotografias atuais. O valor final inclui IVA. Definir a validade de cada orçamento.
 - Definir como funcionam visitas, reservas, pagamentos e cancelamentos, incluindo quando uma casa deixa de aparecer disponível.
-- Definir os destinos do transporte, como se calcula o orçamento, quem verifica o acesso ao terreno e quem é responsável pela descarga, instalação e ligações. Confirmar a garantia e o apoio pós-venda aplicáveis.
-- Na secção «Como funciona», confirmar antes de anunciar como incluídos o IVA, os portes marítimos e as taxas portuárias. Para Açores e Madeira, definir os portos servidos, o que fica a cargo da Azmora e o que se orçamenta à parte, incluindo transporte por estrada, descarga, grua e colocação.
+- Identificar o porto de destino no orçamento e confirmar a garantia e o apoio pós-venda aplicáveis.
+- Nos Açores e na Madeira, o valor final inclui IVA, transporte marítimo, descarga no porto e taxas portuárias. O cliente assegura transporte na ilha, preparação e instalação no terreno e ligações às redes. A reserva admite pagamento parcial. Comunicar montante e condições concretas por escrito.
 - Confirmar a entidade responsável, os contactos públicos, os textos legais e a política de tratamento dos pedidos. Rever quem pode aceder às mensagens e durante quanto tempo são guardadas.
 
 ## Última revisão visual

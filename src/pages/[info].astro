@@ -5,7 +5,7 @@ const pages = {
   sobre: [
     'Sobre a Azmora Homes',
     'Uma escolha com espaço para pensar.',
-    'A Azmora Homes é um revendedor independente de casas móveis em segunda mão. No nosso catálogo pode conhecer os modelos, observar as fotografias e comparar as características de cada casa.',
+    'A Azmora Homes é um revendedor independente de casas móveis em segunda mão. Trabalhamos com clientes dos Açores e da Madeira. A Azmora acompanha o pedido desde a escolha da unidade até à entrega no porto comercial da ilha.',
     'Cada ficha representa uma unidade. Duas casas do mesmo modelo podem ter equipamentos e dimensões diferentes. O pedido inclui uma ligação para a ficha da casa escolhida.',
   ],
 };
@@ -17,7 +17,7 @@ export function getStaticPaths() {
 const [label, title, a, b] = pages[Astro.params.info as keyof typeof pages];
 ---
 
-<Layout title={label}
+<Layout title={label} description={a}
   ><div class="wrap page prose">
     <p class="kicker"><i></i>{label}</p><h1>{title}</h1><p class="intro">
       {a}
