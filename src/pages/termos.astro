@@ -33,10 +33,18 @@ import { company, complaintsUrl } from '../lib/site';
       <h2>Reclamações e resolução de litígios</h2>
       <p>Pode apresentar uma reclamação através da plataforma oficial.</p>
       <p><a class="under" href={complaintsUrl}>Aceder ao Livro de Reclamações Eletrónico</a></p>
-      {company.ralName && company.ralUrl ? (
-        <p>Para a resolução alternativa de litígios de consumo, pode consultar a entidade indicada para a Azmora Homes. <a class="under" href={company.ralUrl}>{company.ralName}</a></p>
-      ) : <p>A entidade de resolução alternativa de litígios aplicável à Azmora Homes está por confirmar. A competência pode depender do local e do tipo de contratação.</p>}
-      <p><a class="under" href="https://www.gov.pt/guias/resolucao-de-conflitos-de-consumo">Como encontrar o centro de arbitragem competente</a></p>
+      <h3>Resolução alternativa de litígios</h3>
+      <p>O centro competente depende da forma de contratação, da área geográfica e dos limites de competência aplicáveis ao litígio.</p>
+      <p><strong>Vendas concluídas à distância por email.</strong> Para consumidores residentes nas regiões autónomas, os centros de referência são os seguintes.</p>
+      <ul>
+        <li>Açores — <a class="under" href="https://ocimara.pt/abrangencia-territorial/">CIMARA — Centro de Informação, Mediação e Arbitragem de Consumo dos Açores</a></li>
+        <li>Madeira — <a class="under" href="https://www.madeira.gov.pt/cacc/estrutura/o-centro-de-arbitragem">CACC RAM — Centro de Arbitragem de Conflitos de Consumo da Região Autónoma da Madeira</a></li>
+      </ul>
+      <p><strong>Vendas presenciais.</strong> Em estabelecimento comercial, consulte o centro da área onde é celebrado o contrato. Em vendas fora do estabelecimento, a residência do consumidor também pode determinar o centro competente.</p>
+      {company.ralName && company.ralUrl && (
+        <p>Entidade de resolução alternativa de litígios indicada para a Azmora Homes. <a class="under" href={company.ralUrl}>{company.ralName}</a></p>
+      )}
+      <p>Para outros locais, consulte a rede oficial. O CNIACC atua nas zonas sem outro centro territorialmente competente. <a class="under" href="https://meiosral.justica.gov.pt/Meios-RAL/Centros-de-Arbitragem/Encontrar-um-Centro-de-Arbitragem">Consultar os centros de arbitragem</a></p>
     </section>
   </div>
 </Layout>

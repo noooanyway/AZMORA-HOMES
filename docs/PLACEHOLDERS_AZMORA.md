@@ -17,7 +17,7 @@ Os campos em falta aparecem na antevisão como «a definir», «a confirmar» ou
 | Validação das bases jurídicas por finalidade | `privacyBasis` em Privacidade, incluindo avaliação do interesse legítimo para contactos gerais | Privacidade |
 | Processo de eliminação dos pedidos | Os proprietários revêm Formspree e Gmail. Apagar pedidos sem venda até 12 meses após a última interação, ou antes quando deixarem de ser necessários | Privacidade |
 | Enquadramento das transferências dos prestadores | Rever as condições e os acordos aplicáveis às contas Formspree e Gmail utilizadas | Privacidade |
-| Entidade de resolução alternativa de litígios aplicável e ligação | `ralName` e `ralUrl` | Informação legal |
+| Centro de arbitragem para os contratos presenciais | Definir o concelho e se a assinatura decorre em estabelecimento comercial. Se aplicável, preencher `ralName` e `ralUrl` | Informação legal já indica os centros insulares para vendas à distância e o diretório oficial |
 | Registo no Livro de Reclamações e ligação aplicável | Confirmar o registo com a identificação legal e usar `complaintsUrl` se houver ligação específica | Rodapé e Informação legal já mostram o portal oficial |
 
 Os nomes em camelCase pertencem a `src/data/company.json`. O texto «Chamada para a rede móvel nacional» pressupõe que o número divulgado é móvel português e que não há um preço único para a chamada. Se a linha for de outro tipo, confirmar a redação aplicável antes de publicar. [Orientação da ASAE sobre linhas telefónicas](https://www.asae.gov.pt/perguntas-frequentes1/area-economica/faqs-decreto-lei-n-592021-de-14-de-julho.aspx)
