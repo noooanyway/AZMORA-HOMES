@@ -1,0 +1,24 @@
+
+{
+  "name": "azmora-homes",
+  "pages_build_output_dir": "dist-cloudflare/client",
+  "compatibility_date": "2025-11-01",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "disable_nodejs_process_v2"
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "azmora-inventario",
+      "database_id": "025a79c8-617d-4a7c-a1d5-51292e3eeeaf",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "PHOTOS",
+      "bucket_name": "azmora-fotos"
+    }
+  ]
+}
