@@ -2,6 +2,8 @@ import { chromium } from 'playwright-core';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 const data = JSON.parse(readFileSync('src/data/houses.json', 'utf8'));
+const [firstHouse, secondHouse, thirdHouse] = data;
+const housePath = (house) => 'casas/' + house.media_slug + '/';
 const company = JSON.parse(readFileSync('src/data/company.json', 'utf8'));
 const exe = process.env.CHROME_BIN;
 const browser = await chromium.launch({
@@ -26,6 +28,15 @@ try {
         .map((i) => i.currentSrc),
     );
   assert.deepEqual(badAssets, []);
+  await page.evaluate((id) => localStorage.setItem('azmora:favoritos', JSON.stringify([id])), firstHouse.id);
+  await page.goto(root + 'favoritos/');
+  assert.ok(await page.locator(`#saved [data-card="${firstHouse.media_slug}"]`).isVisible());
+  await page.evaluate(() => localStorage.removeItem('azmora:favoritos'));
+  await page.goto(root + 'casas/' + firstHouse.id + '/', { waitUntil: 'commit' });
+  await page.waitForURL(root + housePath(firstHouse));
+  await page.goto(root + 'contactos/?casas=' + firstHouse.id);
+  assert.equal(await page.locator('#selected a').innerText(), firstHouse.name_for_site);
+  assert.equal(new URL(page.url()).searchParams.get('casas'), firstHouse.media_slug);
   await page.goto(root + 'casas/');
   const cards = page.locator('#results [data-card]:visible');
   assert.equal(await cards.count(), 16);
@@ -60,22 +71,22 @@ try {
   await page.locator('select[name=sort]').selectOption('area');
   const first = await cards.first().getAttribute('data-card');
   assert.equal(
-    data.find((h) => h.id === first).area_m2,
+    data.find((h) => h.media_slug === first).area_m2,
     Math.max(...data.map((h) => h.area_m2 ?? 0)),
   );
-  await page.locator('[data-fav="exposul-001"]').click();
+  await page.locator(`[data-fav="${firstHouse.media_slug}"]`).click();
   await page.goto(root + 'favoritos/');
   await page.reload();
   assert.equal(await page.locator('#saved [data-card]:visible').count(), 1);
   await page.locator('#favcontact').click();
-  assert.equal(new URL(page.url()).searchParams.get('casas'), 'exposul-001');
+  assert.equal(new URL(page.url()).searchParams.get('casas'), firstHouse.media_slug);
   const form = page.locator('#lead-form');
   const endpoint = process.env.PUBLIC_FORM_ENDPOINT || company.formEndpoint;
   assert.equal(await form.getAttribute('action'), endpoint);
   assert.ok(await form.locator('button[type=submit]').isEnabled());
   await page.goto(root + 'casas/');
-  for (let i = 1; i <= 4; i++)
-    await page.locator('#results [data-compare="exposul-00' + i + '"]').click();
+  for (const house of data.slice(0, 4))
+    await page.locator(`#results [data-compare="${house.media_slug}"]`).click();
   assert.equal(
     await page.locator('[data-compare][aria-pressed=true]').count(),
     3,
@@ -85,20 +96,20 @@ try {
   await page.locator('#cmpcontact').click();
   assert.deepEqual(
     new URL(page.url()).searchParams.get('casas').split(',').sort(),
-    ['exposul-001', 'exposul-002', 'exposul-003'],
+    [firstHouse, secondHouse, thirdHouse].map((house) => house.media_slug).sort(),
   );
-  await page.goto(root + 'casas/exposul-001/');
+  await page.goto(root + housePath(firstHouse));
   await page.reload();
   assert.ok((await page.title()).includes(data[0].name_for_site));
   assert.ok(!(await page.title()).includes(data[0].id));
   await page.locator('.summary a.btn').filter({ hasText: 'Pedir preço e disponibilidade' }).click();
   assert.equal(await page.locator('#lead-topic').inputValue(), 'preco');
   assert.equal(await page.locator('#selected a').innerText(), data[0].name_for_site);
-  await page.locator('#lead-house').selectOption(data[1].id);
+  await page.locator('#lead-house').selectOption(secondHouse.media_slug);
   assert.equal(await page.locator('#selected li').count(), 2);
   await page.getByRole('button', { name: `Remover ${data[1].name_for_site}`, exact: true }).click();
   assert.equal(await page.locator('#selected li').count(), 1);
-  await page.goto(root + 'casas/exposul-001/');
+  await page.goto(root + housePath(firstHouse));
   if (await page.locator('#gallery [data-photo]').count()) {
     await page.locator('#gallery [data-photo]').click();
     await page.locator('#lightbox[open]').waitFor();
@@ -120,7 +131,7 @@ try {
     'comparar/',
     'favoritos/',
     'contactos/',
-    'casas/exposul-001/',
+    housePath(firstHouse),
     'sobre/',
   ]) {
     await page.goto(root + route);
@@ -145,13 +156,13 @@ try {
   await page.locator('#menu a').filter({ hasText: 'Sobre' }).click();
   assert.equal(new URL(page.url()).pathname, '/AZMORA-HOMES/sobre/');
   await page.goto(root + 'comparar/');
-  await page.locator('#tablehost button[data-compare="exposul-003"]').click();
+  await page.locator(`#tablehost button[data-compare="${thirdHouse.media_slug}"]`).click();
   assert.equal(await page.locator('#tablehost thead th').count(), 3);
   await page.goto(root + 'casas/');
   await page.locator('#tray [data-clear]').click();
   assert.ok(await page.locator('#tray').isHidden());
   await page.goto(root + 'favoritos/');
-  await page.locator('#saved [data-fav="exposul-001"]').click();
+  await page.locator(`#saved [data-fav="${firstHouse.media_slug}"]`).click();
   assert.ok(await page.locator('#favempty').isVisible());
   let notification;
   let accepted = false;
@@ -162,7 +173,7 @@ try {
     }).formData();
     await route.fulfill({ json: { ok: accepted } });
   });
-  await page.goto(root + 'contactos/?casas=' + data[0].id + '&motivo=preco');
+  await page.goto(root + 'contactos/?casas=' + [firstHouse.media_slug, secondHouse.media_slug].join(',') + '&motivo=preco');
   assert.ok(await page.locator('a[href="mailto:azmorahomes@gmail.com"]').first().isVisible());
   await page.locator('[name=nome]').fill('Teste Azmora');
   await page.locator('[name=email]').fill('teste@example.com');
@@ -184,13 +195,15 @@ try {
   assert.ok(await formStatus.evaluate((element) => element === document.activeElement));
   assert.ok((await formStatus.innerText()).includes(reference));
   assert.equal(notification.get('Referência do pedido'), reference);
-  assert.equal(notification.get('subject'), `[Azmora Homes] Preço e disponibilidade — ${data[0].name_for_site} · ${reference}`);
+  assert.equal(notification.get('subject'), `[Azmora Homes] Preço e disponibilidade — ${firstHouse.name_for_site}, ${secondHouse.name_for_site} · ${reference}`);
   assert.equal(notification.get('email'), 'teste@example.com');
   assert.equal(notification.get('Nome'), 'Teste Azmora');
   assert.equal(notification.get('Motivo do pedido'), 'Preço e disponibilidade');
   assert.equal(notification.get('Localidade de destino'), 'Ponta Delgada');
   assert.equal(notification.get('Mensagem'), 'Teste de preço e disponibilidade. Pode ignorar.');
-  assert.equal(notification.get('Casas de interesse'), data[0].name_for_site + ' · ' + root + 'casas/' + data[0].id + '/');
+  assert.equal(notification.get('Casas de interesse').replace(/\r\n/g, '\n'), `1. ${firstHouse.name_for_site}\n2. ${secondHouse.name_for_site}`);
+  assert.equal(notification.get('Ligações para as fichas').replace(/\r\n/g, '\n'), `1. ${root + housePath(firstHouse)}\n2. ${root + housePath(secondHouse)}`);
+  assert.ok(![...notification.values()].some((value) => /exposul/i.test(value)));
   assert.equal(notification.get('Política de Privacidade'), 'Li e concordo');
   assert.ok(!notification.has('Telefone') && !notification.has('Tipologia pretendida'));
   assert.deepEqual(errors, []);

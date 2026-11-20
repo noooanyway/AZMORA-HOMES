@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/site';
+---
+
+<Layout title="Página indisponível" noindex>
+  <div class="wrap page" id="missing-house">
+    <h1>Página indisponível</h1>
+    <p>Consulte o catálogo para encontrar a ficha da casa.</p>
+    <a class="btn primary" href={url('casas/')}>Ver catálogo</a>
+  </div>
+</Layout>

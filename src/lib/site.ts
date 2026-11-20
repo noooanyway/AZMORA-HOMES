@@ -7,9 +7,9 @@ export const houses = (raw as House[]).filter(
 );
 export const url = (path = '') =>
   import.meta.env.BASE_URL.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
-export const detail = (h: House) => url('casas/' + h.id + '/');
+export const detail = (h: House) => url('casas/' + h.media_slug + '/');
 export const priceRequest = (h: House) =>
-  url(`contactos/?${new URLSearchParams({ casas: h.id, motivo: 'preco' })}`);
+  url(`contactos/?${new URLSearchParams({ casas: h.media_slug, motivo: 'preco' })}`);
 export const brands = [...new Set(houses.map((h) => h.brand))].sort();
 export const company = business;
 export const contacts = {

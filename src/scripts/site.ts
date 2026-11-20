@@ -3,6 +3,7 @@ import {
   sorted,
   specs,
   name,
+  previousCatalogNumber,
   toggle,
   type House,
 } from '../lib/catalog';
@@ -11,9 +12,15 @@ const $ = <T extends HTMLElement = HTMLElement>(s: string) =>
   document.querySelector<T>(s);
 const all = <T extends HTMLElement = HTMLElement>(s: string) =>
   Array.from(document.querySelectorAll<T>(s));
-const houses: House[] = JSON.parse($('#units')!.textContent || '[]');
+const houses: (House & { previousNumber?: string })[] = JSON.parse($('#units')!.textContent || '[]');
 const units = new Map(houses.map((h) => [h.id, h]));
+const previousIds = new Map(houses.filter((h) => h.previousNumber).map((h) => [h.previousNumber, h.id]));
 const base = document.body.dataset.base!;
+if ($('#missing-house') && location.pathname.startsWith(base + 'casas/')) {
+  const oldSlug = location.pathname.slice((base + 'casas/').length).replace(/\/$/, '');
+  const slug = previousIds.get(previousCatalogNumber(oldSlug));
+  if (slug) location.replace(base + 'casas/' + slug + '/' + location.search + location.hash);
+}
 const keys = { fav: 'azmora:favoritos', compare: 'azmora:comparar' };
 function read(key: keyof typeof keys): string[] {
   try {
@@ -21,9 +28,9 @@ function read(key: keyof typeof keys): string[] {
     return Array.isArray(a)
       ? [
           ...new Set(
-            a.filter(
-              (id): id is string => typeof id === 'string' && units.has(id),
-            ),
+            a.filter((id): id is string => typeof id === 'string')
+              .map((id) => units.has(id) ? id : previousIds.get(previousCatalogNumber(id)))
+              .filter((id): id is string => id !== undefined),
           ),
         ].slice(0, key === 'compare' ? 3 : Infinity)
       : [];

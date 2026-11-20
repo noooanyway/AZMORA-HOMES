@@ -16,7 +16,7 @@ import {
   ChevronRight,
 } from 'lucide-astro';
 export function getStaticPaths() {
-  return houses.map((h) => ({ params: { id: h.id }, props: { h } }));
+  return houses.map((h) => ({ params: { slug: h.media_slug }, props: { h } }));
 }
 const { h } = Astro.props as { h: House };
 const related = houses
@@ -75,8 +75,8 @@ const related = houses
           class="btn primary"
           href={priceRequest(h)}>Pedir preço e disponibilidade</a
         ><a class="under summary-guide-link" href={url('#como-funciona')}>Como funciona a compra</a><div class="actions">
-          <button data-fav={h.id}><Heart size={16} />Favoritos</button><button
-            data-compare={h.id}><Columns2 size={16} />Comparar</button>
+          <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button
+            data-compare={h.media_slug}><Columns2 size={16} />Comparar</button>
         </div>
       </aside>
     </div><HouseTechnical h={h} />{
@@ -97,7 +97,7 @@ const related = houses
     h.media.length > 0 && (
       <dialog
         id="lightbox"
-        data-unit={h.id}
+        data-unit={h.media_slug}
         aria-label={`Galeria de ${h.name_for_site}`}
       >
         <div>

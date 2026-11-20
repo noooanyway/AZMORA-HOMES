@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { contacts, detail, houses, url } from '../lib/site';
+import { previousCatalogNumber } from '../lib/catalog';
 import '../styles/contact.css';
 
 const topics = [
@@ -50,7 +51,7 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
             <select id="lead-house">
               <option value="">Escolher uma casa</option>
               {houses.map((house) => (
-                <option value={house.id} data-url={detail(house)}>
+                <option value={house.media_slug} data-url={detail(house)} data-previous-number={previousCatalogNumber(house.id)}>
                   {house.name_for_site}
                 </option>
               ))}

@@ -8,14 +8,14 @@ const area = houseMeasure(h, 'area');
 const bathrooms = bathroomCount(h);
 ---
 
-<article class="card" data-card={h.id}>
+<article class="card" data-card={h.media_slug}>
   <div class="card-photo">
     <a href={detail(h)} aria-label={'Ver ' + name(h)}><Photo h={h} /></a>{
       h.typology && <b class="tag">{h.typology}</b>
     }<button
       type="button"
       class="heart"
-      data-fav={h.id}
+      data-fav={h.media_slug}
       aria-label={'Guardar ' + name(h) + ' nos favoritos'}
       aria-pressed="false"><Heart size={18} /></button>
   </div><div class="card-body">
@@ -46,7 +46,7 @@ const bathrooms = bathroomCount(h);
         <strong>{price(h)}</strong>
         <span>Pedir preço e disponibilidade</span>
       </a><button
-        data-compare={h.id}
+        data-compare={h.media_slug}
         aria-pressed="false"><Columns2 size={15} />Comparar</button>
     </div>
   </div>

@@ -1,5 +1,6 @@
 export interface House {
   id: string;
+  media_slug: string;
   brand: string;
   model: string | null;
   name_for_site: string;
@@ -35,6 +36,8 @@ export interface House {
   source: { url: string };
   reference_azmora?: string | null;
 }
+export const previousCatalogNumber = (id: string) => /^[a-z]+-(\d{3})$/.exec(id)?.[1];
+
 export const clean = (t: unknown) =>
   String(t ?? '')
     .normalize('NFD')
@@ -127,7 +130,7 @@ export function sorted(items: House[], sort: string) {
           ? -1
           : (av - bv) * (sort === 'preco-asc' ? 1 : -1);
     }
-    return a.id.localeCompare(b.id);
+    return 0;
   });
 }
 export function toggle(ids: string[], id: string, max = Infinity) {

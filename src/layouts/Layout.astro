@@ -13,12 +13,15 @@ import Brand from '../components/Brand.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { url, houses, preview } from '../lib/site';
+import { previousCatalogNumber } from '../lib/catalog';
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 const {
   title,
+  noindex = false,
   description = 'Descubra e compare casas móveis com a Azmora Homes.',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -39,8 +42,8 @@ const nav = [
       {title} · Azmora Homes
     </title><meta name="description" content={description} /><meta
       name="robots"
-      content={preview || !houses.length ? 'noindex,nofollow' : 'index,follow'}
-    /><link rel="canonical" href={canonical} /><meta
+      content={noindex || preview || !houses.length ? 'noindex,nofollow' : 'index,follow'}
+    />{!noindex && <link rel="canonical" href={canonical} />}<meta
       property="og:title"
       content={title + ' · Azmora Homes'}
     /><meta property="og:description" content={description} /><meta
@@ -116,7 +119,12 @@ const nav = [
       id="units"
       set:html={JSON.stringify(
         houses.map(
-          ({ source, publish, catalogue_preview_allowed, ...rest }) => rest,
+          ({ id, media_slug, source, reference_azmora, publish, catalogue_preview_allowed, ...rest }) => ({
+            ...rest,
+            id: media_slug,
+            media_slug,
+            previousNumber: previousCatalogNumber(id),
+          }),
         ),
       ).replace(/</g, '\\u003c')}
     /><script>

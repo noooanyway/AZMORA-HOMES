@@ -1,4 +1,4 @@
-export {};
+import { previousCatalogNumber } from '../lib/catalog';
 
 const form = document.querySelector<HTMLFormElement>('#lead-form')!;
 const canSend = form.dataset.enabled === 'true';
@@ -25,23 +25,35 @@ const options = new Map(
     .map((option) => [option.value, option]),
 );
 const params = new URLSearchParams(location.search);
+const previousOptions = new Map([...options.values()]
+  .filter((option) => option.dataset.previousNumber)
+  .map((option) => [option.dataset.previousNumber, option.value]));
+const requested = (params.get('casas') || '').split(',');
 const selected = new Set(
-  (params.get('casas') || '').split(',').filter((id) => options.has(id)),
+  requested.map((id) => options.has(id) ? id : previousOptions.get(previousCatalogNumber(id)))
+    .filter((id): id is string => id !== undefined),
 );
+if (requested.some((id) => previousOptions.has(previousCatalogNumber(id)))) {
+  params.set('casas', [...selected].join(','));
+  history.replaceState(history.state, '', `${location.pathname}?${params}${location.hash}`);
+}
 if (Array.from(topic.options).some((option) => option.value === params.get('motivo'))) {
   topic.value = params.get('motivo')!;
 }
 
 const selectedOptions = () => [...selected].map((id) => options.get(id)!);
 const topicLabel = () => topic.value ? topic.selectedOptions[0].text.trim() : 'Pedido de contacto';
-const houseDetails = () => selectedOptions().map((option) =>
-  `${option.text.trim()} · ${new URL(option.dataset.url!, location.href)}`,
-);
+const houseLink = (option: HTMLOptionElement) => new URL(option.dataset.url!, location.href).href;
+const houseList = (values: string[]) => values.length > 1
+  ? values.map((value, index) => `${index + 1}. ${value}`).join('\n')
+  : values.join('');
 
 function updateTopic() {
   message.placeholder = prompts[topic.value] ?? 'Diga-nos o que gostaria de saber.';
   if (whatsapp && phone) {
-    const details = [topicLabel(), ...houseDetails()];
+    const details = [topicLabel(), ...selectedOptions().map((option) =>
+      `${option.text.trim()} · ${houseLink(option)}`,
+    )];
     whatsapp.href = `https://wa.me/${phone}?text=${encodeURIComponent(details.join('\n'))}`;
   }
 }
@@ -100,7 +112,7 @@ form.addEventListener('submit', async (event) => {
     subject: `[Azmora Homes] ${topicLabel()} — ${context} · ${reference}`,
     'Motivo do pedido': topicLabel(),
     Mensagem: field('message'),
-    'Casas de interesse': houseDetails().join('\n'),
+    'Casas de interesse': houseList(houseNames),
     Nome: field('nome'),
     email: field('email'),
     Telefone: field('telefone'),
@@ -108,6 +120,7 @@ form.addEventListener('submit', async (event) => {
     'Localidade de destino': field('localidade'),
     'Política de Privacidade': field('privacidade'),
     'Referência do pedido': reference,
+    'Ligações para as fichas': houseList(selectedOptions().map(houseLink)),
   })) {
     if (value) notification.append(label, value);
   }

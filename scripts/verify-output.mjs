@@ -50,6 +50,10 @@ assert.equal(
   'Número de fichas difere dos registos autorizados para este modo',
 );
 
+for (const house of allowed) {
+  assert(files.has(`casas/${house.media_slug}/index.html`), 'Ficha em falta: ' + house.media_slug);
+}
+
 const errors = new Set();
 const anchors = new Map();
 let references = 0;
@@ -122,16 +126,16 @@ for (const file of files) {
     if (!reference[1].startsWith('#')) checkReference(file, reference[1]);
   }
 }
-if (mode === 'production') {
-  const withheld = houses.filter((house) => !house.publish);
-  for (const file of files) {
-    if (!/\.(html|js|json|xml)$/.test(file)) continue;
-    const output =
-      markup.get(file) ?? (await readFile(path.join(dist, file), 'utf8'));
-    for (const house of withheld) {
-      if (output.includes(house.id))
-        errors.add(file + ' → unidade não aprovada: ' + house.id);
-    }
+const withheld = mode === 'production' ? houses.filter((house) => !house.publish) : [];
+for (const file of files) {
+  if (!/\.(html|js|json|xml)$/.test(file)) continue;
+  const output =
+    markup.get(file) ?? (await readFile(path.join(dist, file), 'utf8'));
+  if (/exposul/i.test(file) || /exposul/i.test(output))
+    errors.add(file + ' → referência ao fornecedor no site público');
+  for (const house of withheld) {
+    if (output.includes(`"${house.media_slug}"`) || output.includes(`/casas/${house.media_slug}/`))
+      errors.add(file + ' → unidade não aprovada: ' + house.media_slug);
   }
 }
 assert.equal(errors.size, 0, [...errors].join('\n'));
