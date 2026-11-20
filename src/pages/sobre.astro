@@ -9,13 +9,7 @@ const pages = {
     'Cada ficha representa uma unidade. Duas casas do mesmo modelo podem ter equipamentos e dimensões diferentes. O pedido inclui uma ligação para a ficha da casa escolhida.',
   ],
 };
-export function getStaticPaths() {
-  return ['sobre'].map((info) => ({
-    params: { info },
-  }));
-}
-if (Astro.params.info !== 'sobre') return Astro.rewrite(url('404/'));
-const [label, title, a, b] = pages[Astro.params.info as keyof typeof pages];
+const [label, title, a, b] = pages.sobre;
 ---
 
 <Layout title={label} description={a}

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { build } from 'esbuild';
 const origin = 'https://azmora.example',
-  base = origin + '/AZMORA-HOMES/',
+  base = origin + (process.env.TEST_BASE_PATH || '/AZMORA-HOMES/'),
   issuer = 'https://test.cloudflareaccess.com';
 const { privateKey, publicKey } = await generateKeyPair('RS256', {
   extractable: true,
@@ -77,13 +77,37 @@ try {
     assert.equal(response.status, 200, text.slice(0, 600));
     return JSON.parse(text);
   };
-  assert.equal((await call('admin/')).status, 403);
+
+  for (const [route, expected] of [['', 'Outra forma'], ['casas/', 'Explore as'], ['sobre/', 'Azmora'], ['inexistente/', null]]) {
+    const response = await call(route);
+    const html = await response.text();
+    assert.equal(response.status, expected ? 200 : 404, route + ' ' + html.slice(0, 1000));
+    if (expected) assert.ok(html.includes(expected), route + ' ' + html.slice(0, 1000));
+  }
+
+  const catalogue = await (await call('casas/')).text();
+  assert.match(catalogue, /16 casas/);
+  const firstImage = JSON.parse((await db.prepare("SELECT data FROM inventory WHERE state='live' LIMIT 1").first()).data).media[0].src;
+  const bucket = await mf.getR2Bucket('PHOTOS');
+  await bucket.put(firstImage, new Uint8Array([1, 2, 3]));
+  assert.equal((await call(firstImage)).status, 200);
+  for (const path of ['admin/', 'admin/dados/', 'admin/foto/', 'admin/guardar/', 'admin/upload/', 'admin/eliminar/']) {
+    assert.equal((await call(path)).status, 403, path);
+  }
+
   assert.equal((await admin('')).status, 200);
   assert.equal((await json(await call('api/casas/'))).length, 16);
   const dashboard = await json(await admin('dados'));
   assert.equal(dashboard.units.length, 16);
   const unit = dashboard.units[0],
     data = { ...unit.data, name_for_site: 'Teste de inventário' };
+
+  const original = unit.data.name_for_site;
+  const changed = { ...unit.data, name_for_site: 'Casa alterada no inventário' };
+  await json(await admin('guardar', { id: unit.id, revision: unit.revision, data: changed, state: 'live' }));
+  assert.ok((await (await call('casas/')).text()).includes(changed.name_for_site));
+  const refreshed = (await json(await admin('dados'))).units.find((item) => item.id === unit.id);
+  await json(await admin('guardar', { id: unit.id, revision: refreshed.revision, data: { ...refreshed.data, name_for_site: original }, state: 'live' }));
   const { id } = await json(await admin('guardar', { data, state: 'draft' }));
   const get = async () =>
     (await json(await admin('dados'))).units.find((u) => u.id === id);
