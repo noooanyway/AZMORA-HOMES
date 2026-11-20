@@ -8,7 +8,7 @@ A [lista de placeholders](PLACEHOLDERS_AZMORA.md) indica os dados por preencher,
 2. Copiar o endereço público do formulário, no formato `https://formspree.io/f/...`, para `PUBLIC_FORM_ENDPOINT` em `.env` local ou nas variáveis do workflow GitHub Pages. Definir `PUBLIC_CONTACT_EMAIL` se o endereço também for para aparecer no site. O destinatário é configurado no Formspree.
 3. Na versão publicada, testar um pedido a partir de uma ficha e confirmar a entrega e a opção de responder para o email do cliente. Repetir com um pedido geral e um pedido com várias casas. Confirmar as definições de spam e as regras de privacidade e retenção.
 
-O assunto segue o formato `[Azmora Homes] Preço e disponibilidade — Exposul 01` ou `[Azmora Homes] Pedido de contacto — Pedido geral`. Sem uma casa escolhida, usa a tipologia pretendida ou «Pedido geral». O email inclui os nomes e links das casas, a mensagem, os dados de contacto e os campos opcionais que o visitante preencher. O campo `subject` preenche o assunto no Formspree. [Documentação do assunto no Formspree](https://help.formspree.io/articles/building-your-form/email-subject-line)
+O assunto segue o formato `[Azmora Homes] Preço e disponibilidade — IRM Super Venus - T2` ou `[Azmora Homes] Pedido de contacto — Pedido geral`. Sem uma casa escolhida, usa a tipologia pretendida ou «Pedido geral». O email inclui os nomes e links das casas, a mensagem, os dados de contacto e os campos opcionais que o visitante preencher. O campo `subject` preenche o assunto no Formspree. [Documentação do assunto no Formspree](https://help.formspree.io/articles/building-your-form/email-subject-line)
 
 ## Decisões comerciais antes de abrir ao público
 

@@ -89,10 +89,10 @@ try {
   assert.ok(!(await page.title()).includes(data[0].id));
   await page.locator('.summary a.btn').filter({ hasText: 'Pedir preço e disponibilidade' }).click();
   assert.equal(await page.locator('#lead-topic').inputValue(), 'preco');
-  assert.match(await page.locator('#selected').innerText(), /Exposul 01/);
+  assert.equal(await page.locator('#selected a').innerText(), data[0].name_for_site);
   await page.locator('#lead-house').selectOption(data[1].id);
   assert.equal(await page.locator('#selected li').count(), 2);
-  await page.getByRole('button', { name: 'Remover Exposul 02' }).click();
+  await page.getByRole('button', { name: `Remover ${data[1].name_for_site}`, exact: true }).click();
   assert.equal(await page.locator('#selected li').count(), 1);
   await page.goto(root + 'casas/exposul-001/');
   if (await page.locator('#gallery [data-photo]').count()) {

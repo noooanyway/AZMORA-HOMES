@@ -6,7 +6,7 @@ import HouseHighlights from '../../components/HouseHighlights.astro';
 import HouseTechnical from '../../components/HouseTechnical.astro';
 import '../../styles/house-detail.css';
 import { url, houses, priceRequest } from '../../lib/site';
-import { houseReference, price, status, type House } from '../../lib/catalog';
+import { price, status, type House } from '../../lib/catalog';
 import {
   Heart,
   Columns2,
@@ -19,7 +19,6 @@ export function getStaticPaths() {
   return houses.map((h) => ({ params: { id: h.id }, props: { h } }));
 }
 const { h } = Astro.props as { h: House };
-const reference = houseReference(h);
 const related = houses
   .filter((p) => p.id !== h.id)
   .sort((a, b) => Number(b.brand === h.brand) - Number(a.brand === h.brand))
@@ -32,7 +31,7 @@ const related = houses
   ><div class="wrap page">
     <nav class="crumb">
       <a href={url()}>Início</a> / <a href={url('casas/')}>Casas</a>
-    </nav><p class="kicker"><i></i>{reference}{h.typology && ' · ' + h.typology}</p><h1>
+    </nav><p class="kicker"><i></i>{h.brand}{h.typology && ' · ' + h.typology}</p><h1>
       {h.name_for_site}
     </h1><HouseHighlights h={h} /><div class="details">
       <div>
