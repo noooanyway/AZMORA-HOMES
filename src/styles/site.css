@@ -140,16 +140,18 @@ header {
   gap: clamp(10px, 1.55vw, 24px);
   align-items: center;
 }
-.head .desktop a {
-  font-size: 1rem;
+.head .desktop a,
+.head :is(.favlink, .top-contact) {
+  font-size: 1.125rem;
   font-weight: 600;
   white-space: nowrap;
 }
+.head .top-contact { min-height: 48px; }
 .desktop a + a {
   padding-inline-start: clamp(10px, 1.55vw, 24px);
   border-inline-start: 1px solid var(--line);
 }
-.head a:not(.brand, .desktop a) {
+.head .call-contact-header {
   font-size: var(--text-label);
 }
 .head-actions {
@@ -957,7 +959,7 @@ dialog nav a {
 #menu nav a {
   min-height: 48px;
   padding-block: 14px;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 #theme-menu h2 {
@@ -1077,10 +1079,7 @@ dialog nav a {
     grid-template-columns: 1.25fr 1fr;
   }
 }
-@media (max-width: 700px) {
-  .wrap {
-    width: 90%;
-  }
+@media (max-width: 840px) {
   .head {
     height: 66px;
   }
@@ -1094,6 +1093,11 @@ dialog nav a {
   }
   .mobile {
     display: inline-flex;
+  }
+}
+@media (max-width: 700px) {
+  .wrap {
+    width: 90%;
   }
   .hero-grid {
     width: 100%;
