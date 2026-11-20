@@ -17,12 +17,14 @@ import { url, houses, preview, complaintsUrl } from '../lib/site';
 import { previousCatalogNumber } from '../lib/catalog';
 interface Props {
   title: string;
+  sharePhoto?: { src: string; alt: string; width: number; height: number };
   description?: string;
   noindex?: boolean;
 }
 const {
   title,
   noindex = false,
+  sharePhoto = houses.find((house) => house.media.length)?.media[0],
   description = 'Descubra e compare casas móveis com a Azmora Homes.',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -87,14 +89,19 @@ const nav = [
     /><meta property="og:description" content={description} /><meta
       property="og:url"
       content={canonical}
-    /><meta property="og:type" content="website" /><meta
+    />{sharePhoto && <>
+      <meta property="og:image" content={new URL(url(sharePhoto.src), Astro.site)} />
+      <meta property="og:image:alt" content={sharePhoto.alt} />
+      <meta property="og:image:width" content={String(sharePhoto.width)} />
+      <meta property="og:image:height" content={String(sharePhoto.height)} />
+    </>}<link rel="sitemap" href={url('sitemap.xml')} /><meta property="og:type" content="website" /><meta
       name="theme-color"
       content="#234237"
     /></head
   ><body data-base={url()}
     ><a class="skip" href="#conteudo">Saltar para o conteúdo</a><header>
       <div class="wrap head">
-        <Brand /><nav class="desktop">
+        <Brand /><nav class="desktop" aria-label="Menu principal">
           {nav.map(([s, p]) => <a href={url(p)}>{s}</a>)}
         </nav><div class="head-actions">
           <CallContact mode="header" />
@@ -177,14 +184,11 @@ const nav = [
       type="application/json"
       id="units"
       set:html={JSON.stringify(
-        houses.map(
-          ({ id, media_slug, source, reference_azmora, publish, catalogue_preview_allowed, ...rest }) => ({
-            ...rest,
-            id: media_slug,
-            media_slug,
-            previousNumber: previousCatalogNumber(id),
-          }),
-        ),
+        houses.map((h) => ({
+          id: h.media_slug,
+          name_for_site: h.name_for_site,
+          previousNumber: previousCatalogNumber(h.id),
+        })),
       ).replace(/</g, '\\u003c')}
     /><script>
       import '../scripts/site';

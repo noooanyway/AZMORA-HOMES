@@ -32,7 +32,7 @@ button {
   border: 0;
 }
 a:hover,
-.card h3 a:hover {
+.card .card-title a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -442,6 +442,17 @@ h3 {
   border: 1px solid var(--line);
   min-width: 0;
 }
+.cards:not(.list) > .card {
+  display: flex;
+  flex-direction: column;
+}
+.cards:not(.list) .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.cards:not(.list) .card-availability { margin-bottom: 14px; }
+.cards:not(.list) .card-foot { margin-top: auto; }
 .card-photo,
 .main-photo {
   position: relative;
@@ -490,7 +501,7 @@ h3 {
 .card-body {
   padding: clamp(14px, 1.5vw, 24px);
 }
-.card h3 {
+.card .card-title {
   margin: 7px 0 12px;
   font-size: clamp(1.35rem, 1.8vw, 1.8rem);
   line-height: 1.17;
@@ -668,6 +679,11 @@ footer {
   padding-top: 16px;
 }
 .footer-bottom nav { display: flex; gap: 16px; flex-wrap: wrap; font-size: .86rem; }
+@media (min-width: 881px) {
+  .footer-main:not(:has(.social-links)) {
+    grid-template-columns: 1fr 1.35fr .8fr;
+  }
+}
 @media (max-width: 880px) {
   .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -815,24 +831,6 @@ footer {
   aspect-ratio: 3 / 2;
   padding: 0;
 }
-.specs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 35px;
-  margin: 20px 0 32px;
-}
-.specs > div {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  padding: 12px 0;
-}
-.specs dt {
-  color: var(--muted);
-}
-.specs dd {
-  font-weight: 600;
-}
 .table-scroll {
   overflow: auto;
   margin-bottom: 30px;
@@ -865,15 +863,6 @@ th button {
 }
 .prose h1 {
   max-width: 15ch;
-}
-.lead fieldset {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  min-width: 0;
-}
-.lead legend {
-  font: 550 1.65rem var(--serif);
 }
 .lead label,
 dialog label {
@@ -1026,14 +1015,23 @@ dialog nav a {
   max-width: 95vw;
 }
 #traynames {
+  min-width: 0;
   display: flex;
   gap: 7px;
 }
 #traynames > span {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
   white-space: nowrap;
   font-size: var(--text-small);
 }
+#traynames .tray-name { overflow: hidden; text-overflow: ellipsis; }
+#tray .btn, #tray button, #tray > svg { flex-shrink: 0; }
 #traynames button {
+  min-width: 24px;
+  min-height: 24px;
   color: inherit;
 }
 .has-tray {
@@ -1147,8 +1145,7 @@ dialog nav a {
   }
   .cards,
   .details,
-  .contact-grid,
-  .specs {
+  .contact-grid {
     grid-template-columns: 1fr;
   }
   .summary {
@@ -1193,7 +1190,7 @@ dialog nav a {
   .list .card-body {
     padding: 10px;
   }
-  .list .card h3 {
+  .list .card .card-title {
     font-size: 1.35rem;
   }
   .list .heart {

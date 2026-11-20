@@ -1,10 +1,11 @@
 ---
+import CatalogData from '../components/CatalogData.astro';
 import Layout from '../layouts/Layout.astro';
 import { url } from '../lib/site';
 ---
 
-<Layout title="Comparar casas"
-  ><div class="wrap page" id="comparison">
+<Layout noindex title="Comparar casas"
+  ><CatalogData /><div class="wrap page" id="comparison">
     <p class="kicker"><i></i> A SUA SELEÇÃO</p><h1>
       Casas lado <em>a lado.</em>
     </h1><p>Compare as características de duas ou três unidades.</p><div

@@ -2,19 +2,20 @@ import {
   matches,
   sorted,
   specs,
-  name,
   previousCatalogNumber,
   toggle,
-  type House,
+  type CatalogRecord,
 } from '../lib/catalog';
 
 const $ = <T extends HTMLElement = HTMLElement>(s: string) =>
   document.querySelector<T>(s);
 const all = <T extends HTMLElement = HTMLElement>(s: string) =>
   Array.from(document.querySelectorAll<T>(s));
-const houses: (House & { previousNumber?: string })[] = JSON.parse($('#units')!.textContent || '[]');
-const units = new Map(houses.map((h) => [h.id, h]));
-const previousIds = new Map(houses.filter((h) => h.previousNumber).map((h) => [h.previousNumber, h.id]));
+interface UnitLink { id: string; name_for_site: string; previousNumber?: string }
+const index: UnitLink[] = JSON.parse($('#units')!.textContent || '[]');
+const houses: CatalogRecord[] = JSON.parse($('#catalog-data')?.textContent || '[]');
+const units = new Map(index.map((h) => [h.id, h]));
+const previousIds = new Map(index.filter((h) => h.previousNumber).map((h) => [h.previousNumber, h.id]));
 const base = document.body.dataset.base!;
 if ($('#missing-house') && location.pathname.startsWith(base + 'casas/')) {
   const oldSlug = location.pathname.slice((base + 'casas/').length).replace(/\/$/, '');
@@ -100,8 +101,11 @@ function render() {
   document.body.classList.toggle('has-tray', !$('#tray')!.hidden);
   $('#traynames')!.replaceChildren(
     ...ids.map((id) => {
-      const chip = textEl('span', name(units.get(id)!));
-      chip.append(removeButton(id));
+      const chip = document.createElement('span');
+      const label = textEl('span', units.get(id)!.name_for_site);
+      label.className = 'tray-name';
+      label.title = label.textContent || '';
+      chip.append(label, removeButton(id));
       return chip;
     }),
   );
@@ -116,7 +120,8 @@ function render() {
   a.href = contact(ids);
   a.hidden = ids.length < 2;
   if (ids.length < 2) return;
-  const items = ids.map((id) => units.get(id)!);
+  const items = ids.map((id) => houses.find((h) => h.id === id)!);
+  const valuesByHouse = items.map(specs);
   const table = document.createElement('table');
   const head = table.createTHead().insertRow();
   head.append(textEl('th', 'Característica'));
@@ -129,10 +134,10 @@ function render() {
     head.append(th);
   });
   const body = table.createTBody();
-  for (const k of Object.keys(specs(items[0]))) {
+  for (const k of Object.keys(valuesByHouse[0])) {
     const row = body.insertRow();
     row.append(textEl('th', k));
-    const values = items.map((h) => specs(h)[k]);
+    const values = valuesByHouse.map((values) => values[k]);
     row.classList.toggle('different', new Set(values).size > 1);
     values.forEach((v) => row.append(textEl('td', v)));
   }
@@ -271,6 +276,7 @@ if (filterForm) {
         params.delete(k);
         syncFilters();
         update();
+        q.focus();
       };
       chips.append(b);
     }
@@ -304,9 +310,11 @@ if (filterForm) {
   all('[data-reset]').forEach(
     (b) =>
       (b.onclick = () => {
+        const fromEmpty = Boolean(b.closest('#empty'));
         for (const k of [...keysFilter, 'q']) params.delete(k);
         syncFilters();
         update();
+        if (fromEmpty) q.focus();
       }),
   );
   all('[data-view]').forEach(
@@ -323,7 +331,7 @@ if (filterForm) {
 const light = $<HTMLDialogElement>('#lightbox');
 if (light) {
   const unit = units.get(light.dataset.unit!)!;
-  const { media } = unit;
+  const media: { src: string; alt: string }[] = JSON.parse($('#gallery-data')!.textContent!);
   let ix = 0;
   let opener: HTMLElement | undefined;
   dismissOutside(light, (event) => event.target instanceof Element && !event.target.closest('#enlarged, button'));

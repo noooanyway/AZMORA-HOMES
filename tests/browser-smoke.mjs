@@ -29,6 +29,7 @@ try {
   assert.equal(await themeSwitch.getAttribute('aria-expanded'), 'true');
   await page.mouse.click(1, 1);
   await themeMenu.waitFor({ state: 'hidden' });
+  await page.waitForFunction(() => document.querySelector('[data-open="theme-menu"]').getAttribute('aria-expanded') === 'false');
   assert.equal(await themeSwitch.getAttribute('aria-expanded'), 'false');
   assert.ok(await themeSwitch.evaluate((el) => el === document.activeElement));
   await themeSwitch.click();

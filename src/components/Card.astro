@@ -1,28 +1,29 @@
 ---
 import { Heart, Columns2, BedDouble, Maximize2, Bath } from 'lucide-astro';
-import { detail, priceRequest } from '../lib/site';
+import { detail, houses, priceRequest } from '../lib/site';
 import { bathroomCount, name, status, price, houseMeasure, type House } from '../lib/catalog';
 import Photo from './Photo.astro';
-const { h } = Astro.props as { h: House };
+const { h, heading: Heading = 'h3' } = Astro.props as { h: House; heading?: 'h2' | 'h3' };
+const repeatedModel = h.model && houses.some((unit) => unit.id !== h.id && unit.brand === h.brand && unit.model === h.model);
+const title = repeatedModel ? h.name_for_site.replace(/\s+[—-]\s+T\d+$/, '') : name(h);
 const area = houseMeasure(h, 'area');
 const bathrooms = bathroomCount(h);
 ---
 
 <article class="card" data-card={h.media_slug}>
   <div class="card-photo">
-    <a href={detail(h)} aria-label={'Ver ' + name(h)}><Photo h={h} /></a>{
+    <a href={detail(h)} aria-label={'Ver ' + title}><Photo h={h} /></a>{
       h.typology && <b class="tag">{h.typology}</b>
     }<button
       type="button"
       class="heart"
       data-fav={h.media_slug}
-      aria-label={'Guardar ' + name(h) + ' nos favoritos'}
+      aria-label={'Guardar ' + title + ' nos favoritos'}
       aria-pressed="false"><Heart size={18} /></button>
   </div><div class="card-body">
-    <small class="eyebrow">{h.brand}</small><h3
-    >
-      <a href={detail(h)}>{name(h)}</a>
-    </h3><ul class="spec-mini" role="list">
+    <small class="eyebrow">{h.brand}</small><Heading class="card-title">
+      <a href={detail(h)}>{title}</a>
+    </Heading><ul class="spec-mini" role="list">
       <li>
         <BedDouble size={15} aria-hidden="true" />
         <span>{h.bedrooms == null ? 'Quartos por confirmar' : `${h.bedrooms} ${h.bedrooms === 1 ? 'quarto' : 'quartos'}`}</span>
@@ -42,7 +43,7 @@ const bathrooms = bathroomCount(h);
       {h.condition && <strong>{h.condition}</strong>}
       <span>{status(h)}</span>
     </p><div class="card-foot">
-      <a class="card-price-link" href={priceRequest(h)} aria-label={`Pedir preço e disponibilidade de ${h.name_for_site}`}>
+      <a class="card-price-link" href={priceRequest(h)} aria-label={`${price(h)} Pedir preço e disponibilidade de ${h.name_for_site}`}>
         <strong>{price(h)}</strong>
         <span>Pedir preço e disponibilidade</span>
       </a><button

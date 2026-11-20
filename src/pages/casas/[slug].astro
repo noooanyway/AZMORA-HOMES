@@ -6,7 +6,7 @@ import CallContact from '../../components/CallContact.astro';
 import HouseHighlights from '../../components/HouseHighlights.astro';
 import HouseTechnical from '../../components/HouseTechnical.astro';
 import '../../styles/house-detail.css';
-import { url, houses, priceRequest } from '../../lib/site';
+import { url, houses, detail, priceRequest } from '../../lib/site';
 import { price, status, type House } from '../../lib/catalog';
 import {
   Heart,
@@ -20,6 +20,15 @@ export function getStaticPaths() {
   return houses.map((h) => ({ params: { slug: h.media_slug }, props: { h } }));
 }
 const { h } = Astro.props as { h: House };
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    ['Início', url()], ['Casas', url('casas/')], [h.name_for_site, detail(h)],
+  ].map(([name, path], index) => ({
+    '@type': 'ListItem', position: index + 1, name, item: new URL(path, Astro.site).href,
+  })),
+};
 const related = houses
   .filter((p) => p.id !== h.id)
   .sort((a, b) => Number(b.brand === h.brand) - Number(a.brand === h.brand))
@@ -28,9 +37,11 @@ const related = houses
 
 <Layout
   title={h.name_for_site}
+  sharePhoto={h.media[0]}
   description={h.description_azmora || undefined}
   ><div class="wrap page">
-    <nav class="crumb">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs).replace(/</g, '\\u003c')} />
+    <nav class="crumb" aria-label="Percurso da página">
       <a href={url()}>Início</a> / <a href={url('casas/')}>Casas</a>
     </nav><p class="kicker"><i></i>{h.brand}{h.typology && ' · ' + h.typology}</p><h1>
       {h.name_for_site}
@@ -76,7 +87,7 @@ const related = houses
           class="btn primary"
           href={priceRequest(h)}>Pedir preço e disponibilidade</a>
         <CallContact />
-        <a class="under summary-guide-link" href={url('#como-funciona')}>Como funciona a compra</a><div class="actions">
+        <a class="under summary-guide-link" href={url('#como-funciona')}>O que inclui a entrega na ilha</a><div class="actions">
           <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button
             data-compare={h.media_slug}><Columns2 size={16} />Comparar</button>
         </div>
@@ -102,6 +113,7 @@ const related = houses
         data-unit={h.media_slug}
         aria-label={`Galeria de ${h.name_for_site}`}
       >
+        <script type="application/json" id="gallery-data" set:html={JSON.stringify(h.media.map(({ src, alt }) => ({ src, alt }))).replace(/</g, '\\u003c')} />
         <div>
           <>
             <button class="icon close" data-close aria-label="Fechar galeria">

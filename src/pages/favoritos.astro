@@ -4,7 +4,7 @@ import Card from '../components/Card.astro';
 import { houses, url } from '../lib/site';
 ---
 
-<Layout title="Favoritos"
+<Layout noindex title="Favoritos"
   ><div class="wrap page" id="favorites">
     <p class="kicker"><i></i> A SUA SELEÇÃO</p><h1>
       Casas <em>favoritas.</em>
@@ -13,7 +13,7 @@ import { houses, url } from '../lib/site';
       id="saved"
       hidden
     >
-      {houses.map((h) => <Card h={h} />)}
+      {houses.map((h) => <Card h={h} heading="h2" />)}
     </div><div class="empty" id="favempty">
       <h2>A sua seleção começa aqui.</h2><p>
         Toque no coração de uma casa para a guardar.

@@ -36,6 +36,14 @@ export interface House {
   source: { url: string };
   reference_azmora?: string | null;
 }
+// Public fields needed to filter, sort and compare an individual listing.
+export function catalogRecord(h: House) {
+  const { brand, model, name_for_site, typology, bedrooms, bathrooms, bathroom_count_minimum,
+    dimensions_m, model_measure_reference, area_m2, equipment_summary, condition, availability, public_price_eur } = h;
+  return { id: h.media_slug, brand, model, name_for_site, typology, bedrooms, bathrooms, bathroom_count_minimum,
+    dimensions_m, model_measure_reference, area_m2, equipment_summary, condition, availability, public_price_eur };
+}
+export type CatalogRecord = Pick<House, keyof ReturnType<typeof catalogRecord>>;
 export const previousCatalogNumber = (id: string) => /^[a-z]+-(\d{3})$/.exec(id)?.[1];
 
 export const clean = (t: unknown) =>
@@ -46,7 +54,7 @@ export const clean = (t: unknown) =>
     .toLowerCase()
     .trim();
 export const num = (n: number) => n.toLocaleString('pt-PT');
-export function houseMeasure(h: House, field: 'area' | 'length' | 'width') {
+export function houseMeasure(h: CatalogRecord, field: 'area' | 'length' | 'width') {
   const announced = field === 'area' ? h.area_m2 : h.dimensions_m[field];
   if (announced != null) {
     return { value: `${num(announced)} ${field === 'area' ? 'm²' : 'm'}`, source: 'announced' } as const;
@@ -56,46 +64,47 @@ export function houseMeasure(h: House, field: 'area' | 'length' | 'width') {
     ? { value: reference, source: 'reference' } as const
     : { value: null, source: 'unknown' } as const;
 }
-export const bathroomCount = (h: House) =>
+export const bathroomCount = (h: CatalogRecord) =>
   h.bathrooms != null
     ? String(h.bathrooms)
     : h.bathroom_count_minimum != null
       ? String(h.bathroom_count_minimum)
       : null;
-export const price = (h: House) =>
+export const price = (h: CatalogRecord) =>
   h.public_price_eur == null
     ? 'Preço sob consulta'
     : num(h.public_price_eur) + ' €';
-export const status = (h: House) =>
+export const status = (h: CatalogRecord) =>
   ({
     disponivel: 'Disponível',
     reservado: 'Reservada',
     vendido: 'Vendida',
     em_breve: 'Em breve',
   })[h.availability] || 'Disponibilidade a confirmar';
-export const name = (h: House) =>
+export const name = (h: CatalogRecord) =>
   !h.model
     ? h.name_for_site
     : h.model.toLowerCase().startsWith(h.brand.toLowerCase())
       ? h.model
       : h.brand + ' ' + h.model;
-export const specs = (h: House): Record<string, string> => ({
+function comparisonMeasure(h: CatalogRecord, field: 'area' | 'length' | 'width') {
+  const { value, source } = houseMeasure(h, field);
+  if (!value) return 'A confirmar';
+  return source === 'reference' ? value + ' (de referência)' : value + ' (no anúncio)';
+}
+export const specs = (h: CatalogRecord): Record<string, string> => ({
   Marca: h.brand,
   Tipologia: h.typology || 'A confirmar',
   Quartos: String(h.bedrooms ?? 'A confirmar'),
   'Casas de banho': bathroomCount(h) ?? 'A confirmar',
-  Área: h.area_m2 ? num(h.area_m2) + ' m²' : 'A confirmar',
-  Comprimento: h.dimensions_m.length
-    ? num(h.dimensions_m.length) + ' m'
-    : 'A confirmar',
-  Largura: h.dimensions_m.width
-    ? num(h.dimensions_m.width) + ' m'
-    : 'A confirmar',
+  Área: comparisonMeasure(h, 'area'),
+  Comprimento: comparisonMeasure(h, 'length'),
+  Largura: comparisonMeasure(h, 'width'),
   Condição: h.condition || 'A confirmar',
   Disponibilidade: status(h),
   Preço: price(h),
 });
-export function matches(h: House, p: URLSearchParams) {
+export function matches(h: CatalogRecord, p: URLSearchParams) {
   const query = clean(p.get('q'));
   const full = clean(
     [
@@ -118,7 +127,7 @@ export function matches(h: House, p: URLSearchParams) {
         h.public_price_eur <= Number(p.get('price'))))
   );
 }
-export function sorted(items: House[], sort: string) {
+export function sorted<T extends CatalogRecord>(items: T[], sort: string) {
   return [...items].sort((a, b) => {
     if (sort === 'nome') return name(a).localeCompare(name(b), 'pt');
     if (sort === 'area' || sort.startsWith('preco')) {

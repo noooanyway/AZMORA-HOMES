@@ -25,10 +25,9 @@ const highlights = [
 <dl class="house-highlights" aria-label="Características principais">
   {highlights.map(({ label, value, Icon }) => (
     <div>
-      <span class="house-spec-icon"><Icon size={20} aria-hidden="true" /></span>
-      <dt>{label}</dt>
+      <dt><span class="house-spec-icon" aria-hidden="true"><Icon size={20} /></span>{label}</dt>
       <dd class:list={{ 'highlight-pending': value == null }}>
-        {typeof value === 'string' ? value.replace(/ (m²?)/gu, ' $1') : value ?? 'Por confirmar'}{label === 'Casas de banho' && h.bathrooms == null && h.bathroom_layout && (
+        {typeof value === 'string' ? value.replace(/ (m²?)(?=\s|$|[.,;)])/gu, '\u00a0$1') : value ?? 'Por confirmar'}{label === 'Casas de banho' && h.bathrooms == null && h.bathroom_layout && (
           <sup><a href="#nota-casas-de-banho" aria-label="Nota sobre a configuração do WC">*</a></sup>
         )}
       </dd>

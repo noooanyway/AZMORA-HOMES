@@ -1,13 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Card from '../../components/Card.astro';
+import CatalogData from '../../components/CatalogData.astro';
 import Filters from '../../components/Filters.astro';
 import { houses } from '../../lib/site';
 import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-astro';
 ---
 
-<Layout title="Catálogo de casas móveis"
-  ><div class="wrap page">
+<Layout title="Catálogo de casas móveis" description="Pesquise casas móveis usadas por marca, tipologia e quartos. Consulte as fotografias, compare as medidas e peça o preço da unidade."
+  ><CatalogData /><div class="wrap page">
     <p class="kicker"><i></i> CATÁLOGO</p><h1>Explore as <em>casas.</em></h1><p
       class="intro"
     >
@@ -30,7 +31,7 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
               >Nome A–Z</option
             >{
               houses.some((h) => h.area_m2 != null) && (
-                <option value="area">Maior área</option>
+                <option value="area">Maior área anunciada</option>
               )
             }{
               houses.some((h) => h.public_price_eur != null) && (
@@ -63,7 +64,7 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
         >
         </div>
       </div><div class="cards" id="results">
-        {houses.map((h) => <Card h={h} />)}
+        {houses.map((h) => <Card h={h} heading="h2" />)}
       </div><div id="empty" class="empty" hidden>
         <h2>Nenhuma casa encontrada</h2><p>
           Experimente outra pesquisa ou retire alguns filtros.

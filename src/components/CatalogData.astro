@@ -1,0 +1,5 @@
+---
+import { catalogRecord } from '../lib/catalog';
+import { houses } from '../lib/site';
+---
+<script type="application/json" id="catalog-data" set:html={JSON.stringify(houses.map(catalogRecord)).replace(/</g, '\\u003c')} />

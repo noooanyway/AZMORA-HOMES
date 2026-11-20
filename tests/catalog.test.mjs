@@ -7,6 +7,7 @@ import {
   price,
   status,
   sorted,
+  specs,
   toggle,
 } from '../src/lib/catalog.ts';
 const all = JSON.parse(
@@ -55,4 +56,26 @@ test('Seleção limitada sem perder a terceira casa', () => {
 test('Cada unidade tem identidade e título utilizável', () => {
   assert.equal(new Set(all.map((h) => h.id)).size, all.length);
   for (const h of all) assert.ok(name(h).length > 0);
+});
+
+test('A comparação distingue medidas anunciadas, referências e campos desconhecidos', () => {
+  const sample = { ...all[0], area_m2: null, model_measure_reference: { area: '29–30 m²' } };
+  assert.equal(specs(sample).Área, '29–30 m² (de referência)');
+  assert.equal(specs({ ...sample, area_m2: 30 }).Área, '30 m² (no anúncio)');
+  assert.equal(specs({ ...sample, model_measure_reference: undefined }).Área, 'A confirmar');
+  assert.equal(matches(sample, new URLSearchParams({ area: '20' })), false);
+});
+
+test('Cada fotografia e a sua miniatura pertencem à ficha documentada', () => {
+  const manifest = JSON.parse(readFileSync(new URL('../docs/media-manifest.json', import.meta.url)));
+  for (const house of all) {
+    const records = manifest.filter((entry) => entry.unit_id === house.id).sort((a, b) => a.order - b.order);
+    assert.equal(records.length, house.media.length);
+    house.media.forEach((photo, i) => {
+      assert.equal(records[i].source_page_url, house.source.url);
+      assert.equal(records[i].local_image_path, photo.src);
+      assert.equal(records[i].small_image_path, photo.small);
+      assert.ok(photo.alt.trim());
+    });
+  }
 });
