@@ -88,7 +88,7 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
         </label>
         <label class="consent">
           <input required type="checkbox" name="privacidade" value="Li e concordo" />
-          <span>Li e concordo com a <a href={url('privacidade/')}>Política de Privacidade</a> para efeitos da resposta ao meu pedido.</span>
+          <span>Li a <a href={url('privacidade/')}>Política de Privacidade</a> e tomei conhecimento do tratamento dos dados para responder ao meu pedido.</span>
         </label>
         <button class="btn primary" type="submit" disabled aria-describedby={contacts.form ? undefined : 'lead-unavailable'}>
           {contacts.form ? 'Enviar pedido por email' : 'Envio ainda indisponível'}

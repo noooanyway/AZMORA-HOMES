@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
-import { company, preview } from '../lib/site';
+import { company, complaintsUrl } from '../lib/site';
 ---
 
 <Layout title="Informação legal" description="Identificação da Azmora Homes, condições do catálogo, verificação do terreno e informação para consumidores.">
@@ -9,7 +9,7 @@ import { company, preview } from '../lib/site';
     <p class="kicker"><i></i> INFORMAÇÃO LEGAL</p>
     <h1>Informação <em>legal.</em></h1>
     <p class="intro">Identificação da empresa e informações a ter em conta antes de avançar com a compra de uma casa móvel.</p>
-    {preview && <p class="legal-draft">Versão de antevisão. Os campos assinalados serão preenchidos antes do lançamento.</p>}
+    {(!company.legalName || !company.taxId || !company.registeredAddress) && <p class="legal-draft">A identificação legal da entidade que opera a marca Azmora Homes está por confirmar.</p>}
 
     <section>
       <h2>Identificação da empresa</h2>
@@ -31,12 +31,12 @@ import { company, preview } from '../lib/site';
 
     <section>
       <h2>Reclamações e resolução de litígios</h2>
-      <p><a class="under" href={company.complaintsUrl || 'https://www.livroreclamacoes.pt/Inicio/'}>Livro de Reclamações Eletrónico</a></p>
-      {preview && !company.complaintsUrl && <p class="business-placeholder">Aplicabilidade e ligação da Azmora no Livro de Reclamações a confirmar.</p>}
-      {company.ralName ? (
-        <p>Entidade de resolução alternativa de litígios de consumo: {company.ralUrl ? <a class="under" href={company.ralUrl}>{company.ralName}</a> : company.ralName}.</p>
-      ) : preview ? <p class="business-placeholder">Entidade de resolução alternativa de litígios e respetiva ligação a definir.</p> : null}
-      <p><a class="under" href="https://www.asae.gov.pt/perguntas-frequentes1/area-economica/resolucao-alternativa-de-litigios-de-consumo.aspx">Informação da ASAE sobre resolução alternativa de litígios</a></p>
+      <p>Pode apresentar uma reclamação através da plataforma oficial.</p>
+      <p><a class="under" href={complaintsUrl}>Aceder ao Livro de Reclamações Eletrónico</a></p>
+      {company.ralName && company.ralUrl ? (
+        <p>Para a resolução alternativa de litígios de consumo, pode consultar a entidade indicada para a Azmora Homes. <a class="under" href={company.ralUrl}>{company.ralName}</a></p>
+      ) : <p>A entidade de resolução alternativa de litígios aplicável à Azmora Homes está por confirmar. A competência pode depender do local e do tipo de contratação.</p>}
+      <p><a class="under" href="https://www.gov.pt/guias/resolucao-de-conflitos-de-consumo">Como encontrar o centro de arbitragem competente</a></p>
     </section>
   </div>
 </Layout>

@@ -5,7 +5,7 @@ import '@fontsource-variable/source-serif-4/wght.css';
 import '@fontsource-variable/source-serif-4/wght-italic.css';
 import '@fontsource/dm-sans/latin-400.css';
 import '@fontsource/dm-sans/latin-600.css';
-import { Heart, Menu, X, Columns2, Moon, Sun } from 'lucide-astro';
+import { Heart, Menu, X, Columns2, Palette } from 'lucide-astro';
 import headingFont from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
 import bodyFont from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2?url';
 import favicon from '../assets/azmora-favicon.png';
@@ -13,7 +13,7 @@ import Brand from '../components/Brand.astro';
 import CallContact from '../components/CallContact.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { url, houses, preview } from '../lib/site';
+import { url, houses, preview, complaintsUrl } from '../lib/site';
 import { previousCatalogNumber } from '../lib/catalog';
 interface Props {
   title: string;
@@ -48,23 +48,30 @@ const nav = [
         let preference;
         try {
           const saved = localStorage.getItem(key);
-          if (saved === 'light' || saved === 'dark') preference = saved;
+          if (['light', 'dark', 'gold'].includes(saved)) preference = saved;
         } catch {}
 
         function apply() {
-          const dark = preference ? preference === 'dark' : system.matches;
-          root.dataset.theme = dark ? 'dark' : 'light';
-          document.querySelector('[data-theme-toggle]')?.setAttribute('aria-pressed', String(dark));
+          root.dataset.theme = preference || (system.matches ? 'dark' : 'light');
+          document.querySelectorAll('[data-theme-choice]').forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.dataset.themeChoice === (preference || 'system')));
+          });
         }
 
         apply();
         system.addEventListener('change', apply);
         document.addEventListener('DOMContentLoaded', () => {
           apply();
-          document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
-            preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
-            try { localStorage.setItem(key, preference); } catch {}
-            apply();
+          document.querySelectorAll('[data-theme-choice]').forEach((button) => {
+            button.addEventListener('click', () => {
+              preference = button.dataset.themeChoice === 'system' ? undefined : button.dataset.themeChoice;
+              try {
+                if (preference) localStorage.setItem(key, preference);
+                else localStorage.removeItem(key);
+              } catch {}
+              apply();
+              button.closest('dialog')?.close();
+            });
           });
         });
       })();
@@ -91,9 +98,9 @@ const nav = [
           {nav.map(([s, p]) => <a href={url(p)}>{s}</a>)}
         </nav><div class="head-actions">
           <CallContact mode="header" />
-          <button type="button" class="icon theme-switch" data-theme-toggle aria-label="Modo escuro" aria-pressed="false" title="Modo escuro">
-            <Moon size={18} class="theme-moon" aria-hidden="true" />
-            <Sun size={18} class="theme-sun" aria-hidden="true" />
+          <button type="button" class="icon theme-switch" data-open="theme-menu" aria-label="Tema do site"
+            aria-haspopup="dialog" aria-controls="theme-menu" aria-expanded="false" title="Tema do site">
+            <Palette size={19} aria-hidden="true" />
           </button>
           <a class="favlink" href={url('favoritos/')} aria-label="Favoritos"
             ><Heart size={18} /><span>Favoritos</span><small
@@ -101,11 +108,11 @@ const nav = [
               hidden></small></a
           ><a class="btn primary top-contact" href={url('contactos/')}
             >Contacte-nos</a
-          ><button class="icon mobile" data-open="menu" aria-label="Abrir menu"
+          ><button class="icon mobile" data-open="menu" aria-label="Abrir menu" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false"
             ><Menu /></button>
         </div>
       </div>
-    </header><dialog id="menu">
+    </header><dialog id="menu" aria-label="Menu principal">
       <button class="icon close" aria-label="Fechar menu" data-close
         ><X /></button
       ><nav>
@@ -117,6 +124,21 @@ const nav = [
           ].map(([s, p]) => <a href={url(p)}>{s}</a>)
         }
       </nav>
+    </dialog><dialog id="theme-menu" aria-labelledby="theme-title">
+      <button type="button" class="icon close" aria-label="Fechar seletor de tema" data-close><X /></button>
+      <h2 id="theme-title">Tema do site</h2>
+      <div class="theme-choices">
+        {[
+          ['light', 'Claro'],
+          ['dark', 'Escuro'],
+          ['gold', 'Dourado e verde'],
+          ['system', 'Usar tema do dispositivo'],
+        ].map(([value, label]) => (
+          <button type="button" data-theme-choice={value} aria-pressed="false">
+            <span class="theme-swatch" aria-hidden="true"></span>{label}
+          </button>
+        ))}
+      </div>
     </dialog><main id="conteudo"><slot /></main><footer class="site-footer">
       <div class="wrap">
         <div class="footer-main">
@@ -140,6 +162,7 @@ const nav = [
           <nav aria-label="Informação legal">
             <a href={url('privacidade/')}>Privacidade</a>
             <a href={url('termos/')}>Informação legal</a>
+            <a href={complaintsUrl}>Livro de Reclamações</a>
           </nav>
         </div>
       </div>

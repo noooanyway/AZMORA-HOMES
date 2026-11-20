@@ -12,6 +12,7 @@ export const priceRequest = (h: House) =>
   url(`contactos/?${new URLSearchParams({ casas: h.media_slug, motivo: 'preco' })}`);
 export const brands = [...new Set(houses.map((h) => h.brand))].sort();
 export const company = business;
+export const complaintsUrl = company.complaintsUrl || 'https://www.livroreclamacoes.pt/Inicio/';
 const phone = (import.meta.env.PUBLIC_CONTACT_PHONE || company.phone || '').trim();
 const dial = phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
 export const contacts = {

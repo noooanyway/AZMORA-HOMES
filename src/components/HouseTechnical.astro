@@ -41,7 +41,8 @@ const other = { label: 'Outros detalhes', Icon: List };
 const grouped = [...categories, other].map(({ label, Icon }) => ({ label, Icon, entries: [] as string[] }));
 for (const description of h.equipment_summary) {
   const index = categories.findIndex(({ pattern }) => pattern.test(clean(description)));
-  grouped[index < 0 ? categories.length : index].entries.push(description);
+  const sentence = description.trim().replace(/^\p{Ll}/u, (first) => first.toLocaleUpperCase('pt-PT'));
+  grouped[index < 0 ? categories.length : index].entries.push(sentence);
 }
 ---
 

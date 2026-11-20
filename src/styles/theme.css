@@ -7,6 +7,8 @@
   --forest: var(--brand-green);
   --paper: #f8f5ee;
   --surface: #fffdf8;
+  --header-bg: var(--paper);
+  --header-ink: var(--ink);
   --soft: #eeeadd;
   --tint: #e5ebe0;
   --cream: #f3e8d2;
@@ -51,4 +53,16 @@
   --error-ink: #ffb999;
   --error-bg: #442d29;
   --overlay: #0d1a16ef;
+}
+
+:root[data-theme='gold'] {
+  --paper: #ead8b7;
+  --surface: #fbf0da;
+  --soft: #ead0a6;
+  --tint: #e4c58f;
+  --line: #af9365;
+  --muted: #4d5540;
+  --rust: #7d3d2a;
+  --header-bg: var(--brand-green);
+  --header-ink: var(--on-forest);
 }

@@ -138,6 +138,32 @@ function render() {
   }
   host.append(table);
 }
+function dismissOutside(dialog: HTMLDialogElement, outside: (event: MouseEvent) => boolean) {
+  let pressedOutside = false;
+  dialog.addEventListener('pointerdown', (event) => {
+    pressedOutside = outside(event);
+  });
+  dialog.addEventListener('click', (event) => {
+    if (pressedOutside && outside(event)) dialog.close();
+    pressedOutside = false;
+  });
+  dialog.addEventListener('close', () => { pressedOutside = false; });
+}
+
+for (const opener of all('[data-open]')) {
+  const dialog = $<HTMLDialogElement>('#' + opener.dataset.open);
+  if (!dialog) continue;
+  dismissOutside(dialog, (event) => {
+    const { left, right, top, bottom } = dialog.getBoundingClientRect();
+    return event.target === dialog && (event.clientX < left || event.clientX > right
+      || event.clientY < top || event.clientY > bottom);
+  });
+  dialog.addEventListener('close', () => {
+    opener.setAttribute('aria-expanded', 'false');
+    opener.focus({ preventScroll: true });
+  });
+}
+
 document.addEventListener('click', (e) => {
   const b = (e.target as Element).closest<HTMLElement>('button,a');
   if (!b) return;
@@ -147,9 +173,12 @@ document.addEventListener('click', (e) => {
   }
   if (b.dataset.open) {
     const d = $<HTMLDialogElement>('#' + b.dataset.open);
-    d?.showModal();
+    if (d && !d.open) {
+      d.showModal();
+      b.setAttribute('aria-expanded', 'true');
+    }
   }
-  if (b.hasAttribute('data-close')) b.closest('dialog')?.close();
+  if (b.hasAttribute('data-close') || b.matches('#menu nav a')) b.closest('dialog')?.close();
   if (b.hasAttribute('data-clear')) save('compare', []);
   for (const key of ['fav', 'compare'] as const) {
     const id = b.dataset[key];
@@ -297,17 +326,7 @@ if (light) {
   const { media } = unit;
   let ix = 0;
   let opener: HTMLElement | undefined;
-  let pressedOutsidePhoto = false;
-  const outsidePhoto = (target: EventTarget | null) =>
-    target instanceof Element && !target.closest('#enlarged, button');
-
-  light.addEventListener('pointerdown', (event) => {
-    pressedOutsidePhoto = outsidePhoto(event.target);
-  });
-  light.addEventListener('click', (event) => {
-    if (pressedOutsidePhoto && outsidePhoto(event.target)) light.close();
-    pressedOutsidePhoto = false;
-  });
+  dismissOutside(light, (event) => event.target instanceof Element && !event.target.closest('#enlarged, button'));
   light.addEventListener('close', () => {
     opener?.focus({ preventScroll: true });
   });
@@ -322,7 +341,6 @@ if (light) {
     (b) =>
       (b.onclick = () => {
         opener = b;
-        pressedOutsidePhoto = false;
         show(Number(b.dataset.photo));
         light.showModal();
       }),

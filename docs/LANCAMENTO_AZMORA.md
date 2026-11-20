@@ -10,6 +10,12 @@ A [lista de placeholders](PLACEHOLDERS_AZMORA.md) indica os dados por preencher,
 
 O assunto segue o formato `[Azmora Homes] Preço e disponibilidade — IRM Super Venus - T2 · AZ-1234ABCD`. Sem uma casa escolhida, usa a tipologia pretendida ou «Pedido geral». A referência aparece também na confirmação do site e no corpo da notificação. Se faltar uma notificação, pode ser usada para procurar o pedido no Formspree e no Gmail. A confirmação do site indica que o Formspree aceitou o pedido. O email apresenta os nomes das casas numa lista e as ligações para as fichas num bloco separado. As ligações usam endereços baseados no nome da casa. Os dados de contacto aparecem primeiro. Os campos opcionais indicam quando não foram preenchidos. A caixa de privacidade é obrigatória no site. [Documentação do assunto no Formspree](https://help.formspree.io/articles/building-your-form/email-subject-line)
 
+## Gestão dos pedidos e privacidade
+
+- O contacto para exercer direitos é `azmorahomes@gmail.com`. O acesso ao Formspree e ao Gmail comercial cabe aos proprietários. Confirmar as permissões e remover acessos que já não sejam necessários.
+- Para pedidos sem venda, registar a data da última interação e rever os pedidos regularmente. Apagar os que ultrapassem 12 meses e os que já não sejam necessários, tanto no Formspree como no Gmail. A política documenta este critério. A eliminação depende da rotina de revisão dos proprietários.
+- Validar o interesse legítimo para contactos gerais e as condições de tratamento e transferências das contas em uso. Completar a identificação legal, confirmar o centro de arbitragem competente e validar o registo no Livro de Reclamações. [RGPD](https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=pt) · [Resolução de conflitos de consumo](https://www.gov.pt/guias/resolucao-de-conflitos-de-consumo) · [Livro de Reclamações na ASAE](https://www.asae.gov.pt/reclamacoes-e-denuncias/livro-de-reclamacoes.aspx)
+
 ## Decisões comerciais antes de abrir ao público
 
 - Definir quem recebe os pedidos, em quanto tempo se responde e quem mantém o catálogo atualizado.

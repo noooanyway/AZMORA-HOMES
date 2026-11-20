@@ -22,14 +22,24 @@ try {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(root);
   const theme = page.locator('html');
-  const themeSwitch = page.getByRole('button', { name: 'Modo escuro' });
+  const themeSwitch = page.getByRole('button', { name: 'Tema do site' });
+  const themeMenu = page.locator('#theme-menu');
   assert.equal(await theme.getAttribute('data-theme'), 'dark');
-  assert.equal(await themeSwitch.getAttribute('aria-pressed'), 'true');
   await themeSwitch.click();
-  assert.equal(await theme.getAttribute('data-theme'), 'light');
+  assert.equal(await themeSwitch.getAttribute('aria-expanded'), 'true');
+  await page.mouse.click(1, 1);
+  await themeMenu.waitFor({ state: 'hidden' });
+  assert.equal(await themeSwitch.getAttribute('aria-expanded'), 'false');
+  assert.ok(await themeSwitch.evaluate((el) => el === document.activeElement));
+  await themeSwitch.click();
+  await themeMenu.getByRole('button', { name: 'Dourado e verde' }).click();
+  assert.equal(await theme.getAttribute('data-theme'), 'gold');
   await page.reload();
+  assert.equal(await theme.getAttribute('data-theme'), 'gold');
+  await themeSwitch.click();
+  assert.equal(await themeMenu.getByRole('button', { name: 'Dourado e verde' }).getAttribute('aria-pressed'), 'true');
+  await themeMenu.getByRole('button', { name: 'Claro', exact: true }).click();
   assert.equal(await theme.getAttribute('data-theme'), 'light');
-  assert.equal(await themeSwitch.getAttribute('aria-pressed'), 'false');
   const badAssets = await page
     .locator('img')
     .evaluateAll((images) =>
@@ -176,8 +186,14 @@ try {
       .locator('#filter-toggle')
       .evaluate((el) => document.activeElement === el),
   );
-  await page.locator('[data-open=menu]').click();
-  await page.locator('#menu a').filter({ hasText: 'Sobre' }).click();
+  const openMenu = page.locator('[data-open=menu]');
+  const mobileMenu = page.locator('#menu');
+  await openMenu.click();
+  await page.mouse.click(1, 1);
+  await mobileMenu.waitFor({ state: 'hidden' });
+  assert.ok(await openMenu.evaluate((el) => el === document.activeElement));
+  await openMenu.click();
+  await mobileMenu.getByRole('link', { name: 'Sobre' }).click();
   assert.equal(new URL(page.url()).pathname, '/AZMORA-HOMES/sobre/');
   await page.goto(root + 'comparar/');
   await page.locator(`#tablehost button[data-compare="${thirdHouse.media_slug}"]`).click();
