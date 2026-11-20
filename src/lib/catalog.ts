@@ -109,7 +109,7 @@ export function matches(h: House, p: URLSearchParams) {
   return (
     query.split(/\s+/).every((w) => full.includes(w)) &&
     (
-      ['brand', 'typology', 'bedrooms', 'availability', 'condition'] as const
+      ['brand', 'typology', 'bedrooms', 'condition'] as const
     ).every((k) => !p.get(k) || String(h[k]) === p.get(k)) &&
     (!p.get('area') ||
       (h.area_m2 != null && h.area_m2 >= Number(p.get('area')))) &&

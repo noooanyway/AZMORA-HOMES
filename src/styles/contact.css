@@ -10,14 +10,14 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: #e6ebe1;
+  background: var(--tint);
   margin-bottom: 16px;
 }
 .contact-intro h2, .contact-form h2 { font-size: clamp(1.65rem, 3.2vw, 2.55rem); }
 .contact-intro p { margin: 14px 0; max-width: 40ch; }
 .contact-form { min-width: 0; }
 .contact-form h2 { margin-bottom: 15px; }
-.contact-form label small { font-size: .75rem; font-weight: 400; }
+.contact-form label small { font-size: var(--text-small); font-weight: 400; }
 .contact-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -64,12 +64,12 @@
   background: var(--paper);
 }
 .contact-form-status[data-state='success'] {
-  background: #e6ebe1;
+  background: var(--tint);
   border-inline-start: 4px solid var(--ink);
 }
 .contact-form-status[data-state='error'] {
-  color: #80321e;
-  background: #f8eee8;
+  color: var(--error-ink);
+  background: var(--error-bg);
   border-inline-start: 4px solid currentColor;
 }
 @media (max-width: 760px) {

@@ -1,0 +1,54 @@
+:root {
+  color-scheme: light;
+  --brand-green: #234237;
+  --brand-gold: #d4b891;
+  --brand-terracotta: #bb6f49;
+  --ink: var(--brand-green);
+  --forest: var(--brand-green);
+  --paper: #f8f5ee;
+  --surface: #fffdf8;
+  --soft: #eeeadd;
+  --tint: #e5ebe0;
+  --cream: #f3e8d2;
+  --rust: #91472f;
+  --focus: #a45437;
+  --line: #cdc5b6;
+  --muted: #526157;
+  --on-forest: #fff7e8;
+  --on-forest-muted: #ede2cd;
+  --inverse-line: #fff7e84a;
+  --primary-bg: var(--forest);
+  --primary-ink: var(--on-forest);
+  --error-ink: #80321e;
+  --error-bg: #f9ece5;
+  --overlay: #10251de8;
+  --serif: 'Source Serif 4 Variable', Georgia, serif;
+  --sans: 'DM Sans', Arial, sans-serif;
+  --text-small: .875rem;
+  --text-label: .9375rem;
+  --heading-page: clamp(2.45rem, 4.5vw, 4.85rem);
+  --heading-section: clamp(1.95rem, 3.1vw, 3.25rem);
+  color: var(--ink);
+  background: var(--paper);
+  font: 100%/1.62 var(--sans);
+  font-synthesis: none;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #f7efde;
+  --forest: #1c352b;
+  --paper: #14251f;
+  --surface: #1c3028;
+  --soft: #23382f;
+  --tint: #2b4638;
+  --rust: #eda483;
+  --focus: var(--brand-gold);
+  --line: #63776a;
+  --muted: #becbbd;
+  --primary-bg: var(--brand-gold);
+  --primary-ink: #1b3329;
+  --error-ink: #ffb999;
+  --error-bg: #442d29;
+  --overlay: #0d1a16ef;
+}

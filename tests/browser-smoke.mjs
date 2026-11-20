@@ -19,7 +19,17 @@ page.setDefaultNavigationTimeout(60000);
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 try {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(root);
+  const theme = page.locator('html');
+  const themeSwitch = page.getByRole('button', { name: 'Modo escuro' });
+  assert.equal(await theme.getAttribute('data-theme'), 'dark');
+  assert.equal(await themeSwitch.getAttribute('aria-pressed'), 'true');
+  await themeSwitch.click();
+  assert.equal(await theme.getAttribute('data-theme'), 'light');
+  await page.reload();
+  assert.equal(await theme.getAttribute('data-theme'), 'light');
+  assert.equal(await themeSwitch.getAttribute('aria-pressed'), 'false');
   const badAssets = await page
     .locator('img')
     .evaluateAll((images) =>
@@ -46,6 +56,7 @@ try {
   );
   assert.equal(await cards.count(), 5);
   await page.locator('#filter-toggle').click();
+  assert.equal(await page.locator('#filterform [name=availability]').count(), 0);
   await page.locator('select[name=typology]').selectOption('T2');
   assert.ok(await page.locator('#filters').isVisible());
   assert.equal(await page.locator('dialog[open]').count(), 0);

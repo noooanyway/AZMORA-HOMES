@@ -1,11 +1,9 @@
 ---
 import { houses } from '../lib/site';
-import { status } from '../lib/catalog';
 const facets = [
   ['brand', 'Marca'],
   ['typology', 'Tipologia'],
   ['bedrooms', 'Quartos'],
-  ['availability', 'Disponibilidade'],
   ['condition', 'Condição'],
 ] as const;
 ---
@@ -23,9 +21,7 @@ const facets = [
             <option value="">Todas as opções</option>
             {vals.map((v) => (
               <option value={v}>
-                {key === 'availability'
-                  ? status(houses.find((h) => h.availability === v)!)
-                  : v}
+                {v}
               </option>
             ))}
           </select>

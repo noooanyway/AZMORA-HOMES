@@ -1,12 +1,12 @@
 ---
+import '../styles/theme.css';
 import '../styles/site.css';
-import '@fontsource/instrument-serif/latin-400.css';
-import '@fontsource/instrument-serif/latin-400-italic.css';
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
 import '@fontsource/dm-sans/latin-400.css';
 import '@fontsource/dm-sans/latin-600.css';
-import { Heart, Menu, X, Columns2 } from 'lucide-astro';
-import headingFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
-import italicFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import { Heart, Menu, X, Columns2, Moon, Sun } from 'lucide-astro';
+import headingFont from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
 import bodyFont from '@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2?url';
 import favicon from '../assets/azmora-favicon.png';
 import Brand from '../components/Brand.astro';
@@ -39,7 +39,37 @@ const nav = [
     ><meta charset="utf-8" /><meta
       name="viewport"
       content="width=device-width,initial-scale=1"
-    /><link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={italicFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="icon" href={favicon.src} type="image/png" sizes="64x64" /><title>
+    />
+    <script is:inline>
+      (() => {
+        const key = 'azmora:theme';
+        const system = window.matchMedia('(prefers-color-scheme: dark)');
+        const root = document.documentElement;
+        let preference;
+        try {
+          const saved = localStorage.getItem(key);
+          if (saved === 'light' || saved === 'dark') preference = saved;
+        } catch {}
+
+        function apply() {
+          const dark = preference ? preference === 'dark' : system.matches;
+          root.dataset.theme = dark ? 'dark' : 'light';
+          document.querySelector('[data-theme-toggle]')?.setAttribute('aria-pressed', String(dark));
+        }
+
+        apply();
+        system.addEventListener('change', apply);
+        document.addEventListener('DOMContentLoaded', () => {
+          apply();
+          document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+            preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            try { localStorage.setItem(key, preference); } catch {}
+            apply();
+          });
+        });
+      })();
+    </script>
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin="anonymous" /><link rel="icon" href={favicon.src} type="image/png" sizes="64x64" /><title>
       {title} · Azmora Homes
     </title><meta name="description" content={description} /><meta
       name="robots"
@@ -52,7 +82,7 @@ const nav = [
       content={canonical}
     /><meta property="og:type" content="website" /><meta
       name="theme-color"
-      content="#173c33"
+      content="#234237"
     /></head
   ><body data-base={url()}
     ><a class="skip" href="#conteudo">Saltar para o conteúdo</a><header>
@@ -61,6 +91,10 @@ const nav = [
           {nav.map(([s, p]) => <a href={url(p)}>{s}</a>)}
         </nav><div class="head-actions">
           <CallContact mode="header" />
+          <button type="button" class="icon theme-switch" data-theme-toggle aria-label="Modo escuro" aria-pressed="false" title="Modo escuro">
+            <Moon size={18} class="theme-moon" aria-hidden="true" />
+            <Sun size={18} class="theme-sun" aria-hidden="true" />
+          </button>
           <a class="favlink" href={url('favoritos/')} aria-label="Favoritos"
             ><Heart size={18} /><span>Favoritos</span><small
               data-fav-count

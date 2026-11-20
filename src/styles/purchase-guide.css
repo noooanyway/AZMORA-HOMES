@@ -9,11 +9,11 @@
 .purchase-heading h2 { margin-top: 8px; }
 .purchase-heading > p { max-width: 46ch; color: var(--muted); }
 .purchase-panel, .purchase-callouts > aside {
-  background: #eeeee5;
+  background: var(--soft);
   padding: clamp(18px, 2.3vw, 32px);
   border: 1px solid var(--line);
 }
-.purchase-panel-dark { background: var(--forest); color: var(--paper); border-color: var(--forest); }
+.purchase-panel-dark { background: var(--forest); color: var(--on-forest); border-color: var(--forest); }
 .purchase-panel h3 {
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
   padding: 12px 0;
 }
 .purchase-panel li + li { border-top: 1px solid var(--line); }
-.purchase-panel-dark li + li { border-color: #ffffff42; }
+.purchase-panel-dark li + li { border-color: var(--inverse-line); }
 .purchase-panel li p { margin-top: 2px; }
 .purchase-process { margin-top: clamp(28px, 4vw, 52px); }
 .purchase-steps {

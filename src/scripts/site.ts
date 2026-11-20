@@ -174,7 +174,6 @@ const keysFilter = [
   'brand',
   'typology',
   'bedrooms',
-  'availability',
   'condition',
   'area',
   'price',
