@@ -178,6 +178,8 @@ try {
   await page.locator('[name=nome]').fill('Teste Azmora');
   await page.locator('[name=email]').fill('teste@example.com');
   await page.locator('[name=localidade]').fill('Ponta Delgada');
+  await page.locator('[name=tipologia]').selectOption('T3');
+  await page.locator('[name=telefone]').fill('912345678');
   await page.locator('[name=message]').fill('Teste de preço e disponibilidade. Pode ignorar.');
   await page.locator('#lead-form button[type=submit]').click();
   assert.equal(notification, undefined);
@@ -204,8 +206,24 @@ try {
   assert.equal(notification.get('Casas de interesse').replace(/\r\n/g, '\n'), `1. ${firstHouse.name_for_site}\n2. ${secondHouse.name_for_site}`);
   assert.equal(notification.get('Ligações para as fichas').replace(/\r\n/g, '\n'), `1. ${root + housePath(firstHouse)}\n2. ${root + housePath(secondHouse)}`);
   assert.ok(![...notification.values()].some((value) => /exposul/i.test(value)));
-  assert.equal(notification.get('Política de Privacidade'), 'Li e concordo');
-  assert.ok(!notification.has('Telefone') && !notification.has('Tipologia pretendida'));
+  assert.equal(notification.get('Telefone'), '912345678');
+  assert.match(notification.get('Tipologia pretendida'), /^T3 · 3 quartos$/);
+  assert.deepEqual([...notification.keys()].slice(1, 4), ['Nome', 'email', 'Telefone']);
+  assert.ok(!notification.has('Política de Privacidade') && !notification.has('privacidade'));
+
+  await page.goto(root + 'contactos/?motivo=escolha');
+  await page.locator('[name=nome]').fill('Teste Azmora');
+  await page.locator('[name=email]').fill('teste@example.com');
+  await page.locator('[name=message]').fill('Gostaria de ajuda a escolher uma casa.');
+  await page.locator('[name=privacidade]').check();
+  await page.locator('#lead-form button[type=submit]').click();
+  await formStatus.and(page.locator('[data-state=success]')).waitFor();
+  assert.equal(notification.get('email'), 'teste@example.com');
+  assert.equal(notification.get('Casas de interesse'), 'Sem casa selecionada');
+  assert.equal(notification.get('Tipologia pretendida'), 'Sem preferência');
+  assert.equal(notification.get('Telefone'), 'Não indicado');
+  assert.equal(notification.get('Localidade de destino'), 'Não indicada');
+  assert.ok(!notification.has('Ligações para as fichas') && !notification.has('Política de Privacidade'));
   assert.deepEqual(errors, []);
   console.log(
     'OK browser · desktop/mobile 360 px, filtros partilháveis, lista, ordenação, favoritos persistentes, comparação 2–3, contacto, ficha, galeria quando disponível, navegação e teclado.',

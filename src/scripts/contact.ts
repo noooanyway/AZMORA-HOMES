@@ -3,6 +3,7 @@ import { previousCatalogNumber } from '../lib/catalog';
 const form = document.querySelector<HTMLFormElement>('#lead-form')!;
 const canSend = form.dataset.enabled === 'true';
 const topic = form.querySelector<HTMLSelectElement>('#lead-topic')!;
+const typology = form.querySelector<HTMLSelectElement>('select[name="tipologia"]')!;
 const message = form.querySelector<HTMLTextAreaElement>('#lead-message')!;
 const picker = form.querySelector<HTMLSelectElement>('#lead-house');
 const selectedList = form.querySelector<HTMLUListElement>('#selected');
@@ -110,15 +111,14 @@ form.addEventListener('submit', async (event) => {
   const notification = new FormData();
   for (const [label, value] of Object.entries({
     subject: `[Azmora Homes] ${topicLabel()} — ${context} · ${reference}`,
-    'Motivo do pedido': topicLabel(),
-    Mensagem: field('message'),
-    'Casas de interesse': houseList(houseNames),
     Nome: field('nome'),
     email: field('email'),
-    Telefone: field('telefone'),
-    'Tipologia pretendida': preference,
-    'Localidade de destino': field('localidade'),
-    'Política de Privacidade': field('privacidade'),
+    Telefone: field('telefone') || 'Não indicado',
+    'Motivo do pedido': topicLabel(),
+    Mensagem: field('message'),
+    'Casas de interesse': houseList(houseNames) || 'Sem casa selecionada',
+    'Tipologia pretendida': typology.selectedOptions[0].text.trim(),
+    'Localidade de destino': field('localidade') || 'Não indicada',
     'Referência do pedido': reference,
     'Ligações para as fichas': houseList(selectedOptions().map(houseLink)),
   })) {
