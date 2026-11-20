@@ -111,8 +111,14 @@ try {
   assert.equal(await page.locator('#selected li').count(), 1);
   await page.goto(root + housePath(firstHouse));
   if (await page.locator('#gallery [data-photo]').count()) {
-    await page.locator('#gallery [data-photo]').click();
+    const openGallery = page.locator('#gallery [data-photo]');
+    const lightbox = page.locator('#lightbox');
+    const thumbnail = await page.locator('.thumbs button').first().boundingBox();
+    assert.ok(thumbnail.width >= 110);
+    await openGallery.click();
     await page.locator('#lightbox[open]').waitFor();
+    await page.locator('#enlarged').click();
+    assert.ok(await lightbox.isVisible());
     if (data[0].media.length > 1) {
       const before = await page.locator('#enlarged').getAttribute('src');
       await page.keyboard.press('ArrowRight');
@@ -121,8 +127,15 @@ try {
         before,
       );
     }
+    const position = await page.evaluate(() => scrollY);
+    await page.mouse.click(1, 1);
+    await lightbox.waitFor({ state: 'hidden' });
+    assert.equal(await page.evaluate(() => scrollY), position);
+    assert.ok(await openGallery.evaluate((el) => el === document.activeElement));
+    await openGallery.click();
     await page.keyboard.press('Escape');
-    assert.equal(await page.locator('#lightbox[open]').count(), 0);
+    await lightbox.waitFor({ state: 'hidden' });
+    assert.ok(await openGallery.evaluate((el) => el === document.activeElement));
   }
   await page.setViewportSize({ width: 360, height: 780 });
   for (const route of [

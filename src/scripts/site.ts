@@ -297,6 +297,21 @@ if (light) {
   const unit = units.get(light.dataset.unit!)!;
   const { media } = unit;
   let ix = 0;
+  let opener: HTMLElement | undefined;
+  let pressedOutsidePhoto = false;
+  const outsidePhoto = (target: EventTarget | null) =>
+    target instanceof Element && !target.closest('#enlarged, button');
+
+  light.addEventListener('pointerdown', (event) => {
+    pressedOutsidePhoto = outsidePhoto(event.target);
+  });
+  light.addEventListener('click', (event) => {
+    if (pressedOutsidePhoto && outsidePhoto(event.target)) light.close();
+    pressedOutsidePhoto = false;
+  });
+  light.addEventListener('close', () => {
+    opener?.focus({ preventScroll: true });
+  });
   const show = (i: number) => {
     ix = (i + media.length) % media.length;
     const img = $<HTMLImageElement>('#enlarged')!;
@@ -307,6 +322,8 @@ if (light) {
   all('[data-photo]').forEach(
     (b) =>
       (b.onclick = () => {
+        opener = b;
+        pressedOutsidePhoto = false;
         show(Number(b.dataset.photo));
         light.showModal();
       }),

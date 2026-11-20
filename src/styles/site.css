@@ -156,6 +156,36 @@ header {
 .head-actions {
   gap: 22px;
 }
+.call-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--ink);
+}
+.call-contact svg { flex: none; }
+.call-contact-copy { display: grid; gap: 2px; }
+.call-contact strong { font-weight: 600; white-space: nowrap; }
+.call-contact small, .call-contact-label { font-size: .75rem; }
+.call-contact small { color: var(--muted); }
+.call-contact-header {
+  justify-content: center;
+  min-width: 44px;
+}
+.call-contact-header small { line-height: 1.15; }
+.call-contact-panel {
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.call-contact-placeholder { color: var(--muted); font-size: .88rem; }
+.summary .call-contact-panel { display: flex; margin-top: 12px; }
+.contact-intro .call-contact-panel { margin-bottom: 18px; }
+@media (max-width: 1050px) {
+  .call-contact-header .call-contact-copy { display: none; }
+}
 .favlink small {
   background: var(--cream);
   padding: 0 5px;
@@ -750,15 +780,17 @@ footer {
   align-items: center;
   gap: 6px;
 }
+.details > div { min-width: 0; }
 .thumbs {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  overflow: auto;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 2px 2px 6px;
+  overflow-x: auto;
 }
 .thumbs button {
-  flex: 0 0 90px;
-  height: 64px;
+  flex: 0 0 clamp(110px, 12vw, 166px);
+  aspect-ratio: 3 / 2;
   padding: 0;
 }
 .specs {

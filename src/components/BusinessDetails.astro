@@ -1,7 +1,6 @@
 ---
 import { company, contacts, preview } from '../lib/site';
 const { mode = 'contact' } = Astro.props as { mode?: 'contact' | 'footer' | 'legal' };
-const phoneLink = company.phone ? 'tel:' + company.phone.replace(/[^\d+]/g, '') : '';
 const identity = [
   { label: 'Denominação legal', value: company.legalName, placeholder: 'Denominação legal a definir' },
   { label: 'NIF / NIPC', value: company.taxId, placeholder: 'NIF / NIPC a definir' },
@@ -9,7 +8,7 @@ const identity = [
 ];
 const channels = [
   { label: 'Email', value: contacts.email, placeholder: 'Email comercial a definir', href: contacts.email ? 'mailto:' + contacts.email : '' },
-  { label: 'Telemóvel', value: company.phone, placeholder: 'Telemóvel comercial a definir', href: phoneLink, caption: 'Chamada para rede móvel nacional' },
+  ...(mode === 'contact' ? [] : [{ label: 'Telemóvel', value: contacts.phoneHref ? contacts.phone : '', placeholder: 'Telemóvel comercial a definir', href: contacts.phoneHref, caption: contacts.phoneCaption }]),
   { label: 'Morada da empresa', value: company.registeredAddress, placeholder: 'Morada da empresa a definir' },
 ];
 const visits = [
@@ -31,7 +30,7 @@ const fields = (mode === 'legal'
           {field.value
             ? ('href' in field && field.href ? <a href={field.href}>{field.value}</a> : field.value)
             : <span class="business-placeholder">{field.placeholder}</span>}
-          {'caption' in field && (field.value || preview) && <small>{field.caption}</small>}
+          {'caption' in field && field.caption && <small>{field.caption}</small>}
         </dd>
       </div>
     ))}

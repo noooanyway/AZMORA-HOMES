@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Photo from '../../components/Photo.astro';
 import Card from '../../components/Card.astro';
+import CallContact from '../../components/CallContact.astro';
 import HouseHighlights from '../../components/HouseHighlights.astro';
 import HouseTechnical from '../../components/HouseTechnical.astro';
 import '../../styles/house-detail.css';
@@ -62,7 +63,7 @@ const related = houses
                   data-photo={i}
                   aria-label={`Ampliar fotografia ${i + 1} de ${h.name_for_site}`}
                 >
-                  <img src={url(m.small || m.src)} alt={m.alt} loading="lazy" />
+                  <img src={url(m.small || m.src)} alt={m.alt} width={m.width} height={m.height} loading="lazy" />
                 </button>
               ))}
             </div>
@@ -73,8 +74,9 @@ const related = houses
           {status(h)}
         </p><a
           class="btn primary"
-          href={priceRequest(h)}>Pedir preço e disponibilidade</a
-        ><a class="under summary-guide-link" href={url('#como-funciona')}>Como funciona a compra</a><div class="actions">
+          href={priceRequest(h)}>Pedir preço e disponibilidade</a>
+        <CallContact />
+        <a class="under summary-guide-link" href={url('#como-funciona')}>Como funciona a compra</a><div class="actions">
           <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button
             data-compare={h.media_slug}><Columns2 size={16} />Comparar</button>
         </div>

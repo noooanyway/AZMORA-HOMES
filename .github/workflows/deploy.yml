@@ -27,6 +27,7 @@ jobs:
       SITE_URL: https://noooanyway.github.io
       BASE_PATH: /AZMORA-HOMES/
       PUBLIC_CONTACT_EMAIL: ${{ vars.PUBLIC_CONTACT_EMAIL }}
+      PUBLIC_CONTACT_PHONE: ${{ vars.PUBLIC_CONTACT_PHONE }}
       PUBLIC_WHATSAPP: ${{ vars.PUBLIC_WHATSAPP }}
       PUBLIC_FORM_ENDPOINT: ${{ vars.PUBLIC_FORM_ENDPOINT }}
     steps:

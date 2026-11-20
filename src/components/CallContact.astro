@@ -1,0 +1,23 @@
+---
+import { Phone } from 'lucide-astro';
+import { contacts, preview } from '../lib/site';
+
+const { mode = 'panel' } = Astro.props as { mode?: 'header' | 'panel' };
+const callLabel = `Ligar para a Azmora Homes, ${contacts.phone}${contacts.phoneCaption ? `. ${contacts.phoneCaption}` : ''}`;
+---
+
+{contacts.phoneHref ? (
+  <a class:list={['call-contact', `call-contact-${mode}`]} href={contacts.phoneHref} aria-label={callLabel}>
+    <Phone size={19} aria-hidden="true" />
+    <span class="call-contact-copy">
+      {mode === 'panel' && <span class="call-contact-label">Ligar para a Azmora Homes</span>}
+      <strong>{contacts.phone}</strong>
+      {contacts.phoneCaption && <small>{contacts.phoneCaption}</small>}
+    </span>
+  </a>
+) : preview && mode === 'panel' && (
+  <div class="call-contact call-contact-panel call-contact-placeholder">
+    <Phone size={19} aria-hidden="true" />
+    <span>Telemóvel comercial a definir</span>
+  </div>
+)}

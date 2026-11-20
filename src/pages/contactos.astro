@@ -2,6 +2,7 @@
 import { Mail } from 'lucide-astro';
 import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
+import CallContact from '../components/CallContact.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { contacts, detail, houses, url } from '../lib/site';
 import { previousCatalogNumber } from '../lib/catalog';
@@ -28,6 +29,7 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
         <span class="contact-icon"><Mail size={24} aria-hidden="true" /></span>
         <h2>Como podemos ajudar?</h2>
         <p>Escolha o motivo do contacto e a casa que lhe interessa. Se ainda estiver a explorar, basta indicar a tipologia que procura e contar-nos um pouco sobre o seu projeto.</p>
+        <CallContact />
         <BusinessDetails />
         <SocialLinks whatsappOnly />
       </aside>
