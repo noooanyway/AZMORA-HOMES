@@ -32,4 +32,4 @@ Os componentes de apresentação estão em `src/components/`, as rotas em `src/p
 
 Copiar `.env.example` para `.env` para testar canais confirmados da Azmora. O WhatsApp e o formulário recebem as referências escolhidas. O endpoint do formulário deve aceitar POST de um formulário HTML, tratar abuso e devolver uma confirmação verdadeira. Testar com o prestador e rever a privacidade antes de ativar o envio.
 
-A compilação com `CATALOG_MODE=production` inclui apenas unidades com `publish:true` e respetivas imagens. O workflow do GitHub Pages é manual e usa esse modo por defeito. Nesta entrega todas as unidades aguardam aprovação comercial. O [guia de validação e publicação](docs/VALIDACAO.md) contém os comandos para os dois modos, as variáveis do repositório e os passos de publicação.
+A compilação com `CATALOG_MODE=production` inclui apenas unidades com `publish:true` e respetivas imagens. O workflow do GitHub Pages é manual e usa esse modo por defeito. As 16 unidades atuais estão aprovadas para publicação. O [guia de validação e publicação](docs/VALIDACAO.md) contém os comandos para os dois modos, as variáveis do repositório e os passos de publicação.

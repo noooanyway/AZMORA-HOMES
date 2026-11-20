@@ -62,7 +62,7 @@
       }
     ],
     "description_azmora": "O’Hara 734 com dois quartos, sala e zona de refeições ligadas à cozinha. O terraço frontal coberto tem acesso direto ao interior e a casa dispõe de ar condicionado.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Duche e lavatório numa divisão; sanita separada.",
     "bathroom_count_minimum": 1,
@@ -129,7 +129,7 @@
       }
     ],
     "description_azmora": "IRM Super Mercure de dois quartos, com sofá de canto na zona de estar, placa a gás de quatro queimadores e aquecimento elétrico. O WC fica numa divisão separada.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "WC separado. A composição da zona de banho está por confirmar.",
     "bathroom_count_minimum": 1,
@@ -203,7 +203,7 @@
       }
     ],
     "description_azmora": "IRM Super Venus com um quarto de casal e outro com duas camas individuais. A zona de refeições tem banco corrido, mesa e cadeiras, junto à cozinha equipada e à arrumação integrada.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
     "bathroom_count_minimum": 1,
@@ -277,7 +277,7 @@
       }
     ],
     "description_azmora": "Rideau Panama Duo de dois quartos, com deck frontal coberto. A cozinha em L fica junto à zona de refeições e o duche e o WC ocupam divisões separadas.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Zona de duche e WC separado.",
     "bathroom_count_minimum": 1,
@@ -353,7 +353,7 @@
       }
     ],
     "description_azmora": "Willerby Granada XL com três quartos, duas casas de banho e 12,5 m de comprimento anunciados. A sala tem janelas panorâmicas e sofá de canto. A cozinha inclui forno duplo e a casa dispõe de aquecimento por radiadores.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "As duas casas de banho têm sanita e lavatório. Pelo menos uma tem cabine de duche.",
     "model_measure_reference": {
@@ -427,7 +427,7 @@
       }
     ],
     "description_azmora": "Trigano Evolution com zona de estar e cozinha em espaço aberto, despensa independente e aquecimento elétrico. Os dois quartos têm cinco lugares para dormir.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Duche e lavatório numa divisão; sanita separada.",
     "bedroom_sleeping_places": 5,
@@ -504,7 +504,7 @@
       }
     ],
     "description_azmora": "O’Hara 734 de dois quartos, com revestimento exterior em madeira e deck coberto iluminado. A zona de refeições tem banco corrido e a cozinha está equipada com placa elétrica de quatro zonas.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
     "bathroom_count_minimum": 1,
@@ -580,7 +580,7 @@
       }
     ],
     "description_azmora": "IRM Super Octália com três quartos e seis lugares para dormir nos quartos. A zona social tem sofá de canto, ar condicionado, portas envidraçadas e cozinha em U.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Duche e lavatório numa divisão; WC independente.",
     "bedroom_sleeping_places": 6,
@@ -656,7 +656,7 @@
       }
     ],
     "description_azmora": "IRM Super Mercure de dois quartos, com sala e cozinha abertas, sofá de canto, placa a gás e aquecimento elétrico. Um dos quartos tem duas camas individuais.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC independente.",
     "bathroom_count_minimum": 1,
@@ -731,7 +731,7 @@
       }
     ],
     "description_azmora": "Atlas Nevada Super com três quartos, sala ampla, cozinha equipada e aquecimento por radiadores. Duas portas ligam a casa ao exterior.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e instalações sanitárias separadas.",
     "bathroom_count_minimum": 1,
@@ -803,7 +803,7 @@
       }
     ],
     "description_azmora": "IRM Super Octália com três quartos e 36,8 m² anunciados. A sala comunica com a cozinha, que tem fogão e arrumação, e o WC é separado da zona de duche.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
     "bathroom_count_minimum": 1,
@@ -876,7 +876,7 @@
       }
     ],
     "description_azmora": "O’Hara 784 com dois quartos e alpendre em madeira. A zona de refeições comunica com a cozinha, equipada com fogão, frigorífico e arrumação.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
     "bathroom_count_minimum": 1,
@@ -949,7 +949,7 @@
       }
     ],
     "description_azmora": "Willerby Salisbury com dois quartos, sala dividida em duas zonas e janelas amplas. O quarto principal tem arrumação.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_count_minimum": 1,
     "model_measure_reference": {
@@ -1020,7 +1020,7 @@
       }
     ],
     "description_azmora": "Trigano de três quartos, com cozinha equipada com armários e WC separado. A designação «n.º 18» identifica o anúncio e o modelo de fábrica está por confirmar.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "WC separado. A configuração do duche está por confirmar.",
     "bathroom_count_minimum": 1,
@@ -1094,7 +1094,7 @@
       }
     ],
     "description_azmora": "O’Hara 834 de dois quartos, com beliche, máquina de lavar loiça, cabine de duche e WC separado.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e WC separado.",
     "bathroom_count_minimum": 1,
@@ -1166,7 +1166,7 @@
       }
     ],
     "description_azmora": "O’Hara T2 com dois quartos e cozinha equipada com fogão, frigorífico e arrumação. O anúncio indica 7,5 × 4 m e 30 m². O submodelo não está identificado.",
-    "publish": false,
+    "publish": true,
     "catalogue_preview_allowed": true,
     "bathroom_layout": "Cabine de duche e lavatório numa divisão; WC separado.",
     "bathroom_count_minimum": 1,
