@@ -1,5 +1,6 @@
 ---
 import { catalogRecord } from '../lib/catalog';
-import { houses } from '../lib/site';
+import { pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 ---
 <script type="application/json" id="catalog-data" set:html={JSON.stringify(houses.map(catalogRecord)).replace(/</g, '\\u003c')} />

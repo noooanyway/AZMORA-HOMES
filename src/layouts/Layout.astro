@@ -13,7 +13,8 @@ import Brand from '../components/Brand.astro';
 import CallContact from '../components/CallContact.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { url, houses, preview, complaintsUrl } from '../lib/site';
+import { url, preview, complaintsUrl, pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 import { previousCatalogNumber } from '../lib/catalog';
 interface Props {
   title: string;

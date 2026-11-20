@@ -6,7 +6,8 @@ import CallContact from '../../components/CallContact.astro';
 import HouseHighlights from '../../components/HouseHighlights.astro';
 import HouseTechnical from '../../components/HouseTechnical.astro';
 import '../../styles/house-detail.css';
-import { url, houses, detail, priceRequest } from '../../lib/site';
+import { url, detail, priceRequest, pageHouses, houses as staticHouses } from '../../lib/site';
+const houses = pageHouses(Astro.locals);
 import { price, status, type House } from '../../lib/catalog';
 import {
   Heart,
@@ -17,9 +18,14 @@ import {
   ChevronRight,
 } from 'lucide-astro';
 export function getStaticPaths() {
-  return houses.map((h) => ({ params: { slug: h.media_slug }, props: { h } }));
+  return staticHouses.map((h) => ({ params: { slug: h.media_slug }, props: { h } }));
 }
-const { h } = Astro.props as { h: House };
+const h: House | undefined = Astro.props.h ?? houses.find(unit => unit.media_slug === Astro.params.slug);
+if (!h) {
+  const legacy = houses.find(unit => unit.id === Astro.params.slug);
+  if (legacy) return Astro.redirect(detail(legacy), 301);
+  return Astro.rewrite(url('404/'));
+}
 const breadcrumbs = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -36,9 +42,9 @@ const related = houses
 ---
 
 <Layout
-  title={h.name_for_site}
+  title={h.seo_title || h.name_for_site}
   sharePhoto={h.media[0]}
-  description={h.description_azmora || undefined}
+  description={h.seo_description || h.description_azmora || undefined}
   ><div class="wrap page">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs).replace(/</g, '\\u003c')} />
     <nav class="crumb" aria-label="Percurso da página">

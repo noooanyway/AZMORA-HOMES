@@ -6,3 +6,8 @@ dist/
 *.log
 .qa/
 
+
+dist-cloudflare/
+.wrangler/
+.dev.vars
+inventory-seed.sql

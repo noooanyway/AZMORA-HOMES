@@ -3,17 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Photo from '../components/Photo.astro';
 import PurchaseGuide from '../components/PurchaseGuide.astro';
-import { url, houses, brands, detail } from '../lib/site';
+import { url, detail, pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 import { name } from '../lib/catalog';
 import { Search, SlidersHorizontal } from 'lucide-astro';
+const brands = [...new Set(houses.map(h => h.brand))].sort();
 const hero =
+  houses.find((h) => h.featured && h.media.length) ||
   houses.find((h) => h.id.endsWith('-007') && h.media.length) ||
   houses.find((h) => h.media.length);
 const types = [...new Set(houses.map((h) => h.typology).filter(Boolean))];
 const featured = [
   ...houses.filter((h) => h.media.length),
   ...houses.filter((h) => !h.media.length),
-].slice(0, 3);
+].sort((a,b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 3);
 ---
 
 <Layout sharePhoto={hero?.media[0]} description="Explore casas móveis usadas para os Açores e a Madeira. Compare as fichas e peça um orçamento com IVA e entrega no porto da sua ilha." title="Casas móveis usadas para os Açores e a Madeira"

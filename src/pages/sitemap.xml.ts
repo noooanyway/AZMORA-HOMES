@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { houses, url, detail, preview } from '../lib/site';
-export const GET: APIRoute = ({ site }) => {
+import { pageHouses, url, detail, preview } from '../lib/site';
+export const GET: APIRoute = ({ site, locals }) => {
   const routes = preview
     ? []
     : [
@@ -12,7 +12,7 @@ export const GET: APIRoute = ({ site }) => {
           'privacidade/',
           'termos/',
         ].map((p) => url(p)),
-        ...houses.map(detail),
+        ...pageHouses(locals).map(detail),
       ];
   return new Response(
     '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +

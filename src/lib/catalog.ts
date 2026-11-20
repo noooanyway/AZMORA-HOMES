@@ -1,6 +1,9 @@
 export interface House {
   id: string;
   media_slug: string;
+  featured?: boolean;
+  seo_title?: string;
+  seo_description?: string;
   brand: string;
   model: string | null;
   name_for_site: string;

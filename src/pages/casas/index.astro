@@ -3,7 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Card from '../../components/Card.astro';
 import CatalogData from '../../components/CatalogData.astro';
 import Filters from '../../components/Filters.astro';
-import { houses } from '../../lib/site';
+import { pageHouses } from '../../lib/site';
+const houses = pageHouses(Astro.locals);
 import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-astro';
 ---
 

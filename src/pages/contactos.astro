@@ -4,7 +4,8 @@ import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import CallContact from '../components/CallContact.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { contacts, detail, houses, url } from '../lib/site';
+import { contacts, detail, url, pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 import { previousCatalogNumber } from '../lib/catalog';
 import '../styles/contact.css';
 

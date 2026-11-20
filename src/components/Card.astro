@@ -1,6 +1,7 @@
 ---
 import { Heart, Columns2, BedDouble, Maximize2, Bath } from 'lucide-astro';
-import { detail, houses, priceRequest } from '../lib/site';
+import { detail, priceRequest, pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 import { bathroomCount, name, status, price, houseMeasure, type House } from '../lib/catalog';
 import Photo from './Photo.astro';
 const { h, heading: Heading = 'h3' } = Astro.props as { h: House; heading?: 'h2' | 'h3' };

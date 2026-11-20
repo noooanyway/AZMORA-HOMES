@@ -1,5 +1,6 @@
 ---
-import { houses } from '../lib/site';
+import { pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 const facets = [
   ['brand', 'Marca'],
   ['typology', 'Tipologia'],

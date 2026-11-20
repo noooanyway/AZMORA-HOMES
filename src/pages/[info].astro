@@ -14,6 +14,7 @@ export function getStaticPaths() {
     params: { info },
   }));
 }
+if (Astro.params.info !== 'sobre') return Astro.rewrite(url('404/'));
 const [label, title, a, b] = pages[Astro.params.info as keyof typeof pages];
 ---
 

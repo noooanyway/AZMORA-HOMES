@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import { houses, url } from '../lib/site';
+import { url, pageHouses } from '../lib/site';
+const houses = pageHouses(Astro.locals);
 ---
 
 <Layout noindex title="Favoritos"

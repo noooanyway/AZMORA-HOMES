@@ -9,13 +9,16 @@
     "check": "astro check",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "catalog:validate": "node scripts/catalog.mjs",
-    "catalog:import": "node scripts/catalog.mjs --import"
+    "catalog:import": "node scripts/catalog.mjs --import",
+    "build:cloudflare": "astro build --config cloudflare/config.mjs && node scripts/cloudflare-edge.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.5",
+    "@astrojs/cloudflare": "^12.6.13",
     "@fontsource-variable/source-serif-4": "^5.3.1",
     "@fontsource/dm-sans": "^5.2.0",
     "astro": "^5.16.0",
+    "jose": "^6.2.18",
     "lucide-astro": "^0.468.0",
     "typescript": "^5.9.0"
   },
