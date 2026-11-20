@@ -154,12 +154,13 @@ try {
   await page.locator('#saved [data-fav="exposul-001"]').click();
   assert.ok(await page.locator('#favempty').isVisible());
   let notification;
+  let accepted = false;
   await page.route(endpoint, async (route) => {
     const request = route.request();
     notification = await new Response(request.postDataBuffer(), {
       headers: { 'Content-Type': request.headers()['content-type'] },
     }).formData();
-    await route.fulfill({ json: { ok: true } });
+    await route.fulfill({ json: { ok: accepted } });
   });
   await page.goto(root + 'contactos/?casas=' + data[0].id + '&motivo=preco');
   assert.ok(await page.locator('a[href="mailto:azmorahomes@gmail.com"]').first().isVisible());
@@ -171,14 +172,27 @@ try {
   assert.equal(notification, undefined);
   await page.locator('[name=privacidade]').check();
   await page.locator('#lead-form button[type=submit]').click();
+  const formStatus = page.locator('#lead-status');
+  await formStatus.and(page.locator('[data-state=error]')).waitFor();
+  const reference = notification.get('Referência do pedido');
+  assert.match(reference, /^AZ-[0-9A-F]{8}$/);
+  assert.ok((await formStatus.innerText()).includes(reference));
+  assert.equal(await page.locator('[name=message]').inputValue(), 'Teste de preço e disponibilidade. Pode ignorar.');
+  accepted = true;
+  await page.locator('#lead-form button[type=submit]').click();
   await page.locator('#lead-status[data-state=success]').waitFor();
-  assert.equal(notification.get('subject'), '[Azmora Homes] Preço e disponibilidade — ' + data[0].name_for_site);
+  assert.ok(await formStatus.evaluate((element) => element === document.activeElement));
+  assert.ok((await formStatus.innerText()).includes(reference));
+  assert.equal(notification.get('Referência do pedido'), reference);
+  assert.equal(notification.get('subject'), `[Azmora Homes] Preço e disponibilidade — ${data[0].name_for_site} · ${reference}`);
   assert.equal(notification.get('email'), 'teste@example.com');
-  assert.equal(notification.get('nome'), 'Teste Azmora');
-  assert.equal(notification.get('motivo'), 'Preço e disponibilidade');
-  assert.equal(notification.get('localidade'), 'Ponta Delgada');
-  assert.equal(notification.get('message'), 'Teste de preço e disponibilidade. Pode ignorar.');
-  assert.equal(notification.get('casas'), data[0].name_for_site + ' · ' + root + 'casas/' + data[0].id + '/');
+  assert.equal(notification.get('Nome'), 'Teste Azmora');
+  assert.equal(notification.get('Motivo do pedido'), 'Preço e disponibilidade');
+  assert.equal(notification.get('Localidade de destino'), 'Ponta Delgada');
+  assert.equal(notification.get('Mensagem'), 'Teste de preço e disponibilidade. Pode ignorar.');
+  assert.equal(notification.get('Casas de interesse'), data[0].name_for_site + ' · ' + root + 'casas/' + data[0].id + '/');
+  assert.equal(notification.get('Política de Privacidade'), 'Li e concordo');
+  assert.ok(!notification.has('Telefone') && !notification.has('Tipologia pretendida'));
   assert.deepEqual(errors, []);
   console.log(
     'OK browser · desktop/mobile 360 px, filtros partilháveis, lista, ordenação, favoritos persistentes, comparação 2–3, contacto, ficha, galeria quando disponível, navegação e teclado.',

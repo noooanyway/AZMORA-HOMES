@@ -79,6 +79,7 @@ renderSelection();
 updateTopic();
 
 submit.disabled = !canSend;
+let requestReference: string | undefined;
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!canSend || submit.disabled || !form.reportValidity()) return;
@@ -89,11 +90,27 @@ form.addEventListener('submit', async (event) => {
   const summary = houseNames.length <= 2
     ? houseNames.join(', ')
     : `${houseNames[0]} e mais ${houseNames.length - 1} casas`;
-  const preference = String(data.get('tipologia') ?? '');
+  const field = (name: string) => String(data.get(name) ?? '').trim();
+  const preference = field('tipologia');
   const context = summary || preference || 'Pedido geral';
-  data.set('subject', `[Azmora Homes] ${topicLabel()} — ${context}`);
-  data.set('motivo', topicLabel());
-  data.set('casas', houseDetails().join('\n') || 'Nenhuma casa selecionada');
+  requestReference ??= `AZ-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  const reference = requestReference;
+  const notification = new FormData();
+  for (const [label, value] of Object.entries({
+    subject: `[Azmora Homes] ${topicLabel()} — ${context} · ${reference}`,
+    'Motivo do pedido': topicLabel(),
+    Mensagem: field('message'),
+    'Casas de interesse': houseDetails().join('\n'),
+    Nome: field('nome'),
+    email: field('email'),
+    Telefone: field('telefone'),
+    'Tipologia pretendida': preference,
+    'Localidade de destino': field('localidade'),
+    'Política de Privacidade': field('privacidade'),
+    'Referência do pedido': reference,
+  })) {
+    if (value) notification.append(label, value);
+  }
 
   submit.disabled = true;
   form.setAttribute('aria-busy', 'true');
@@ -102,19 +119,21 @@ form.addEventListener('submit', async (event) => {
   try {
     const response = await fetch(form.action, {
       method: 'POST',
-      body: data,
+      body: notification,
       headers: { Accept: 'application/json' },
       signal: AbortSignal.timeout(15000),
     });
-    if (!response.ok) throw new Error('Submission rejected');
-    status.textContent = 'Pedido enviado. A resposta será feita para o email que indicou.';
+    if (!response.ok || (await response.json()).ok !== true) throw new Error('Submission rejected');
+    status.textContent = `Pedido recebido. Guarde a referência ${reference}. A equipa responderá para o email que indicou.`;
     status.dataset.state = 'success';
     message.value = '';
+    requestReference = undefined;
   } catch {
-    status.textContent = 'Não foi possível confirmar o envio. Os seus dados continuam no formulário. Tente novamente.';
+    status.textContent = `Não foi possível confirmar a receção do pedido ${reference}. Os seus dados continuam no formulário. Tente novamente.`;
     status.dataset.state = 'error';
   } finally {
     submit.disabled = false;
     form.removeAttribute('aria-busy');
+    status.focus();
   }
 });

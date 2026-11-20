@@ -56,9 +56,22 @@
 }
 .contact-houses li + li { margin-top: 6px; }
 .contact-houses button { flex: none; width: 44px; height: 44px; font-size: 1.2rem; }
-.contact-form-status:empty { display: none; }
-.contact-form-status { margin: 12px 0 0; font-size: .9rem; font-weight: 600; }
-.contact-form-status[data-state='error'] { color: #80321e; }
+.contact-form-status { margin: 0; font-size: 1rem; font-weight: 600; }
+.contact-form-status[data-state] {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.contact-form-status[data-state='success'] {
+  background: #e6ebe1;
+  border-inline-start: 4px solid var(--ink);
+}
+.contact-form-status[data-state='error'] {
+  color: #80321e;
+  background: #f8eee8;
+  border-inline-start: 4px solid currentColor;
+}
 @media (max-width: 760px) {
   #contact.contact-grid, .contact-form-grid { grid-template-columns: minmax(0, 1fr); }
 }

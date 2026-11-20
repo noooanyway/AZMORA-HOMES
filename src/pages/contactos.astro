@@ -90,7 +90,7 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
         <button class="btn primary" type="submit" disabled aria-describedby={contacts.form ? undefined : 'lead-unavailable'}>
           {contacts.form ? 'Enviar pedido por email' : 'Envio ainda indisponível'}
         </button>
-        <p id="lead-status" class="contact-form-status" role="status" aria-live="polite"></p>
+        <p id="lead-status" class="contact-form-status" role="status" tabindex="-1"></p>
       </form>
     </div>
   </div>
