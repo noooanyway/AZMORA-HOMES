@@ -1,6 +1,7 @@
-export const GET = async ({ locals, params }) => {
+import { env as bindings } from 'cloudflare:workers';
+export const GET = async ({ params }) => {
   const key = 'images/' + params.key.replace(/\/$/,'');
-  const { DB, PHOTOS } = locals.runtime.env;
+  const { DB, PHOTOS } = bindings;
   const row = await DB.prepare(
     "SELECT 1 FROM inventory i,json_each(i.data,'$.media') m WHERE i.state='live' AND ? IN (m.value->>'src',m.value->>'small',m.value->>'cover') LIMIT 1",
   )

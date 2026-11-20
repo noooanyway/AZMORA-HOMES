@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 const short = z.string().trim().max(250);
 const note = z.string().trim().max(5000).nullable();
-const number = z.number().finite().min(0).max(1e8).nullable();
+const number = z.number().min(0).max(1e8).nullable();
 const count = z.number().int().min(0).max(100).nullable();
 const path = z
   .string()

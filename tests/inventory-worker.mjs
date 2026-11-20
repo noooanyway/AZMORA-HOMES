@@ -1,4 +1,4 @@
-import { Miniflare } from 'miniflare';
+import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
 import { generateKeyPair, exportJWK, SignJWT } from 'jose';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,14 +19,14 @@ const token = await new SignJWT({ type: 'app', email: 'owner@example.test' })
   .setProtectedHeader({ kid: 'local', alg: 'RS256' })
   .sign(privateKey);
 const bundle = await build({
-  entryPoints: ['dist-cloudflare/_worker.js/index.js'],
+  entryPoints: ['dist-cloudflare/client/_worker.js/index.js'],
   bundle: true,
   format: 'esm',
   platform: 'neutral',
   external: ['cloudflare:*', 'node:*'],
   write: false,
 });
-const mf = new Miniflare({
+const mf = new Miniflare(convertV4MiniflareOptions({
   modules: [
     {
       type: 'ESModule',
@@ -49,7 +49,7 @@ const mf = new Miniflare({
     new URL(request.url).origin === issuer
       ? Response.json({ keys: [jwk] })
       : new Response(null, { status: 403 }),
-});
+}));
 try {
   const db = await mf.getD1Database('DB');
   // D1 exec takes one complete statement per line.

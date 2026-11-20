@@ -1,0 +1,8 @@
+{
+  "name": "azmora-renderer",
+  "compatibility_date": "2025-11-01",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "disable_nodejs_process_v2"
+  ]
+}

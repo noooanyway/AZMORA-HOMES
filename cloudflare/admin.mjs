@@ -1,9 +1,10 @@
+import { env as bindings } from 'cloudflare:workers';
 import { authorize } from './access.mjs';
 import { fields, limited, dimensions, stripMetadata } from './inventory.mjs';
 import html from './panel.html?raw';
 const reply = (message, status) => Response.json({ message }, { status });
-export const ALL = async ({ request, params, locals }) => {
-  const env = locals.runtime.env,
+export const ALL = async ({ request, params }) => {
+  const env = bindings,
     actor = await authorize(request, env);
   if (!actor) return reply('Acesso reservado à administração.', 403);
   const action = params.action?.replace(/\/$/, '') || '',

@@ -12,7 +12,7 @@ export default defineConfig({
   outDir: './dist-cloudflare',
   publicDir: './.astro/empty-public',
   adapter: cloudflare({
-    platformProxy: { enabled: true },
+    configPath: './cloudflare/build-worker.json',
     imageService: 'compile',
   }),
   integrations: [

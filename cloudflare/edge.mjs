@@ -1,4 +1,4 @@
-import renderer from './astro-entry.js';
+import renderer from './entry.mjs';
 
 // Only the project's public routes and protected inventory reach the SSR renderer.
 export default {

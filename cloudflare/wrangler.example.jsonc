@@ -1,6 +1,6 @@
 {
   "name": "azmora-homes",
-  "pages_build_output_dir": "dist-cloudflare",
+  "pages_build_output_dir": "dist-cloudflare/client",
   "compatibility_date": "2025-11-01",
   "compatibility_flags": ["nodejs_compat","disable_nodejs_process_v2"],
   "d1_databases": [{"binding":"DB","database_name":"azmora-inventario","database_id":"SUBSTITUIR_PELO_ID_D1","migrations_dir":"migrations"}],

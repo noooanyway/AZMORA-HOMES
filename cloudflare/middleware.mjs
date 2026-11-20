@@ -1,9 +1,10 @@
+import { env as bindings } from 'cloudflare:workers';
 import { defineMiddleware } from 'astro:middleware';
 export const onRequest = defineMiddleware(async (ctx, next) => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const path = new URL(ctx.request.url).pathname.slice(base.length);
   if (!/^\/(admin|images)(\/|$)/.test(path)) {
-    const { results } = await ctx.locals.runtime.env.DB.prepare(
+    const { results } = await bindings.DB.prepare(
       "SELECT data FROM inventory WHERE state='live' ORDER BY rowid",
     ).all();
     ctx.locals.houses = results.map((row) => JSON.parse(row.data));
