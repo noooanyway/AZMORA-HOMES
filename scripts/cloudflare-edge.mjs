@@ -3,6 +3,8 @@ import path from 'node:path';
 const root = 'dist-cloudflare';
 const client = path.join(root, 'client');
 const worker = path.join(client, '_worker.js');
+await fs.mkdir(path.join(client, 'assets'), { recursive: true });
+await fs.copyFile('public/assets/azmora-logo.png', path.join(client, 'assets/azmora-logo.png'));
 const origin = new URL(process.env.SITE_URL).origin;
 if (!origin.startsWith('https://')) throw Error('SITE_URL deve usar HTTPS.');
 const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
@@ -23,6 +25,6 @@ await fs.writeFile(
   JSON.stringify({
     version: 1,
     include: ['/*'],
-    exclude: [base + '/_astro/*'],
+    exclude: [base + '/_astro/*', base + '/assets/azmora-logo.png'],
   }),
 );

@@ -448,7 +448,7 @@ export function csvCell(value) {
   if (/^[\s\uFEFF]*[=+@-]/.test(s) || /^[\t\r\n]/.test(s)) s = "'" + s;
   return '"' + s.replace(/"/g, '""') + '"';
 }
-export async function adminContacts(request, env, action) {
+export async function adminContacts(request, env, action, actor = null) {
   const db = env.DB,
     params = new URL(request.url).searchParams;
   if (request.method === 'GET') {
@@ -461,6 +461,7 @@ export async function adminContacts(request, env, action) {
       delete row.email_payload;
       delete row.payload_hash;
       delete row.dedupe_key;
+      row.history = (await db.prepare('SELECT event,at,actor,old_value,new_value,note FROM contact_history WHERE contact_id=? ORDER BY id DESC LIMIT 500').bind(row.id).all()).results;
       return Response.json(row);
     }
     const filters = [],
@@ -589,8 +590,14 @@ export async function adminContacts(request, env, action) {
       .bind(input.id)
       .first();
     if (!exists) return reply('Pedido inexistente.', 404);
+    await db.prepare("INSERT INTO contact_history(contact_id,event,actor) SELECT id,'retry',? FROM contact_requests WHERE id=?").bind(actor,input.id).run();
     const result = await notifyContact(db, input.id, env);
     return Response.json(result, { status: result.ok ? 200 : 409 });
+  }
+  if (action === 'contactos-acao') {
+    if (!['zoho','whatsapp'].includes(input.kind)) return reply('Ação inválida.');
+    const result = await db.prepare("INSERT INTO contact_history(contact_id,event,actor) SELECT id,?,? FROM contact_requests WHERE id=?").bind(input.kind,actor,input.id).run();
+    return result.meta.changes ? Response.json({ok:true}) : reply('Pedido inexistente.',404);
   }
   if (!Number.isInteger(input.revision))
     return reply('Reabra o pedido antes de guardar.');
@@ -603,9 +610,9 @@ export async function adminContacts(request, env, action) {
       return reply('Estado ou notas inválidos.');
     const result = await db
       .prepare(
-        'UPDATE contact_requests SET status=?,notes=?,revision=revision+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND revision=?',
+        'UPDATE contact_requests SET history_actor=?,status=?,new_note=?,revision=revision+1,updated_at=CURRENT_TIMESTAMP WHERE id=? AND revision=?',
       )
-      .bind(input.status, input.notes, input.id, input.revision)
+      .bind(actor, input.status, input.notes.trim(), input.id, input.revision)
       .run();
     return result.meta.changes
       ? Response.json({ ok: true })

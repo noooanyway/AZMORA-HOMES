@@ -338,6 +338,7 @@ test('admin pesquisa, filtros, detalhe, estados, concorrência, exportação e e
   );
   const detail = await (await get('contacto', 'id=' + id)).json();
   assert.equal(detail.email_payload, undefined);
+  f.sql.prepare('UPDATE contact_requests SET notes=? WHERE id=?').run('Nota anterior',id);
   assert.equal(
     (
       await post('contactos-guardar', {
@@ -360,8 +361,10 @@ test('admin pesquisa, filtros, detalhe, estados, concorrência, exportação e e
     ).status,
     409,
   );
-  const csv = await (await get('contactos-exportar')).text();
-  assert.ok(csv.includes('"\'=HYPERLINK'));
+  const updated = await (await get('contacto', 'id=' + id)).json();
+  assert.ok(updated.history.some(h => h.event === 'note' && h.note === '=HYPERLINK("evil")'));
+  assert.ok(updated.history.some(h => h.event === 'status' && h.old_value === 'new' && h.new_value === 'working'));
+  assert.equal(updated.notes,'Nota anterior');
   assert.equal(
     (await post('contactos-eliminar', { id, revision: 2, confirm: id })).status,
     409,
@@ -382,5 +385,6 @@ test('admin pesquisa, filtros, detalhe, estados, concorrência, exportação e e
     200,
   );
   assert.equal(f.row(), undefined);
+  assert.equal(f.sql.prepare('SELECT count(*) n FROM contact_history').get().n,0);
   f.sql.close();
 });

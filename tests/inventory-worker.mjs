@@ -73,7 +73,7 @@ try {
   for (const f of fs.readdirSync('migrations').sort()) {
     const sql = fs.readFileSync('migrations/' + f, 'utf8');
     const statements = sql.match(
-      /CREATE TRIGGER[\s\S]*?END;|(?:CREATE TABLE|CREATE INDEX|INSERT INTO)[^]*?;(?=\s*(?:CREATE|INSERT|$))/gi,
+      /CREATE TRIGGER[\s\S]*?END;|(?:CREATE TABLE|CREATE INDEX|ALTER TABLE|INSERT INTO)[^]*?;(?=\s*(?:CREATE|ALTER|INSERT|$))/gi,
     );
     assert.ok(statements?.length);
     for (const stmt of statements) await db.prepare(stmt).run();
@@ -153,6 +153,7 @@ try {
     'admin/contactos-guardar/',
     'admin/contactos-reenviar/',
     'admin/contactos-eliminar/',
+    'admin/contactos-acao/',
   ]) {
     assert.equal((await call(path)).status, 403, path);
     assert.equal(
@@ -393,6 +394,7 @@ try {
         'contactos mobile',
       );
       await page.goto(base + 'admin/');
+      await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
       await page.locator('#list .unit').first().waitFor();
       await page.reload();
       await page.getByRole('button', { name: /Pedidos de contacto/ }).click();
@@ -401,7 +403,19 @@ try {
         .filter({ hasText: 'Cliente sintético' })
         .getByRole('button', { name: 'Consultar pedido' })
         .click();
+      await page.locator('#contact-detail:not([aria-busy])').waitFor();
+      assert.match(await page.locator('#contact-legacy-note').innerText(),/Nota anterior de teste/);
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),false);
+      await page.locator('#contact-list article').filter({hasText:'Cliente sintético'}).getByRole('button',{name:'Consultar pedido'}).click();
+      await page.locator('#contact-detail:not([aria-busy])').waitFor();
+      await page.mouse.click(1,1);
+      assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),false);
+      await page.locator('#contact-list article').filter({hasText:'Cliente sintético'}).getByRole('button',{name:'Consultar pedido'}).click();
       await page.locator('#contact-notes').fill('Nota de ensaio');
+      page.once('dialog', dialog => dialog.dismiss());
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),true);
       await page.locator('#contact-status').selectOption('working');
       await page
         .getByRole('button', { name: 'Guardar acompanhamento' })
@@ -409,6 +423,17 @@ try {
       await page
         .getByText('Acompanhamento guardado.', { exact: true })
         .waitFor();
+      assert.ok(await page.locator('#contact-history').innerText().then(s=>s.includes('Nota de ensaio')));
+      assert.equal(await page.locator('#contact-email').getAttribute('href'),'https://mail.zoho.eu/');
+      await page.locator('#contact-status').selectOption('archived');
+      await page.getByRole('button', { name: 'Guardar acompanhamento' }).click();
+      await page.getByText('Acompanhamento guardado.', { exact: true }).waitFor();
+      await page.locator('#contact-detail:not([aria-busy])').waitFor();
+      await page.locator('summary').filter({hasText:'Eliminar dados pessoais'}).click();
+      await page.locator('#contact-delete').click();
+      await page.locator('#delete-confirmation[open]').waitFor();
+      await page.locator('#delete-cancel').click();
+      assert.ok(await db.prepare('SELECT id FROM contact_requests WHERE id=?').bind(contactInput.id).first());
       await page.locator('#contact-detail').evaluate((dialog) => {
         dialog.scrollTop = 0;
       });
@@ -417,10 +442,10 @@ try {
       assert.equal(
         (
           await db
-            .prepare('SELECT notes FROM contact_requests WHERE id=?')
+            .prepare("SELECT note FROM contact_history WHERE contact_id=? AND event='note'")
             .bind(contactInput.id)
             .first()
-        ).notes,
+        ).note,
         'Nota de ensaio',
       );
       await page.locator('#show-inventory').click();

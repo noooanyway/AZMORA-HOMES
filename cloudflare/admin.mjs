@@ -13,7 +13,7 @@ export const ALL = async ({ request, params }) => {
     db = env.DB;
   if (action.startsWith('contacto')) {
     try {
-      return await adminContacts(request, env, action);
+      return await adminContacts(request, env, action, actor);
     } catch {
       return reply(
         'Não foi possível concluir a operação. Tente novamente.',

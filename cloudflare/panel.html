@@ -157,9 +157,17 @@
     dialog::backdrop {
       background: #10251dcc;
     }
+    #contact-close, #closePreview { float: right; }
     #contact-detail {
       width: min(680px, 94vw);
     }
+    #contact-detail h3 { margin: 1.5em 0 .5em; }
+    #contact-info { padding: 1rem; background: #f2eee4; border-radius: 6px; }
+    #contact-info p { margin: .55rem 0; }
+    #contact-history { padding-left: 1.4rem; border-left: 2px solid #c9c3b4; list-style: none; }
+    #contact-history li { padding: .7rem 0 .7rem 1rem; border-bottom: 1px solid #e1ddcf; overflow-wrap: anywhere; }
+    #contact-notification, #contact-legacy-note { background: #f2eee4; padding: .8rem; border-radius: 4px; }
+    #delete-confirmation { width: min(480px, 94vw); }
     #contact-list .unit > div {
       min-width: 0;
       overflow-wrap: anywhere;
@@ -231,17 +239,20 @@
     <dialog id="contact-detail" aria-labelledby="contact-title">
       <button id="contact-close">Fechar</button>
       <h2 id="contact-title">Pedido de contacto</h2>
+      <h3>Cliente e pedido</h3>
       <div
         id="contact-info"
         style="overflow-wrap: anywhere; white-space: pre-wrap"
       ></div>
-      <p class="actions">
-        <a id="contact-email">Responder por email</a
+      <h3>Ações de contacto</h3><p class="actions">
+        <a id="contact-email" href="https://mail.zoho.eu/" target="_blank" rel="noopener noreferrer">Responder via Zoho Mail</a
         ><a id="contact-whatsapp" target="_blank" rel="noopener noreferrer"
           >Contactar por WhatsApp</a
         >
       </p>
-      <form id="contact-edit">
+      <p>Entre na conta profissional geral@azmorahomes.pt. Abrir o Zoho não envia uma resposta.</p>
+      <p class="actions"><button type="button" id="copy-email">Copiar email do cliente</button><button type="button" id="copy-subject">Copiar assunto</button></p>
+      <h3>Acompanhamento</h3><form id="contact-edit">
         <label
           >Estado<select id="contact-status">
             <option value="new">Novo</option>
@@ -251,7 +262,7 @@
           </select></label
         >
         <label
-          >Notas internas<textarea
+          >Nova nota interna<textarea
             id="contact-notes"
             maxlength="5000"
           ></textarea>
@@ -260,8 +271,9 @@
           <button class="primary" type="submit">Guardar acompanhamento</button>
         </p>
       </form>
-      <p id="contact-notification"></p>
-      <button id="contact-retry">Reenviar notificação</button>
+      <section><h3>Notas anteriores</h3><p id="contact-legacy-note"></p><h3>Histórico de acompanhamento</h3><ol id="contact-history"></ol></section>
+      <h3>Notificação interna</h3><p id="contact-notification"></p>
+      <button id="contact-retry">Reenviar notificação interna</button>
       <details>
         <summary>Eliminar dados pessoais</summary>
         <p>
@@ -269,13 +281,16 @@
           não pode ser desfeita aqui. Emails e backups têm de ser tratados
           separadamente.
         </p>
-        <label
-          >Confirme a referência completa<input
-            id="contact-confirm"
-            autocomplete="off" /></label
-        ><button id="contact-delete">Eliminar definitivamente</button>
+        <p id="contact-delete-reason" role="status"></p>
+        <button type="button" id="contact-delete">Eliminar definitivamente</button>
       </details>
       <p id="contact-feedback" role="status"></p>
+    </dialog>
+    <dialog id="delete-confirmation" aria-labelledby="delete-title">
+      <h2 id="delete-title">Eliminar pedido definitivamente?</h2>
+      <p id="delete-description"></p>
+      <p>O pedido, notas e histórico serão eliminados. Emails, registos externos e backups têm procedimentos próprios de eliminação.</p>
+      <div class="actions"><button type="button" id="delete-cancel">Cancelar</button><button type="button" id="delete-accept">Eliminar definitivamente</button></div>
     </dialog>
     <section id="dash">
       <h1>Inventário de casas</h1>
@@ -379,8 +394,9 @@
               method: 'POST',
               headers: { 'Content-Type': type },
               body: type === 'application/json' ? JSON.stringify(body) : body,
+              signal: AbortSignal.timeout(30000),
             }
-          : {},
+          : { signal: AbortSignal.timeout(30000) },
       );
       if (!r.ok)
         throw Error(
@@ -765,6 +781,10 @@
       upload(e.dataTransfer.files);
     };
     el('closePreview').onclick = () => el('preview').close();
+    let previewBackdropStart = false;
+    el('preview').addEventListener('pointerdown', e => { previewBackdropStart = e.target === el('preview'); });
+    el('preview').addEventListener('click', e => { if (previewBackdropStart && e.target === el('preview') && !busy) el('preview').close(); previewBackdropStart = false; });
+    el('preview').addEventListener('cancel', e => { if (busy) e.preventDefault(); });
     el('peek').onclick = () => {
       const d = data(),
         s = el('sample');

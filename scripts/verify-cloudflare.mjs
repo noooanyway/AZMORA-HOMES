@@ -23,7 +23,8 @@ const routes = JSON.parse(
   await fs.readFile('dist-cloudflare/client/_routes.json'),
 );
 assert.deepEqual(routes.include, ['/*']);
-assert.deepEqual(routes.exclude, [base + '/_astro/*']);
+assert.deepEqual(routes.exclude, [base + '/_astro/*',base + '/assets/azmora-logo.png']);
+assert.deepEqual(await fs.readFile('dist-cloudflare/client/assets/azmora-logo.png'),await fs.readFile('public/assets/azmora-logo.png'));
 const files = await fs.readdir('dist-cloudflare/client', { recursive: true });
 assert.ok(
   !files.some((f) => /\.map$|\.env|\.dev\.vars/.test(f)),
