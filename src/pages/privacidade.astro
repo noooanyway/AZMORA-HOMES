@@ -4,57 +4,242 @@ import { company, contacts, preview } from '../lib/site';
 
 const identityPending = !company.legalName || !company.registeredAddress;
 const privacyEmail = company.privacyEmail || contacts.email;
+const native = Astro.locals.contactBackend === true;
 const fields = [
-  { label: 'Responsável pelo tratamento', value: company.legalName, placeholder: 'Entidade responsável a definir' },
-  { label: 'Morada', value: company.registeredAddress, placeholder: 'Morada da empresa a definir' },
-  { label: 'Contacto de privacidade', value: privacyEmail, placeholder: 'Email de privacidade a definir', email: true },
-  { label: 'Fundamento jurídico', value: company.privacyBasis, placeholder: 'Fundamento jurídico a validar' },
-  { label: 'Acesso aos pedidos', value: company.privacyAccess, placeholder: 'Acessos internos por confirmar' },
-  { label: 'Prazo ou critério de conservação', value: company.privacyRetention, placeholder: 'Prazo ou critério de conservação a definir' },
-  { label: 'Prestadores que recebem os pedidos', value: company.privacyProvider, placeholder: 'Prestador de formulários e email a confirmar' },
-  { label: 'Transferências internacionais', value: company.privacyTransfers, placeholder: 'Localização e garantias do tratamento externo a validar' },
-].filter(({ value }) => value || preview);
+  {
+    label: 'Responsável pelo tratamento',
+    value: company.legalName,
+    placeholder: 'Entidade responsável a definir',
+  },
+  {
+    label: 'Morada',
+    value: company.registeredAddress,
+    placeholder: 'Morada da empresa a definir',
+  },
+  {
+    label: 'Contacto de privacidade',
+    value: privacyEmail,
+    placeholder: 'Email de privacidade a definir',
+    email: true,
+  },
+  {
+    label: 'Fundamento jurídico',
+    value: company.privacyBasis,
+    placeholder: 'Fundamento jurídico a validar',
+  },
+  {
+    label: 'Acesso aos pedidos',
+    value: company.privacyAccess,
+    placeholder: 'Acessos internos por confirmar',
+  },
+  {
+    label: 'Prazo ou critério de conservação',
+    value: company.privacyRetention,
+    placeholder: 'Prazo ou critério de conservação a definir',
+  },
+  {
+    label: 'Prestadores que recebem os pedidos',
+    value: company.privacyProvider,
+    placeholder: 'Prestador de formulários e email a confirmar',
+  },
+  {
+    label: 'Transferências internacionais',
+    value: company.privacyTransfers,
+    placeholder: 'Localização e garantias do tratamento externo a validar',
+  },
+].filter(
+  ({ label, value }) =>
+    (value || preview) &&
+    (!native ||
+      ![
+        'Acesso aos pedidos',
+        'Prestadores que recebem os pedidos',
+        'Transferências internacionais',
+      ].includes(label)),
+);
 ---
 
-<Layout title="Privacidade" description="Informação sobre os dados usados pela Azmora Homes para responder a pedidos e guardar preferências no navegador.">
+<Layout
+  title="Privacidade"
+  description="Informação sobre os dados usados pela Azmora Homes para responder a pedidos e guardar preferências no navegador."
+>
   <div class="wrap page prose legal-page">
     <p class="kicker"><i></i> PRIVACIDADE</p>
     <h1>Política de <em>privacidade.</em></h1>
-    <p class="intro">Esta página explica que dados são utilizados quando envia um pedido e como funcionam os favoritos e a comparação de casas.</p>
-    {identityPending && <p class="legal-draft">Azmora Homes é o nome comercial. A denominação legal e a morada do responsável pelo tratamento estão por confirmar.</p>}
+    <p class="intro">
+      Esta página explica que dados são utilizados quando envia um pedido e como
+      funcionam os favoritos e a comparação de casas.
+    </p>
+    {
+      identityPending && (
+        <p class="legal-draft">
+          Azmora Homes é o nome comercial. A denominação legal e a morada do
+          responsável pelo tratamento estão por confirmar.
+        </p>
+      )
+    }
 
     <section>
       <h2>Pedidos de contacto</h2>
-      <p>O formulário recolhe nome, email, motivo e mensagem, bem como as casas selecionadas. Se os indicar, são também recebidos o telefone, a tipologia pretendida e a localidade de destino. Estes dados servem para identificar o pedido, responder e acompanhar a consulta sobre as casas.</p>
-      <p>O Formspree recebe o formulário e envia a notificação para o Gmail comercial. Os dados são usados para responder e acompanhar o seu pedido. O nome, o email, o motivo e a mensagem permitem receber e responder ao pedido. Os restantes campos são opcionais.</p>
-      {contacts.whatsapp && <p>Ao escolher o WhatsApp, abre um serviço externo. O WhatsApp trata os dados da conversa segundo as suas próprias condições de privacidade.</p>}
-      {fields.length > 0 && (
-        <dl class="business-details business-details-legal">
-          {fields.map(({ label, value, placeholder, email }) => (
-            <div>
-              <dt>{label}</dt>
-              <dd>{value ? email ? <a href={'mailto:' + value}>{value}</a> : value : <span class="business-placeholder">{placeholder}</span>}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
-      <p><a class="under" href="https://formspree.io/security/">Informação de segurança do Formspree</a> · <a class="under" href="https://policies.google.com/privacy/frameworks?hl=pt-PT">Transferências de dados da Google</a></p>
+      <p>
+        O formulário recolhe nome, email, motivo e mensagem, bem como as casas
+        selecionadas. Se os indicar, são também recebidos o telefone, a
+        tipologia pretendida e a localidade de destino. Estes dados servem para
+        identificar o pedido, responder e acompanhar a consulta sobre as casas.
+      </p>
+      {
+        native ? (
+          <>
+            <>
+              <p>
+                Os pedidos são guardados na base de dados Cloudflare D1 e
+                consultados pelos proprietários autorizados da Azmora Homes no
+                painel administrativo. O Resend recebe os dados do pedido para
+                enviar uma notificação à equipa. Não enviamos campanhas nem
+                confirmações automáticas aos clientes através deste formulário.
+              </p>
+              <p>
+                O Cloudflare Turnstile verifica as submissões para prevenir
+                abuso. São tratados dados técnicos da ligação para esta
+                verificação. O site conserva identificadores de segurança
+                derivados do endereço IP, sem guardar o endereço IP em claro na
+                base de contactos, durante até 24 horas; os registos expirados
+                são removidos na submissão seguinte.
+              </p>
+              <p>
+                A ilha de destino é opcional. O acesso ao serviço de email
+                comercial encontra-se em transição para o Zoho Mail. Os
+                prestadores podem tratar dados fora do Espaço Económico Europeu;
+                a Azmora Homes deve disponibilizar os mecanismos de
+                transferência aplicáveis à configuração contratada.
+              </p>
+            </>
+          </>
+        ) : (
+          <p>
+            O Formspree recebe o formulário e envia a notificação para o Gmail
+            comercial. Os dados são usados para responder e acompanhar o seu
+            pedido. O nome, o email, o motivo e a mensagem permitem receber e
+            responder ao pedido. Os restantes campos são opcionais.
+          </p>
+        )
+      }
+      {
+        contacts.whatsapp && (
+          <p>
+            Ao escolher o WhatsApp, abre um serviço externo. O WhatsApp trata os
+            dados da conversa segundo as suas próprias condições de privacidade.
+          </p>
+        )
+      }
+      {
+        fields.length > 0 && (
+          <dl class="business-details business-details-legal">
+            {fields.map(({ label, value, placeholder, email }) => (
+              <div>
+                <dt>{label}</dt>
+                <dd>
+                  {value ? (
+                    email ? (
+                      <a href={'mailto:' + value}>{value}</a>
+                    ) : (
+                      value
+                    )
+                  ) : (
+                    <span class="business-placeholder">{placeholder}</span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+      {
+        native ? (
+          <p>
+            <a class="under" href="https://www.cloudflare.com/privacypolicy/">
+              Privacidade da Cloudflare
+            </a>{' '}
+            ·{' '}
+            <a class="under" href="https://resend.com/legal/privacy-policy">
+              Privacidade do Resend
+            </a>
+          </p>
+        ) : (
+          <p>
+            <a class="under" href="https://formspree.io/security/">
+              Informação de segurança do Formspree
+            </a>{' '}
+            ·{' '}
+            <a
+              class="under"
+              href="https://policies.google.com/privacy/frameworks?hl=pt-PT"
+            >
+              Transferências de dados da Google
+            </a>
+          </p>
+        )
+      }
     </section>
 
     <section>
       <h2>Preferências no navegador</h2>
-      <p>O tema, os favoritos e a seleção para comparação ficam guardados no navegador. Pode limpar as seleções no site e remover as preferências nas definições do navegador. Quando envia um pedido sobre casas selecionadas, os nomes e as ligações para as fichas seguem no pedido.</p>
+      <p>
+        O tema, os favoritos e a seleção para comparação ficam guardados no
+        navegador. Pode limpar as seleções no site e remover as preferências nas
+        definições do navegador. Quando envia um pedido sobre casas
+        selecionadas, os nomes e as ligações para as fichas seguem no pedido.
+      </p>
     </section>
 
     <section>
       <h2>Alojamento do site</h2>
-      <p>O site está alojado no GitHub Pages. O GitHub indica que regista o endereço IP dos visitantes para fins de segurança.</p>
-      <p><a class="under" href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">Informação do GitHub Pages</a></p>
+      {
+        native ? (
+          <p>
+            O site está alojado na Cloudflare Pages. As fotografias são servidas
+            pelo Cloudflare R2 e o catálogo é guardado na Cloudflare D1. A
+            Cloudflare trata dados técnicos necessários ao funcionamento e à
+            segurança do serviço.
+          </p>
+        ) : (
+          <>
+            <>
+              <p>
+                O site está alojado no GitHub Pages. O GitHub indica que regista
+                o endereço IP dos visitantes para fins de segurança.
+              </p>
+              <p>
+                <a
+                  class="under"
+                  href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+                >
+                  Informação do GitHub Pages
+                </a>
+              </p>
+            </>
+          </>
+        )
+      }
     </section>
 
     <section>
       <h2>Os seus direitos</h2>
-      <p>Pode pedir acesso, retificação ou apagamento dos seus dados, limitação do tratamento, oposição ou portabilidade, quando aplicável. Para exercer estes direitos, escreva para {privacyEmail && <a class="under" href={'mailto:' + privacyEmail}>{privacyEmail}</a>}. Também pode apresentar uma reclamação à <a class="under" href="https://www.cnpd.pt/cidadaos/participacoes/">Comissão Nacional de Proteção de Dados</a>.</p>
+      <p>
+        Pode pedir acesso, retificação ou apagamento dos seus dados, limitação
+        do tratamento, oposição ou portabilidade, quando aplicável. Para exercer
+        estes direitos, escreva para {
+          privacyEmail && (
+            <a class="under" href={'mailto:' + privacyEmail}>
+              {privacyEmail}
+            </a>
+          )
+        }. Também pode apresentar uma reclamação à <a
+          class="under"
+          href="https://www.cnpd.pt/cidadaos/participacoes/"
+          >Comissão Nacional de Proteção de Dados</a
+        >.
+      </p>
     </section>
   </div>
 </Layout>

@@ -1,5 +1,7 @@
 # Backoffice da Azmora Homes
 
+**Atualização de 24/11/2026:** para o domínio definitivo, contactos, variáveis e comandos de corte, seguir [Preparação final para produção](PRODUCAO_2026-11-24.md). O caminho de produção é agora `/admin/` em `https://www.azmorahomes.pt`; as referências abaixo a `/AZMORA-HOMES/` descrevem a configuração anterior. Não repetir os imports iniciais numa base já existente.
+
 ## Utilização pela equipa
 
 Abra **/admin** no domínio comercial. Entre com a sua conta autorizada e valide o segundo fator. O painel mostra o inventário, as contagens e as últimas operações. Em **Adicionar casa**, preencha nome e marca, escolha a situação comercial e guarde um rascunho. Deixe os valores técnicos desconhecidos em branco. Use os campos de referência para medidas indicativas de outros exemplares. A referência interna é editável e o identificador e endereço da ficha são estáveis.

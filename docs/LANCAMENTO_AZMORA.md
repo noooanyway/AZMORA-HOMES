@@ -1,5 +1,7 @@
 # Preparar o lançamento da Azmora Homes
 
+**Guia legado do formulário estático.** O novo build Cloudflare usa D1, Turnstile e Resend. Para o corte e validação, seguir [Preparação final para produção — 24/11/2026](PRODUCAO_2026-11-24.md). Manter o Formspree anterior até aceitar a alternativa; não usar os passos abaixo para configurar o novo backend.
+
 A [lista de placeholders](PLACEHOLDERS_AZMORA.md) indica os dados por preencher, o respetivo campo de configuração e a página onde aparecem.
 
 ## Ativar o formulário de contacto

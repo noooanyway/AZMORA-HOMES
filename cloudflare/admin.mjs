@@ -2,6 +2,8 @@ import { env as bindings } from 'cloudflare:workers';
 import { authorize } from './access.mjs';
 import { fields, limited, dimensions, stripMetadata } from './inventory.mjs';
 import html from './panel.html?raw';
+import contactPanel from './contact-panel.mjs?raw';
+import { adminContacts } from './contacts.mjs';
 const reply = (message, status) => Response.json({ message }, { status });
 export const ALL = async ({ request, params }) => {
   const env = bindings,
@@ -9,14 +11,26 @@ export const ALL = async ({ request, params }) => {
   if (!actor) return reply('Acesso reservado à administração.', 403);
   const action = params.action?.replace(/\/$/, '') || '',
     db = env.DB;
+  if (action.startsWith('contacto')) {
+    try {
+      return await adminContacts(request, env, action);
+    } catch {
+      return reply(
+        'Não foi possível concluir a operação. Tente novamente.',
+        503,
+      );
+    }
+  }
   if (request.method === 'GET') {
     if (!action) {
       const nonce = crypto.randomUUID();
       return new Response(
-        html.replace(
-          '<script type="module">',
-          '<script nonce="' + nonce + '" type="module">',
-        ),
+        html
+          .replace('/* CONTACTS */', contactPanel)
+          .replace(
+            '<script type="module">',
+            '<script nonce="' + nonce + '" type="module">',
+          ),
         {
           headers: {
             'Content-Type': 'text/html; charset=utf-8',

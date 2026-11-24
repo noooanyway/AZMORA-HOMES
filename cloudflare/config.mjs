@@ -6,7 +6,7 @@ if (!process.env.SITE_URL)
   throw Error('Defina SITE_URL com o endereço público da Azmora.');
 export default defineConfig({
   site: process.env.SITE_URL,
-  base: process.env.BASE_PATH || '/AZMORA-HOMES',
+  base: process.env.BASE_PATH || '/',
   trailingSlash: 'always',
   output: 'server',
   outDir: './dist-cloudflare',
@@ -27,6 +27,7 @@ export default defineConfig({
           for (const [pattern, file] of [
             ['/admin/[...action]', 'admin.mjs'],
             ['/api/casas', 'public.mjs'],
+            ['/api/contactos', 'contact-route.mjs'],
             ['/images/[...key]', 'media.mjs'],
           ])
             injectRoute({

@@ -6,22 +6,36 @@ import CallContact from '../components/CallContact.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { contacts, detail, url, pageHouses } from '../lib/site';
 const houses = pageHouses(Astro.locals);
+const native = Astro.locals.contactBackend === true;
+const endpoint = native ? url('api/contactos/') : contacts.form;
+const enabled = native ? !!Astro.locals.turnstileSiteKey : !!endpoint;
 import { previousCatalogNumber } from '../lib/catalog';
 import '../styles/contact.css';
 
 const topics = [
   ['contacto', 'Pedido de contacto'],
   ['preco', 'Preço e disponibilidade'],
+  ['orcamento', 'Pedido de orçamento'],
   ['visita', 'Informações sobre visitas'],
   ['transporte', 'Transporte e instalação'],
   ['ficha', 'Características de uma casa'],
   ['escolha', 'Ajuda a escolher uma casa'],
   ['outro', 'Outro assunto'],
 ];
-const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => house.typology ?? [])])].sort();
+const typologies = [
+  ...new Set([
+    'T1',
+    'T2',
+    'T3',
+    ...houses.flatMap((house) => house.typology ?? []),
+  ]),
+].sort();
 ---
 
-<Layout title="Contacte-nos" description="Peça informações sobre uma casa móvel, confirme preço e disponibilidade ou diga-nos o que procura.">
+<Layout
+  title="Contacte-nos"
+  description="Peça informações sobre uma casa móvel, confirme preço e disponibilidade ou diga-nos o que procura."
+>
   <div class="wrap page">
     <p class="kicker"><i></i> CONTACTE-NOS</p>
     <h1>Vamos falar de <em>casas.</em></h1>
@@ -29,72 +43,200 @@ const typologies = [...new Set(['T1', 'T2', 'T3', ...houses.flatMap((house) => h
       <aside class="contact-intro">
         <span class="contact-icon"><Mail size={24} aria-hidden="true" /></span>
         <h2>Como podemos ajudar?</h2>
-        <p>Escolha o motivo do contacto e a casa que lhe interessa. Se ainda estiver a explorar, basta indicar a tipologia que procura e contar-nos um pouco sobre o seu projeto.</p>
+        <p>
+          Escolha o motivo do contacto e a casa que lhe interessa. Se ainda
+          estiver a explorar, basta indicar a tipologia que procura e contar-nos
+          um pouco sobre o seu projeto.
+        </p>
         <CallContact />
         <BusinessDetails />
         <SocialLinks whatsappOnly />
       </aside>
 
-      <form action={contacts.form || undefined} method="post" class="lead contact-form" id="lead-form" data-enabled={contacts.form ? 'true' : 'false'}>
+      <form
+        action={endpoint || undefined}
+        method="post"
+        class="lead contact-form"
+        id="lead-form"
+        data-native={String(native)}
+        data-sitekey={Astro.locals.turnstileSiteKey}
+        data-enabled={String(enabled)}
+      >
         <h2>Enviar um pedido</h2>
-        {!contacts.form && <p class="contact-form-note" id="lead-unavailable">O envio pelo formulário ainda não está ativo.{contacts.email && <> Pode <a href={`mailto:${contacts.email}`}>enviar-nos um email diretamente</a>.</>}</p>}
-        <noscript><p class="contact-form-note">Ative o JavaScript para usar o formulário.</p></noscript>
+        {
+          !enabled && (
+            <p class="contact-form-note" id="lead-unavailable">
+              O envio pelo formulário ainda não está ativo.
+              {contacts.email && (
+                <>
+                  {' '}
+                  Pode{' '}
+                  <a href={`mailto:${contacts.email}`}>
+                    enviar-nos um email diretamente
+                  </a>
+                  .
+                </>
+              )}
+            </p>
+          )
+        }
+        <noscript
+          ><p class="contact-form-note">
+            Ative o JavaScript para usar o formulário.
+          </p></noscript
+        >
 
         <label>
           Motivo do contacto
           <select name="motivo" required id="lead-topic">
             <option value="">Selecione um motivo</option>
-            {topics.map(([value, label]) => <option value={value}>{label}</option>)}
+            {
+              topics.map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
           </select>
         </label>
 
-        {houses.length > 0 && (
-          <div class="contact-selection">
-            <label for="lead-house"><span>Casa de interesse <small>(opcional)</small></span></label>
-            <select id="lead-house">
-              <option value="">Escolher uma casa</option>
-              {houses.map((house) => (
-                <option value={house.media_slug} data-url={detail(house)} data-previous-number={previousCatalogNumber(house.id)}>
-                  {house.name_for_site}
-                </option>
-              ))}
-            </select>
-            <ul class="contact-houses" id="selected" aria-label="Casas selecionadas"></ul>
-          </div>
-        )}
+        {
+          houses.length > 0 && (
+            <div class="contact-selection">
+              <label for="lead-house">
+                <span>
+                  Casa de interesse <small>(opcional)</small>
+                </span>
+              </label>
+              <select id="lead-house">
+                <option value="">Escolher uma casa</option>
+                {houses.map((house) => (
+                  <option
+                    value={house.media_slug}
+                    data-url={detail(house)}
+                    data-previous-number={previousCatalogNumber(house.id)}
+                  >
+                    {house.name_for_site}
+                  </option>
+                ))}
+              </select>
+              <ul
+                class="contact-houses"
+                id="selected"
+                aria-label="Casas selecionadas"
+              />
+            </div>
+          )
+        }
 
         <div class="contact-form-grid">
-          <label><span>Tipologia pretendida <small>(opcional)</small></span>
+          <label
+            ><span>Tipologia pretendida <small>(opcional)</small></span>
             <select name="tipologia">
               <option value="">Sem preferência</option>
-              {typologies.map((type) => (
-                <option value={type}>{type}{/^T[1-9]\d*$/.test(type) && ` · ${type.slice(1)} ${type === 'T1' ? 'quarto' : 'quartos'}`}</option>
-              ))}
+              {
+                typologies.map((type) => (
+                  <option value={type}>
+                    {type}
+                    {/^T[1-9]\d*$/.test(type) &&
+                      ` · ${type.slice(1)} ${type === 'T1' ? 'quarto' : 'quartos'}`}
+                  </option>
+                ))
+              }
             </select>
           </label>
-          <label><span>Localidade de destino <small>(opcional)</small></span>
-            <input name="localidade" autocomplete="address-level2" maxlength="100" placeholder="Ex.: Ponta Delgada, São Miguel" />
+          <label
+            ><span>Localidade de destino <small>(opcional)</small></span>
+            <input
+              name="localidade"
+              autocomplete="address-level2"
+              maxlength="100"
+              placeholder="Ex.: Ponta Delgada, São Miguel"
+            />
           </label>
-          <label>Nome <input name="nome" autocomplete="name" required maxlength="120" /></label>
-          <label>Email <input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+          <label
+            ><span>Ilha de destino <small>(opcional)</small></span><select
+              name="ilha"
+              ><option value="">Não indicada</option>{
+                [
+                  'São Miguel',
+                  'Santa Maria',
+                  'Terceira',
+                  'Graciosa',
+                  'São Jorge',
+                  'Pico',
+                  'Faial',
+                  'Flores',
+                  'Corvo',
+                  'Madeira',
+                  'Porto Santo',
+                  'Outro',
+                ].map((i) => <option>{i}</option>)
+              }</select
+            ></label
+          >
+          <label
+            >Nome <input
+              name="nome"
+              autocomplete="name"
+              required
+              maxlength="120"
+            /></label
+          >
+          <label
+            >Email <input
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              maxlength="254"
+            /></label
+          >
         </div>
-        <label><span>Telefone <small>(opcional)</small></span>
+        <label
+          ><span>Telefone <small>(opcional)</small></span>
           <input name="telefone" type="tel" autocomplete="tel" maxlength="32" />
         </label>
-        <label>Mensagem
-          <textarea name="message" id="lead-message" rows="5" maxlength="4000" required placeholder="Diga-nos o que gostaria de saber."></textarea>
+        <label
+          >Mensagem
+          <textarea
+            name="message"
+            id="lead-message"
+            rows="5"
+            maxlength="4000"
+            required
+            placeholder="Diga-nos o que gostaria de saber."></textarea>
         </label>
-        <label class="trap" aria-hidden="true">Website
+        <label class="trap" aria-hidden="true"
+          >Website
           <input name="_gotcha" tabindex="-1" autocomplete="off" />
         </label>
         <label class="consent">
-          <input required type="checkbox" name="privacidade" value="Li e concordo" />
-          <span>Li a <a href={url('privacidade/')}>Política de Privacidade</a> e tomei conhecimento do tratamento dos dados para responder ao meu pedido.</span>
+          <input
+            required
+            type="checkbox"
+            name="privacidade"
+            value="Li e concordo"
+          />
+          <span
+            >Li a <a href={url('privacidade/')}>Política de Privacidade</a> e tomei
+            conhecimento do tratamento dos dados para responder ao meu pedido.</span
+          >
         </label>
-        <button class="btn primary" type="submit" disabled aria-describedby={contacts.form ? undefined : 'lead-unavailable'}>
-          {contacts.form ? 'Enviar pedido por email' : 'Envio ainda indisponível'}
+        {native && <div id="turnstile" aria-label="Verificação de segurança" />}
+        <button
+          class="btn primary"
+          type="submit"
+          disabled
+          aria-describedby={enabled ? undefined : 'lead-unavailable'}
+        >
+          {enabled ? 'Enviar pedido' : 'Envio ainda indisponível'}
         </button>
-        <p id="lead-status" class="contact-form-status" role="status" tabindex="-1"></p>
+        <p
+          id="lead-status"
+          class="contact-form-status"
+          role="status"
+          tabindex="-1"
+        >
+        </p>
       </form>
     </div>
   </div>

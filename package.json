@@ -10,7 +10,8 @@
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "catalog:validate": "node scripts/catalog.mjs",
     "catalog:import": "node scripts/catalog.mjs --import",
-    "build:cloudflare": "astro build --config cloudflare/config.mjs && node scripts/cloudflare-edge.mjs"
+    "build:cloudflare": "astro build --config cloudflare/config.mjs && node scripts/cloudflare-edge.mjs && node scripts/verify-cloudflare.mjs",
+    "test:worker": "node tests/inventory-worker.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.5",

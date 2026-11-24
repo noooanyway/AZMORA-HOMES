@@ -150,6 +150,20 @@
       outline: 3px solid #995529;
       outline-offset: 2px;
     }
+    a {
+      color: #234237;
+      text-underline-offset: 3px;
+    }
+    dialog::backdrop {
+      background: #10251dcc;
+    }
+    #contact-detail {
+      width: min(680px, 94vw);
+    }
+    #contact-list .unit > div {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
     [hidden] {
       display: none !important;
     }
@@ -157,6 +171,112 @@
   <header>Azmora Homes · Administração</header>
   <main>
     <p role="status" id="notice"></p>
+    <nav class="actions" aria-label="Administração">
+      <button id="show-inventory">Inventário</button
+      ><button id="show-contacts">
+        Pedidos de contacto <span id="new-contacts"></span>
+      </button>
+    </nav>
+    <section id="contacts" hidden>
+      <h1>Pedidos de contacto</h1>
+      <p>
+        Abra um pedido para consultar os detalhes, responder e atualizar o
+        acompanhamento.
+      </p>
+      <form id="contact-filters" class="grid">
+        <label
+          >Pesquisar<input
+            name="q"
+            placeholder="Nome, email, telefone ou modelo"
+            maxlength="120"
+        /></label>
+        <label
+          >Estado<select name="estado">
+            <option value="">Todos</option>
+            <option value="new">Novo</option>
+            <option value="working">Em tratamento</option>
+            <option value="answered">Respondido</option>
+            <option value="archived">Arquivado</option>
+          </select></label
+        >
+        <label
+          >Ilha<select name="ilha" id="contact-island">
+            <option value="">Todas</option>
+          </select></label
+        >
+        <label
+          >Casa<select name="casa" id="contact-house">
+            <option value="">Todas</option>
+          </select></label
+        >
+        <label>Desde<input type="date" name="desde" /></label
+        ><label>Até<input type="date" name="ate" /></label>
+        <label
+          >Conservação<select name="expirados">
+            <option value="">Todos</option>
+            <option value="1">Sem atualização há 12 meses</option>
+          </select></label
+        >
+        <button type="submit">Aplicar filtros</button
+        ><button type="reset">Limpar filtros</button>
+      </form>
+      <p><a id="contact-export" href="#">Exportar resultados em CSV</a></p>
+      <p id="contact-count" role="status"></p>
+      <div id="contact-list"></div>
+      <div class="actions">
+        <button id="contacts-prev">Anterior</button
+        ><button id="contacts-next">Seguinte</button>
+      </div>
+    </section>
+    <dialog id="contact-detail" aria-labelledby="contact-title">
+      <button id="contact-close">Fechar</button>
+      <h2 id="contact-title">Pedido de contacto</h2>
+      <div
+        id="contact-info"
+        style="overflow-wrap: anywhere; white-space: pre-wrap"
+      ></div>
+      <p class="actions">
+        <a id="contact-email">Responder por email</a
+        ><a id="contact-whatsapp" target="_blank" rel="noopener noreferrer"
+          >Contactar por WhatsApp</a
+        >
+      </p>
+      <form id="contact-edit">
+        <label
+          >Estado<select id="contact-status">
+            <option value="new">Novo</option>
+            <option value="working">Em tratamento</option>
+            <option value="answered">Respondido</option>
+            <option value="archived">Arquivado</option>
+          </select></label
+        >
+        <label
+          >Notas internas<textarea
+            id="contact-notes"
+            maxlength="5000"
+          ></textarea>
+        </label>
+        <p>
+          <button class="primary" type="submit">Guardar acompanhamento</button>
+        </p>
+      </form>
+      <p id="contact-notification"></p>
+      <button id="contact-retry">Reenviar notificação</button>
+      <details>
+        <summary>Eliminar dados pessoais</summary>
+        <p>
+          Arquive primeiro o pedido. A eliminação retira os dados deste painel e
+          não pode ser desfeita aqui. Emails e backups têm de ser tratados
+          separadamente.
+        </p>
+        <label
+          >Confirme a referência completa<input
+            id="contact-confirm"
+            autocomplete="off" /></label
+        ><button id="contact-delete">Eliminar definitivamente</button>
+      </details>
+      <p id="contact-feedback" role="status"></p>
+    </dialog>
     <section id="dash">
       <h1>Inventário de casas</h1>
       <div class="stats" id="stats"></div>
@@ -687,6 +807,7 @@
       }
     });
     for (const id of ['sort', 'filter', 'search']) el(id).oninput = draw;
+    /* CONTACTS */
     task(load);
   </script>
 </html>

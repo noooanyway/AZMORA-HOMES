@@ -10,4 +10,8 @@ dist/
 dist-cloudflare/
 .wrangler/
 .dev.vars
+.dev.vars.*
+.env.*
+!.env.example
+*-backup.sql
 inventory-seed.sql

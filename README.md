@@ -1,5 +1,7 @@
 # Azmora Homes
 
+**Produção Cloudflare:** consultar [preparação final e deployment](docs/PRODUCAO_2026-11-24.md). O build de produção com backoffice é `npm run build:cloudflare`, com output `dist-cloudflare/client`, `SITE_URL=https://www.azmorahomes.pt` e `BASE_PATH=/`. O comando `npm run build` e o workflow GitHub Pages abaixo continuam a ser o caminho estático legado, sem painel administrativo. Não os usar para substituir a aplicação Cloudflare.
+
 Site estático de revenda de casas móveis em Astro e TypeScript. A antevisão inclui 16 unidades distintas, com fichas, fotografias locais, filtros partilháveis, favoritos e comparação de duas ou três casas.
 
 ## Desenvolvimento

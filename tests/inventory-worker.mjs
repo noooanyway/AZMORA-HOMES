@@ -3,7 +3,7 @@ import { generateKeyPair, exportJWK, SignJWT } from 'jose';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { build } from 'esbuild';
-const origin = 'https://azmora.example',
+const origin = process.env.TEST_ORIGIN || 'https://www.azmorahomes.pt',
   base = origin + (process.env.TEST_BASE_PATH || '/AZMORA-HOMES/'),
   issuer = 'https://test.cloudflareaccess.com';
 const { privateKey, publicKey } = await generateKeyPair('RS256', {
@@ -26,37 +26,54 @@ const bundle = await build({
   external: ['cloudflare:*', 'node:*'],
   write: false,
 });
-const mf = new Miniflare(convertV4MiniflareOptions({
-  modules: [
-    {
-      type: 'ESModule',
-      path: 'index.mjs',
-      contents: bundle.outputFiles[0].text,
+const mf = new Miniflare(
+  convertV4MiniflareOptions({
+    modules: [
+      {
+        type: 'ESModule',
+        path: 'index.mjs',
+        contents: bundle.outputFiles[0].text,
+      },
+    ],
+    compatibilityDate: '2025-11-01',
+    compatibilityFlags: ['nodejs_compat', 'disable_nodejs_process_v2'],
+    d1Databases: ['DB'],
+    r2Buckets: ['PHOTOS'],
+    bindings: {
+      ADMIN_ORIGIN: origin,
+      ACCESS_AUD: 'local',
+      ACCESS_ISSUER: issuer,
+      ADMIN_EMAILS: 'owner@example.test',
+      SITE_URL: origin,
+      TURNSTILE_SITE_KEY: 'test-site-key',
+      TURNSTILE_SECRET_KEY: 'test-secret',
+      RESEND_API_KEY: 'test-resend',
+      CONTACT_FROM_EMAIL: 'notificacoes@send.azmorahomes.pt',
+      CONTACT_TO_EMAIL: 'team@example.test',
     },
-  ],
-  compatibilityDate: '2025-11-01',
-  compatibilityFlags: ['nodejs_compat', 'disable_nodejs_process_v2'],
-  d1Databases: ['DB'],
-  r2Buckets: ['PHOTOS'],
-  bindings: {
-    ADMIN_ORIGIN: origin,
-    ACCESS_AUD: 'local',
-    ACCESS_ISSUER: issuer,
-    ADMIN_EMAILS: 'owner@example.test',
-  },
-  serviceBindings: { ASSETS: () => new Response(null, { status: 404 }) },
-  outboundService: (request) =>
-    new URL(request.url).origin === issuer
-      ? Response.json({ keys: [jwk] })
-      : new Response(null, { status: 403 }),
-}));
+    serviceBindings: { ASSETS: () => new Response(null, { status: 404 }) },
+    outboundService: (request) =>
+      request.url.includes('challenges.cloudflare.com/turnstile/v0/siteverify')
+        ? Response.json({
+            success: true,
+            hostname: new URL(origin).hostname,
+            action: 'contact',
+            challenge_ts: new Date().toISOString(),
+          })
+        : request.url.includes('api.resend.com/emails')
+          ? Response.json({ id: 'mock-email' })
+          : new URL(request.url).origin === issuer
+            ? Response.json({ keys: [jwk] })
+            : new Response(null, { status: 403 }),
+  }),
+);
 try {
   const db = await mf.getD1Database('DB');
   // D1 exec takes one complete statement per line.
   for (const f of fs.readdirSync('migrations').sort()) {
     const sql = fs.readFileSync('migrations/' + f, 'utf8');
     const statements = sql.match(
-      /CREATE TRIGGER[\s\S]*?END;|(?:CREATE TABLE|INSERT INTO)[^]*?;(?=\s*(?:CREATE|INSERT|$))/gi,
+      /CREATE TRIGGER[\s\S]*?END;|(?:CREATE TABLE|CREATE INDEX|INSERT INTO)[^]*?;(?=\s*(?:CREATE|INSERT|$))/gi,
     );
     assert.ok(statements?.length);
     for (const stmt of statements) await db.prepare(stmt).run();
@@ -78,22 +95,137 @@ try {
     return JSON.parse(text);
   };
 
-  for (const [route, expected] of [['', 'Outra forma'], ['casas/', 'Explore as'], ['sobre/', 'Azmora'], ['inexistente/', null]]) {
+  for (const [route, expected] of [
+    ['', 'Outra forma'],
+    ['casas/', 'Explore as'],
+    ['sobre/', 'Azmora'],
+    ['inexistente/', null],
+  ]) {
     const response = await call(route);
     const html = await response.text();
-    assert.equal(response.status, expected ? 200 : 404, route + ' ' + html.slice(0, 1000));
-    if (expected) assert.ok(html.includes(expected), route + ' ' + html.slice(0, 1000));
+    assert.equal(
+      response.status,
+      expected ? 200 : 404,
+      route + ' ' + html.slice(0, 1000),
+    );
+    if (expected)
+      assert.ok(html.includes(expected), route + ' ' + html.slice(0, 1000));
   }
 
   const catalogue = await (await call('casas/')).text();
   assert.match(catalogue, /16 casas/);
-  const firstImage = JSON.parse((await db.prepare("SELECT data FROM inventory WHERE state='live' LIMIT 1").first()).data).media[0].src;
+  const firstImage = JSON.parse(
+    (
+      await db
+        .prepare("SELECT data FROM inventory WHERE state='live' LIMIT 1")
+        .first()
+    ).data,
+  ).media[0].src;
   const bucket = await mf.getR2Bucket('PHOTOS');
-  await bucket.put(firstImage, new Uint8Array([1, 2, 3]));
-  assert.equal((await call(firstImage)).status, 200);
-  for (const path of ['admin/', 'admin/dados/', 'admin/foto/', 'admin/guardar/', 'admin/upload/', 'admin/eliminar/']) {
-    assert.equal((await call(path)).status, 403, path);
+  for (const unit of (
+    await db.prepare("SELECT data FROM inventory WHERE state='live'").all()
+  ).results) {
+    const house = JSON.parse(unit.data);
+    assert.equal(
+      (await call('casas/' + house.media_slug + '/')).status,
+      200,
+      house.media_slug,
+    );
+    for (const picture of house.media)
+      for (const path of new Set(
+        [picture.src, picture.small, picture.cover].filter(Boolean),
+      )) {
+        await bucket.put(path, fs.readFileSync('public/' + path));
+        assert.equal((await call(path)).status, 200, path);
+      }
   }
+  assert.equal((await call(firstImage)).status, 200);
+  for (const path of [
+    'admin/',
+    'admin/dados/',
+    'admin/foto/',
+    'admin/guardar/',
+    'admin/upload/',
+    'admin/eliminar/',
+    'admin/contactos/',
+    'admin/contacto/',
+    'admin/contactos-exportar/',
+    'admin/contactos-guardar/',
+    'admin/contactos-reenviar/',
+    'admin/contactos-eliminar/',
+  ]) {
+    assert.equal((await call(path)).status, 403, path);
+    assert.equal(
+      (
+        await call(path, {
+          method: 'POST',
+          headers: { Origin: origin, 'Content-Type': 'application/json' },
+          body: '{}',
+        })
+      ).status,
+      403,
+      path + ' POST',
+    );
+  }
+
+  assert.equal(
+    (await call('admin', { headers: { 'Cf-Access-Jwt-Assertion': token } }))
+      .status,
+    200,
+    'acesso direto sem barra',
+  );
+  const denied = await call('admin/contactos-guardar/', {
+    method: 'POST',
+    headers: {
+      Origin: 'https://evil.test',
+      'Cf-Access-Jwt-Assertion': token,
+      'Content-Type': 'application/json',
+    },
+    body: '{}',
+  });
+  assert.equal(denied.status, 403, 'CSRF');
+  assert.equal(
+    (
+      await mf.dispatchFetch('https://preview.azmora-homes.pages.dev/admin/', {
+        headers: { 'Cf-Access-Jwt-Assertion': token },
+      })
+    ).status,
+    404,
+  );
+  if (origin === 'https://www.azmorahomes.pt') {
+    const redirect = await mf.dispatchFetch(
+      'https://azmorahomes.pt/casas/?q=teste',
+      { redirect: 'manual' },
+    );
+    assert.equal(redirect.status, 308);
+    assert.equal(
+      redirect.headers.get('Location'),
+      'https://www.azmorahomes.pt/casas/?q=teste',
+    );
+  }
+  assert.match(await (await call('robots.txt')).text(), /Disallow: \/admin/);
+  assert.ok((await (await call('sitemap.xml')).text()).includes(origin));
+  const contactInput = {
+    id: crypto.randomUUID(),
+    name: 'Cliente sintético',
+    email: 'client@example.test',
+    phone: '+351912345678',
+    island: 'São Miguel',
+    locality: 'Teste',
+    typology: 'T2',
+    request_type: 'orcamento',
+    message: 'Mensagem de ensaio',
+    houses: [],
+    consent: true,
+    token: crypto.randomUUID(),
+  };
+  const submitted = await call('api/contactos/', {
+    method: 'POST',
+    headers: { Origin: origin, 'Content-Type': 'application/json' },
+    body: JSON.stringify(contactInput),
+  });
+  assert.equal(submitted.status, 201, await submitted.clone().text());
+  assert.equal((await json(await admin('contactos'))).total, 1);
 
   assert.equal((await admin('')).status, 200);
   assert.equal((await json(await call('api/casas/'))).length, 16);
@@ -103,11 +235,32 @@ try {
     data = { ...unit.data, name_for_site: 'Teste de inventário' };
 
   const original = unit.data.name_for_site;
-  const changed = { ...unit.data, name_for_site: 'Casa alterada no inventário' };
-  await json(await admin('guardar', { id: unit.id, revision: unit.revision, data: changed, state: 'live' }));
-  assert.ok((await (await call('casas/')).text()).includes(changed.name_for_site));
-  const refreshed = (await json(await admin('dados'))).units.find((item) => item.id === unit.id);
-  await json(await admin('guardar', { id: unit.id, revision: refreshed.revision, data: { ...refreshed.data, name_for_site: original }, state: 'live' }));
+  const changed = {
+    ...unit.data,
+    name_for_site: 'Casa alterada no inventário',
+  };
+  await json(
+    await admin('guardar', {
+      id: unit.id,
+      revision: unit.revision,
+      data: changed,
+      state: 'live',
+    }),
+  );
+  assert.ok(
+    (await (await call('casas/')).text()).includes(changed.name_for_site),
+  );
+  const refreshed = (await json(await admin('dados'))).units.find(
+    (item) => item.id === unit.id,
+  );
+  await json(
+    await admin('guardar', {
+      id: unit.id,
+      revision: refreshed.revision,
+      data: { ...refreshed.data, name_for_site: original },
+      state: 'live',
+    }),
+  );
   const { id } = await json(await admin('guardar', { data, state: 'draft' }));
   const get = async () =>
     (await json(await admin('dados'))).units.find((u) => u.id === id);
@@ -150,9 +303,29 @@ try {
       });
       const errors = [];
       page.on('pageerror', (e) => errors.push(e.message));
+      await page.route('https://challenges.cloudflare.com/**', (route) =>
+        route.fulfill({
+          contentType: 'application/javascript',
+          body: `window.turnstile={render:(selector,options)=>{window.testChallenge=options;options.callback(crypto.randomUUID());document.querySelector(selector).textContent='Verificação de teste';return 'widget';},reset:()=>window.testChallenge.callback(crypto.randomUUID())};`,
+        }),
+      );
       await page.route(origin + '/**', async (route) => {
         const r = route.request(),
           headers = { ...r.headers(), 'Cf-Access-Jwt-Assertion': token };
+        if (new URL(r.url()).pathname.startsWith('/_astro/')) {
+          const file = 'dist-cloudflare/client' + new URL(r.url()).pathname;
+          const ext = file.split('.').pop();
+          return route.fulfill({
+            body: fs.readFileSync(file),
+            contentType:
+              {
+                js: 'application/javascript',
+                css: 'text/css',
+                woff2: 'font/woff2',
+                png: 'image/png',
+              }[ext] || 'application/octet-stream',
+          });
+        }
         const response = await mf.dispatchFetch(r.url(), {
           method: r.method(),
           headers,
@@ -167,8 +340,90 @@ try {
           body: Buffer.from(await response.arrayBuffer()),
         });
       });
+      fs.mkdirSync('.qa', { recursive: true });
+      for (const path of ['', 'casas/', 'casas/' + unit.slug + '/']) {
+        await page.goto(base + path);
+        await page.locator('h1').waitFor();
+        await page.locator('img[src]').evaluateAll((images) =>
+          Promise.all(
+            images.map((i) => {
+              i.loading = 'eager';
+              return i.decode().catch(() => {});
+            }),
+          ),
+        );
+        assert.deepEqual(
+          await page
+            .locator('img[src]')
+            .evaluateAll((images) =>
+              images.filter((i) => !i.naturalWidth).map((i) => i.src),
+            ),
+          [],
+          path + ' fotografias',
+        );
+        assert.equal(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+          true,
+          path + ' mobile',
+        );
+      }
+      await page.goto(base + 'contactos/?casas=' + unit.slug + '&motivo=preco');
+      await page.locator('[name=nome]').fill('Cliente navegador');
+      await page.locator('[name=email]').fill('browser@example.test');
+      await page.locator('#lead-message').fill('Pedido sintético no navegador');
+      await page.locator('[name=privacidade]').check();
+      await page.getByText('Verificação de teste', { exact: true }).waitFor();
+      await page.locator('button[type=submit]').click();
+      await page.locator('#lead-status[data-state=success]').waitFor();
+      assert.equal(
+        (await db.prepare('SELECT count(*) n FROM contact_requests').first()).n,
+        2,
+      );
+      await page.screenshot({
+        path: '.qa/contactos-mobile.png',
+        fullPage: true,
+      });
+      assert.equal(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+        true,
+        'contactos mobile',
+      );
       await page.goto(base + 'admin/');
-      await page.locator('.unit').first().waitFor();
+      await page.locator('#list .unit').first().waitFor();
+      await page.reload();
+      await page.getByRole('button', { name: /Pedidos de contacto/ }).click();
+      await page
+        .locator('#contact-list article')
+        .filter({ hasText: 'Cliente sintético' })
+        .getByRole('button', { name: 'Consultar pedido' })
+        .click();
+      await page.locator('#contact-notes').fill('Nota de ensaio');
+      await page.locator('#contact-status').selectOption('working');
+      await page
+        .getByRole('button', { name: 'Guardar acompanhamento' })
+        .click();
+      await page
+        .getByText('Acompanhamento guardado.', { exact: true })
+        .waitFor();
+      await page.locator('#contact-detail').evaluate((dialog) => {
+        dialog.scrollTop = 0;
+      });
+      await page.screenshot({ path: '.qa/admin-contacto-mobile.png' });
+      await page.locator('#contact-close').click();
+      assert.equal(
+        (
+          await db
+            .prepare('SELECT notes FROM contact_requests WHERE id=?')
+            .bind(contactInput.id)
+            .first()
+        ).notes,
+        'Nota de ensaio',
+      );
+      await page.locator('#show-inventory').click();
       await page.getByRole('button', { name: 'Adicionar casa' }).click();
       await page
         .getByLabel('Nome da casa', { exact: true })
@@ -177,7 +432,14 @@ try {
       await page
         .locator('#files')
         .setInputFiles('public/' + unit.data.media[0].small);
-      await page.locator('.photo img').waitFor({timeout:5000}).catch(async e=>{throw Error(e.message+' / '+await page.locator('#notice').innerText())});
+      await page
+        .locator('.photo img')
+        .waitFor({ timeout: 5000 })
+        .catch(async (e) => {
+          throw Error(
+            e.message + ' / ' + (await page.locator('#notice').innerText()),
+          );
+        });
       await page.getByRole('button', { name: 'Pré-visualizar' }).click();
       await page.locator('dialog[open]').waitFor();
       await page.locator('#closePreview').click();
@@ -209,6 +471,13 @@ try {
         true,
       );
       assert.deepEqual(errors, []);
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.locator('#show-contacts').click();
+      await page.locator('#contact-list article').first().waitFor();
+      await page.screenshot({
+        path: '.qa/admin-contactos-desktop.png',
+        fullPage: true,
+      });
       console.log(
         'OK · Chrome mobile, criação por formulário, upload convertido, pré-visualização, rascunho e visibilidade pública da fotografia.',
       );
