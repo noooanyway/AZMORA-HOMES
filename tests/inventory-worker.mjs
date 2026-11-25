@@ -98,6 +98,9 @@ try {
   for (const [route, expected] of [
     ['', 'Outra forma'],
     ['casas/', 'Explore as'],
+    ['casas-moveis-acores/', 'Casas móveis usadas nos Açores'],
+    ['casas-moveis-madeira/', 'Casas móveis usadas na Madeira'],
+    ['guias/como-escolher-casa-movel-usada/', 'Como escolher uma casa móvel usada'],
     ['sobre/', 'Azmora'],
     ['inexistente/', null],
   ]) {
@@ -117,6 +120,28 @@ try {
     }
   }
 
+  const regionalPages = [
+    ['casas-moveis-acores/', 'Casas móveis usadas nos Açores'],
+    ['casas-moveis-madeira/', 'Casas móveis usadas na Madeira'],
+    ['guias/como-escolher-casa-movel-usada/', 'Como escolher uma casa móvel usada'],
+  ];
+  const observed = { title: new Set(), description: new Set(), h1: new Set(), canonical: new Set() };
+  for (const [route, heading] of regionalPages) {
+    const html = await (await call(route)).text();
+    const read = (pattern) => { const match = html.match(pattern); assert.ok(match, route + ' ' + pattern); return match[1].trim(); };
+    const title = read(/<title>\s*([^<]+)\s*<\/title>/);
+    const description = read(/<meta name="description" content="([^"]+)"/);
+    const h1 = read(/<h1>\s*([^<]+)\s*<\/h1>/);
+    const canonical = read(/<link rel="canonical" href="([^"]+)"/);
+    assert.equal(h1, heading);
+    assert.equal(canonical, base + route);
+    assert.match(html, /<meta name="robots" content="index,follow"/);
+    for (const [key, value] of Object.entries({ title, description, h1, canonical })) observed[key].add(value);
+  }
+  for (const values of Object.values(observed)) assert.equal(values.size, regionalPages.length);
+
+  const sitemap = await (await call('sitemap.xml')).text();
+  for (const route of ['casas-moveis-acores/', 'casas-moveis-madeira/', 'guias/como-escolher-casa-movel-usada/']) assert.ok(sitemap.includes(route));
   const catalogue = await (await call('casas/')).text();
   assert.match(catalogue, /16 casas/);
   const firstImage = JSON.parse(

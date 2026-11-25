@@ -24,7 +24,7 @@ export default {
     const path = u.pathname.slice(base.length);
     if (
       !u.pathname.startsWith(base + '/') ||
-      !/^\/(?:|(?:casas(?:\/[a-z0-9-]+)?|contactos|comparar|favoritos|sobre|privacidade|termos|404|api\/(?:casas|contactos)|admin(?:\/(?:dados|foto|upload|guardar|eliminar|contacto|contactos(?:-(?:exportar|guardar|eliminar|reenviar|acao))?))?)\/?|sitemap\.xml|robots\.txt|images\/(?:uploads|casas\/[a-z0-9-]+)\/[a-z0-9-]+\.(?:webp|avif)\/?)$/.test(
+      !/^\/(?:|(?:casas(?:\/[a-z0-9-]+)?|casas-moveis-acores|casas-moveis-madeira|guias\/como-escolher-casa-movel-usada|contactos|comparar|favoritos|sobre|privacidade|termos|404|api\/(?:casas|contactos)|admin(?:\/(?:dados|foto|upload|guardar|eliminar|contacto|contactos(?:-(?:exportar|guardar|eliminar|reenviar|acao))?))?)\/?|sitemap\.xml|robots\.txt|images\/(?:uploads|casas\/[a-z0-9-]+)\/[a-z0-9-]+\.(?:webp|avif)\/?)$/.test(
         path,
       )
     )

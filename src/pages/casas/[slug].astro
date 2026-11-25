@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { houseSeo } from '../../lib/seo';
 import Photo from '../../components/Photo.astro';
 import Card from '../../components/Card.astro';
 import CallContact from '../../components/CallContact.astro';
@@ -26,6 +27,7 @@ if (!h) {
   if (legacy) return Astro.redirect(detail(legacy), 301);
   return Astro.rewrite(url('404/'));
 }
+const seo = houseSeo(h);
 const breadcrumbs = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -42,9 +44,9 @@ const related = houses
 ---
 
 <Layout
-  title={h.seo_title || h.name_for_site}
+  title={seo.title}
   sharePhoto={h.media[0]}
-  description={h.seo_description || h.description_azmora || undefined}
+  description={seo.description}
   ><div class="wrap page">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs).replace(/</g, '\\u003c')} />
     <nav class="crumb" aria-label="Percurso da página">

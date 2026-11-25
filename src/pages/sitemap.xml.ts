@@ -7,6 +7,9 @@ export const GET: APIRoute = ({ site, locals }) => {
         ...[
           '',
           'casas/',
+          'casas-moveis-acores/',
+          'casas-moveis-madeira/',
+          'guias/como-escolher-casa-movel-usada/',
           'sobre/',
           'contactos/',
           'privacidade/',
