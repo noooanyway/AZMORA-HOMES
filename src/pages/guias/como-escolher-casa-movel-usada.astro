@@ -1,21 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { url } from '../../lib/site';
+import Photo from '../../components/Photo.astro';
+import { url, pageHouses, detail } from '../../lib/site';
+import '../../styles/editorial.css';
+const houses = pageHouses(Astro.locals);
+const featured = houses.find(h => h.featured && h.media.length) || houses.find(h => h.media.length);
 const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Início', item: new URL(url(), Astro.site).href },
   { '@type': 'ListItem', position: 2, name: 'Como escolher uma casa móvel usada', item: new URL(url('guias/como-escolher-casa-movel-usada/'), Astro.site).href },
 ] };
+const steps = [
+  { title: 'Compare o espaço e as medidas', text: 'Veja quantos quartos pretende, a distribuição interior e as dimensões anunciadas. Confirme os dados em falta e verifique se a casa e os acessos são adequados ao local pretendido.' },
+  { title: 'Analise o estado da unidade', text: 'Veja as fotografias e peça esclarecimentos sobre o estado, possíveis sinais de humidade, equipamentos incluídos e o funcionamento das instalações. Confirme o que está incluído na unidade específica.' },
+  { title: 'Peça uma discriminação dos custos', text: 'Indique a casa e a ilha de destino. Peça confirmação escrita do preço, disponibilidade e condições de transporte e descarga, assim como de quaisquer custos adicionais aplicáveis.' },
+  { title: 'Confirme o terreno antes da compra', text: 'Consulte a Câmara Municipal sobre o uso pretendido e os procedimentos aplicáveis. Avalie os acessos e confirme as condições para as ligações de água, eletricidade e saneamento.' },
+];
 ---
-<Layout title="Como escolher uma casa móvel usada" description="Uma lista prática para comparar casas móveis usadas e preparar perguntas sobre preço, transporte e terreno nos Açores ou na Madeira.">
-<div class="wrap page">
+<Layout title="Como escolher uma casa móvel usada" description="Uma lista prática para comparar casas móveis usadas e preparar perguntas sobre preço, transporte e terreno nos Açores ou na Madeira." sharePhoto={featured?.media[0]}>
 <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\u003c')} />
-<nav class="crumb" aria-label="Percurso da página"><a href={url()}>Início</a> / Guia de compra</nav>
-<p class="kicker"><i></i> GUIA DE COMPRA</p><h1>Como escolher uma casa móvel usada</h1>
-<p class="intro">Uma boa comparação começa pela ficha de cada unidade e pelas perguntas certas para o destino e terreno onde pretende colocá-la.</p>
-<h2>1. Compare o espaço e as medidas</h2><p>Veja quantos quartos pretende, a distribuição interior e as dimensões anunciadas. Confirme os dados em falta e verifique se a casa e os acessos são adequados ao local pretendido.</p>
-<h2>2. Analise o estado da unidade</h2><p>Veja as fotografias e peça esclarecimentos sobre o estado, possíveis sinais de humidade, equipamentos incluídos e o funcionamento das instalações. Confirme o que está incluído na unidade específica.</p>
-<h2>3. Peça uma discriminação dos custos</h2><p>Indique a casa e a ilha de destino. Peça confirmação escrita do preço, disponibilidade e condições de transporte e descarga, assim como de quaisquer custos adicionais aplicáveis.</p>
-<h2>4. Confirme o terreno antes da compra</h2><p>Consulte a Câmara Municipal sobre o uso pretendido e os procedimentos aplicáveis. Avalie os acessos e confirme as condições para as ligações de água, eletricidade e saneamento. <a class="under" href={url('termos/#terreno')}>Saiba o que confirmar sobre o terreno</a>.</p>
-<h2>Compare as casas disponíveis</h2><p>As fichas apresentam os dados conhecidos de cada unidade. Pergunte sempre quando alguma informação estiver em falta.</p><p><a class="btn primary" href={url('casas/')}>Ver catálogo</a> <a class="under" href={url('contactos/')}>Contactar a Azmora Homes</a></p>
-<p>Informações regionais: <a class="under" href={url('casas-moveis-acores/')}>Açores</a> · <a class="under" href={url('casas-moveis-madeira/')}>Madeira</a>.</p>
+<div class="wrap editorial-page">
+  <nav class="crumb" aria-label="Percurso da página"><a href={url()}>Início</a> / Guia de compra</nav>
+  <section class="editorial-hero">
+    <div class="editorial-hero-copy"><p class="kicker"><i></i> GUIA DE COMPRA</p><h1>Como escolher uma casa móvel usada</h1><p class="editorial-intro">Uma boa comparação começa pela ficha de cada unidade e pelas perguntas certas para o destino e terreno onde pretende colocá-la.</p><div class="editorial-actions"><a class="btn primary" href="#guia">Ler o guia <span aria-hidden="true">↓</span></a><a class="under" href={url('casas/')}>Explorar o catálogo</a></div></div>
+    {featured && <figure class="editorial-hero-image"><Photo h={featured} hero /><figcaption><span>A NOSSA SELEÇÃO</span><a href={detail(featured)}>{featured.name_for_site} <span aria-hidden="true">↗</span></a></figcaption></figure>}
+  </section>
+  <section class="editorial-guide" id="guia"><div class="editorial-heading"><div><p class="kicker"><i></i> ANTES DE DECIDIR</p><h2>Quatro passos para escolher com confiança.</h2></div><p>O que deve comparar e confirmar antes de avançar.</p></div>
+    <ol class="editorial-guide-list">{steps.map((step, i) => <li><span class="editorial-number" aria-hidden="true">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p>{i === 3 && <a class="under" href={url('termos/#terreno')}>Saiba o que confirmar sobre o terreno <span aria-hidden="true">↗</span></a>}</div></li>)}</ol>
+  </section>
+  <aside class="editorial-cta"><div><p class="kicker"><i></i> A SUA PRÓXIMA CASA</p><h2>Compare as casas disponíveis.</h2><p>As fichas apresentam os dados conhecidos de cada unidade. Pergunte sempre quando alguma informação estiver em falta.</p></div><div class="editorial-cta-links"><a class="btn cream" href={url('casas/')}>Ver catálogo <span aria-hidden="true">↗</span></a><a href={url('contactos/')}>Contactar a Azmora Homes <span aria-hidden="true">↗</span></a></div></aside>
+  <p class="editorial-regions">Informações para o seu destino: <a class="under" href={url('casas-moveis-acores/')}>Açores</a> <span aria-hidden="true">·</span> <a class="under" href={url('casas-moveis-madeira/')}>Madeira</a></p>
 </div></Layout>

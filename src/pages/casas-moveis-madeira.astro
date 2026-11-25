@@ -1,19 +1,31 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { url } from '../lib/site';
-const path = 'casas-moveis-madeira/';
-const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Início', item: new URL(url(), Astro.site).href }, { '@type': 'ListItem', position: 2, name: 'Casas móveis na Madeira', item: new URL(url(path), Astro.site).href }] };
+import RegionPage from '../components/RegionPage.astro';
+const data = {
+  "region": "Madeira",
+  "where": "na Madeira",
+  "prep": "O que preparar para a Madeira",
+  "intro": "Indique se o destino pretendido é na ilha da Madeira ou no Porto Santo, o concelho e os acessos ao local. Pergunte quais as condições aplicáveis ao transporte e à descarga: a viabilidade depende do destino e é confirmada caso a caso.",
+  "process": "Da escolha ao pedido de informação",
+  "steps": [
+    "Veja as casas no catálogo e anote as referências que lhe interessam.",
+    "Compare a distribuição, as medidas anunciadas e as fotografias de cada unidade.",
+    "Peça confirmação de disponibilidade, preço e custos para o destino indicado.",
+    "Verifique com a Câmara Municipal as condições para o terreno e a utilização pretendida antes de comprar."
+  ],
+  "faq": [
+    [
+      "É possível entregar no Porto Santo?",
+      "Indique o destino no contacto para confirmar a viabilidade e as respetivas condições. A entrega não está garantida sem essa confirmação."
+    ],
+    [
+      "Qual é o preço final?",
+      "Depende da unidade e das condições aplicáveis. Peça uma discriminação que esclareça o preço da casa e os custos associados ao destino."
+    ],
+    [
+      "Uma casa móvel pode ser instalada em qualquer terreno?",
+      "Não assuma que sim. Consulte previamente a Câmara Municipal e confirme o acesso ao local e as ligações necessárias."
+    ]
+  ]
+};
 ---
-<Layout title="Casas móveis usadas na Madeira" description="Explore casas móveis usadas para os Açores e a Madeira. Compare unidades e peça condições para o seu destino.">
-  <div class="wrap page">
-    <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\u003c')} />
-    <nav class="crumb" aria-label="Percurso da página"><a href={url()}>Início</a> / Casas móveis na Madeira</nav>
-    <p class="kicker"><i></i> CASAS MÓVEIS EM SEGUNDA MÃO</p>
-    <h1>Casas móveis usadas na Madeira</h1>
-    <p class="intro">Conheça as casas móveis em segunda mão da Azmora Homes e peça informações para o seu destino na Madeira.</p>
-    <p><a class="btn primary" href={url('casas/')}>Explorar o catálogo</a></p>
-    <h2>O que preparar para a Madeira</h2><p>Indique se o destino pretendido é na ilha da Madeira ou no Porto Santo, o concelho e os acessos ao local. Pergunte quais as condições aplicáveis ao transporte e à descarga: a viabilidade depende do destino e é confirmada caso a caso.</p><h2>Da escolha ao pedido de informação</h2><ol><li>Veja as casas no catálogo e anote as referências que lhe interessam.</li><li>Compare a distribuição, as medidas anunciadas e as fotografias de cada unidade.</li><li>Peça confirmação de disponibilidade, preço e custos para o destino indicado.</li><li>Verifique com a Câmara Municipal as condições para o terreno e a utilização pretendida antes de comprar.</li></ol><h2>Perguntas frequentes sobre casas móveis na Madeira</h2><details><summary>É possível entregar no Porto Santo?</summary><p>Indique o destino no contacto para confirmar a viabilidade e as respetivas condições. A entrega não está garantida sem essa confirmação.</p></details><details><summary>Qual é o preço final?</summary><p>Depende da unidade e das condições aplicáveis. Peça uma discriminação que esclareça o preço da casa e os custos associados ao destino.</p></details><details><summary>Uma casa móvel pode ser instalada em qualquer terreno?</summary><p>Não assuma que sim. Consulte previamente a Câmara Municipal e confirme o acesso ao local e as ligações necessárias.</p></details>
-    <p><a class="btn primary" href={url('contactos/')}>Pedir informações para a Madeira</a></p>
-    <p>Consulte também o <a class="under" href={url('guias/como-escolher-casa-movel-usada/')}>guia para escolher uma casa móvel usada</a>.</p>
-  </div>
-</Layout>
+<RegionPage data={data} slug="madeira" />

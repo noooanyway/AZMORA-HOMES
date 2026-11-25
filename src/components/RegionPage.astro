@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Photo from './Photo.astro';
+import { url, pageHouses, detail } from '../lib/site';
+import '../styles/editorial.css';
+interface Props {
+  slug: string;
+  data: { region: string; where: string; prep: string; intro: string; process: string; steps: string[]; faq: string[][] };
+}
+const { data, slug } = Astro.props;
+const houses = pageHouses(Astro.locals);
+const featured = houses.find(h => h.featured && h.media.length) || houses.find(h => h.media.length);
+const path = `casas-moveis-${slug}/`;
+const label = `Casas móveis ${data.where}`;
+const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Início', item: new URL(url(), Astro.site).href },
+  { '@type': 'ListItem', position: 2, name: label, item: new URL(url(path), Astro.site).href },
+] };
+---
+<Layout title={`Casas móveis usadas ${data.where}`} description={`Explore casas móveis usadas para ${slug === 'acores' ? 'os Açores' : 'a Madeira'}. Compare unidades e peça condições para o seu destino.`} sharePhoto={featured?.media[0]}>
+  <script type="application/ld+json" set:html={JSON.stringify(crumbs).replace(/</g, '\u003c')} />
+  <div class="wrap editorial-page">
+    <nav class="crumb" aria-label="Percurso da página"><a href={url()}>Início</a> / {label}</nav>
+    <section class="editorial-hero">
+      <div class="editorial-hero-copy">
+        <p class="kicker"><i></i> CASAS MÓVEIS EM SEGUNDA MÃO</p>
+        <h1>Casas móveis usadas {data.where}</h1>
+        <p class="editorial-intro">Conheça as casas móveis em segunda mão da Azmora Homes e peça informações para o seu destino {data.where}.</p>
+        <div class="editorial-actions"><a class="btn primary" href={url('casas/')}>Explorar o catálogo <span aria-hidden="true">↗</span></a><a class="under" href={url('contactos/')}>Falar connosco</a></div>
+      </div>
+      {featured && <figure class="editorial-hero-image"><Photo h={featured} hero /><figcaption><span>UMA CASA, UMA HISTÓRIA</span><a href={detail(featured)}>{featured.name_for_site} <span aria-hidden="true">↗</span></a></figcaption></figure>}
+    </section>
+    <section class="editorial-feature">
+      <div><p class="kicker"><i></i> PARA O SEU DESTINO</p><h2>{data.prep}</h2></div>
+      <div><p>{data.intro}</p><a class="under" href={url('contactos/?motivo=transporte')}>Esclarecer o transporte <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <section class="editorial-process">
+      <div class="editorial-heading"><div><p class="kicker"><i></i> PASSO A PASSO</p><h2>{data.process}</h2></div><p>Uma escolha informada começa com os detalhes certos.</p></div>
+      <ol class="editorial-steps">{data.steps.map((step, i) => <li><span class="editorial-number" aria-hidden="true">0{i + 1}</span><p>{step}</p></li>)}</ol>
+    </section>
+    <section class="editorial-faq">
+      <div><p class="kicker"><i></i> INFORMAÇÃO ÚTIL</p><h2>Perguntas frequentes sobre casas móveis {data.where}</h2><p>Tem outras questões? Estamos disponíveis para ajudar.</p></div>
+      <div>{data.faq.map(([question, answer]) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div>
+    </section>
+    <aside class="editorial-cta"><div><p class="kicker"><i></i> ESTAMOS AQUI PARA AJUDAR</p><h2>Vamos encontrar a sua casa?</h2><p>Conte-nos o que procura e o destino pretendido.</p></div><div class="editorial-cta-links"><a class="btn cream" href={url('contactos/')}>Pedir informações para {slug === 'acores' ? 'os Açores' : 'a Madeira'} <span aria-hidden="true">↗</span></a><a href={url('guias/como-escolher-casa-movel-usada/')}>Ler o guia de compra <span aria-hidden="true">↗</span></a></div></aside>
+  </div>
+</Layout>
