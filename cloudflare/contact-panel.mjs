@@ -43,8 +43,9 @@ async function contactTask(fn) {
   try {
     await fn();
   } catch (e) {
-    el('contact-feedback').textContent = e.message;
-    msg(e.message);
+    const message = e.name === 'TimeoutError' || e.name === 'AbortError' ? 'A operação demorou demasiado. Confirme o estado antes de tentar novamente.' : e.message;
+    el('contact-feedback').textContent = message;
+    msg(message);
   } finally {
     contactBusy = false;
     el('contact-edit').inert = false;
@@ -131,8 +132,15 @@ async function openContact(id) {
       'Atualizado (UTC)': r.updated_at,
     }).map(([k, v]) => node('p', k + ': ' + (v || 'Não indicado'))),
   );
-  el('copy-email').onclick = () => navigator.clipboard.writeText(r.email).then(() => { el('contact-feedback').textContent = 'Email copiado.'; }).catch(() => { el('contact-feedback').textContent = 'Não foi possível copiar. Selecione o email e copie-o manualmente.'; });
-  el('copy-subject').onclick = () => navigator.clipboard.writeText('Azmora Homes · Pedido ' + r.id).then(() => { el('contact-feedback').textContent = 'Assunto copiado.'; }).catch(() => { el('contact-feedback').textContent = 'Não foi possível copiar. Copie a referência manualmente.'; });
+  const copy = async (value, success, failure) => {
+    try {
+      if (!navigator.clipboard?.writeText) throw Error();
+      await navigator.clipboard.writeText(value);
+      el('contact-feedback').textContent = success;
+    } catch { el('contact-feedback').textContent = failure; }
+  };
+  el('copy-email').onclick = () => copy(r.email, 'Email copiado.', 'Não foi possível copiar. Selecione o email e copie-o manualmente.');
+  el('copy-subject').onclick = () => copy('Azmora Homes · Pedido ' + r.id, 'Assunto copiado.', 'Não foi possível copiar. Copie a referência manualmente.');
   let phone = r.phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
   if (/^9\d{8}$/.test(phone)) phone = '+351' + phone;
   const valid = /^\+[1-9]\d{7,14}$/.test(phone);
@@ -172,22 +180,31 @@ el('contact-detail').addEventListener('cancel', (e) => {
   closeContact();
 });
 let contactBackdropStart = false;
-el('contact-detail').addEventListener('pointerdown', e => { contactBackdropStart = e.target === el('contact-detail'); });
-el('contact-detail').addEventListener('click', e => { if (contactBackdropStart && e.target === el('contact-detail')) closeContact(); contactBackdropStart = false; });
+el('contact-detail').addEventListener('pointerdown', e => { contactBackdropStart = onBackdrop(el('contact-detail'), e); });
+el('contact-detail').addEventListener('click', e => { if (contactBackdropStart && onBackdrop(el('contact-detail'), e)) closeContact(); contactBackdropStart = false; });
 el('contact-edit').oninput = () => {
   contactDirty = true;
 };
 el('show-contacts').onclick = () => {
+  if (busy || contactBusy) return;
   if (dirty && !confirm('Sair sem guardar a ficha de inventário?')) return;
   dirty = false;
   el('dash').hidden = true;
   el('edit').hidden = true;
   el('contacts').hidden = false;
+  el('show-inventory').setAttribute('aria-pressed','false');
+  el('show-contacts').setAttribute('aria-pressed','true');
   contactTask(loadContacts);
 };
 el('show-inventory').onclick = () => {
+  if (busy || contactBusy) return;
+  if (!el('edit').hidden && dirty && !confirm('Sair sem guardar a ficha de inventário?')) return;
+  dirty = false;
+  el('edit').hidden = true;
   el('contacts').hidden = true;
   el('dash').hidden = false;
+  el('show-inventory').setAttribute('aria-pressed','true');
+  el('show-contacts').setAttribute('aria-pressed','false');
 };
 el('contact-filters').onsubmit = (e) => {
   e.preventDefault();
@@ -240,8 +257,8 @@ function confirmContactDeletion() {
     const done = () => { dialog.removeEventListener('close',done); resolve(accepted); };
     el('delete-cancel').onclick = () => dialog.close();
     el('delete-accept').onclick = () => { accepted = true; dialog.close(); };
-    dialog.onpointerdown = e => { outside = e.target === dialog; };
-    dialog.onclick = e => { if(outside && e.target === dialog) dialog.close(); outside = false; };
+    dialog.onpointerdown = e => { outside = onBackdrop(dialog, e); };
+    dialog.onclick = e => { if(outside && onBackdrop(dialog, e)) dialog.close(); outside = false; };
     dialog.addEventListener('close',done);
     dialog.showModal();
   });

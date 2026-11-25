@@ -49,7 +49,7 @@ const fields = [
   },
 ].filter(
   ({ label, value }) =>
-    (value || preview) &&
+    (value || preview || ['Fundamento jurídico', 'Prazo ou critério de conservação'].includes(label)) &&
     (!native ||
       ![
         'Acesso aos pedidos',
@@ -108,7 +108,7 @@ const fields = [
               </p>
               <p>
                 A ilha de destino é opcional. O acesso ao serviço de email
-                comercial encontra-se em transição para o Zoho Mail. Os
+                comercial utiliza o Zoho Mail. Os
                 prestadores podem tratar dados fora do Espaço Económico Europeu;
                 a Azmora Homes deve disponibilizar os mecanismos de
                 transferência aplicáveis à configuração contratada.
@@ -117,10 +117,8 @@ const fields = [
           </>
         ) : (
           <p>
-            O Formspree recebe o formulário e envia a notificação para o Gmail
-            comercial. Os dados são usados para responder e acompanhar o seu
-            pedido. O nome, o email, o motivo e a mensagem permitem receber e
-            responder ao pedido. Os restantes campos são opcionais.
+            Nesta versão do site o formulário não está ativo. Pode contactar-nos
+            através do endereço de email indicado nesta página.
           </p>
         )
       }
@@ -166,18 +164,7 @@ const fields = [
             </a>
           </p>
         ) : (
-          <p>
-            <a class="under" href="https://formspree.io/security/">
-              Informação de segurança do Formspree
-            </a>{' '}
-            ·{' '}
-            <a
-              class="under"
-              href="https://policies.google.com/privacy/frameworks?hl=pt-PT"
-            >
-              Transferências de dados da Google
-            </a>
-          </p>
+          <p>Consulte o endereço de contacto indicado nesta página.</p>
         )
       }
     </section>

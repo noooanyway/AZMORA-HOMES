@@ -9,26 +9,26 @@ import '../styles/purchase-guide.css';
 
 const panels = [
   {
-    title: 'O que inclui',
+    title: 'O que confirmar no orçamento',
     Badge: CircleCheck,
-    note: 'O valor final inclui a unidade escolhida e a sua entrega até ao porto comercial da ilha.',
+    note: 'Peça a descrição da unidade, do preço e das condições de entrega por escrito.',
     items: [
-      { Icon: Warehouse, title: 'Casa móvel em segunda mão', text: 'A unidade identificada no orçamento, com as características confirmadas na sua ficha.' },
-      { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'O inventário da unidade, incluindo o mobiliário, a cozinha e os eletrodomésticos que a acompanham.' },
-      { Icon: Snowflake, title: 'Climatização e água quente', text: 'Os equipamentos existentes na unidade, como aquecimento, ar condicionado ou esquentador.' },
-      { Icon: Ship, title: 'Transporte marítimo', text: 'Envio até ao porto comercial da ilha de destino, nos Açores ou na Madeira, com descarga no porto e taxas portuárias incluídas.' },
-      { Icon: ReceiptText, title: 'IVA e valor final', text: 'O valor final que a Azmora Homes comunica já inclui IVA.' },
+      { Icon: Warehouse, title: 'Casa móvel em segunda mão', text: 'Confirme a unidade e as características indicadas na ficha e no orçamento.' },
+      { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'Confirme o mobiliário, a cozinha e os eletrodomésticos que acompanham a unidade.' },
+      { Icon: Snowflake, title: 'Climatização e água quente', text: 'Confirme quais os equipamentos existentes e o seu estado.' },
+      { Icon: Ship, title: 'Transporte marítimo', text: 'Confirme o porto de destino, a descarga, as taxas e os respetivos custos.' },
+      { Icon: ReceiptText, title: 'IVA e valor final', text: 'Peça a indicação do IVA aplicável e do preço final por escrito.' },
     ],
   },
   {
-    title: 'O que não inclui',
+    title: 'O que preparar na ilha',
     Badge: CircleX,
-    note: 'A partir do porto, o cliente organiza o transporte até ao terreno e a instalação.',
+    note: 'Confirme responsabilidades e custos antes de organizar a instalação.',
     items: [
-      { Icon: MapPin, title: 'Transporte por estrada', text: 'O cliente contrata o transporte por estrada entre o porto e o local de instalação.' },
-      { Icon: LiftIcon, title: 'Colocação no terreno', text: 'A descarga no terreno, a eventual grua, o posicionamento e o nivelamento ficam a cargo do cliente.' },
+      { Icon: MapPin, title: 'Transporte por estrada', text: 'Confirme como será organizado o transporte entre o porto e o local de instalação.' },
+      { Icon: LiftIcon, title: 'Colocação no terreno', text: 'Confirme quem assegura a descarga, a eventual grua, o posicionamento e o nivelamento.' },
       { Icon: Shovel, title: 'Preparação do terreno', text: 'O acesso ao local, a base de apoio e os trabalhos necessários antes da entrega.' },
-      { Icon: Plug, title: 'Ligações às redes', text: 'Cabe ao cliente assegurar as ligações de água, eletricidade, saneamento e gás, quando aplicável.' },
+      { Icon: Plug, title: 'Ligações às redes', text: 'Confirme as condições para ligar água, eletricidade, saneamento e gás, quando aplicável.' },
       { Icon: FileText, title: 'Licenças e autorizações', text: 'Os procedimentos que a Câmara Municipal indicar para instalar e utilizar a casa no terreno.' },
     ],
   },
@@ -36,8 +36,8 @@ const panels = [
 const steps = [
   { Icon: House, title: 'Escolha a casa', text: 'Consulte a ficha e compare as características e o equipamento.' },
   { Icon: MessageSquare, title: 'Peça um orçamento', text: 'Indique a casa e a localidade ou ilha de destino.' },
-  { Icon: Handshake, title: 'Reserve a unidade', text: 'Após a Azmora confirmar a disponibilidade e as condições por escrito, pode reservar pagando parte do valor.' },
-  { Icon: Ship, title: 'Combine a entrega', text: 'Combine a entrega no porto com a Azmora e organize o transporte da casa até ao terreno.' },
+  { Icon: Handshake, title: 'Confirme as condições', text: 'Peça a disponibilidade e as condições de reserva por escrito.' },
+  { Icon: Ship, title: 'Combine a entrega', text: 'Confirme o destino, os custos e a organização da entrega.' },
 ];
 ---
 
@@ -47,7 +47,7 @@ const steps = [
       <p class="kicker"><i></i> ORÇAMENTO E ENTREGA</p>
       <h2 id="purchase-title">O que entra no <em>orçamento?</em></h2>
     </div>
-    <p>O orçamento identifica a casa, o equipamento que a acompanha e o porto de destino. Veja onde termina a entrega da Azmora e o que precisa de preparar em terra.</p>
+    <p>Peça um orçamento que identifique a casa, o equipamento, os custos e as condições de entrega. Confirme o que precisa de preparar em terra.</p>
   </div>
 
   <div class="purchase-panels">
@@ -78,7 +78,7 @@ const steps = [
       <Ship size={25} aria-hidden="true" />
       <div>
         <h3>Açores e Madeira</h3>
-        <p>Para um pedido de entrega, indique a ilha e a localidade de destino. A Azmora indica o porto comercial no orçamento da unidade escolhida.</p>
+        <p>Para um pedido de entrega, indique a ilha e a localidade de destino e confirme as condições no orçamento.</p>
         <a class="under" href={url('contactos/?motivo=transporte')}>Pedir informação sobre transporte</a>
       </div>
     </aside>

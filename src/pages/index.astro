@@ -19,14 +19,14 @@ const featured = [
 ].sort((a,b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 3);
 ---
 
-<Layout sharePhoto={hero?.media[0]} description="Explore casas móveis usadas para os Açores e a Madeira. Compare as fichas e peça um orçamento com IVA e entrega no porto da sua ilha." title="Casas móveis usadas para os Açores e a Madeira"
+<Layout sharePhoto={hero?.media[0]} description="Explore casas móveis usadas para os Açores e a Madeira. Compare as fichas e peça informações sobre preços e entrega." title="Casas móveis usadas para os Açores e a Madeira"
   ><section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <p class="kicker"><i></i> CASAS MÓVEIS EM SEGUNDA MÃO</p><h1>
           Outra forma <br />de <em>habitar.</em>
         </h1><p class="intro">
-          Escolha a sua casa móvel em segunda mão. Entregamos no porto comercial da sua ilha, nos Açores ou na Madeira.
+          Escolha a sua casa móvel em segunda mão e peça informações sobre entrega nos Açores ou na Madeira.
         </p><a class="btn cream" href={url('casas/')}>Explorar as casas</a>
       </div>{
         hero ? (

@@ -21,5 +21,5 @@ export const contacts = {
   phoneHref: /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '',
   phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '',
   whatsapp: import.meta.env.PUBLIC_WHATSAPP || '',
-  form: import.meta.env.PUBLIC_FORM_ENDPOINT || company.formEndpoint,
+  form: '',
 };

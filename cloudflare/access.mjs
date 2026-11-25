@@ -41,6 +41,8 @@ export async function authorize(request, env, testKey) {
       .map((x) => x.trim())
       .filter(Boolean);
     return payload.type === 'app' &&
+      typeof payload.sub === 'string' && payload.sub.length > 0 &&
+      typeof payload.iat === 'number' && payload.iat <= Math.floor(Date.now() / 1000) + 60 &&
       typeof payload.email === 'string' &&
       allowed.includes(payload.email.toLowerCase())
       ? payload.email

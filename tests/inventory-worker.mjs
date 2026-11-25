@@ -110,6 +110,11 @@ try {
     );
     if (expected)
       assert.ok(html.includes(expected), route + ' ' + html.slice(0, 1000));
+    if (expected) {
+      assert.match(html, /<meta name="description" content="[^"]+/);
+      assert.match(html, new RegExp('rel="canonical" href="'+origin.replaceAll('.','\\.')+'/'));
+      assert.match(html, /property="og:title"/);
+    }
   }
 
   const catalogue = await (await call('casas/')).text();
@@ -278,6 +283,7 @@ try {
   assert.equal((await json(await call('api/casas/'))).length, 17);
   await json(await change(await get(), 'archived'));
   assert.equal((await call('casas/' + u.slug + '/')).status, 404);
+  assert.ok(!(await (await call('sitemap.xml')).text()).includes('/casas/'+u.slug+'/'));
   await json(await change(await get(), 'draft'));
   await json(await change(await get(), 'archived'));
   u = await get();
@@ -398,6 +404,7 @@ try {
       await page.locator('#list .unit').first().waitFor();
       await page.reload();
       await page.getByRole('button', { name: /Pedidos de contacto/ }).click();
+      assert.equal(await page.locator('#show-contacts').getAttribute('aria-pressed'),'true');
       await page
         .locator('#contact-list article')
         .filter({ hasText: 'Cliente sintético' })
@@ -405,10 +412,19 @@ try {
         .click();
       await page.locator('#contact-detail:not([aria-busy])').waitFor();
       assert.match(await page.locator('#contact-legacy-note').innerText(),/Nota anterior de teste/);
+      await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined }));
+      await page.locator('#copy-email').click();
+      assert.match(await page.locator('#contact-feedback').innerText(),/Não foi possível copiar/);
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),false);
       await page.locator('#contact-list article').filter({hasText:'Cliente sintético'}).getByRole('button',{name:'Consultar pedido'}).click();
       await page.locator('#contact-detail:not([aria-busy])').waitFor();
+      const contactBox = await page.locator('#contact-detail').boundingBox();
+      await page.mouse.move(contactBox.x + contactBox.width / 2, contactBox.y + 35);
+      await page.mouse.down();
+      await page.mouse.move(1,1);
+      await page.mouse.up();
+      assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),true);
       await page.mouse.click(1,1);
       assert.equal(await page.locator('#contact-detail').evaluate(d => d.open),false);
       await page.locator('#contact-list article').filter({hasText:'Cliente sintético'}).getByRole('button',{name:'Consultar pedido'}).click();
@@ -449,10 +465,15 @@ try {
         'Nota de ensaio',
       );
       await page.locator('#show-inventory').click();
+      assert.equal(await page.locator('#show-inventory').getAttribute('aria-pressed'),'true');
       await page.getByRole('button', { name: 'Adicionar casa' }).click();
       await page
         .getByLabel('Nome da casa', { exact: true })
         .fill('Casa de ensaio');
+      page.once('dialog', dialog => dialog.dismiss());
+      await page.locator('#show-inventory').click();
+      assert.equal(await page.locator('#edit').isVisible(),true);
+      assert.equal(await page.locator('#dash').isVisible(),false);
       await page.getByLabel('Marca', { exact: true }).fill('Azmora');
       await page
         .locator('#files')
@@ -467,7 +488,9 @@ try {
         });
       await page.getByRole('button', { name: 'Pré-visualizar' }).click();
       await page.locator('dialog[open]').waitFor();
+      assert.equal(await page.getByRole('dialog', {name:'Pré-visualização da casa'}).isVisible(), true);
       await page.locator('#closePreview').click();
+      assert.equal(await page.locator('#peek').evaluate(e => document.activeElement === e),true);
       await page.getByRole('button', { name: 'Guardar rascunho' }).click();
       await page
         .locator('.unit')
@@ -503,6 +526,22 @@ try {
         path: '.qa/admin-contactos-desktop.png',
         fullPage: true,
       });
+      for (const width of [360,390,768,1024,1440,1920]) {
+        await page.setViewportSize({width,height:900});
+        for (const route of ['', 'casas/', 'casas/'+unit.slug+'/', 'contactos/', 'sobre/', 'favoritos/', 'comparar/', 'privacidade/', 'termos/', 'admin/']) {
+          await page.goto(base+route);
+          await page.locator('h1:visible').first().waitFor();
+          assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${width}px ${route}`);
+        }
+        if(width<768){
+          await page.goto(base);
+          await page.getByRole('button',{name:'Abrir menu'}).click();
+          assert.equal(await page.locator('#menu').evaluate(d=>d.open),true);
+          await page.keyboard.press('Escape');
+          assert.equal(await page.locator('#menu').evaluate(d=>d.open),false);
+        }
+      }
+      assert.deepEqual(errors, []);
       console.log(
         'OK · Chrome mobile, criação por formulário, upload convertido, pré-visualização, rascunho e visibilidade pública da fotografia.',
       );

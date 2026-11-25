@@ -4,7 +4,6 @@ import { readFileSync } from 'node:fs';
 const data = JSON.parse(readFileSync('src/data/houses.json', 'utf8'));
 const [firstHouse, secondHouse, thirdHouse] = data;
 const housePath = (house) => 'casas/' + house.media_slug + '/';
-const company = JSON.parse(readFileSync('src/data/company.json', 'utf8'));
 const exe = process.env.CHROME_BIN;
 const browser = await chromium.launch({
   channel: exe ? undefined : 'chrome',
@@ -103,9 +102,8 @@ try {
   await page.locator('#favcontact').click();
   assert.equal(new URL(page.url()).searchParams.get('casas'), firstHouse.media_slug);
   const form = page.locator('#lead-form');
-  const endpoint = process.env.PUBLIC_FORM_ENDPOINT || company.formEndpoint;
-  assert.equal(await form.getAttribute('action'), endpoint);
-  assert.ok(await form.locator('button[type=submit]').isEnabled());
+  assert.equal(await form.getAttribute('action'), null);
+  assert.ok(await form.locator('button[type=submit]').isDisabled());
   await page.goto(root + 'casas/');
   for (const house of data.slice(0, 4))
     await page.locator(`#results [data-compare="${house.media_slug}"]`).click();
@@ -195,7 +193,7 @@ try {
   assert.ok(await openMenu.evaluate((el) => el === document.activeElement));
   await openMenu.click();
   await mobileMenu.getByRole('link', { name: 'Sobre' }).click();
-  assert.equal(new URL(page.url()).pathname, '/AZMORA-HOMES/sobre/');
+  assert.equal(new URL(page.url()).pathname, new URL('sobre/', root).pathname);
   await page.goto(root + 'comparar/');
   await page.locator(`#tablehost button[data-compare="${thirdHouse.media_slug}"]`).click();
   assert.equal(await page.locator('#tablehost thead th').count(), 3);
@@ -205,66 +203,11 @@ try {
   await page.goto(root + 'favoritos/');
   await page.locator(`#saved [data-fav="${firstHouse.media_slug}"]`).click();
   assert.ok(await page.locator('#favempty').isVisible());
-  let notification;
-  let accepted = false;
-  await page.route(endpoint, async (route) => {
-    const request = route.request();
-    notification = await new Response(request.postDataBuffer(), {
-      headers: { 'Content-Type': request.headers()['content-type'] },
-    }).formData();
-    await route.fulfill({ json: { ok: accepted } });
-  });
   await page.goto(root + 'contactos/?casas=' + [firstHouse.media_slug, secondHouse.media_slug].join(',') + '&motivo=preco');
-  assert.ok(await page.locator('a[href="mailto:azmorahomes@gmail.com"]').first().isVisible());
-  await page.locator('[name=nome]').fill('Teste Azmora');
-  await page.locator('[name=email]').fill('teste@example.com');
-  await page.locator('[name=localidade]').fill('Ponta Delgada');
-  await page.locator('[name=tipologia]').selectOption('T3');
-  await page.locator('[name=telefone]').fill('912345678');
-  await page.locator('[name=message]').fill('Teste de preço e disponibilidade. Pode ignorar.');
-  await page.locator('#lead-form button[type=submit]').click();
-  assert.equal(notification, undefined);
-  await page.locator('[name=privacidade]').check();
-  await page.locator('#lead-form button[type=submit]').click();
-  const formStatus = page.locator('#lead-status');
-  await formStatus.and(page.locator('[data-state=error]')).waitFor();
-  const reference = notification.get('Referência do pedido');
-  assert.match(reference, /^AZ-[0-9A-F]{8}$/);
-  assert.ok((await formStatus.innerText()).includes(reference));
-  assert.equal(await page.locator('[name=message]').inputValue(), 'Teste de preço e disponibilidade. Pode ignorar.');
-  accepted = true;
-  await page.locator('#lead-form button[type=submit]').click();
-  await page.locator('#lead-status[data-state=success]').waitFor();
-  assert.ok(await formStatus.evaluate((element) => element === document.activeElement));
-  assert.ok((await formStatus.innerText()).includes(reference));
-  assert.equal(notification.get('Referência do pedido'), reference);
-  assert.equal(notification.get('subject'), `[Azmora Homes] Preço e disponibilidade — ${firstHouse.name_for_site}, ${secondHouse.name_for_site} · ${reference}`);
-  assert.equal(notification.get('email'), 'teste@example.com');
-  assert.equal(notification.get('Nome'), 'Teste Azmora');
-  assert.equal(notification.get('Motivo do pedido'), 'Preço e disponibilidade');
-  assert.equal(notification.get('Localidade de destino'), 'Ponta Delgada');
-  assert.equal(notification.get('Mensagem'), 'Teste de preço e disponibilidade. Pode ignorar.');
-  assert.equal(notification.get('Casas de interesse').replace(/\r\n/g, '\n'), `1. ${firstHouse.name_for_site}\n2. ${secondHouse.name_for_site}`);
-  assert.equal(notification.get('Ligações para as fichas').replace(/\r\n/g, '\n'), `1. ${root + housePath(firstHouse)}\n2. ${root + housePath(secondHouse)}`);
-  assert.ok(![...notification.values()].some((value) => /exposul/i.test(value)));
-  assert.equal(notification.get('Telefone'), '912345678');
-  assert.match(notification.get('Tipologia pretendida'), /^T3 · 3 quartos$/);
-  assert.deepEqual([...notification.keys()].slice(1, 4), ['Nome', 'email', 'Telefone']);
-  assert.ok(!notification.has('Política de Privacidade') && !notification.has('privacidade'));
-
-  await page.goto(root + 'contactos/?motivo=escolha');
-  await page.locator('[name=nome]').fill('Teste Azmora');
-  await page.locator('[name=email]').fill('teste@example.com');
-  await page.locator('[name=message]').fill('Gostaria de ajuda a escolher uma casa.');
-  await page.locator('[name=privacidade]').check();
-  await page.locator('#lead-form button[type=submit]').click();
-  await formStatus.and(page.locator('[data-state=success]')).waitFor();
-  assert.equal(notification.get('email'), 'teste@example.com');
-  assert.equal(notification.get('Casas de interesse'), 'Sem casa selecionada');
-  assert.equal(notification.get('Tipologia pretendida'), 'Sem preferência');
-  assert.equal(notification.get('Telefone'), 'Não indicado');
-  assert.equal(notification.get('Localidade de destino'), 'Não indicada');
-  assert.ok(!notification.has('Ligações para as fichas') && !notification.has('Política de Privacidade'));
+  assert.ok(await page.locator('a[href="mailto:geral@azmorahomes.pt"]').first().isVisible());
+  assert.equal(await page.locator('#selected li').count(), 2);
+  assert.ok(await page.locator('#lead-form button[type=submit]').isDisabled());
+  assert.ok(await page.locator('#lead-unavailable').isVisible());
   assert.deepEqual(errors, []);
   console.log(
     'OK browser · desktop/mobile 360 px, filtros partilháveis, lista, ordenação, favoritos persistentes, comparação 2–3, contacto, ficha, galeria quando disponível, navegação e teclado.',

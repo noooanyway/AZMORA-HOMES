@@ -38,7 +38,7 @@ test('Access valida token, administrador, origem e prazo', async () => {
       exp: Math.floor(Date.now() / 1000) + 90,
       ...overrides,
     })
-      .setIssuedAt()
+      .setIssuedAt(overrides.iat ?? Math.floor(Date.now() / 1000))
       .setProtectedHeader({ alg: 'RS256' })
       .sign(privateKey);
   }
@@ -63,6 +63,8 @@ test('Access valida token, administrador, origem e prazo', async () => {
         { iss: 'https://other.example' },
         { exp: 1 },
         { email: 'other@example.test' },
+        { iat: Math.floor(Date.now() / 1000) + 600 },
+        { sub: '' },
       ].map(async (o) => req(await sign(o))),
     )),
   ])

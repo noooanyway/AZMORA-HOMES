@@ -1,0 +1,37 @@
+name: Cópia privada de recuperação
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: azmora-backup
+  cancel-in-progress: false
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Preparar ferramentas
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq restic awscli
+          npm ci --ignore-scripts
+      - name: Guardar cópia cifrada e verificar
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.BACKUP_CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.BACKUP_CLOUDFLARE_ACCOUNT_ID }}
+          R2_ENDPOINT: ${{ vars.BACKUP_R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.BACKUP_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.BACKUP_R2_SECRET_ACCESS_KEY }}
+          BACKUP_REPOSITORY: ${{ vars.BACKUP_REPOSITORY }}
+          BACKUP_ACCESS_KEY_ID: ${{ secrets.BACKUP_ACCESS_KEY_ID }}
+          BACKUP_SECRET_ACCESS_KEY: ${{ secrets.BACKUP_SECRET_ACCESS_KEY }}
+          RESTIC_PASSWORD: ${{ secrets.BACKUP_RESTIC_PASSWORD }}
+          BACKUP_ALLOW_PRUNE: ${{ vars.BACKUP_ALLOW_PRUNE }}
+        run: bash scripts/backup.sh

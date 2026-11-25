@@ -58,6 +58,8 @@
       background: #234237;
       color: white;
     }
+    nav[aria-label="Administração"] button[aria-pressed="true"] { background: #234237; color: #fff; border-color: #234237; }
+    nav[aria-label="Administração"] { margin-bottom: 1.5rem; }
     button:disabled {
       opacity: 0.6;
       cursor: wait;
@@ -180,8 +182,8 @@
   <main>
     <p role="status" id="notice"></p>
     <nav class="actions" aria-label="Administração">
-      <button id="show-inventory">Inventário</button
-      ><button id="show-contacts">
+      <button id="show-inventory" aria-pressed="true">Inventário</button
+      ><button id="show-contacts" aria-pressed="false">
         Pedidos de contacto <span id="new-contacts"></span>
       </button>
     </nav>
@@ -347,7 +349,7 @@
       </form>
       <div id="manage" class="actions"></div>
     </section>
-    <dialog id="preview">
+    <dialog id="preview" aria-label="Pré-visualização da casa">
       <button id="closePreview">Fechar</button>
       <div id="sample"></div>
     </dialog>
@@ -414,7 +416,7 @@
       try {
         await fn();
       } catch (e) {
-        msg(e.message);
+        msg(e.name === 'TimeoutError' || e.name === 'AbortError' ? 'A operação demorou demasiado. Confirme o estado antes de tentar novamente.' : e.message);
       } finally {
         edit.inert = false;
         el('dash').inert = false;
@@ -781,9 +783,13 @@
       upload(e.dataTransfer.files);
     };
     el('closePreview').onclick = () => el('preview').close();
+    const onBackdrop = (dialog, e) => {
+      const r = dialog.getBoundingClientRect();
+      return e.target === dialog && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom);
+    };
     let previewBackdropStart = false;
-    el('preview').addEventListener('pointerdown', e => { previewBackdropStart = e.target === el('preview'); });
-    el('preview').addEventListener('click', e => { if (previewBackdropStart && e.target === el('preview') && !busy) el('preview').close(); previewBackdropStart = false; });
+    el('preview').addEventListener('pointerdown', e => { previewBackdropStart = onBackdrop(el('preview'), e); });
+    el('preview').addEventListener('click', e => { if (previewBackdropStart && onBackdrop(el('preview'), e) && !busy) el('preview').close(); previewBackdropStart = false; });
     el('preview').addEventListener('cancel', e => { if (busy) e.preventDefault(); });
     el('peek').onclick = () => {
       const d = data(),
