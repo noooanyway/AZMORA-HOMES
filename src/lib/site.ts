@@ -13,13 +13,17 @@ export const priceRequest = (h: House) =>
 export const pageHouses = (locals: App.Locals): House[] => import.meta.env.INVENTORY_LIVE ? (locals.houses ?? []) : houses;
 export const company = business;
 export const complaintsUrl = company.complaintsUrl || 'https://www.livroreclamacoes.pt/Inicio/';
-const phone = (import.meta.env.PUBLIC_CONTACT_PHONE || company.phone || '').trim();
+const phone = company.phone.trim();
 const dial = phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
 export const contacts = {
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL || company.email,
+  email: company.email,
   phone,
   phoneHref: /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '',
   phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '',
-  whatsapp: import.meta.env.PUBLIC_WHATSAPP || '',
+  whatsapp: company.whatsapp,
+  whatsappHref: `https://wa.me/${company.whatsapp}`,
   form: '',
 };
+
+export const houseWhatsApp = (houseName: string) =>
+  `${contacts.whatsappHref}?${new URLSearchParams({ text: `Olá! Gostaria de obter mais informações sobre a casa ${houseName}.` })}`;

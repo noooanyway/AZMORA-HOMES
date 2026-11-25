@@ -18,6 +18,23 @@ page.setDefaultNavigationTimeout(60000);
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 try {
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const house of [firstHouse, secondHouse]) {
+      await page.goto(root + housePath(house));
+      const wa = page.getByRole('link', { name: 'Contactar por WhatsApp' });
+      const destination = new URL(await wa.getAttribute('href'));
+      assert.equal(destination.origin + destination.pathname, 'https://wa.me/351913667365');
+      assert.equal(destination.searchParams.get('text'), `Olá! Gostaria de obter mais informações sobre a casa ${house.name_for_site}.`);
+      assert.ok(await wa.isVisible());
+      assert.ok(await page.locator('a[href="tel:+351913667365"]').count());
+      assert.ok(await page.locator('a[href="mailto:geral@azmorahomes.pt"]').count());
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    }
+    await page.goto(root + 'contactos/');
+    assert.ok(await page.locator('#whatsapp').isVisible());
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto(root);
   const theme = page.locator('html');

@@ -1,17 +1,18 @@
 ---
 import { company, contacts, preview } from '../lib/site';
 const { mode = 'contact' } = Astro.props as { mode?: 'contact' | 'footer' | 'legal' };
-const identity = [
+type Field = { label: string; value: string; placeholder: string; href?: string; caption?: string };
+const identity: Field[] = [
   { label: 'Denominação legal', value: company.legalName, placeholder: 'Denominação legal a definir' },
   { label: 'NIF / NIPC', value: company.taxId, placeholder: 'NIF / NIPC a definir' },
   { label: 'Registo', value: company.registration, placeholder: 'Dados de registo a definir' },
 ];
-const channels = [
+const channels: Field[] = [
   { label: 'Email', value: contacts.email, placeholder: 'Email comercial a definir', href: contacts.email ? 'mailto:' + contacts.email : '' },
   ...(mode === 'contact' ? [] : [{ label: 'Telemóvel', value: contacts.phoneHref ? contacts.phone : '', placeholder: 'Telemóvel comercial a definir', href: contacts.phoneHref, caption: contacts.phoneCaption }]),
   { label: 'Morada da empresa', value: company.registeredAddress, placeholder: 'Morada da empresa a definir' },
 ];
-const visits = [
+const visits: Field[] = [
   { label: 'Horário', value: company.openingHours, placeholder: 'Horário de atendimento a definir' },
   { label: 'Local de visita', value: company.visitAddress, placeholder: 'Local e condições de visita a definir' },
 ];

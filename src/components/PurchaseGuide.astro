@@ -14,10 +14,10 @@ const panels = [
     note: 'Peça a descrição da unidade, do preço e das condições de entrega por escrito.',
     items: [
       { Icon: Warehouse, title: 'Casa móvel em segunda mão', text: 'Confirme a unidade e as características indicadas na ficha e no orçamento.' },
-      { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'Confirme o mobiliário, a cozinha e os eletrodomésticos que acompanham a unidade.' },
+      { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'O mobiliário e os equipamentos apresentados estão incluídos, respeitando a informação específica da unidade.' },
       { Icon: Snowflake, title: 'Climatização e água quente', text: 'Confirme quais os equipamentos existentes e o seu estado.' },
-      { Icon: Ship, title: 'Transporte marítimo', text: 'Confirme o porto de destino, a descarga, as taxas e os respetivos custos.' },
-      { Icon: ReceiptText, title: 'IVA e valor final', text: 'Peça a indicação do IVA aplicável e do preço final por escrito.' },
+      { Icon: Ship, title: 'Transporte marítimo', text: 'O preço inclui transporte até à ilha nas condições do orçamento, que depende da ilha de destino.' },
+      { Icon: ReceiptText, title: 'IVA e valor final', text: 'Os preços incluem IVA; peça o orçamento para a ilha de destino.' },
     ],
   },
   {
@@ -25,10 +25,10 @@ const panels = [
     Badge: CircleX,
     note: 'Confirme responsabilidades e custos antes de organizar a instalação.',
     items: [
-      { Icon: MapPin, title: 'Transporte por estrada', text: 'Confirme como será organizado o transporte entre o porto e o local de instalação.' },
-      { Icon: LiftIcon, title: 'Colocação no terreno', text: 'Confirme quem assegura a descarga, a eventual grua, o posicionamento e o nivelamento.' },
-      { Icon: Shovel, title: 'Preparação do terreno', text: 'O acesso ao local, a base de apoio e os trabalhos necessários antes da entrega.' },
-      { Icon: Plug, title: 'Ligações às redes', text: 'Confirme as condições para ligar água, eletricidade, saneamento e gás, quando aplicável.' },
+      { Icon: MapPin, title: 'Transporte por estrada', text: 'O transporte dentro da ilha é da responsabilidade do cliente.' },
+      { Icon: LiftIcon, title: 'Colocação no terreno', text: 'A descarga e a instalação são da responsabilidade do cliente.' },
+      { Icon: Shovel, title: 'Preparação do terreno', text: 'A preparação do terreno é da responsabilidade do cliente.' },
+      { Icon: Plug, title: 'Ligações às redes', text: 'As ligações são da responsabilidade do cliente.' },
       { Icon: FileText, title: 'Licenças e autorizações', text: 'Os procedimentos que a Câmara Municipal indicar para instalar e utilizar a casa no terreno.' },
     ],
   },
@@ -36,7 +36,7 @@ const panels = [
 const steps = [
   { Icon: House, title: 'Escolha a casa', text: 'Consulte a ficha e compare as características e o equipamento.' },
   { Icon: MessageSquare, title: 'Peça um orçamento', text: 'Indique a casa e a localidade ou ilha de destino.' },
-  { Icon: Handshake, title: 'Confirme as condições', text: 'Peça a disponibilidade e as condições de reserva por escrito.' },
+  { Icon: Handshake, title: 'Confirme as condições', text: 'Peça a disponibilidade e as condições aplicáveis por escrito.' },
   { Icon: Ship, title: 'Combine a entrega', text: 'Confirme o destino, os custos e a organização da entrega.' },
 ];
 ---
@@ -78,7 +78,7 @@ const steps = [
       <Ship size={25} aria-hidden="true" />
       <div>
         <h3>Açores e Madeira</h3>
-        <p>Para um pedido de entrega, indique a ilha e a localidade de destino e confirme as condições no orçamento.</p>
+        <p>A atividade destina-se aos Açores e à Madeira; não realizamos vendas para Portugal continental. Indique a ilha de destino para o orçamento.</p>
         <a class="under" href={url('contactos/?motivo=transporte')}>Pedir informação sobre transporte</a>
       </div>
     </aside>
