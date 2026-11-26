@@ -34,7 +34,19 @@ function contentRead(){const c=structuredClone(settingsContent);for(const [g,fie
 async function settingsLoad() {
   const [r, inventory] = await Promise.all([api('configuracoes/'),api('dados/')]);settingsUnits=inventory.units;settingsRevision=r.revision;settingsFill(r.draft.contacts || r.published.contacts || r.defaults, r.draft.content || r.published.content || r.contentDefaults);
   const host=el('settings-history'); host.replaceChildren();
-  for(const v of r.history){ const row=node('p',`Versão ${v.published_revision} · ${v.created_at} `); row.append(button('Recuperar esta versão',()=>settingsTask(async()=>{ if(!confirm('Publicar esta versão anterior e substituir o rascunho?'))return; await api('configuracoes-recuperar/',{revision:settingsRevision,historyId:v.id}); await settingsLoad(); el('settings-feedback').textContent='Versão recuperada.'; })));host.append(row); }
+  for(const v of r.history){
+    const row=node('p',`Versão ${v.published_revision} · ${v.created_at} · ${v.actor || 'autor desconhecido'} `);
+    row.append(button('Recuperar esta versão',()=>settingsTask(async()=>{
+      const old=JSON.parse(v.data), current=r.published;
+      const groups={contacts:'contactos e redes sociais',home:'página inicial e destaques',about:'Sobre Nós',faq:'perguntas frequentes',commercial:'informação comercial',notice:'avisos',seo:'metadados SEO'};
+      const value=(obj,key)=>key==='contacts'?obj.contacts:obj.content?.[key];
+      const changed=Object.keys(groups).filter(key=>JSON.stringify(value(old,key))!==JSON.stringify(value(current,key))).map(key=>groups[key]);
+      const draftPending=settingsDirty || JSON.stringify(r.draft)!==JSON.stringify(r.published);
+      const message=`Recuperar a versão ${v.published_revision} de ${v.created_at}, publicada por ${v.actor || 'autor desconhecido'}?\n\nDiferenças por secção: ${changed.join(', ') || 'sem diferenças detetadas'}.\n\nToda a configuração publicada e o rascunho serão substituídos.${draftPending?' ATENÇÃO: existem alterações no rascunho que serão perdidas.':''} A versão publicada anteriormente permanece no histórico.`;
+      if(!confirm(message))return;
+      await api('configuracoes-recuperar/',{revision:settingsRevision,historyId:v.id}); await settingsLoad(); el('settings-feedback').textContent='Versão recuperada.';
+    })));host.append(row);
+  }
 }
 async function settingsTask(fn){ if(busy||contactBusy)return;busy=true;el('settings').inert=true;try{await fn()}catch(e){el('settings-feedback').textContent=e.message}finally{el('settings').inert=false;busy=false} }
 el('show-settings').onclick=()=>{if(busy||contactBusy)return;if(dirty&&!confirm('Sair sem guardar a ficha de inventário?'))return; dirty=false;el('dash').hidden=true;el('edit').hidden=true;el('contacts').hidden=true;el('settings').hidden=false;for(const id of ['show-inventory','show-contacts'])el(id).setAttribute('aria-pressed','false');el('show-settings').setAttribute('aria-pressed','true');settingsTask(settingsLoad)};

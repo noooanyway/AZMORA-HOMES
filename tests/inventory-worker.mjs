@@ -140,6 +140,22 @@ try {
   const htmlRestore = await (await call('contactos/')).text();
   assert.doesNotMatch(htmlRestore,/\+351 911 222 333/);
   assert.doesNotMatch(await (await call('')).text(),/Título inicial sintético/);
+  // Each institutional route receives only the published SEO values.
+  const seoRoutes={home:'',about:'sobre/',contacts:'contactos/',acores:'casas-moveis-acores/',madeira:'casas-moveis-madeira/',guide:'guias/como-escolher-casa-movel-usada/'};
+  const seoContent=structuredClone(cfg.contentDefaults);
+  for (const key of Object.keys(seoRoutes)) seoContent.seo[key]={title:`SEO ${key}`,description:`Descrição ${key}`,socialTitle:`Partilha ${key}`,socialDescription:`Resumo ${key}`};
+  let revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:seoContent})).status,200);
+  for(const [key,route] of Object.entries(seoRoutes)) assert.ok(!(await (await call(route)).text()).includes(`SEO ${key}`));
+  assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+  for(const [key,route] of Object.entries(seoRoutes)) {
+    const html=await (await call(route)).text();
+    for(const value of [`SEO ${key}`,`Descrição ${key}`,`Partilha ${key}`,`Resumo ${key}`]) assert.ok(html.includes(value),`${route}: ${value}`);
+    assert.match(html, /rel="canonical"/);
+  }
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
+  assert.ok(!(await (await call('')).text()).includes('SEO home'));
   for (const [route, expected] of [
     ['', 'Outra forma'],
     ['casas/', 'Explore as'],
@@ -501,7 +517,7 @@ try {
       const homeVisual=await (await call('')).text(); for(const x of ['Casa de teste visual','Pergunta visual?','Transporte de teste visual','Título SEO visual','Aviso visual']) assert.ok(homeVisual.includes(x),x);
       assert.match(await (await call('sobre/')).text(),/Sobre de teste visual/);
       assert.doesNotMatch(await (await call('contactos/')).text(),/instagram.com\/azmorahomes/);
-      page.once('dialog',d=>d.accept()); await page.locator('#settings-history button').last().click();
+      page.once('dialog',d=>{assert.match(d.message(),/Diferenças por secção/);assert.match(d.message(),/rascunho/);assert.match(d.message(),/histórico/);return d.accept();}); await page.locator('#settings-history button').last().click();
       await page.getByText('Versão recuperada.').waitFor();
       assert.doesNotMatch(await (await call('contactos/')).text(), /919 222 333/);
       await page.getByRole('button',{name:'Inventário',exact:true}).click();

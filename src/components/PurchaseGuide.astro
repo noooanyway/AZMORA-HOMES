@@ -28,8 +28,8 @@ const panels = [
     items: [
       { Icon: MapPin, title: 'Transporte por estrada', text: commercial?.excluded ?? 'O transporte dentro da ilha é da responsabilidade do cliente.' },
       { Icon: LiftIcon, title: 'Colocação no terreno', text: commercial?.delivery ?? 'A descarga e a instalação são da responsabilidade do cliente.' },
-      { Icon: Shovel, title: 'Preparação do terreno', text: 'A preparação do terreno é da responsabilidade do cliente.' },
-      { Icon: Plug, title: 'Ligações às redes', text: 'As ligações são da responsabilidade do cliente.' },
+      ...(!commercial ? [{ Icon: Shovel, title: 'Preparação do terreno', text: 'A preparação do terreno é da responsabilidade do cliente.' }] : []),
+      ...(!commercial ? [{ Icon: Plug, title: 'Ligações às redes', text: 'As ligações são da responsabilidade do cliente.' }] : []),
       { Icon: FileText, title: 'Licenças e autorizações', text: 'Os procedimentos que a Câmara Municipal indicar para instalar e utilizar a casa no terreno.' },
     ],
   },

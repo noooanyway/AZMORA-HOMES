@@ -1,5 +1,7 @@
 # Backoffice da Azmora Homes
 
+> **Estado atual local:** o ADMIN permite editar e publicar configurações em conjunto. A pré-visualização é textual; ao recuperar uma versão, reveja as secções indicadas e o aviso sobre rascunhos. Existem textos comerciais repetidos que ainda precisam de reconciliação antes de usar o editor em produção. As instruções técnicas antigas abaixo são históricas; para operação diária use a secção de configurações no final deste documento.
+
 **Atualização de 24/11/2026:** para o domínio definitivo, contactos, variáveis e comandos de corte, seguir [Preparação final para produção](PRODUCAO_2026-11-24.md). O caminho de produção é agora `/admin/` em `https://www.azmorahomes.pt`; as referências abaixo a `/AZMORA-HOMES/` descrevem a configuração anterior. Não repetir os imports iniciais numa base já existente.
 
 ## Utilização pela equipa

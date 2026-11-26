@@ -19,7 +19,7 @@ export const ALL = async ({ request, params }) => {
     try {
       if (request.method === 'GET' && action === 'configuracoes') {
         const settings = await readSettings(db);
-        const history = await db.prepare('SELECT id,published_revision,actor,created_at FROM site_settings_history ORDER BY id DESC LIMIT 30').all();
+        const history = await db.prepare('SELECT id,published_revision,actor,created_at,data FROM site_settings_history ORDER BY id DESC LIMIT 30').all();
         const defaults = {phone:company.phone,secondPhone:company.secondPhone,whatsapp:company.whatsapp,email:company.email,openingHours:company.openingHours,timezone:'Europe/Lisbon',languages:company.languages,social:company.social};
         return Response.json({ ...settings, defaults, contentDefaults, history: history.results });
       }
