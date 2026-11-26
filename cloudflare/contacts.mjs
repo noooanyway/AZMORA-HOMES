@@ -217,7 +217,10 @@ export async function submitContact(request, env, send = fetch) {
       return reply(
         'Uma casa selecionada já não está disponível. Atualize a seleção.',
       );
-    houses.push({ slug, name: JSON.parse(house.data).name_for_site });
+    const listing = JSON.parse(house.data);
+    if (['reservado', 'vendido'].includes(listing.availability))
+      return reply('Uma casa selecionada está reservada ou vendida. Atualize a seleção para escolher alternativas.');
+    houses.push({ slug, name: listing.name_for_site });
   }
   const saved = await db
     .prepare(

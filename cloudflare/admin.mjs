@@ -77,9 +77,16 @@ export const ALL = async ({ request, params }) => {
         db.prepare('SELECT * FROM inventory ORDER BY rowid'),
         db.prepare('SELECT * FROM activity ORDER BY seq DESC LIMIT 20'),
       ]);
+      let commercialEvents = [];
+      try {
+        commercialEvents = (await db.prepare('SELECT inventory_id,old_state,new_state,actor,changed_at FROM inventory_commercial_history ORDER BY seq DESC LIMIT 100').all()).results;
+      } catch (error) {
+        if (!String(error?.message || '').includes('no such table: inventory_commercial_history')) throw error;
+      }
       return Response.json({
         units: units.results.map((r) => ({ ...r, data: JSON.parse(r.data) })),
         events: events.results,
+        commercialEvents,
       });
     }
     if (action === 'foto') {
@@ -171,6 +178,10 @@ export const ALL = async ({ request, params }) => {
       'Reveja os campos da ficha e as legendas das fotografias.',
       400,
     );
+  const priorData = existing ? JSON.parse(existing.data) : {};
+  const knownStates = ['por_confirmar','disponivel','reservado','vendido','em_breve'];
+  if (!knownStates.includes(parsed.data.availability) && (!existing || parsed.data.availability !== (priorData.availability ?? null)))
+    return reply('Escolha uma situação comercial válida.', 400);
   const state = input.state;
   if (!['draft', 'live', 'archived'].includes(state))
     return reply('Escolha um estado válido para a ficha.', 400);
@@ -188,8 +199,10 @@ export const ALL = async ({ request, params }) => {
         .slice(0, 64) +
         '-' +
         id.slice(0, 8);
-  const old = existing ? JSON.parse(existing.data) : {};
-  for (const field of Object.keys(fields.shape)) delete old[field];
+  const old = priorData;
+  for (const field of Object.keys(fields.shape)) {
+    if (field !== 'inventory_group' || Object.hasOwn(parsed.data, field)) delete old[field];
+  }
   const paths = [
     ...new Set(
       parsed.data.media.flatMap((m) =>

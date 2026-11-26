@@ -20,6 +20,7 @@ export const fields = z.object({
   brand: short.min(1),
   model: short.nullable(),
   reference_azmora: short.nullable(),
+  inventory_group: z.string().trim().max(120).nullable().optional(),
   description_azmora: note,
   typology: short.nullable(),
   year: z.number().int().min(1900).max(2100).nullable(),
@@ -40,13 +41,8 @@ export const fields = z.object({
     .optional(),
   equipment_summary: z.array(short.min(1)).max(80),
   condition: short.nullable(),
-  availability: z.enum([
-    'por_confirmar',
-    'disponivel',
-    'reservado',
-    'vendido',
-    'em_breve',
-  ]),
+  // Unknown legacy values may only be preserved unchanged by the admin endpoint.
+  availability: z.string().trim().max(100).nullable(),
   public_price_eur: number,
   featured: z.boolean().optional(),
   seo_title: short.optional(),

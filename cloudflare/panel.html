@@ -325,9 +325,14 @@
           <option>Alterações recentes</option>
         </select>
       </div>
+      <div class="row"><button type="button" id="view-units" aria-pressed="true">Por unidade</button><button type="button" id="view-models" aria-pressed="false">Por modelo</button></div>
+      <p id="group-help" hidden>Os totais excluem casas arquivadas. Associe manualmente cada casa a um grupo de modelo na ficha. O stock conhecido inclui disponíveis e reservadas; as casas por confirmar são apresentadas à parte.</p>
+      <div id="groups" hidden></div>
       <div id="list"></div>
       <h2>Atividade recente</h2>
       <ul id="events"></ul>
+      <h2>Alterações comerciais recentes</h2>
+      <ul id="commercial-events"></ul>
     </section>
     <section id="edit" hidden>
       <button id="back">← Inventário</button>
@@ -395,6 +400,7 @@
       };
     let units = [],
       events = [],
+      commercialEvents = [],
       current = null,
       dirty = false,
       busy = false,
@@ -435,6 +441,15 @@
         busy = false;
       }
     }
+    el('view-units').onclick = () => setInventoryView(false);
+    el('view-models').onclick = () => setInventoryView(true);
+    function setInventoryView(grouped) {
+      el('view-units').setAttribute('aria-pressed', String(!grouped));
+      el('view-models').setAttribute('aria-pressed', String(grouped));
+      el('list').hidden = grouped;
+      el('groups').hidden = !grouped;
+      el('group-help').hidden = !grouped;
+    }
     function draw() {
       const text = el('search').value.toLocaleLowerCase('pt'),
         filter = el('filter').value;
@@ -449,6 +464,8 @@
             .length,
           Vendidas: active.filter((u) => u.data.availability === 'vendido')
             .length,
+          'Por confirmar / em breve': active.filter((u) => !['disponivel','reservado','vendido'].includes(u.data.availability)).length,
+          Arquivadas: units.filter((u) => u.state === 'archived').length,
           Publicadas: units.filter((u) => u.state === 'live').length,
           Rascunhos: units.filter((u) => u.state === 'draft').length,
         }).map(([k, v]) => {
@@ -465,6 +482,7 @@
               u.data.name_for_site,
               u.data.brand,
               u.data.reference_azmora,
+              u.data.inventory_group,
               u.slug,
             ]
               .join(' ')
@@ -482,7 +500,7 @@
           row.className = 'unit';
           const title = node('strong', u.data.name_for_site);
           title.append(
-            node('small', states[u.state] + ' · ' + stock[u.data.availability]),
+            node('small', states[u.state] + ' · ' + (stock[u.data.availability] || 'Estado não classificado')),
           );
           row.append(
             title,
@@ -492,6 +510,24 @@
         }),
       );
       if (!found.length) el('list').textContent = 'Nenhuma casa encontrada.';
+      const groups = new Map();
+      for (const u of found.filter((u) => u.state !== 'archived')) {
+        const label = u.data.inventory_group?.trim() || '';
+        const key = label ? label.normalize('NFKC').toLocaleLowerCase('pt-PT') : '';
+        if (!groups.has(key)) groups.set(key, { label: label || 'Sem grupo de modelo', units: [] });
+        groups.get(key).units.push(u);
+      }
+      el('groups').replaceChildren(...[...groups.values()].map((group) => {
+        const row = node('article', ''); row.className = 'unit';
+        const counts = Object.fromEntries(['disponivel','reservado','vendido'].map((state) => [state, group.units.filter((u) => u.data.availability === state).length]));
+        const pending = group.units.length - counts.disponivel - counts.reservado - counts.vendido;
+        row.append(node('strong', group.label), node('p', 'Disponíveis: ' + counts.disponivel + ' · Reservadas: ' + counts.reservado + ' · Vendidas: ' + counts.vendido + ' · Por confirmar / em breve: ' + pending + ' · Stock conhecido: ' + (counts.disponivel + counts.reservado)));
+        return row;
+      }));
+      if (!groups.size) el('groups').textContent = 'Nenhuma casa não arquivada encontrada.';
+      el('commercial-events').replaceChildren(...commercialEvents.map((v) => node('li',
+        v.changed_at + ' UTC · ' + (units.find(u => u.id === v.inventory_id)?.data.name_for_site || 'Casa removida') +
+        ' · ' + (stock[v.old_state] || 'Não registado / outro') + ' → ' + (stock[v.new_state] || 'Não registado / outro') + ' · ' + v.actor)));
       el('events').replaceChildren(
         ...events.map((v) =>
           node(
@@ -508,7 +544,7 @@
       );
     }
     async function load() {
-      ({ units, events } = await api('dados/'));
+      ({ units, events, commercialEvents = [] } = await api('dados/'));
       draw();
     }
     const groups = {
@@ -516,6 +552,7 @@
         ['name_for_site', 'Nome da casa'],
         ['brand', 'Marca'],
         ['model', 'Modelo'],
+        ['inventory_group', 'Grupo de modelo (interno)'],
         ['reference_azmora', 'Referência interna'],
         ['description_azmora', 'Descrição', 'text'],
       ],
@@ -559,6 +596,11 @@
           i = document.createElement(
             t === 'stock' ? 'select' : t === 'text' ? 'textarea' : 'input',
           );
+        if (k === 'inventory_group') {
+          i.setAttribute('list', 'inventory-groups');
+          i.maxLength = 120;
+          if (!el('inventory-groups')) { const choices = document.createElement('datalist'); choices.id = 'inventory-groups'; f.append(choices); }
+        }
         if (t === 'num') {
           i.type = 'number';
           i.min = '0';
@@ -577,6 +619,7 @@
     function open(u, duplicate = false) {
       current = duplicate ? null : u;
       const d = u?.data || {};
+      el('inventory-groups').replaceChildren(...[...new Set(units.map(x => x.data.inventory_group?.trim()).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'pt')).map(value => { const option = document.createElement('option'); option.value = value; return option; }));
       dirty = duplicate;
       media = structuredClone(d.media || []);
       el('heading').textContent = current ? 'Editar casa' : 'Adicionar casa';
@@ -585,9 +628,15 @@
         : '';
       for (const [k, i] of inputs) {
         const v = k.split('.').reduce((a, p) => a?.[p], d);
-        i.value = Array.isArray(v)
-          ? v.join('\n')
-          : (v ?? (k === 'availability' ? 'por_confirmar' : ''));
+        if (k === 'availability') {
+          i.querySelector('[data-legacy]')?.remove();
+          const value = u ? (v ?? '') : 'por_confirmar';
+          if (!Object.hasOwn(stock, value)) {
+            const option = new Option('Estado não classificado', value);
+            option.dataset.legacy = 'true'; i.add(option);
+          }
+          i.value = value;
+        } else i.value = Array.isArray(v) ? v.join('\n') : (v ?? '');
       }
       if (duplicate) {
         inputs.get('name_for_site').value += ' (cópia)';

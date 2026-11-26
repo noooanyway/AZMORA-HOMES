@@ -10,7 +10,7 @@ interface Props {
 }
 const { data, slug } = Astro.props;
 const commercial = Astro.locals.siteSettings?.content?.commercial ?? defaults.commercial;
-const houses = pageHouses(Astro.locals);
+const houses = pageHouses(Astro.locals).filter(h => h.availability === 'disponivel');
 const featured = houses.find(h => h.featured && h.media.length) || houses.find(h => h.media.length);
 const path = `casas-moveis-${slug}/`;
 const label = `Casas móveis ${data.where}`;

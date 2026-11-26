@@ -9,21 +9,25 @@ import { url, detail, pageHouses } from '../lib/site';
 const houses = pageHouses(Astro.locals);
 import { name } from '../lib/catalog';
 import { Search, SlidersHorizontal } from 'lucide-astro';
-const brands = [...new Set(houses.map(h => h.brand))].sort();
+const available = houses.filter(h => h.availability === 'disponivel');
+const brands = [...new Set(available.map(h => h.brand))].sort();
 const hero =
-  houses.find((h) => h.featured && h.media.length) ||
-  houses.find((h) => h.id.endsWith('-007') && h.media.length) ||
-  houses.find((h) => h.media.length);
-const types = [...new Set(houses.map((h) => h.typology).filter(Boolean))];
+  available.find((h) => h.featured && h.media.length) ||
+  available.find((h) => h.id.endsWith('-007') && h.media.length) ||
+  available.find((h) => h.media.length);
+const types = [...new Set(available.map((h) => h.typology).filter(Boolean))];
+// Known sale events come first; older listings without an event keep their existing order.
+const sold = houses.filter(h => h.availability === 'vendido')
+  .sort((a, b) => (b.sale_order ?? 0) - (a.sale_order ?? 0)).slice(0, 3);
 const content = Astro.locals.siteSettings?.content;
 const displayedContent = content || defaults;
 const oldDescription = 'Escolha a sua casa móvel em segunda mão para os Açores ou a Madeira. Entregas nos Açores e na Madeira, sujeitas à confirmação das condições de transporte para a ilha de destino. Não realizamos vendas para Portugal continental.';
 const introduction = displayedContent.home.description === oldDescription ? defaults.home.description : displayedContent.home.description;
 const automaticFeatured = [
-  ...houses.filter((h) => h.media.length),
-  ...houses.filter((h) => !h.media.length),
+  ...available.filter((h) => h.media.length),
+  ...available.filter((h) => !h.media.length),
 ].sort((a,b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 3);
-const featured = content?.home.featured.length ? content.home.featured.flatMap(slug => houses.filter(h => h.media_slug === slug)).slice(0,3) : automaticFeatured;
+const featured = content?.home.featured.length ? content.home.featured.flatMap(slug => available.filter(h => h.media_slug === slug)).slice(0,3) : automaticFeatured;
 ---
 
 <Layout sharePhoto={hero?.media[0]} description="Explore casas móveis usadas para os Açores e a Madeira. Compare as fichas e peça informações sobre preços e entrega." title="Casas móveis usadas para os Açores e a Madeira"
@@ -86,7 +90,12 @@ const featured = content?.home.featured.length ? content.home.featured.flatMap(s
           <p>Estamos a preparar a próxima seleção de casas.</p>
         )
       }<p class="muted">Preços e disponibilidade sob consulta.</p>
-    </section>{
+    </section>
+    {sold.length > 0 && <section class="section">
+      <div class="section-heading"><h2>Casas vendidas</h2><a class="under" href={url('casas/?estado=vendido')}>Ver casas vendidas</a></div>
+      <div class="cards">{sold.map(h => <Card h={h} />)}</div>
+    </section>}
+    {
       brands.length > 0 && (
         <div class="brands">
           {brands.map((b) => (

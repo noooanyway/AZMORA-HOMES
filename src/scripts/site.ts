@@ -73,6 +73,12 @@ function announce(s: string) {
   }, 3200);
 }
 let timer = 0;
+function contactable(ids: string[]) {
+  return ids.filter(id => {
+    const house = houses.find(h => h.id === id);
+    return house && !['reservado', 'vendido'].includes(house.availability);
+  });
+}
 function contact(ids: string[]) {
   return base + 'contactos/?casas=' + encodeURIComponent(ids.join(','));
 }
@@ -117,7 +123,9 @@ function render() {
     $('#favempty')!.hidden = !!state.fav.length;
     const a = $<HTMLAnchorElement>('#favcontact')!;
     a.hidden = !state.fav.length;
-    a.href = contact(state.fav);
+    const eligible = contactable(state.fav);
+    a.href = eligible.length ? contact(eligible) : base + 'casas/';
+    a.textContent = eligible.length ? 'Pedir informações sobre as favoritas' : 'Ver casas disponíveis';
   }
   all<HTMLAnchorElement>('.favlink, [data-favorites-nav]').forEach(link => {
     link.href = selectionHref('favoritos/', 'fav', state.fav);
@@ -144,7 +152,9 @@ function render() {
   host.replaceChildren();
   $('#cmpempty')!.hidden = ids.length >= 2;
   const a = $<HTMLAnchorElement>('#cmpcontact')!;
-  a.href = contact(ids);
+  const eligible = contactable(ids);
+  a.href = eligible.length ? contact(eligible) : base + 'casas/';
+  a.textContent = eligible.length ? 'Pedir informações sobre a seleção' : 'Ver casas disponíveis';
   a.hidden = ids.length < 2;
   if (ids.length < 2) return;
   const items = ids.map((id) => houses.find((h) => h.id === id)!);
@@ -283,16 +293,19 @@ if (filterForm) {
       );
     q.value = params.get('q') || '';
     sort.value = params.get('sort') || '';
+    const selectedCategory = ['disponivel', 'reservado', 'vendido'].includes(params.get('estado') || '') ? params.get('estado') : 'disponivel';
     const list = sorted(
-      houses.filter((h) => matches(h, params)),
+      houses.filter((h) => h.availability === selectedCategory && cards.has(h.id) && matches(h, params)),
       sort.value,
     );
     const visible = new Set(list.map((h) => h.id));
     cards.forEach((el, id) => (el.hidden = !visible.has(id)));
     list.forEach((h) => results.append(cards.get(h.id)!));
-    $('#count')!.textContent =
-      list.length + (list.length === 1 ? ' casa' : ' casas');
+    $('#count')!.textContent = list.length ? 'Resultados' : 'Sem resultados';
     $('#empty')!.hidden = !!list.length;
+    const noAvailable = selectedCategory === 'disponivel' && cards.size === 0;
+    $('#empty-title')!.textContent = noAvailable ? 'Não há casas disponíveis neste momento' : 'Nenhuma casa encontrada';
+    $('#empty-message')!.textContent = noAvailable ? 'Volte a consultar o catálogo mais tarde ou contacte-nos para obter informações.' : 'Experimente outra pesquisa ou retire alguns filtros.';
     const chips = $('#chips')!;
     chips.replaceChildren();
     for (const k of ['q', ...keysFilter]) {

@@ -2,6 +2,7 @@ export interface House {
   id: string;
   media_slug: string;
   featured?: boolean;
+  sale_order?: number | null;
   seo_title?: string;
   seo_description?: string;
   brand: string;

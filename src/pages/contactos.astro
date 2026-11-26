@@ -6,7 +6,7 @@ import CallContact from '../components/CallContact.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { getContacts, detail, url, pageHouses } from '../lib/site';
 const contacts = getContacts(Astro.locals);
-const houses = pageHouses(Astro.locals);
+const houses = pageHouses(Astro.locals).filter(h => !['reservado', 'vendido'].includes(h.availability));
 const native = Astro.locals.contactBackend === true;
 const endpoint = native ? url('api/contactos/') : contacts.form;
 const enabled = native ? !!Astro.locals.turnstileSiteKey : !!endpoint;

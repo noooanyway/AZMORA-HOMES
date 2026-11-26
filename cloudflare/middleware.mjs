@@ -6,10 +6,16 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   ctx.locals.contactBackend = true;
   ctx.locals.turnstileSiteKey = bindings.TURNSTILE_SITE_KEY || '';
   if (!/^\/(admin|images|api\/contactos)(\/|$)/.test(path)) {
-    const { results } = await bindings.DB.prepare(
-      "SELECT data FROM inventory WHERE state='live' ORDER BY rowid",
-    ).all();
-    ctx.locals.houses = results.map((row) => JSON.parse(row.data));
+    let results;
+    try {
+      ({ results } = await bindings.DB.prepare(
+        "SELECT i.data, (SELECT seq FROM inventory_commercial_history h WHERE h.inventory_id=i.id AND h.new_state='vendido' ORDER BY seq DESC LIMIT 1) sale_order FROM inventory i WHERE i.state='live' ORDER BY i.rowid",
+      ).all());
+    } catch (error) {
+      if (!String(error?.message || '').includes('no such table: inventory_commercial_history')) throw error;
+      ({ results } = await bindings.DB.prepare("SELECT data FROM inventory WHERE state='live' ORDER BY rowid").all());
+    }
+    ctx.locals.houses = results.map((row) => ({ ...JSON.parse(row.data), sale_order: row.sale_order ?? null }));
     // During rollout older databases have no settings table; use the built-in values.
     try {
       const settings = await bindings.DB.prepare('SELECT published FROM site_settings WHERE id=1').first();

@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CatalogData from '../components/CatalogData.astro';
 import Card from '../components/Card.astro';
 import { url, pageHouses } from '../lib/site';
 const houses = pageHouses(Astro.locals);
 ---
 
 <Layout noindex title="Favoritos"
-  ><div class="wrap page" id="favorites">
+  ><CatalogData /><div class="wrap page" id="favorites">
     <p class="kicker"><i></i> A SUA SELEÇÃO</p><h1>
       Casas <em>favoritas.</em>
     </h1><p>As casas que guardou neste navegador.</p><div

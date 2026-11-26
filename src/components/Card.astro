@@ -1,6 +1,6 @@
 ---
 import { Heart, Columns2, BedDouble, Maximize2, Bath } from 'lucide-astro';
-import { detail, priceRequest, pageHouses } from '../lib/site';
+import { detail, priceRequest, pageHouses, url } from '../lib/site';
 const houses = pageHouses(Astro.locals);
 import { bathroomCount, name, status, price, houseMeasure, type House } from '../lib/catalog';
 import Photo from './Photo.astro';
@@ -9,6 +9,7 @@ const repeatedModel = h.model && houses.some((unit) => unit.id !== h.id && unit.
 const title = repeatedModel ? h.name_for_site.replace(/\s+[—-]\s+T\d+$/, '') : name(h);
 const area = houseMeasure(h, 'area');
 const bathrooms = bathroomCount(h);
+const unavailable = ['reservado', 'vendido'].includes(h.availability);
 ---
 
 <article class="card" data-card={h.media_slug}>
@@ -44,9 +45,9 @@ const bathrooms = bathroomCount(h);
       {h.condition && <strong>{h.condition}</strong>}
       <span>{status(h)}</span>
     </p><div class="card-foot">
-      <a class="card-price-link" href={priceRequest(h)} aria-label={`${price(h)} Pedir preço e disponibilidade de ${h.name_for_site}`}>
-        <strong>{price(h)}</strong>
-        <span>Pedir preço e disponibilidade</span>
+      <a class="card-price-link" href={unavailable ? url('casas/') : priceRequest(h)} aria-label={unavailable ? 'Ver casas disponíveis' : `${price(h)} Pedir preço e disponibilidade de ${h.name_for_site}`}>
+        <strong>{unavailable ? status(h) : price(h)}</strong>
+        <span>{unavailable ? 'Ver casas disponíveis' : 'Pedir preço e disponibilidade'}</span>
       </a><button
         data-compare={h.media_slug}
         aria-pressed="false"><Columns2 size={15} />Comparar</button>

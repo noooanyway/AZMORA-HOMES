@@ -29,6 +29,7 @@ if (!h) {
   return Astro.rewrite(url('404/'));
 }
 const seo = houseSeo(h);
+const unavailable = ['reservado', 'vendido'].includes(h.availability);
 const breadcrumbs = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -39,7 +40,7 @@ const breadcrumbs = {
   })),
 };
 const related = houses
-  .filter((p) => p.id !== h.id)
+  .filter((p) => p.id !== h.id && p.availability === 'disponivel')
   .sort((a, b) => Number(b.brand === h.brand) - Number(a.brand === h.brand))
   .slice(0, 3);
 ---
@@ -92,11 +93,11 @@ const related = houses
       </div><aside class="summary">
         <p class="eyebrow">INFORMAÇÃO COMERCIAL</p><h2>{price(h)}</h2><p>
           {status(h)}
-        </p><a
-          class="btn primary"
-          href={priceRequest(h)}>Pedir preço e disponibilidade</a>
-        {getContacts(Astro.locals).whatsappHref && <a class="btn light" href={houseWhatsApp(h.name_for_site, getContacts(Astro.locals))} target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>}
-        <CallContact />
+        </p>{unavailable ? <a class="btn primary" href={url('casas/')}>Ver casas disponíveis</a> : <>
+          <a class="btn primary" href={priceRequest(h)}>Pedir preço e disponibilidade</a>
+          {getContacts(Astro.locals).whatsappHref && <a class="btn light" href={houseWhatsApp(h.name_for_site, getContacts(Astro.locals))} target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>}
+          <CallContact />
+        </>}
         <p>{['included','transport','delivery','excluded'].map(key => (Astro.locals.siteSettings?.content?.commercial ?? defaults.commercial)[key as keyof typeof defaults.commercial]).filter(Boolean).join(' ')}</p>
         <a class="under summary-guide-link" href={url('#como-funciona')}>O que confirmar sobre a entrega</a><div class="actions">
           <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button

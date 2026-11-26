@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Photo from '../../components/Photo.astro';
 import { url, pageHouses, detail } from '../../lib/site';
 import '../../styles/editorial.css';
-const houses = pageHouses(Astro.locals);
+const houses = pageHouses(Astro.locals).filter(h => h.availability === 'disponivel');
 const featured = houses.find(h => h.featured && h.media.length) || houses.find(h => h.media.length);
 const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Início', item: new URL(url(), Astro.site).href },

@@ -78,6 +78,8 @@ try {
     assert.ok(statements?.length);
     for (const stmt of statements) await db.prepare(stmt).run();
   }
+  // Deliberately mark only two local fixtures available; production is never touched.
+  await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','disponivel','$.inventory_group','Modelo visual sintético') WHERE slug IN ('ohara-734-com-terraco-t2','irm-super-mercure-t2')").run();
   const call = (path, opts = {}) => mf.dispatchFetch(base + path, opts);
   const admin = (action, body) =>
     call('admin/' + (action ? action + '/' : ''), {
@@ -284,7 +286,8 @@ try {
   const sitemap = await (await call('sitemap.xml')).text();
   for (const route of ['casas-moveis-acores/', 'casas-moveis-madeira/', 'guias/como-escolher-casa-movel-usada/']) assert.ok(sitemap.includes(route));
   const catalogue = await (await call('casas/')).text();
-  assert.match(catalogue, /16 casas/);
+  assert.match(catalogue, /Resultados/);
+  assert.doesNotMatch(catalogue, /Modelo visual sintético|inventory_group|reference_azmora|inventory_commercial_history/);
   const firstImage = JSON.parse(
     (
       await db
@@ -395,6 +398,13 @@ try {
     consent: true,
     token: crypto.randomUUID(),
   };
+  // A previously selected unit may have become reserved before submission.
+  const contactTestUnit=(await json(await admin('dados'))).units[0];
+  await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','reservado') WHERE id=?").bind(contactTestUnit.id).run();
+  const staleRequest=await call('api/contactos/',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify({...contactInput,id:crypto.randomUUID(),token:crypto.randomUUID(),houses:[contactTestUnit.slug]})});
+  assert.equal(staleRequest.status,400);
+  assert.match(await staleRequest.text(),/reservada ou vendida/);
+  await db.prepare('UPDATE inventory SET data=? WHERE id=?').bind(JSON.stringify(contactTestUnit.data),contactTestUnit.id).run();
   const submitted = await call('api/contactos/', {
     method: 'POST',
     headers: { Origin: origin, 'Content-Type': 'application/json' },
@@ -405,6 +415,67 @@ try {
 
   assert.equal((await admin('')).status, 200);
   assert.equal((await json(await call('api/casas/'))).length, 16);
+  // Exercise real endpoint updates, categories, historical ordering and stale editors.
+  const originalRows = (await db.prepare("SELECT * FROM inventory WHERE slug IN ('ohara-734-com-terraco-t2','irm-super-mercure-t2') ORDER BY rowid").all()).results;
+  const [a0,b0] = originalRows;
+  const getUnit = async id => (await json(await admin('dados'))).units.find(x => x.id === id);
+  const updateUnit = async (row, values, state = row.state) => admin('guardar', {id:row.id,revision:row.revision,state,data:{...row.data,...values}});
+  let a = await getUnit(a0.id), b = await getUnit(b0.id);
+  await json(await updateUnit(a,{name_for_site:'Unidade sintética A',inventory_group:'Modelo secreto sintético'}));
+  await json(await updateUnit(b,{name_for_site:'Unidade sintética B',inventory_group:'Modelo secreto sintético'}));
+  a=await getUnit(a0.id); b=await getUnit(b0.id);
+  await json(await updateUnit(a,{availability:'reservado'}));
+  await json(await updateUnit(b,{availability:'reservado'}));
+  let publicPage=await (await call('casas/')).text();
+  let results=publicPage.split('id="results">')[1].split('id="empty"')[0];
+  assert.ok(!results.includes(a.slug) && !results.includes(b.slug),'últimas disponíveis reservadas');
+  assert.match(publicPage,/Não há casas disponíveis neste momento/);
+  publicPage=await (await call('casas/?estado=reservado')).text();
+  assert.ok(publicPage.split('id="results">')[1].split('id="empty"')[0].includes(a.slug));
+  assert.doesNotMatch(publicPage,/Modelo secreto sintético|inventory_group|reference_azmora|inventory_commercial_history/);
+  assert.doesNotMatch(JSON.stringify(await json(await call('api/casas/'))),/Modelo secreto sintético|inventory_group|reference_azmora|inventory_commercial_history/);
+  a=await getUnit(a0.id); await json(await updateUnit(a,{availability:'disponivel'}));
+  assert.ok((await (await call('casas/')).text()).split('id="results">')[1].split('id="empty"')[0].includes(a.slug));
+  // No sold listings means no misleading sales section.
+  assert.doesNotMatch(await (await call('')).text(),/<h2>Casas vendidas<\/h2>/);
+  // Simulate a previously sold published unit with no recoverable sale date.
+  const extraRows=(await db.prepare("SELECT * FROM inventory WHERE id NOT IN (?,?) ORDER BY rowid LIMIT 2").bind(a0.id,b0.id).all()).results;
+  const [legacySold,archivedSold]=extraRows;
+  for (const row of extraRows) {
+    await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','vendido'),state=? WHERE id=?").bind(row.id===archivedSold.id?'archived':'live',row.id).run();
+    await db.prepare('DELETE FROM inventory_commercial_history WHERE inventory_id=?').bind(row.id).run();
+  }
+  let oldSalesHome=await (await call('')).text();
+  let oldSalesSection=oldSalesHome.split('<h2>Casas vendidas</h2>')[1].split('</section>')[0];
+  assert.ok(oldSalesSection.includes(legacySold.slug),'venda antiga sem data é apresentada');
+  assert.ok(!oldSalesSection.includes(archivedSold.slug),'casa arquivada não é apresentada');
+  b=await getUnit(b0.id); await json(await updateUnit(b,{availability:'vendido'}));
+  a=await getUnit(a0.id); await json(await updateUnit(a,{availability:'vendido'}));
+  const soldHome=await (await call('')).text();
+  const recentSection=soldHome.split('<h2>Casas vendidas</h2>')[1].split('</section>')[0];
+  assert.ok(recentSection.indexOf(a.slug) >= 0 && recentSection.indexOf(a.slug) < recentSection.indexOf(b.slug));
+  assert.ok(recentSection.indexOf(b.slug) < recentSection.indexOf(legacySold.slug),'vendas datadas antes das antigas');
+  assert.equal((recentSection.match(/data-card=/g) || []).length,3);
+  assert.doesNotMatch(recentSection,/recentemente|data da venda/i);
+  for (const row of extraRows) await db.prepare('UPDATE inventory SET data=?,state=?,actor=? WHERE id=?').bind(row.data,row.state,row.actor,row.id).run();
+  assert.ok(!soldHome.split('<div class="cards">')[1].split('</section>')[0].includes(a.slug));
+  assert.match(await (await call('casas/'+a.slug+'/')).text(),/Ver casas disponíveis/);
+  a=await getUnit(a0.id);
+  const race=await Promise.all([updateUnit(a,{availability:'disponivel'}),updateUnit(a,{availability:'reservado'})]);
+  assert.deepEqual(race.map(r=>r.status).sort(),[200,409]);
+  a=await getUnit(a0.id); await json(await updateUnit(a,{inventory_group:'Outro modelo sintético'}));
+  assert.equal((await getUnit(a0.id)).data.inventory_group,'Outro modelo sintético');
+  a=await getUnit(a0.id); await json(await updateUnit(a,{availability:'disponivel'},'archived'));
+  assert.ok(!(await (await call('sitemap.xml')).text()).includes(a.slug));
+  assert.equal((await call('casas/'+a.slug+'/')).status,404);
+  a=await getUnit(a0.id); await json(await updateUnit(a,{},'draft'));
+  assert.equal((await call('casas/'+a.slug+'/')).status,404);
+  await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','estado-legado') WHERE id=?").bind(b0.id).run();
+  b=await getUnit(b0.id);
+  await json(await updateUnit(b,{name_for_site:'Estado antigo preservado'}));
+  assert.equal((await getUnit(b0.id)).data.availability,'estado-legado');
+  b=await getUnit(b0.id); assert.equal((await updateUnit(b,{availability:'estado-inventado'})).status,400);
+  for(const row of originalRows) await db.prepare('UPDATE inventory SET data=?,state=?,actor=? WHERE id=?').bind(row.data,row.state,row.actor,row.id).run();
   const dashboard = await json(await admin('dados'));
   assert.equal(dashboard.units.length, 16);
   const unit = dashboard.units[0],
@@ -548,6 +619,42 @@ try {
           path + ' mobile',
         );
       }
+      // Browser category navigation follows the current state, including sold alternatives.
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','reservado') WHERE id IN (?,?)").bind(a0.id,b0.id).run();
+      await page.goto(base + 'casas/');
+      assert.equal(await page.locator('#empty-title').innerText(),'Não há casas disponíveis neste momento');
+      assert.equal(await page.locator('#empty').isVisible(),true);
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','disponivel') WHERE id=?").bind(b0.id).run();
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','vendido') WHERE id=?").bind(a0.id).run();
+      await page.goto(base + 'casas/');
+      if (await page.locator('#consent-panel').isVisible()) await page.locator('[data-consent="reject"]').click();
+      await page.locator('[name=q]').fill('inexistente-sintetico');
+      assert.equal(await page.locator('#empty-title').innerText(),'Nenhuma casa encontrada');
+      await page.locator('#empty [data-reset]').click();
+      assert.equal(await page.locator('#results [data-card="'+a0.slug+'"]').count(),0);
+      await page.getByRole('link',{name:'Vendidas',exact:true}).click();
+      assert.equal(await page.locator('#results [data-card="'+a0.slug+'"]').count(),1);
+      await page.locator('#results [data-card="'+a0.slug+'"]').getByRole('link',{name:'Ver casas disponíveis'}).click();
+      assert.equal(new URL(page.url()).pathname, new URL(base+'casas/').pathname);
+      await page.goto(base+'casas/'+a0.slug+'/');
+      assert.equal(await page.getByRole('link',{name:'Ver casas disponíveis'}).count(),1);
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','disponivel') WHERE id=?").bind(a0.id).run();
+      // Both available listings remain usable for comparison and favorites after refusal.
+      await page.goto(base+'casas/');
+      await page.locator('#results [data-card="'+a0.slug+'"] [data-compare]').click();
+      await page.locator('#results [data-card="'+b0.slug+'"] [data-compare]').click();
+      await page.locator('#compareLink').click();
+      await page.locator('#tablehost table').waitFor({state:'visible'});
+      assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:comparar')),null);
+      await page.goto(base+'casas/');
+      await page.locator('#results [data-card="'+a0.slug+'"] [data-fav]').click();
+      await page.locator('.favlink').click();
+      await page.locator('#saved [data-card="'+a0.slug+'"]').waitFor({state:'visible'});
+      assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:favoritos')),null);
+      await page.getByRole('button',{name:'Tema do site'}).click();
+      await page.getByRole('button',{name:'Escuro',exact:true}).click();
+      assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
+      assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:theme')),null);
       await page.goto(base + 'contactos/?casas=' + unit.slug + '&motivo=preco');
       await page.locator('[name=nome]').fill('Cliente navegador');
       await page.locator('[name=email]').fill('browser@example.test');
@@ -585,6 +692,19 @@ try {
       assert.equal(await db.prepare('SELECT id FROM inventory WHERE id=?').bind('exposul-teste').first(),null);
       assert.doesNotMatch(await page.locator('#events').innerText(),/exposul/i);
       await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
+      await page.locator('#list .unit').first().waitFor();
+      await page.locator('#view-models').click();
+      assert.match(await page.locator('#groups').innerText(), /Modelo visual sintético/);
+      assert.match(await page.locator('#groups').innerText(), /Disponíveis: 2/);
+      await page.locator('#view-units').click();
+      const realFirst=(await json(await admin('dados'))).units.find(x=>x.id===a0.id);
+      await page.locator('#list .unit').filter({hasText:realFirst.data.name_for_site}).getByRole('button',{name:'Abrir ficha'}).click();
+      await page.getByLabel('Grupo de modelo (interno)').fill('Grupo editado no navegador');
+      await page.locator('#form').getByRole('button',{name:'Publicar alterações'}).click();
+      await page.getByText('Alterações guardadas.').waitFor();
+      assert.equal((await getUnit(a0.id)).data.inventory_group,'Grupo editado no navegador');
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.inventory_group','Modelo visual sintético') WHERE id=?").bind(a0.id).run();
+      await page.reload();
       await page.locator('#list .unit').first().waitFor();
       failSettingsLoad = true;
       await page.getByRole('button',{name:'Configurações do website'}).click();

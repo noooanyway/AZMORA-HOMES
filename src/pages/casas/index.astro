@@ -5,6 +5,9 @@ import CatalogData from '../../components/CatalogData.astro';
 import Filters from '../../components/Filters.astro';
 import { pageHouses } from '../../lib/site';
 const houses = pageHouses(Astro.locals);
+const requested = Astro.url.searchParams.get('estado');
+const category = ['disponivel', 'reservado', 'vendido'].includes(requested || '') ? requested : 'disponivel';
+const visibleHouses = houses.filter(h => h.availability === category);
 import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-astro';
 ---
 
@@ -15,6 +18,11 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
     >
       Casas móveis em segunda mão para os Açores e a Madeira. Preços e disponibilidade sob consulta.
     </p><section id="catalog">
+      <nav class="actions" aria-label="Categorias do catálogo">
+        <a class="btn outline" href="?estado=disponivel" aria-current={category === 'disponivel' ? 'page' : undefined}>Disponíveis</a>
+        <a class="btn outline" href="?estado=reservado" aria-current={category === 'reservado' ? 'page' : undefined}>Reservadas</a>
+        <a class="btn outline" href="?estado=vendido" aria-current={category === 'vendido' ? 'page' : undefined}>Vendidas</a>
+      </nav>
       <div class="toolbar">
         <label class="search"
           ><Search size={18} /><input
@@ -60,15 +68,15 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
           <Filters />
         </form>
       </section><div class="result-line">
-        <strong id="count" aria-live="polite">{houses.length} casas</strong><div
+        <strong id="count" aria-live="polite">{visibleHouses.length ? 'Resultados' : 'Sem resultados'}</strong><div
           id="chips"
         >
         </div>
       </div><div class="cards" id="results">
-        {houses.map((h) => <Card h={h} heading="h2" />)}
-      </div><div id="empty" class="empty" hidden>
-        <h2>Nenhuma casa encontrada</h2><p>
-          Experimente outra pesquisa ou retire alguns filtros.
+        {visibleHouses.map((h) => <Card h={h} heading="h2" />)}
+      </div><div id="empty" class="empty" hidden={visibleHouses.length > 0}>
+        <h2 id="empty-title">{category === 'disponivel' && !visibleHouses.length ? 'Não há casas disponíveis neste momento' : 'Nenhuma casa encontrada'}</h2><p id="empty-message">
+          {category === 'disponivel' && !visibleHouses.length ? 'Volte a consultar o catálogo mais tarde ou contacte-nos para obter informações.' : 'Experimente outra pesquisa ou retire alguns filtros.'}
         </p><button class="btn outline" data-reset>Limpar filtros</button>
       </div>
     </section>
