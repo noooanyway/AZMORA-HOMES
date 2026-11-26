@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Política de cookies" description="Estrutura local da política de cookies" noindex>
+  <article class="wrap page prose legal-page" aria-labelledby="legal-title">
+    <p class="kicker"><i></i> PRÉ-VISUALIZAÇÃO LOCAL</p>
+    <h1 id="legal-title">Política de <em>cookies.</em></h1>
+    <p class="intro">Estrutura reservada para o texto definitivo depois de aprovado.</p>
+    <p>O texto legal ainda não está disponível nesta pré-visualização.</p>
+    <button type="button" class="btn light" data-legal-consent>Gerir preferências de privacidade</button>
+  </article>
+</Layout>
+<script>
+  document.querySelector<HTMLButtonElement>('[data-legal-consent]')?.addEventListener('click', () => document.querySelector<HTMLButtonElement>('[data-consent-open]')?.click());
+</script>

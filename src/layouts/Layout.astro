@@ -185,8 +185,11 @@ const nav = [
         <div class="footer-bottom">
           <nav aria-label="Informação legal">
             <a href={url('privacidade/')}>Privacidade</a>
+            {import.meta.env.DEV && <a href={url('termos/')}>Termos de utilização</a>}
+            {import.meta.env.DEV && <a href={url('cookies/')}>Cookies</a>}
+            {import.meta.env.DEV && <a href={url('aviso-legal/')}>Aviso legal</a>}
             <button type="button" class="consent-footer" data-consent-open>Gerir preferências de privacidade</button>
-            <a href={url('termos/')}>Informação legal</a>
+            {!import.meta.env.DEV && <a href={url('termos/')}>Informação legal</a>}
             <a href={complaintsUrl}>Livro de Reclamações</a>
           </nav>
         </div>
