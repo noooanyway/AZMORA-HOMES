@@ -9,13 +9,15 @@ const pages = {
     'Cada ficha representa uma unidade. Duas casas do mesmo modelo podem ter equipamentos e dimensões diferentes. O pedido inclui uma ligação para a ficha da casa escolhida.',
   ],
 };
-const [label, title, a, b] = pages.sobre;
+const [label, originalTitle, originalA, originalB] = pages.sobre;
+const about = Astro.locals.siteSettings?.content?.about;
+const title = about?.title ?? originalTitle, a = about?.description ?? originalA, b = about?.history ?? originalB;
 ---
 
 <Layout title={label} description={a}
   ><div class="wrap page prose">
     <p class="kicker"><i></i>{label}</p><h1>{title}</h1><p class="intro">
       {a}
-    </p><p>{b}</p><a href={url('casas/')} class="btn primary">Explorar casas</a>
+    </p><p>{b}</p>{about?.experience && <p>{about.experience}</p>}{about?.advantages && <p>{about.advantages}</p>}{about?.inspection && <p>{about.inspection}</p>}<a href={url('casas/')} class="btn primary">Explorar casas</a>
   </div></Layout
 >

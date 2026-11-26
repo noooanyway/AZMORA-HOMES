@@ -100,20 +100,46 @@ try {
   const cfg = await json(await admin('configuracoes'));
   assert.equal(cfg.revision,0);
   const c = { ...cfg.defaults, phone:'+351 911 222 333', secondPhone:'+351 911 444 555', whatsapp:'351911222333', email:'loja@example.test', openingHours:'Terça a sábado', languages:'Português e inglês', timezone:'Atlantic/Azores', social:{instagram:'https://www.instagram.com/teste/',facebook:'https://www.facebook.com/teste'} };
-  assert.equal((await admin('configuracoes-guardar',{revision:0,contacts:c})).status,200);
+  const content=structuredClone(cfg.contentDefaults);
+  content.home.title='Título inicial sintético';content.home.featured=['ohara-734-com-terraco-t2'];
+  content.about.title='Sobre sintético';content.about.experience='Experiência sintética';
+  content.faq.unshift({question:'Pergunta sintética?',answer:'Resposta sintética',visible:true});
+  content.faq.push({question:'Pergunta oculta?',answer:'Resposta oculta',visible:false});
+  content.commercial.transport='Transporte sintético';
+  content.notice={title:'Aviso sintético',message:'Mensagem sintética',active:true,start:'2020-01-01',end:'',url:'/contactos/'};
+  content.seo.home={title:'SEO sintético',description:'Descrição SEO sintética',socialTitle:'Partilha sintética',socialDescription:'Resumo de partilha sintético'};
+  assert.equal((await admin('configuracoes-guardar',{revision:0,contacts:c,content})).status,200);
   let htmlBefore = await (await call('contactos/')).text();
   assert.doesNotMatch(htmlBefore,/\+351 911 222 333/);
+  assert.doesNotMatch(await (await call('')).text(),/Título inicial sintético/);
   assert.equal((await admin('configuracoes-publicar',{revision:0})).status,409);
   assert.equal((await admin('configuracoes-publicar',{revision:1})).status,200);
   let htmlAfter = await (await call('contactos/')).text();
   assert.match(htmlAfter,/\+351 911 222 333/);
   assert.match(htmlAfter,/tel:\+351911222333/);
+  const homepage=await (await call('')).text();
+  for(const value of ['Título inicial sintético','Pergunta sintética?','Transporte sintético','Aviso sintético','SEO sintético','Partilha sintética']) assert.ok(homepage.includes(value),value);
+  assert.ok(homepage.indexOf('Pergunta sintética?') < homepage.indexOf('Como confirmo o preço'));
+  assert.doesNotMatch(homepage,/Pergunta oculta\?/);
+  assert.match(await (await call('casas-moveis-acores/')).text(), /Transporte sintético/);
+  const oldUnit=await db.prepare("SELECT state FROM inventory WHERE slug=?").bind('ohara-734-com-terraco-t2').first();
+  await db.prepare("UPDATE inventory SET state='archived' WHERE slug=?").bind('ohara-734-com-terraco-t2').run();
+  assert.doesNotMatch(await (await call('')).text(), /casas\/ohara-734-com-terraco-t2\//);
+  await db.prepare('UPDATE inventory SET state=? WHERE slug=?').bind(oldUnit.state,'ohara-734-com-terraco-t2').run();
+  const about=await (await call('sobre/')).text();assert.match(about,/Sobre sintético/);assert.match(about,/Experiência sintética/);
+  assert.equal((await admin('configuracoes-guardar',{revision:2,contacts:c,content:{...content,notice:{...content.notice,url:'javascript:alert(1)'}}})).status,400);
   for (const text of ['911 444 555','loja@example.test','Terça a sábado','Português e inglês','instagram.com/teste','facebook.com/teste']) assert.ok(htmlAfter.includes(text),text);
   assert.equal((await admin('configuracoes-guardar',{revision:2,contacts:{...c,email:'<script>'}})).status,400);
+  const hiddenContacts={...c,visibility:{phone:false,secondPhone:true,whatsapp:false,email:true,instagram:false,facebook:true,openingHours:true,languages:true}};
+  assert.equal((await admin('configuracoes-guardar',{revision:2,contacts:hiddenContacts,content})).status,200);
+  assert.equal((await admin('configuracoes-publicar',{revision:3})).status,200);
+  const hiddenHtml=await (await call('contactos/')).text();
+  assert.doesNotMatch(hiddenHtml,/tel:\+351911222333/);assert.doesNotMatch(hiddenHtml,/instagram.com\/teste/);assert.doesNotMatch(hiddenHtml,/wa.me\/351911222333/);
   const now = await json(await admin('configuracoes'));
   assert.equal((await admin('configuracoes-recuperar',{revision:now.revision,historyId:cfg.history[0].id})).status,200);
   const htmlRestore = await (await call('contactos/')).text();
   assert.doesNotMatch(htmlRestore,/\+351 911 222 333/);
+  assert.doesNotMatch(await (await call('')).text(),/Título inicial sintético/);
   for (const [route, expected] of [
     ['', 'Outra forma'],
     ['casas/', 'Explore as'],
@@ -453,6 +479,17 @@ try {
       await page.getByRole('button',{name:'Configurações do website'}).click();
       await page.locator('#settings-form input[name="phone"]').waitFor();
       await page.locator('#settings-form input[name="phone"]').fill('+351 919 222 333');
+      await page.locator('[name="home.title"]').fill('Casa de teste visual');
+      await page.locator('[name="about.title"]').fill('Sobre de teste visual');
+      await page.locator('[name="commercial.transport"]').fill('Transporte de teste visual');
+      await page.getByRole('button',{name:'Adicionar pergunta'}).click();
+      const lastFaq=page.locator('.settings-faq-row').last(); await lastFaq.locator('[name=question]').fill('Pergunta visual?');await lastFaq.locator('[name=answer]').fill('Resposta visual');
+      await page.locator('[name="notice.title"]').fill('Aviso visual');await page.locator('[name="notice.message"]').fill('Texto visual');
+      await page.locator('[name="notice.start"]').fill('2020-01-01');await page.locator('[name="notice.active"]').check();
+      await page.locator('#settings-featured input').first().check();
+      await page.locator('[name="visibility.instagram"]').uncheck();
+      await page.locator('details').filter({has:page.getByText('Página inicial',{exact:true})}).first().locator('summary').click();
+      await page.locator('[name="seo.home.title"]').fill('Título SEO visual');
       await page.getByRole('button',{name:'Pré-visualizar',exact:true}).click();
       assert.match(await page.locator('#settings-preview-content').innerText(),/919 222 333/);
       await page.locator('#settings-preview-close').click();
@@ -461,6 +498,9 @@ try {
       page.once('dialog',d=>d.accept()); await page.getByRole('button',{name:'Publicar alterações',exact:true}).click();
       await page.getByText('Alterações publicadas.').waitFor();
       assert.match(await (await call('contactos/')).text(), /919 222 333/);
+      const homeVisual=await (await call('')).text(); for(const x of ['Casa de teste visual','Pergunta visual?','Transporte de teste visual','Título SEO visual','Aviso visual']) assert.ok(homeVisual.includes(x),x);
+      assert.match(await (await call('sobre/')).text(),/Sobre de teste visual/);
+      assert.doesNotMatch(await (await call('contactos/')).text(),/instagram.com\/azmorahomes/);
       page.once('dialog',d=>d.accept()); await page.locator('#settings-history button').last().click();
       await page.getByText('Versão recuperada.').waitFor();
       assert.doesNotMatch(await (await call('contactos/')).text(), /919 222 333/);
@@ -612,6 +652,10 @@ try {
       await browser.close();
     }
   }
+  // Local-only fault injection: missing settings table is surfaced to ADMIN.
+  await db.prepare('DROP TABLE site_settings').run();
+  assert.equal((await admin('configuracoes')).status, 503);
+  assert.equal((await call('')).status, 200);
   console.log(
     'OK · Worker local, acesso, 16 unidades, rascunho, criação, publicação, concorrência, arquivo, recuperação e eliminação.',
   );

@@ -6,8 +6,8 @@ const { whatsappOnly = false, socialOnly = false } = Astro.props as { whatsappOn
 const whatsappUrl = contacts.whatsappHref;
 const links = [
   ...(!whatsappOnly ? [
-    { label: 'Instagram', href: contacts.social.instagram, Icon: Instagram },
-    { label: 'Facebook', href: contacts.social.facebook, Icon: Facebook },
+    { label: 'Instagram', href: contacts.visible('instagram') ? contacts.social.instagram : '', Icon: Instagram },
+    { label: 'Facebook', href: contacts.visible('facebook') ? contacts.social.facebook : '', Icon: Facebook },
   ] : []),
   ...(!socialOnly ? [{ label: 'WhatsApp', href: whatsappUrl }] : []),
 ].filter(({ href }) => href || preview);

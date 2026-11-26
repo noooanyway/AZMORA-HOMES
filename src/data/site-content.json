@@ -1,0 +1,111 @@
+{
+  "home": {
+    "title": "Outra forma",
+    "subtitle": "de habitar.",
+    "description": "Escolha a sua casa móvel em segunda mão para os Açores ou a Madeira. Entregas nos Açores e na Madeira, sujeitas à confirmação das condições de transporte para a ilha de destino. Não realizamos vendas para Portugal continental.",
+    "selectionTitle": "Casas em destaque",
+    "regionText": "Explore o catálogo de casas móveis usadas e saiba o que preparar para um pedido de informação para a sua região.",
+    "featured": []
+  },
+  "about": {
+    "title": "Uma escolha com espaço para pensar.",
+    "description": "A Azmora Homes apresenta casas móveis em segunda mão para clientes dos Açores e da Madeira. Contacte-nos para conhecer as unidades disponíveis e esclarecer as condições de entrega.",
+    "history": "Cada ficha representa uma unidade. Duas casas do mesmo modelo podem ter equipamentos e dimensões diferentes. O pedido inclui uma ligação para a ficha da casa escolhida.",
+    "experience": "",
+    "advantages": "",
+    "inspection": ""
+  },
+  "faq": [
+    {
+      "question": "Como confirmo o preço e a disponibilidade?",
+      "answer": "Consulte a ficha da unidade e prepare o seu pedido de informação para a Azmora Homes.",
+      "visible": true
+    },
+    {
+      "question": "Onde ficam guardadas as minhas favoritas?",
+      "answer": "Neste navegador, disponíveis na página Favoritos sem criar conta.",
+      "visible": true
+    },
+    {
+      "question": "Posso instalar uma casa móvel no meu terreno?",
+      "answer": "Antes de reservar ou comprar, confirme com a Câmara Municipal se o terreno admite a instalação para o uso que pretende e quais os procedimentos aplicáveis. Verifique ainda o acesso ao local e as ligações necessárias.",
+      "visible": true
+    },
+    {
+      "question": "O que está incluído no preço?",
+      "answer": "Os preços incluem IVA e transporte até ao porto marítimo da ilha de destino, nas condições aplicáveis ao orçamento. O orçamento de transporte depende da ilha de destino. O transporte dentro da ilha, a descarga, a preparação do terreno, a instalação e as ligações são da responsabilidade do cliente.",
+      "visible": true
+    },
+    {
+      "question": "Posso visitar uma casa antes de comprar?",
+      "answer": "Sim, mediante agendamento prévio e deslocação ao local onde a casa se encontra.",
+      "visible": true
+    },
+    {
+      "question": "Os preços são negociáveis? Há financiamento?",
+      "answer": "Os preços não são negociáveis e a Azmora Homes não disponibiliza financiamento.",
+      "visible": true
+    },
+    {
+      "question": "Qual é o estado das casas e o que está incluído?",
+      "answer": "As casas são inspecionadas antes da entrega e reparadas quando necessário. O mobiliário e os equipamentos apresentados estão incluídos, respeitando a informação específica de cada unidade.",
+      "visible": true
+    }
+  ],
+  "commercial": {
+    "process": "Peça a disponibilidade e as condições aplicáveis por escrito.",
+    "transport": "O preço inclui transporte até ao porto marítimo da ilha de destino nas condições do orçamento, que depende da ilha de destino.",
+    "delivery": "A descarga e a instalação são da responsabilidade do cliente.",
+    "islands": "A atividade destina-se aos Açores e à Madeira; não realizamos vendas para Portugal continental. Indique a ilha de destino para o orçamento.",
+    "included": "Os preços incluem IVA; peça o orçamento para a ilha de destino.",
+    "excluded": "O transporte dentro da ilha, a descarga, a preparação do terreno, a instalação e as ligações são da responsabilidade do cliente.",
+    "visits": "Sim, mediante agendamento prévio e deslocação ao local onde a casa se encontra.",
+    "inspection": "As casas são inspecionadas antes da entrega e reparadas quando necessário."
+  },
+  "notice": {
+    "title": "",
+    "message": "",
+    "active": false,
+    "start": "",
+    "end": "",
+    "url": ""
+  },
+  "seo": {
+    "home": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    },
+    "about": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    },
+    "contacts": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    },
+    "acores": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    },
+    "madeira": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    },
+    "guide": {
+      "title": "",
+      "description": "",
+      "socialTitle": "",
+      "socialDescription": ""
+    }
+  }
+}

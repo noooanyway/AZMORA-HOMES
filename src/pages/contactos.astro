@@ -69,7 +69,7 @@ const typologies = [
           !enabled && (
             <p class="contact-form-note" id="lead-unavailable">
               O envio pelo formulário ainda não está ativo.
-              {contacts.email && (
+              {contacts.visible('email') && contacts.email && (
                 <>
                   {' '}
                   Pode{' '}

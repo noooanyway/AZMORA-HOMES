@@ -96,7 +96,7 @@ const related = houses
           href={priceRequest(h)}>Pedir preço e disponibilidade</a>
         {getContacts(Astro.locals).whatsappHref && <a class="btn light" href={houseWhatsApp(h.name_for_site, getContacts(Astro.locals))} target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>}
         <CallContact />
-        <p>Preço com IVA e transporte até ao porto marítimo da ilha de destino, nas condições do orçamento. Transporte dentro da ilha, descarga, preparação do terreno, instalação e ligações são da responsabilidade do cliente.</p>
+        <p>{Astro.locals.siteSettings?.content ? `${Astro.locals.siteSettings.content.commercial.included} ${Astro.locals.siteSettings.content.commercial.transport} ${Astro.locals.siteSettings.content.commercial.excluded}` : 'Preço com IVA e transporte até ao porto marítimo da ilha de destino, nas condições do orçamento. Transporte dentro da ilha, descarga, preparação do terreno, instalação e ligações são da responsabilidade do cliente.'}</p>
         <a class="under summary-guide-link" href={url('#como-funciona')}>O que confirmar sobre a entrega</a><div class="actions">
           <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button
             data-compare={h.media_slug}><Columns2 size={16} />Comparar</button>

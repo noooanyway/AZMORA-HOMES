@@ -6,6 +6,7 @@ import {
 import LiftIcon from './LiftIcon.astro';
 import { url } from '../lib/site';
 import '../styles/purchase-guide.css';
+const commercial = Astro.locals.siteSettings?.content?.commercial;
 
 const panels = [
   {
@@ -16,8 +17,8 @@ const panels = [
       { Icon: Warehouse, title: 'Casa móvel em segunda mão', text: 'Confirme a unidade e as características indicadas na ficha e no orçamento.' },
       { Icon: Armchair, title: 'Mobiliário e equipamento', text: 'O mobiliário e os equipamentos apresentados estão incluídos, respeitando a informação específica da unidade.' },
       { Icon: Snowflake, title: 'Climatização e água quente', text: 'Confirme quais os equipamentos existentes e o seu estado.' },
-      { Icon: Ship, title: 'Transporte marítimo', text: 'O preço inclui transporte até ao porto marítimo da ilha de destino nas condições do orçamento, que depende da ilha de destino.' },
-      { Icon: ReceiptText, title: 'IVA e valor final', text: 'Os preços incluem IVA; peça o orçamento para a ilha de destino.' },
+      { Icon: Ship, title: 'Transporte marítimo', text: commercial?.transport ?? 'O preço inclui transporte até ao porto marítimo da ilha de destino nas condições do orçamento, que depende da ilha de destino.' },
+      { Icon: ReceiptText, title: 'IVA e valor final', text: commercial?.included ?? 'Os preços incluem IVA; peça o orçamento para a ilha de destino.' },
     ],
   },
   {
@@ -25,8 +26,8 @@ const panels = [
     Badge: CircleX,
     note: 'Confirme responsabilidades e custos antes de organizar a instalação.',
     items: [
-      { Icon: MapPin, title: 'Transporte por estrada', text: 'O transporte dentro da ilha é da responsabilidade do cliente.' },
-      { Icon: LiftIcon, title: 'Colocação no terreno', text: 'A descarga e a instalação são da responsabilidade do cliente.' },
+      { Icon: MapPin, title: 'Transporte por estrada', text: commercial?.excluded ?? 'O transporte dentro da ilha é da responsabilidade do cliente.' },
+      { Icon: LiftIcon, title: 'Colocação no terreno', text: commercial?.delivery ?? 'A descarga e a instalação são da responsabilidade do cliente.' },
       { Icon: Shovel, title: 'Preparação do terreno', text: 'A preparação do terreno é da responsabilidade do cliente.' },
       { Icon: Plug, title: 'Ligações às redes', text: 'As ligações são da responsabilidade do cliente.' },
       { Icon: FileText, title: 'Licenças e autorizações', text: 'Os procedimentos que a Câmara Municipal indicar para instalar e utilizar a casa no terreno.' },
@@ -36,7 +37,7 @@ const panels = [
 const steps = [
   { Icon: House, title: 'Escolha a casa', text: 'Consulte a ficha e compare as características e o equipamento.' },
   { Icon: MessageSquare, title: 'Peça um orçamento', text: 'Indique a casa e a localidade ou ilha de destino.' },
-  { Icon: Handshake, title: 'Confirme as condições', text: 'Peça a disponibilidade e as condições aplicáveis por escrito.' },
+  { Icon: Handshake, title: 'Confirme as condições', text: commercial?.process ?? 'Peça a disponibilidade e as condições aplicáveis por escrito.' },
   { Icon: Ship, title: 'Combine a entrega', text: 'Confirme o destino, os custos e a organização da entrega.' },
 ];
 ---
@@ -71,6 +72,7 @@ const steps = [
         <li><Icon size={24} aria-hidden="true" /><h4>{title}</h4><p>{text}</p></li>
       ))}
     </ol>
+    {commercial && <><p><strong>Visitas:</strong> {commercial.visits}</p><p><strong>Inspeção:</strong> {commercial.inspection}</p></>}
   </section>
 
   <div class="purchase-callouts">
@@ -78,7 +80,7 @@ const steps = [
       <Ship size={25} aria-hidden="true" />
       <div>
         <h3>Açores e Madeira</h3>
-        <p>A atividade destina-se aos Açores e à Madeira; não realizamos vendas para Portugal continental. Indique a ilha de destino para o orçamento.</p>
+        <p>{commercial?.islands ?? 'A atividade destina-se aos Açores e à Madeira; não realizamos vendas para Portugal continental. Indique a ilha de destino para o orçamento.'}</p>
         <a class="under" href={url('contactos/?motivo=transporte')}>Pedir informação sobre transporte</a>
       </div>
     </aside>

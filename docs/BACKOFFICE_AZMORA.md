@@ -52,3 +52,14 @@ O ensaio usa D1 e R2 efémeros, chaves geradas para o teste e uma resposta JWKS 
 ## Configurações do website — desenvolvimento ainda não concluído
 
 Existe uma primeira categoria local, **Configurações do website**, para contactos, horários, idiomas e ligações sociais. Permite guardar rascunho, pré-visualizar, publicar e recuperar uma versão. O email público não altera os destinatários do CRM. As restantes categorias continuam por implementar e a funcionalidade não está pronta para produção. A migração `0005_site_settings.sql` não foi aplicada remotamente. Inventário e CRM mantêm os procedimentos acima.
+
+
+## Configurações do website — ensaio local
+
+Na área **Configurações do website**, atualize contactos e redes, textos da página inicial e Sobre Nós, informação comercial, perguntas frequentes, aviso e metadados de pesquisa e partilha. Marque ou desmarque os contactos e redes que devem aparecer; a política de privacidade mantém o seu contacto próprio e não é editável nesta área. A exatidão dos conteúdos é da responsabilidade dos proprietários.
+
+Em perguntas frequentes use **Adicionar pergunta**, **Subir**, **Descer** e **Eliminar pergunta**; desmarque a opção de publicação para a ocultar sem a eliminar. Na página inicial selecione até três casas publicadas e use Subir/Descer para ordenar. Uma casa arquivada ou eliminada deixa de aparecer automaticamente; sem seleção usa-se a seleção automática. Nos avisos ativos indique título, mensagem e data inicial; a data final é opcional e inclusiva. As datas usam o fuso configurado em contactos. A ligação do aviso aceita um caminho interno ou HTTPS.
+
+Para rever antes de publicar, use **Pré-visualizar**: o painel mostra um resumo dos valores, não uma simulação visual integral de todas as páginas. **Guardar rascunho** não altera o site; depois de guardar, use **Publicar alterações** e confirme. O histórico recupera uma versão completa das configurações, substituindo simultaneamente publicado e rascunho. Se outra pessoa tiver alterado as configurações, reabra e volte a aplicar as alterações; não se fundem automaticamente.
+
+Os campos SEO vazios utilizam os metadados automáticos. As alterações são servidas no HTML público após publicação sem novo deployment; o build estático mantém os valores incorporados. Fotografias e casas são geridas no inventário existente. Políticas legais e destinatários de notificações não são editáveis aqui. O uso real em produção só é possível depois de migrar e publicar com autorização e realizar verificações.

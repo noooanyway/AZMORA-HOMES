@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
-import { validateContactSettings } from '../cloudflare/settings-validation.mjs';
+import { validateContactSettings, validateContent } from '../cloudflare/settings-validation.mjs';
 import { saveContactDraft, readSettings } from '../cloudflare/settings-store.mjs';
 const valid = { phone: '+351 913 667 365', secondPhone: '+351 961 533 260', whatsapp: '+351 913 667 365', email: 'geral@azmorahomes.pt', openingHours: 'Segunda a sexta', timezone: 'Europe/Lisbon', languages: 'Português, inglês e francês', social: { instagram: 'https://www.instagram.com/azmorahomes/', facebook: 'https://www.facebook.com/azmorahomes' } };
 test('contactos rejeitam dados maliciosos, destinos indevidos e campos não suportados', () => {
@@ -33,4 +33,15 @@ test('guardar rascunho valida e impede gravação concorrente sem alterar a vers
   const row = await readSettings(db); assert.equal(row.revision,1); assert.deepEqual(row.draft.contacts,valid); assert.deepEqual(row.published,{});
   await assert.rejects(() => saveContactDraft(db,1,{...valid,email:'invalid'},'owner-a'));
   sql.close();
+});
+
+
+test('conteúdos recusam XSS, aviso inseguro e referências duplicadas', () => {
+  const base=JSON.parse(readFileSync('src/data/site-content.json','utf8'));
+  assert.equal(validateContent(base),true);
+  const attack=structuredClone(base);attack.home.title='<img src=x onerror=alert(1)>';assert.equal(validateContent(attack),false);
+  const badUrl=structuredClone(base);badUrl.notice.url='javascript:alert(1)';assert.equal(validateContent(badUrl),false);
+  const badDate=structuredClone(base);badDate.notice.start='2026-02-31';assert.equal(validateContent(badDate),false);
+  const repeated=structuredClone(base);repeated.home.featured=['casa-1','casa-1'];assert.equal(validateContent(repeated),false);
+  const wrong=structuredClone(base);wrong.faq[0].visible='true';assert.equal(validateContent(wrong),false);
 });

@@ -17,7 +17,8 @@ export const getContacts = (locals: App.Locals) => {
   const c = locals.siteSettings?.contacts ?? { ...company, timezone: 'Europe/Lisbon' };
   const phone = c.phone.trim(), dial = phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
   const whatsapp = c.whatsapp.replace(/\D/g, '');
-  return { ...c, phone, phoneHref: /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '', phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '', whatsapp, whatsappHref: /^\d{9,15}$/.test(whatsapp) ? 'https://wa.me/' + whatsapp : '', form: '' };
+  const visible = (key: string) => !('visibility' in c) || !c.visibility || c.visibility[key] !== false;
+  return { ...c, visible, phone: visible('phone') ? phone : '', phoneHref: visible('phone') && /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '', phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '', whatsapp: visible('whatsapp') ? whatsapp : '', whatsappHref: visible('whatsapp') && /^\d{9,15}$/.test(whatsapp) ? 'https://wa.me/' + whatsapp : '', form: '' };
 };
 export const contacts = getContacts({});
 export const houseWhatsApp = (houseName: string, c = contacts) =>

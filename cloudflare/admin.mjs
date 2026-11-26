@@ -6,6 +6,7 @@ import contactPanel from './contact-panel.mjs?raw';
 import { adminContacts } from './contacts.mjs';
 import { readSettings, saveContactDraft, publishSettings, restoreSettings } from './settings-store.mjs';
 import company from '../src/data/company.json';
+import contentDefaults from '../src/data/site-content.json';
 import settingsPanel from './settings-panel.mjs?raw';
 const reply = (message, status) => Response.json({ message }, { status });
 export const ALL = async ({ request, params }) => {
@@ -20,18 +21,21 @@ export const ALL = async ({ request, params }) => {
         const settings = await readSettings(db);
         const history = await db.prepare('SELECT id,published_revision,actor,created_at FROM site_settings_history ORDER BY id DESC LIMIT 30').all();
         const defaults = {phone:company.phone,secondPhone:company.secondPhone,whatsapp:company.whatsapp,email:company.email,openingHours:company.openingHours,timezone:'Europe/Lisbon',languages:company.languages,social:company.social};
-        return Response.json({ ...settings, defaults, history: history.results });
+        return Response.json({ ...settings, defaults, contentDefaults, history: history.results });
       }
       if (request.method !== 'POST') return reply('Método inválido.',405);
       if (request.headers.get('Content-Type') !== 'application/json') return reply('Formato inválido.',415);
       const input = JSON.parse(new TextDecoder().decode(await limited(request,100000)));
       let ok;
-      if (action === 'configuracoes-guardar') ok = await saveContactDraft(db,input.revision,input.contacts,actor);
+      if (action === 'configuracoes-guardar') ok = await saveContactDraft(db,input.revision,input.contacts,actor,input.content);
       else if (action === 'configuracoes-publicar') ok = await publishSettings(db,input.revision,actor);
       else if (action === 'configuracoes-recuperar') ok = await restoreSettings(db,input.revision,input.historyId,actor);
       else return reply('Operação inexistente.',404);
       return ok ? Response.json({ok:true}) : reply('As configurações foram alteradas por outra pessoa. Reabra-as.',409);
-    } catch (e) { return reply(e instanceof SyntaxError ? 'Dados inválidos.' : 'Não foi possível guardar as configurações. Verifique os dados e volte a tentar.',400); }
+    } catch (e) {
+      const invalid = e instanceof SyntaxError || e instanceof TypeError || ['Dados de configurações inválidos.','Revisão inválida.','Dados inválidos.','Guarde primeiro um rascunho válido.','Versão inexistente.','Versão inválida.','Conteúdo excede o limite.'].includes(e?.message);
+      return invalid ? reply('Reveja os campos e volte a tentar.', 400) : reply('Não foi possível aceder às configurações. Tente novamente.', 503);
+    }
   }
   if (action.startsWith('contacto')) {
     try {

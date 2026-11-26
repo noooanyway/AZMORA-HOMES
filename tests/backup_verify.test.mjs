@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -45,4 +45,17 @@ test('restauro isolado valida rascunho, publicado e histórico de configuraçõe
     writeFileSync(sql,core+settings+` UPDATE site_settings SET published='{}';`);assert.equal(run().status,1);
     writeFileSync(sql,core+` CREATE TABLE site_settings(id INTEGER);`);assert.equal(run().status,1);
   } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+
+test('cópia sintética preserva conteúdos e histórico após restauro SQLite isolado', () => {
+ const root=mkdtempSync(path.join(tmpdir(),'azmora-content-restore-'));
+ try {const photos=path.join(root,'photos'),sql=path.join(root,'backup.sql');mkdirSync(photos);
+ const core=`CREATE TABLE inventory(data TEXT); CREATE TABLE uploads(id); CREATE TABLE activity(id); CREATE TABLE contact_requests(id); CREATE TABLE contact_history(id); CREATE TABLE contact_limits(id); CREATE TABLE contact_tokens(id);`;
+ const migrate=readFileSync('migrations/0005_site_settings.sql','utf8');
+ const content=JSON.parse(readFileSync('src/data/site-content.json','utf8'));const payload=JSON.stringify({content}).replaceAll("'","''");
+ writeFileSync(sql,core+migrate+` UPDATE site_settings SET draft='${payload}',published='${payload}',revision=1,published_revision=1,published_by='editor';`);
+ const run=spawnSync('python',['scripts/backup_verify.py',sql,photos],{encoding:'utf8'});assert.equal(run.status,0,run.stderr);
+ const read=spawnSync('python',['-c',"import sqlite3,sys,json; d=sqlite3.connect(':memory:');d.executescript(open(sys.argv[1],encoding='utf-8').read());a,b=d.execute('select draft,published from site_settings').fetchone();assert json.loads(a)==json.loads(b);assert len(json.loads(a)['content']['faq'])==7;assert d.execute('select count(*) from site_settings_history').fetchone()[0]==2",sql],{encoding:'utf8'});assert.equal(read.status,0,read.stderr);
+ }finally{rmSync(root,{recursive:true,force:true})}
 });
