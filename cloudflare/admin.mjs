@@ -33,6 +33,7 @@ export const ALL = async ({ request, params }) => {
       else return reply('Operação inexistente.',404);
       return ok ? Response.json({ok:true}) : reply('As configurações foram alteradas por outra pessoa. Reabra-as.',409);
     } catch (e) {
+      if (/no such table: (?:main\.)?site_settings(?:_history)?/i.test(String(e?.message || ''))) return reply('A base de dados não tem as tabelas de configurações. Peça ao gestor técnico que verifique a migração 0005; não são aplicadas alterações automaticamente.', 503);
       const invalid = e instanceof SyntaxError || e instanceof TypeError || ['Dados de configurações inválidos.','Revisão inválida.','Dados inválidos.','Guarde primeiro um rascunho válido.','Versão inexistente.','Versão inválida.','Conteúdo excede o limite.'].includes(e?.message);
       return invalid ? reply('Reveja os campos e volte a tentar.', 400) : reply('Não foi possível aceder às configurações. Tente novamente.', 503);
     }

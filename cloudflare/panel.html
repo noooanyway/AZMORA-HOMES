@@ -191,9 +191,11 @@
     <section id="settings" hidden>
       <h1>Configurações do website</h1>
       <p>Atualize os contactos e redes sociais. As alterações guardadas só aparecem no site depois de publicadas. A informação publicada é da responsabilidade dos proprietários.</p>
-      <form id="settings-form"><fieldset><legend>Contactos e atendimento</legend><div class="grid" id="settings-fields"></div></fieldset>
+      <p id="settings-feedback" role="status" aria-live="polite"></p>
+      <button type="button" id="settings-retry" hidden>Voltar a carregar configurações</button>
+      <form id="settings-form" inert><fieldset><legend>Contactos e atendimento</legend><div class="grid" id="settings-fields"></div></fieldset>
       <div id="settings-sections"></div><div class="actions"><button class="primary" type="submit">Guardar rascunho</button><button type="button" id="settings-preview">Pré-visualizar</button><button type="button" id="settings-publish">Publicar alterações</button><button type="button" id="settings-cancel">Cancelar alterações</button></div></form>
-      <h2>Versões publicadas</h2><p>Recuperar uma versão substitui os contactos publicados e o rascunho.</p><div id="settings-history"></div><p id="settings-feedback" role="status"></p>
+      <h2>Versões publicadas</h2><p>Recuperar uma versão substitui os contactos publicados e o rascunho.</p><div id="settings-history"></div>
     </section>
     <dialog id="settings-preview-dialog" aria-labelledby="settings-preview-title"><h2 id="settings-preview-title">Pré-visualização dos contactos</h2><div id="settings-preview-content"></div><button type="button" id="settings-preview-close">Fechar</button></dialog>
     <section id="contacts" hidden>

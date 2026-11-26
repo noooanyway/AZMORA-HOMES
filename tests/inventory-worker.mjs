@@ -480,6 +480,7 @@ try {
       });
       const errors = [];
       page.on('pageerror', (e) => errors.push(e.message));
+      let failSettingsLoad = false;
       await page.route('https://challenges.cloudflare.com/**', (route) =>
         route.fulfill({
           contentType: 'application/javascript',
@@ -489,6 +490,7 @@ try {
       await page.route(origin + '/**', async (route) => {
         const r = route.request(),
           headers = { ...r.headers(), 'Cf-Access-Jwt-Assertion': token };
+        if (failSettingsLoad && new URL(r.url()).pathname.endsWith('/admin/configuracoes/')) return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({message:'Erro de carregamento simulado.'})});
         if (new URL(r.url()).pathname.startsWith('/_astro/')) {
           const file = 'dist-cloudflare/client' + new URL(r.url()).pathname;
           const ext = file.split('.').pop();
@@ -572,7 +574,15 @@ try {
       await page.goto(base + 'admin/');
       await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
       await page.locator('#list .unit').first().waitFor();
+      failSettingsLoad = true;
       await page.getByRole('button',{name:'Configurações do website'}).click();
+      await page.getByText('Erro de carregamento simulado.').waitFor();
+      assert.equal(await page.locator('#settings-form').evaluate(form => form.inert), true);
+      assert.equal(await page.locator('#settings-retry').isVisible(), true);
+      failSettingsLoad = false;
+      await page.locator('#settings-retry').click();
+      await page.getByText('Configurações carregadas.').waitFor();
+      assert.equal(await page.locator('#settings-form').evaluate(form => form.inert), false);
       await page.locator('#settings-form input[name="phone"]').waitFor();
       await page.locator('#settings-form input[name="phone"]').fill('+351 919 222 333');
       const linkedPrice=page.locator('.settings-faq-row').nth(3);
@@ -769,7 +779,7 @@ try {
   }
   // Local-only fault injection: missing settings table is surfaced to ADMIN.
   await db.prepare('DROP TABLE site_settings').run();
-  assert.equal((await admin('configuracoes')).status, 503);
+  const missingSettings=await admin('configuracoes'); assert.equal(missingSettings.status, 503); assert.match((await missingSettings.json()).message,/migração 0005/i);
   assert.equal((await call('')).status, 200);
   console.log(
     'OK · Worker local, acesso, 16 unidades, rascunho, criação, publicação, concorrência, arquivo, recuperação e eliminação.',
