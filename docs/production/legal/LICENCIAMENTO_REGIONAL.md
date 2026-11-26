@@ -1,0 +1,9 @@
+# Instalação — Açores e Madeira
+
+**INTERNO — PRELIMINAR, NÃO PUBLICAR. Consulta: 25/11/2026. Não constitui parecer jurídico, validação da atividade ou instrução contratual.** A aplicação depende do vendedor, contrato, unidade e destino. Jurista/contabilista devem confirmar redação consolidada na data do ato. A data de publicação do diploma original não garante a sua versão vigente.
+
+RJUE DL 555/99 arts. 2.º, 4.º e 6.º e instrumentos de ordenamento podem ser relevantes conforme implantação, finalidade e operação; isenção de controlo prévio não significa ausência de outras regras. Orientação nacional sobre estruturas amovíveis: https://cnt.dgterritorio.gov.pt/sites/default/files/Recomendacao%201_2019_CNT_0.PDF . Identificar redação vigente; foram identificadas alterações mais recentes e é necessária conferência jurídica antes da aplicação.
+
+Açores: DLR 35/2012/A art. 9.º adapta RJUE, e regime regional de gestão territorial: https://diariodarepublica.pt/dr/detalhe/decreto-legislativo-regional/35-2012-175320 . Confirmar consolidação e regimes específicos de ilha, costa, reservas e património. Madeira: consultar ordenamento regional, governo regional e câmara; não foi identificada nesta pesquisa uma adaptação geral exaustiva cuja vigência se possa afirmar. Empreendimento turístico, alojamento local e habitação podem suscitar regras diferentes. Sem conclusão de licenciamento automático em qualquer arquipélago.
+
+Procedimento por município: obter localização cadastral e PDM/servidões; descrever unidade, chassis, apoio, fundação, permanência, redes e uso; consultar urbanismo da câmara por escrito, pedir enquadramento territorial e procedimento/entidades; quando aplicável consultar ambiente, património, proteção civil, redes e turismo regional; conservar resposta, data e projeto antes da compra. Não foram analisados municípios individualmente. A consulta não transfere automaticamente toda a responsabilidade legal ao comprador.

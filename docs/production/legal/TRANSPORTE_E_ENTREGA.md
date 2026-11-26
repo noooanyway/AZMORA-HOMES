@@ -1,0 +1,9 @@
+# Transporte, entrega e risco
+
+**INTERNO — PRELIMINAR, NÃO PUBLICAR. Consulta: 25/11/2026. Não constitui parecer jurídico, validação da atividade ou instrução contratual.** A aplicação depende do vendedor, contrato, unidade e destino. Jurista/contabilista devem confirmar redação consolidada na data do ato. A data de publicação do diploma original não garante a sua versão vigente.
+
+No cenário consumidor/bem móvel, DL 84/2021 art. 11.º/1–2: entrega por posse física pelo consumidor ou terceiro indicado que não seja transportador; se instalação contratada ao profissional, entrega quando concluída. Art. 11.º/12–13: risco transfere-se na posse, salvo transporte confiado pelo consumidor a pessoa diferente da proposta pelo profissional, hipótese em que se transfere ao transportador. Interpretar com jurista quem escolhe e contrata cada troço e quem detém custódia; chegada ao porto não basta automaticamente. https://diariodarepublica.pt/dr/detalhe/decreto-lei/84-2021-172938301
+
+Confirmado comercialmente: preço inclui IVA e transporte até porto nas condições do orçamento; descarga e transporte na ilha a cargo do cliente. Divisão de custo não determina automaticamente risco, garantia, armazenagem, taxas nem titular da obrigação perante consumidor. Falta saber transportadora, seguro, momento de transferência e entidade que contrata cada trecho; seguro é recomendação de avaliação, não obrigação geral demonstrada.
+
+Art. 11.º/4–8: sem data fixada, entregar sem demora injustificada e até 30 dias após contrato; prazo adicional adequado e resolução, com exceções de resolução imediata previstas na lei. Documentar no orçamento local preciso, condição de entrega, quem organiza descarga e custódia, prazos, custos conhecidos e não incluídos, prova e contacto para incidentes; não criar exclusões de direitos. Propor registo de fotos e estado na origem e destino, identificação da unidade, transportador, horários e comprovativos, sem condicionar direitos à assinatura.
