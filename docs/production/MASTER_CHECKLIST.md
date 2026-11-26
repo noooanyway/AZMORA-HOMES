@@ -1,4 +1,8 @@
-> **Estado atual local:** implementação de configurações disponível, mas conclusão funcional e publicação permanecem pendentes de reconciliação comercial e testes individuais completos. A informação abaixo de intervenções anteriores é histórico, salvo onde explicitamente atualizada. Migração 0005 ainda não foi aplicada remotamente nesta intervenção; documentos legais dependem dos responsáveis e validação jurídica.
+> **Estado local mais recente:** campos comerciais centrais e FAQ automáticas implementados; execução de testes locais documentada em [Consistência e testes](CONSISTENCIA_E_TESTES.md). Rever conteúdos livres personalizados antes da publicação e confirmar as pendências legais e operacionais. Os estados seguintes são históricos.
+
+> **Estado histórico da execução anterior:** finalização incompleta; persistem referências comerciais duplicadas e testes funcionais individuais em falta. Consultar [matriz de consistência e testes](CONSISTENCIA_E_TESTES.md). Os registos abaixo são históricos. Não considerar a versão local pronta para publicação.
+
+> **Estado histórico local:** implementação de configurações disponível, mas conclusão funcional e publicação permaneciam pendentes de reconciliação comercial e testes individuais completos. A informação abaixo de intervenções anteriores é histórico, salvo onde explicitamente atualizada. Migração 0005 ainda não foi aplicada remotamente nesta intervenção; documentos legais dependem dos responsáveis e validação jurídica.
 
 > **Ajuste de âmbito — 25/11/2026:** autorizada a preparação interna de quatro minutas para o website (termos de utilização, privacidade, cookies e aviso legal), sujeitas a aprovação dos proprietários e validação jurídica; não publicar incompletas. Investigação aprofundada, contratos de venda, modelos operacionais e gerador ADMIN continuam fora do âmbito. Instagram confirmado, ainda não implementado. Ver [entrega e lista única de pendências](ENTREGA_RESPONSAVEIS.md).
 

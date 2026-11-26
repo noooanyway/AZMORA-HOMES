@@ -2,6 +2,12 @@
 
 > **MINUTA INTERNA — NÃO PUBLICAR.** Preparada em 25/11/2026 para revisão dos proprietários e do seu jurista. Os campos `[PENDENTE]`, as alternativas e as notas de revisão exigem resolução; nenhuma afirmação de aprovação jurídica ou de conformidade é feita. O website publicado pode divergir da D.1 local.
 
+## Estado técnico local atual — referência para revisão
+
+O painel oferece aceitação, recusa, personalização e alteração posterior da persistência opcional de tema, favoritos e comparação. Sem autorização, essas escolhas não são persistidas em localStorage; favoritos e comparação podem ser transportados no fragmento do endereço para as respetivas páginas. A decisão é guardada em `azmora:consent-v1` quando o armazenamento está disponível. A retirada remove os dados persistentes dessas preferências, quando acessíveis. O código local não carrega o beacon Cloudflare e não disponibiliza opção de medição. Facebook e Instagram são ligações diretas. A identificação do responsável e a revisão jurídica continuam pendentes. Antes da publicação, verificar separadamente qualquer injeção remota da Cloudflare.
+
+As secções seguintes preservam a auditoria e propostas históricas; onde descrevem leituras incondicionais ou medição ativa, não descrevem o código local atual. Esta minuta continua incompleta e não deve ser publicada.
+
 ## 1. Âmbito
 Este website utiliza armazenamento no navegador e serviços de segurança e medição. «Tecnologias semelhantes» incluem mecanismos de armazenamento ou acesso a informação no dispositivo, mesmo que não sejam cookies. Esta política deve ser lida com a política de privacidade. [PENDENTE — IDENTIFICAÇÃO DO RESPONSÁVEL E DATA DE VIGÊNCIA.]
 

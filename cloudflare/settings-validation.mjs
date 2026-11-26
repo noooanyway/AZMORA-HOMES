@@ -28,7 +28,7 @@ export function validateContent(v) {
   const h=v.home;
   if (!exact(h,['title','subtitle','description','selectionTitle','regionText','featured']) || !['title','subtitle','description','selectionTitle','regionText'].every(k=>plain(h[k],2000)) || !Array.isArray(h.featured) || h.featured.length>3 || h.featured.some(x=>typeof x!=='string'||!/^[a-z0-9-]{1,150}$/.test(x)) || new Set(h.featured).size!==h.featured.length) return false;
   if (!textGroup(v.about,['title','description','history','experience','advantages','inspection'])) return false;
-  if (!Array.isArray(v.faq) || v.faq.length>40 || v.faq.some(f=>!exact(f,['question','answer','visible']) || !plain(f.question,240) || !f.question.trim() || !plain(f.answer,4000) || !f.answer.trim() || typeof f.visible!=='boolean')) return false;
+  if (!Array.isArray(v.faq) || v.faq.length>40 || v.faq.some(f=>!f || typeof f!=='object' || Array.isArray(f) || Object.keys(f).some(k=>!['question','answer','visible','source'].includes(k)) || !plain(f.question,240) || !f.question.trim() || !plain(f.answer,4000) || ((!f.source || f.source === 'custom') && !f.answer.trim()) || (f.source !== undefined && !['custom','price','process','transport','delivery','islands','included','excluded','visits','inspection'].includes(f.source)) || typeof f.visible!=='boolean')) return false;
   if (!textGroup(v.commercial,['process','transport','delivery','islands','included','excluded','visits','inspection'])) return false;
   const n=v.notice;
   if (!exact(n,['title','message','active','start','end','url']) || !plain(n.title,160) || !plain(n.message,1000) || typeof n.active!=='boolean' || !plain(n.url,500)) return false;

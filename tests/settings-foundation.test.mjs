@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
 import { validateContactSettings, validateContent } from '../cloudflare/settings-validation.mjs';
-import { saveContactDraft, readSettings } from '../cloudflare/settings-store.mjs';
+import { saveContactDraft, readSettings, publishSettings, restoreSettings } from '../cloudflare/settings-store.mjs';
 const valid = { phone: '+351 913 667 365', secondPhone: '+351 961 533 260', whatsapp: '+351 913 667 365', email: 'geral@azmorahomes.pt', openingHours: 'Segunda a sexta', timezone: 'Europe/Lisbon', languages: 'Português, inglês e francês', social: { instagram: 'https://www.instagram.com/azmorahomes/', facebook: 'https://www.facebook.com/azmorahomes' } };
 test('contactos rejeitam dados maliciosos, destinos indevidos e campos não suportados', () => {
   assert.equal(validateContactSettings(valid), true);
@@ -44,4 +44,52 @@ test('conteúdos recusam XSS, aviso inseguro e referências duplicadas', () => {
   const badDate=structuredClone(base);badDate.notice.start='2026-02-31';assert.equal(validateContent(badDate),false);
   const repeated=structuredClone(base);repeated.home.featured=['casa-1','casa-1'];assert.equal(validateContent(repeated),false);
   const wrong=structuredClone(base);wrong.faq[0].visible='true';assert.equal(validateContent(wrong),false);
+});
+
+
+test('cada campo de conteúdo percorre rascunho privado, publicação e recuperação', async () => {
+  const sql=new DatabaseSync(':memory:'); sql.exec(readFileSync('migrations/0005_site_settings.sql','utf8'));
+  const db={prepare(query){let args=[];return {bind(...v){args=v;return this},async first(){return sql.prepare(query).get(...args)||null},async run(){return {meta:{changes:Number(sql.prepare(query).run(...args).changes)}}}}}};
+  const base=JSON.parse(readFileSync('src/data/site-content.json','utf8'));
+  const cases=[];
+  for(const group of ['home','about','commercial']) for(const key of Object.keys(base[group])) cases.push([`${group}.${key}`, c=>{c[group][key]=key==='featured'?['casa-teste']:`Teste ${group} ${key}`}]);
+  for(const key of ['question','answer','visible']) cases.push([`faq.${key}`,c=>{c.faq[0][key]=key==='visible'?false:`Teste FAQ ${key}`}]);
+  for(const key of Object.keys(base.notice)) cases.push([`notice.${key}`,c=>{c.notice={title:'Aviso',message:'Mensagem',active:false,start:'2026-01-01',end:'',url:''};c.notice[key]=({title:'Outro aviso',message:'Outra mensagem',active:true,start:'2026-01-02',end:'2026-01-03',url:'/contactos/'})[key]}]);
+  for(const page of Object.keys(base.seo)) for(const key of Object.keys(base.seo[page])) cases.push([`seo.${page}.${key}`,c=>{c.seo[page][key]=`Teste ${page} ${key}`}]);
+  for(const [label,change] of cases){
+    const c=structuredClone(base);change(c);assert.equal(validateContent(c),true,label);
+    let row=await readSettings(db);const previous=JSON.stringify(row.published);
+    assert.equal(await saveContactDraft(db,row.revision,valid,'owner',c),true,label);
+    row=await readSettings(db);assert.equal(JSON.stringify(row.published),previous,label);assert.deepEqual(row.draft.content,c,label);
+    assert.equal(await publishSettings(db,row.revision,'owner'),true,label);
+    row=await readSettings(db);assert.deepEqual(row.published.content,c,label);
+    const old=sql.prepare('SELECT id FROM site_settings_history ORDER BY id DESC LIMIT 1 OFFSET 1').get();
+    assert.equal(await restoreSettings(db,row.revision,old.id,'owner'),true,label);
+    row=await readSettings(db);assert.equal(JSON.stringify(row.published),previous,label);
+  }
+  sql.close();
+});
+
+
+test('avisos aceitam intervalos válidos e rejeitam estado ativo incompleto ou datas invertidas', () => {
+  const base=JSON.parse(readFileSync('src/data/site-content.json','utf8'));
+  for(const notice of [
+    {title:'',message:'',active:false,start:'',end:'',url:''},
+    {title:'Aviso',message:'Mensagem',active:true,start:'2026-01-01',end:'',url:'/contactos/'},
+    {title:'Aviso',message:'Mensagem',active:true,start:'2026-01-01',end:'2026-01-01',url:'https://example.test/'},
+  ]) assert.equal(validateContent({...base,notice}),true);
+  for(const notice of [
+    {title:'',message:'Mensagem',active:true,start:'2026-01-01',end:'',url:''},
+    {title:'Aviso',message:'Mensagem',active:true,start:'2026-02-02',end:'2026-02-01',url:''},
+    {title:'Aviso',message:'Mensagem',active:true,start:'2026-01-01',end:'',url:'javascript:alert(1)'},
+  ]) assert.equal(validateContent({...base,notice}),false);
+});
+
+
+test('FAQ explicitamente personalizada preserva resposta original', async () => {
+  const {faqAnswer} = await import('../src/lib/commercial.ts');
+  const base=JSON.parse(readFileSync('src/data/site-content.json','utf8'));
+  const original=base.faq.find(f=>f.source==='visits');
+  assert.equal(faqAnswer({...original,source:'custom'},{...base.commercial,visits:'VISITA ALTERADA'}),original.answer);
+  assert.equal(validateContent({...base,faq:[{...original,source:'custom'}]}),true);
 });

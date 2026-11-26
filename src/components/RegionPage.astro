@@ -3,12 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Photo from './Photo.astro';
 import { url, pageHouses, detail } from '../lib/site';
 import '../styles/editorial.css';
+import defaults from '../data/site-content.json';
 interface Props {
   slug: string;
   data: { region: string; where: string; prep: string; intro: string; process: string; steps: string[]; faq: string[][] };
 }
 const { data, slug } = Astro.props;
-const commercial = Astro.locals.siteSettings?.content?.commercial;
+const commercial = Astro.locals.siteSettings?.content?.commercial ?? defaults.commercial;
 const houses = pageHouses(Astro.locals);
 const featured = houses.find(h => h.featured && h.media.length) || houses.find(h => h.media.length);
 const path = `casas-moveis-${slug}/`;
@@ -41,7 +42,7 @@ const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', it
     </section>
     <section class="editorial-faq">
       <div><p class="kicker"><i></i> INFORMAÇÃO ÚTIL</p><h2>Perguntas frequentes sobre casas móveis {data.where}</h2><p>Tem outras questões? Estamos disponíveis para ajudar.</p></div>
-      <div>{data.faq.map(([question, answer], i) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{commercial && i === 1 ? `${commercial.included} ${commercial.transport} ${commercial.excluded}` : answer}</p></details>)}</div>
+      <div>{data.faq.map(([question, answer], i) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{i === 0 ? commercial.islands : i === 1 ? `${commercial.included} ${commercial.transport} ${commercial.delivery} ${commercial.excluded}` : answer}</p></details>)}</div>
     </section>
     <aside class="editorial-cta"><div><p class="kicker"><i></i> ESTAMOS AQUI PARA AJUDAR</p><h2>Vamos encontrar a sua casa?</h2><p>Conte-nos o que procura e o destino pretendido.</p></div><div class="editorial-cta-links"><a class="btn cream" href={url('contactos/')}>Pedir informações para {slug === 'acores' ? 'os Açores' : 'a Madeira'} <span aria-hidden="true">↗</span></a><a href={url('guias/como-escolher-casa-movel-usada/')}>Ler o guia de compra <span aria-hidden="true">↗</span></a></div></aside>
   </div>

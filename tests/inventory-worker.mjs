@@ -142,6 +142,8 @@ try {
   assert.doesNotMatch(await (await call('')).text(),/Título inicial sintético/);
   // Each institutional route receives only the published SEO values.
   const seoRoutes={home:'',about:'sobre/',contacts:'contactos/',acores:'casas-moveis-acores/',madeira:'casas-moveis-madeira/',guide:'guias/como-escolher-casa-movel-usada/'};
+  const seoTags=html=>['title','description','og:title','og:description','canonical'].map(key=>key==='title'?html.match(/<title>[^<]*<\/title>/)?.[0]:key==='canonical'?html.match(/<link rel="canonical"[^>]*>/)?.[0]:html.match(new RegExp('<meta (?:name|property)="'+key+'"[^>]*>'))?.[0]);
+  const originalSeo={};for(const [key,route] of Object.entries(seoRoutes))originalSeo[key]=seoTags(await (await call(route)).text());
   const seoContent=structuredClone(cfg.contentDefaults);
   for (const key of Object.keys(seoRoutes)) seoContent.seo[key]={title:`SEO ${key}`,description:`Descrição ${key}`,socialTitle:`Partilha ${key}`,socialDescription:`Resumo ${key}`};
   let revision=(await json(await admin('configuracoes'))).revision;
@@ -156,6 +158,84 @@ try {
   revision=(await json(await admin('configuracoes'))).revision;
   assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
   assert.ok(!(await (await call('')).text()).includes('SEO home'));
+  for(const [key,route] of Object.entries(seoRoutes)) assert.deepEqual(seoTags(await (await call(route)).text()),originalSeo[key],`Fallback SEO: ${route}`);
+  // Synthetic values exercise each commercial source and every page that consumes it.
+  const commercialTest=structuredClone(cfg.contentDefaults);
+  for(const key of Object.keys(commercialTest.commercial)) commercialTest.commercial[key]=`VALOR_COMERCIAL_${key.toUpperCase()}_SINTETICO`;
+  for(const group of ['home','about']) for(const key of Object.keys(commercialTest[group])) if(key!=='featured') commercialTest[group][key]=`VALOR_${group.toUpperCase()}_${key.toUpperCase()}_SINTETICO`;
+  commercialTest.faq.push({question:'Questão livre sintética?',answer:'Resposta livre sintética.',visible:true});
+  const legalBody=html=>html.match(/<main id="conteudo">[\s\S]*?<\/main>/)[0].replace(/<dl class="business-details[\s\S]*?<\/dl>/,'');
+  const legalBefore=legalBody(await (await call('termos/')).text());
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:commercialTest})).status,200);
+  const draftHome=await (await call('')).text();assert.doesNotMatch(draftHome,/VALOR_COMERCIAL_/);
+  assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+  const routesByField={process:[''],transport:['','casas-moveis-acores/','casas-moveis-madeira/','casas/ohara-734-com-terraco-t2/'],delivery:['','casas-moveis-acores/','casas-moveis-madeira/','casas/ohara-734-com-terraco-t2/'],islands:['','casas-moveis-acores/','casas-moveis-madeira/'],included:['','casas-moveis-acores/','casas-moveis-madeira/','casas/ohara-734-com-terraco-t2/'],excluded:['','casas-moveis-acores/','casas-moveis-madeira/','casas/ohara-734-com-terraco-t2/'],visits:[''],inspection:['']};
+  for(const [key,routes] of Object.entries(routesByField)) for(const route of routes){const html=await (await call(route)).text();assert.ok(html.includes(commercialTest.commercial[key]),`${key}: ${route}`);assert.ok(!html.includes(cfg.contentDefaults.commercial[key]),`Valor anterior ${key}: ${route}`)}
+  const testHome=await (await call('')).text();for(const [key,value] of Object.entries(commercialTest.home))if(key!=='featured')assert.ok(testHome.includes(value),`home.${key}`);const testAbout=await (await call('sobre/')).text();for(const [key,value] of Object.entries(commercialTest.about))assert.ok(testAbout.includes(value),`about.${key}`);assert.ok(testHome.includes('Resposta livre sintética.'));assert.ok(testHome.includes('VALOR_COMERCIAL_VISITS_SINTETICO'));
+  assert.equal(legalBody(await (await call('termos/')).text()),legalBefore);
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
+  assert.doesNotMatch(await (await call('')).text(),/VALOR_COMERCIAL_/);
+  for(const zone of ['Pacific/Kiritimati','America/Adak']) {
+    const date=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    for(const [label,active,start,end,expected] of [['inactive',false,'2000-01-01','',false],['active',true,'2000-01-01','',true],['future',true,'2999-01-01','',false],['expired',true,'2000-01-01','2000-01-02',false],['today',true,date,date,true]]) {
+      const input=structuredClone(cfg.contentDefaults);input.notice={title:`AVISO_${label}`,message:'Aviso de teste',active,start,end,url:''};
+      revision=(await json(await admin('configuracoes'))).revision;
+      assert.equal((await admin('configuracoes-guardar',{revision,contacts:{...c,timezone:zone},content:input})).status,200);
+      assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+      assert.equal((await (await call('')).text()).includes(`AVISO_${label}`),expected,`${label} ${zone}`);
+    }
+  }
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
+  // Independently publish and recover each FAQ operation.
+  const faqBase=structuredClone(cfg.contentDefaults);
+  faqBase.faq=[{question:'FAQ A?',answer:'Resposta A',visible:true},{question:'FAQ B?',answer:'Resposta B',visible:true}];
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:faqBase})).status,200);
+  assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+  const faqBaseline=await json(await admin('configuracoes'));const faqHistory=faqBaseline.history[0].id;
+  for(const operation of ['add','edit','delete','order','hide','show']) {
+    const changed=structuredClone(faqBase);
+    if(operation==='add')changed.faq.push({question:'FAQ C?',answer:'Resposta C',visible:true});
+    if(operation==='edit')changed.faq[0].answer='Resposta editada';
+    if(operation==='delete')changed.faq.shift();
+    if(operation==='order')changed.faq.reverse();
+    if(operation==='hide')changed.faq[0].visible=false;
+    if(operation==='show'){changed.faq[0].visible=false;revision=(await json(await admin('configuracoes'))).revision;assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:changed})).status,200);assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);changed.faq[0].visible=true;}
+    revision=(await json(await admin('configuracoes'))).revision;
+    assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:changed})).status,200);
+    assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+    const html=await (await call('')).text();
+    if(operation==='add')assert.ok(html.includes('FAQ C?'));if(operation==='edit')assert.ok(html.includes('Resposta editada'));
+    if(operation==='delete'||operation==='hide')assert.ok(!html.includes('FAQ A?'));
+    if(operation==='order')assert.ok(html.indexOf('FAQ B?')<html.indexOf('FAQ A?'));
+    if(operation==='show')assert.ok(html.includes('FAQ A?'));
+    revision=(await json(await admin('configuracoes'))).revision;
+    assert.equal((await admin('configuracoes-recuperar',{revision,historyId:faqHistory})).status,200);
+    const restored=await (await call('')).text();assert.ok(restored.includes('FAQ A?')&&restored.includes('FAQ B?'));assert.ok(!restored.includes('FAQ C?')&&!restored.includes('Resposta editada'));assert.ok(restored.indexOf('FAQ A?')<restored.indexOf('FAQ B?'));
+  }
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
+  const featureTest=structuredClone(cfg.contentDefaults);
+  featureTest.home.featured=['irm-super-mercure-t2','ohara-734-com-terraco-t2','casa-eliminada'];
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-guardar',{revision,contacts:c,content:featureTest})).status,200);
+  assert.equal((await admin('configuracoes-publicar',{revision:revision+1})).status,200);
+  let featuredHtml=(await (await call('')).text()).split('<div class="cards">')[1].split('</section>')[0];
+  assert.ok(featuredHtml.indexOf('irm-super-mercure-t2') < featuredHtml.indexOf('ohara-734-com-terraco-t2'));assert.ok(!featuredHtml.includes('casa-eliminada'));
+  const selectedState=await db.prepare('SELECT state FROM inventory WHERE slug=?').bind('irm-super-mercure-t2').first();
+  await db.prepare('UPDATE inventory SET state=? WHERE slug=?').bind('draft','irm-super-mercure-t2').run();
+  featuredHtml=(await (await call('')).text()).split('<div class="cards">')[1].split('</section>')[0];assert.ok(!featuredHtml.includes('irm-super-mercure-t2'));
+  await db.prepare('UPDATE inventory SET state=? WHERE slug=?').bind(selectedState.state,'irm-super-mercure-t2').run();
+  const deletedUnit=await db.prepare('SELECT * FROM inventory WHERE slug=?').bind('irm-super-mercure-t2').first();
+  await db.prepare('DELETE FROM inventory WHERE slug=?').bind('irm-super-mercure-t2').run();
+  featuredHtml=(await (await call('')).text()).split('<div class="cards">')[1].split('</section>')[0];assert.ok(!featuredHtml.includes('irm-super-mercure-t2'));
+  await db.prepare('INSERT INTO inventory(id,slug,data,state,revision,actor,updated) VALUES (?,?,?,?,?,?,?)').bind(deletedUnit.id,deletedUnit.slug,deletedUnit.data,deletedUnit.state,deletedUnit.revision,deletedUnit.actor,deletedUnit.updated).run();
+
+  revision=(await json(await admin('configuracoes'))).revision;
+  assert.equal((await admin('configuracoes-recuperar',{revision,historyId:cfg.history[0].id})).status,200);
   for (const [route, expected] of [
     ['', 'Outra forma'],
     ['casas/', 'Explore as'],
@@ -495,11 +575,30 @@ try {
       await page.getByRole('button',{name:'Configurações do website'}).click();
       await page.locator('#settings-form input[name="phone"]').waitFor();
       await page.locator('#settings-form input[name="phone"]').fill('+351 919 222 333');
+      const linkedPrice=page.locator('.settings-faq-row').nth(3);
+      assert.equal(await linkedPrice.locator('[name=source]').inputValue(),'price');
+      assert.equal(await linkedPrice.locator('[name=answer]').isVisible(),false);
+      await linkedPrice.locator('[name=question]').fill('Custos associados visual?');
+      await linkedPrice.locator('[name=source]').selectOption('');
+      assert.equal(await linkedPrice.locator('[name=answer]').isVisible(),true);
+      await linkedPrice.locator('[name=answer]').fill('Resposta comercial personalizada de teste');
+      await linkedPrice.locator('[name=source]').selectOption('price');
+      assert.equal(await linkedPrice.locator('[name=answer]').isVisible(),false);
       await page.locator('[name="home.title"]').fill('Casa de teste visual');
       await page.locator('[name="about.title"]').fill('Sobre de teste visual');
       await page.locator('[name="commercial.transport"]').fill('Transporte de teste visual');
       await page.getByRole('button',{name:'Adicionar pergunta'}).click();
       const lastFaq=page.locator('.settings-faq-row').last(); await lastFaq.locator('[name=question]').fill('Pergunta visual?');await lastFaq.locator('[name=answer]').fill('Resposta visual');
+      await lastFaq.locator('[name=answer]').fill('Resposta visual editada');
+      await lastFaq.locator('[name=visible]').uncheck();assert.equal(await lastFaq.locator('[name=visible]').isChecked(),false);
+      await lastFaq.locator('[name=visible]').check();
+      await page.getByRole('button',{name:'Adicionar pergunta'}).click();
+      const extra=page.locator('.settings-faq-row').last();await extra.locator('[name=question]').fill('Pergunta temporária?');await extra.locator('[name=answer]').fill('Resposta temporária');
+      await extra.getByRole('button',{name:'Subir'}).click();
+      assert.equal(await page.locator('.settings-faq-row').nth((await page.locator('.settings-faq-row').count())-2).locator('[name=question]').inputValue(),'Pergunta temporária?');
+      page.once('dialog',d=>d.accept());await page.locator('.settings-faq-row').nth((await page.locator('.settings-faq-row').count())-2).getByRole('button',{name:'Eliminar pergunta'}).click();
+      assert.equal(await page.locator('.settings-faq-row [name=question]').evaluateAll(inputs=>inputs.some(input=>input.value==='Pergunta temporária?')),false);
+
       await page.locator('[name="notice.title"]').fill('Aviso visual');await page.locator('[name="notice.message"]').fill('Texto visual');
       await page.locator('[name="notice.start"]').fill('2020-01-01');await page.locator('[name="notice.active"]').check();
       await page.locator('#settings-featured input').first().check();
@@ -514,7 +613,7 @@ try {
       page.once('dialog',d=>d.accept()); await page.getByRole('button',{name:'Publicar alterações',exact:true}).click();
       await page.getByText('Alterações publicadas.').waitFor();
       assert.match(await (await call('contactos/')).text(), /919 222 333/);
-      const homeVisual=await (await call('')).text(); for(const x of ['Casa de teste visual','Pergunta visual?','Transporte de teste visual','Título SEO visual','Aviso visual']) assert.ok(homeVisual.includes(x),x);
+      const homeVisual=await (await call('')).text(); for(const x of ['Casa de teste visual','Pergunta visual?','Transporte de teste visual','Título SEO visual','Aviso visual']) assert.ok(homeVisual.includes(x),x);assert.ok(homeVisual.includes('Custos associados visual?'));
       assert.match(await (await call('sobre/')).text(),/Sobre de teste visual/);
       assert.doesNotMatch(await (await call('contactos/')).text(),/instagram.com\/azmorahomes/);
       page.once('dialog',d=>{assert.match(d.message(),/Diferenças por secção/);assert.match(d.message(),/rascunho/);assert.match(d.message(),/histórico/);return d.accept();}); await page.locator('#settings-history button').last().click();

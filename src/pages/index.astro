@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Photo from '../components/Photo.astro';
 import PurchaseGuide from '../components/PurchaseGuide.astro';
+import defaults from '../data/site-content.json';
+import { faqAnswer } from '../lib/commercial';
 import { url, detail, pageHouses } from '../lib/site';
 const houses = pageHouses(Astro.locals);
 import { name } from '../lib/catalog';
@@ -14,6 +16,9 @@ const hero =
   houses.find((h) => h.media.length);
 const types = [...new Set(houses.map((h) => h.typology).filter(Boolean))];
 const content = Astro.locals.siteSettings?.content;
+const displayedContent = content || defaults;
+const oldDescription = 'Escolha a sua casa móvel em segunda mão para os Açores ou a Madeira. Entregas nos Açores e na Madeira, sujeitas à confirmação das condições de transporte para a ilha de destino. Não realizamos vendas para Portugal continental.';
+const introduction = displayedContent.home.description === oldDescription ? defaults.home.description : displayedContent.home.description;
 const automaticFeatured = [
   ...houses.filter((h) => h.media.length),
   ...houses.filter((h) => !h.media.length),
@@ -28,7 +33,7 @@ const featured = content?.home.featured.length ? content.home.featured.flatMap(s
         <p class="kicker"><i></i> CASAS MÓVEIS EM SEGUNDA MÃO</p><h1>
           {content ? <>{content.home.title}<br /><em>{content.home.subtitle}</em></> : <>Outra forma <br />de <em>habitar.</em></>}
         </h1><p class="intro">
-          {content?.home.description ?? 'Escolha a sua casa móvel em segunda mão para os Açores ou a Madeira. Entregas nos Açores e na Madeira, sujeitas à confirmação das condições de transporte para a ilha de destino. Não realizamos vendas para Portugal continental.'}
+          {introduction}
         </p><a class="btn cream" href={url('casas/')}>Explorar as casas</a>
       </div>{
         hero ? (
@@ -90,19 +95,7 @@ const featured = content?.home.featured.length ? content.home.featured.flatMap(s
         </div>
       )
     }<PurchaseGuide /><section class="section"><h2>Casas móveis para os Açores e a Madeira</h2><p>{content?.home.regionText ?? 'Explore o catálogo de casas móveis usadas e saiba o que preparar para um pedido de informação para a sua região.'}</p><p><a class="under" href={url('casas-moveis-acores/')}>Casas móveis nos Açores</a> · <a class="under" href={url('casas-moveis-madeira/')}>Casas móveis na Madeira</a> · <a class="under" href={url('guias/como-escolher-casa-movel-usada/')}>Guia para escolher uma casa usada</a></p></section><section class="section faq">
-      <h2>Perguntas frequentes</h2>{content ? content.faq.filter(f => f.visible).map(f => <details><summary>{f.question}</summary><p>{f.answer} {f.question === 'Posso instalar uma casa móvel no meu terreno?' && <a class="under" href={url('termos/#terreno')}>Ver o que confirmar</a>}</p></details>) : <><details>
-        <summary>Como confirmo o preço e a disponibilidade?</summary><p>
-          Consulte a ficha da unidade e prepare o seu pedido de informação para
-          a Azmora Homes.
-        </p>
-      </details><details>
-        <summary>Onde ficam guardadas as minhas favoritas?</summary><p>
-          Neste navegador, disponíveis na página Favoritos sem criar conta.
-        </p>
-      </details><details>
-        <summary>Posso instalar uma casa móvel no meu terreno?</summary>
-        <p>Antes de reservar ou comprar, confirme com a Câmara Municipal se o terreno admite a instalação para o uso que pretende e quais os procedimentos aplicáveis. Verifique ainda o acesso ao local e as ligações necessárias. <a class="under" href={url('termos/#terreno')}>Ver o que confirmar</a></p>
-      </details><details><summary>O que está incluído no preço?</summary><p>Os preços incluem IVA e transporte até ao porto marítimo da ilha de destino, nas condições aplicáveis ao orçamento. O orçamento de transporte depende da ilha de destino. O transporte dentro da ilha, a descarga, a preparação do terreno, a instalação e as ligações são da responsabilidade do cliente.</p></details><details><summary>Posso visitar uma casa antes de comprar?</summary><p>Sim, mediante agendamento prévio e deslocação ao local onde a casa se encontra.</p></details><details><summary>Os preços são negociáveis? Há financiamento?</summary><p>Os preços não são negociáveis e a Azmora Homes não disponibiliza financiamento.</p></details><details><summary>Qual é o estado das casas e o que está incluído?</summary><p>As casas são inspecionadas antes da entrega e reparadas quando necessário. O mobiliário e os equipamentos apresentados estão incluídos, respeitando a informação específica de cada unidade.</p></details></>}<a class="under" href={url('contactos/')}
+      <h2>Perguntas frequentes</h2>{displayedContent.faq.filter(f => f.visible).map(f => <details><summary>{f.question}</summary><p>{faqAnswer(f, displayedContent.commercial)} {f.question === 'Posso instalar uma casa móvel no meu terreno?' && <a class="under" href={url('termos/#terreno')}>Ver o que confirmar</a>}</p></details>)}<a class="under" href={url('contactos/')}
         >Contactar a Azmora Homes</a>
     </section>
   </div></Layout
