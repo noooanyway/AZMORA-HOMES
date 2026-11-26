@@ -1,5 +1,7 @@
 # Atualização do inventário — migração 0006
 
+> Atualização de 26/11/2026: restauro integral do backup real e ensaio 0006/ADMIN/rollback aprovados. Ver [evidência e limites](RESTAURO_0006_VALIDADO.md). Produção inalterada; atualizar o backup se houve novas escritas e reconfirmar pendências antes da intervenção real.
+
 Preparação local. Não aplicada em produção. As consultas de 26/11/2026 identificaram apenas 0006 pendente; confirmar novamente no momento da intervenção.
 
 1. Rever as alterações locais, obter autorização dos responsáveis e preparar uma versão validada. Confirmar que os responsáveis compreendem que o catálogo Disponíveis ficará vazio enquanto não existir uma unidade publicada marcada disponível.

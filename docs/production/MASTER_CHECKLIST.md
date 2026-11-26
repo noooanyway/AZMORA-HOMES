@@ -1,3 +1,28 @@
+# Estado atual — restauro real validado (26/11/2026)
+
+Esta secção prevalece sobre os registos históricos abaixo quanto ao backup e à migração 0006. Evidência: [restauro integral validado](RESTAURO_0006_VALIDADO.md).
+
+- [x] Backup real D1/R2 verificado; 146 objetos e 136 referências a fotografias.
+- [x] Restauro integral isolado e comparação de todos os registos, estados, configurações, CRM, históricos e fotografias.
+- [x] Migração 0006 ensaiada na cópia, sem alterar linhas existentes nem inventar datas históricas.
+- [x] ADMIN atual testado com dados restaurados; rollback para a6af0e2 e regresso ao código atual preservam alterações posteriores.
+- [x] Correções do backup guardadas no commit 28b78dc; 56 testes, tipos e build Cloudflare aprovados.
+
+Pendências indispensáveis desta publicação:
+
+- [ ] Confirmar deployment anterior para rollback e configuração final; manter Analytics desativado.
+- [ ] Coordenar janela de manutenção, suspender escritas e concluir pedidos em curso.
+- [ ] Atualizar backup se houve alterações desde o snapshot das 18:11; verificar/restaurar a cópia atualizada e guardar segunda cópia protegida.
+- [ ] Reconfirmar por leitura as migrações pendentes imediatamente antes da intervenção: o backup contém 0001–0005, mas não 0006.
+- [ ] Com autorização, aplicar apenas as migrações previstas, fazer push/deployment e testes reais de ADMIN, catálogo, CRM, fotografias e autenticação antes de reabrir escritas.
+- [ ] Resolver com os proprietários as aprovações e informações legais/comerciais já documentadas; não publicar minutas internas.
+
+Não há bloqueio técnico identificado à 0006 na cópia ensaiada. A migração remota e a publicação não foram executadas.
+
+---
+
+## Histórico preservado das intervenções anteriores
+
 # Atualização local — redesign do inventário ADMIN (26/11/2026)
 
 Estado desta intervenção: redesign concluído localmente; ver [matriz de validação](VALIDACAO_INVENTARIO_ADMIN.md) e [manual do ADMIN](../BACKOFFICE_AZMORA.md). Esta secção prevalece para o redesign; as secções anteriores preservadas abaixo são histórico e preparação da publicação.

@@ -1,5 +1,7 @@
 # Procedimento de publicação e rollback — executar apenas com autorização
 
+> Atualização de 26/11/2026: restauro integral do backup real e ensaio 0006/ADMIN/rollback aprovados. Ver [evidência e limites](RESTAURO_0006_VALIDADO.md). Produção inalterada; atualizar o backup se houve novas escritas e reconfirmar pendências antes da intervenção real.
+
 Preparado para a próxima atualização do projeto Azmora Homes; esta atualização ainda não foi executada em produção. Consultas de leitura em 26/11/2026 confirmaram 0001–0005 aplicadas, incluindo as tabelas de 0005; a única migração local ainda não aplicada é 0006. Confirmar novamente conta, recursos, branch, domínio e deployment de retorno antes da janela. Não executar se alguma etapa falhar. A migração e o deployment são operações distintas: a ordem abaixo mantém o código anterior a funcionar com as tabelas adicionais, sujeito a confirmação no ensaio.
 
 ## Antes da janela
