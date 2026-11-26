@@ -703,6 +703,17 @@ try {
       assert.equal(await page.locator('#edit').isVisible(),true);
       assert.equal(await page.locator('#dash').isVisible(),false);
       await page.getByLabel('Marca', { exact: true }).fill('Azmora');
+      // The picker must not imply that an unsupported file was uploaded, and the
+      // same file can be selected again after a failure.
+      const invalidPhoto={name:'fotografia.pdf',mimeType:'application/pdf',buffer:Buffer.from('not an image')};
+      for(let attempt=0;attempt<2;attempt++){
+        await page.locator('#files').setInputFiles(invalidPhoto);
+        await page.getByText(/não é JPEG, PNG, WebP ou HEIC/).first().waitFor();
+        await page.waitForFunction(()=>document.querySelector('#files').value==='');
+        assert.equal(await page.locator('#photos img').count(),0);
+      }
+      // Exercise the browser image-element fallback when createImageBitmap fails.
+      await page.evaluate(() => { window.createImageBitmap = () => Promise.reject(new Error('falha simulada')); });
       await page
         .locator('#files')
         .setInputFiles('public/' + unit.data.media[0].small);

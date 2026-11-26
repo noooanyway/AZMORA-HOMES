@@ -67,7 +67,7 @@ export const ALL = async ({ request, params }) => {
             'Content-Security-Policy':
               "default-src 'none'; script-src 'nonce-" +
               nonce +
-              "'; style-src 'unsafe-inline'; img-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'none'",
+              "'; style-src 'unsafe-inline'; img-src 'self' blob:; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'none'",
           },
         },
       );
@@ -172,14 +172,10 @@ export const ALL = async ({ request, params }) => {
       400,
     );
   const state = input.state;
-  if (
-    !['draft', 'live', 'archived'].includes(state) ||
-    (state === 'live' && !parsed.data.media.length)
-  )
-    return reply(
-      'Escolha um estado válido e adicione uma fotografia antes de publicar.',
-      400,
-    );
+  if (!['draft', 'live', 'archived'].includes(state))
+    return reply('Escolha um estado válido para a ficha.', 400);
+  if (state === 'live' && !parsed.data.media.length)
+    return reply('Ainda não há fotografias preparadas. Selecione uma fotografia e aguarde até aparecer a miniatura antes de publicar.', 400);
   const id = existing?.id || crypto.randomUUID(),
     slug =
       existing?.slug ||

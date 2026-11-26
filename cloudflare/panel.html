@@ -342,9 +342,10 @@
             fotografia é a capa.<input
               id="files"
               type="file"
-              accept="image/png,image/jpeg,image/webp"
+              accept="image/png,image/jpeg,image/webp,image/heic,image/heif,.heic,.heif"
               multiple
           /></label>
+          <p id="photo-status" role="status" aria-live="polite">Nenhuma fotografia preparada. Depois de escolher, aguarde até aparecerem as miniaturas.</p>
           <div id="photos"></div>
         </fieldset>
         <label
@@ -700,6 +701,7 @@
       return i;
     }
     function drawPhotos() {
+      el('photo-status').textContent = media.length ? `${media.length} fotografia(s) preparada(s). Reveja as miniaturas e guarde a ficha.` : 'Nenhuma fotografia preparada. Depois de escolher, aguarde até aparecerem as miniaturas.';
       el('photos').replaceChildren(
         ...media.map((m, i) => {
           const p = node('div', '');
@@ -731,7 +733,7 @@
             button('Substituir', () => {
               const f = document.createElement('input');
               f.type = 'file';
-              f.accept = 'image/jpeg,image/png,image/webp';
+              f.accept = 'image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif';
               f.onchange = () => upload(f.files, i);
               f.click();
             }),
@@ -747,44 +749,69 @@
         }),
       );
     }
-    function upload(files, index) {
-      task(async () => {
-        for (const file of files) {
-          if (
-            file.size > 12 * 1024 * 1024 ||
-            !['image/png', 'image/webp', 'image/jpeg'].includes(file.type)
-          )
-            throw Error('Escolha uma imagem JPEG, PNG ou WebP até 12 MB.');
+    async function decodePhoto(file) {
+      if (typeof createImageBitmap === 'function') {
+        try {
           const bitmap = await createImageBitmap(file);
-          const ratio = Math.min(
-            1,
-            1800 / Math.max(bitmap.width, bitmap.height),
-          );
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.max(1, Math.round(bitmap.width * ratio));
-          canvas.height = Math.max(1, Math.round(bitmap.height * ratio));
-          const c = canvas.getContext('2d', { alpha: false });
-          c.fillStyle = 'white';
-          c.fillRect(0, 0, canvas.width, canvas.height);
-          c.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-          bitmap.close();
-          const blob = await new Promise((resolve) =>
-            canvas.toBlob(resolve, 'image/webp', 0.83),
-          );
-          if (!blob || blob.type !== 'image/webp')
-            throw Error('Este navegador não conseguiu preparar a fotografia.');
-          const m = await api('upload/', blob, 'image/webp');
-          m.alt =
-            index == null
-              ? file.name.replace(/\.[^.]+$/, '')
-              : media[index].alt;
-          if (index == null) media.push(m);
-          else media[index] = m;
-          dirty = true;
-          drawPhotos();
+          return { image: bitmap, width: bitmap.width, height: bitmap.height, release: () => bitmap.close() };
+        } catch { /* Alguns navegadores conseguem abrir a imagem através de <img>. */ }
+      }
+      const objectUrl = URL.createObjectURL(file);
+      try {
+        const image = new Image();
+        await new Promise((resolve, reject) => {
+          image.onload = resolve;
+          image.onerror = reject;
+          image.src = objectUrl;
+        });
+        return { image, width: image.naturalWidth, height: image.naturalHeight, release: () => URL.revokeObjectURL(objectUrl) };
+      } catch {
+        URL.revokeObjectURL(objectUrl);
+        throw Error('O navegador não conseguiu abrir esta fotografia. Tente uma imagem JPEG, PNG ou WebP.');
+      }
+    }
+    function upload(files, index) {
+      const selected = Array.from(files || []);
+      if (!selected.length) return;
+      if (busy) { msg('Aguarde até terminar o processamento anterior.'); return; }
+      task(async () => {
+        try {
+          for (const [position, file] of selected.entries()) {
+            const progress = `A preparar fotografia ${position + 1} de ${selected.length}…`;
+            msg(progress); el('photo-status').textContent = progress;
+            const accepted = ['image/png', 'image/webp', 'image/jpeg', 'image/heic', 'image/heif'].includes(file.type) || (!file.type && /\.(?:jpe?g|png|webp|heic|heif)$/i.test(file.name));
+            if (file.size > 12 * 1024 * 1024) throw Error(`A fotografia ${position + 1} excede 12 MB. Escolha uma versão mais pequena.`);
+            if (!accepted) throw Error(`A fotografia ${position + 1} não é JPEG, PNG, WebP ou HEIC/HEIF. Escolha outro ficheiro.`);
+            let decoded;
+            try { decoded = await decodePhoto(file); }
+            catch { throw Error(`Não foi possível abrir a fotografia ${position + 1} neste navegador. Tente uma versão JPEG, PNG ou WebP.`); }
+            let blob;
+            try {
+              if (!decoded.width || !decoded.height) throw Error('Fotografia sem dimensões válidas.');
+              const ratio = Math.min(1, 1800 / Math.max(decoded.width, decoded.height));
+              const canvas = document.createElement('canvas');
+              canvas.width = Math.max(1, Math.round(decoded.width * ratio));
+              canvas.height = Math.max(1, Math.round(decoded.height * ratio));
+              const c = canvas.getContext('2d', { alpha: false });
+              if (!c) throw Error('Não foi possível preparar a fotografia.');
+              c.fillStyle = 'white'; c.fillRect(0, 0, canvas.width, canvas.height);
+              c.drawImage(decoded.image, 0, 0, canvas.width, canvas.height);
+              blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.83));
+            } finally { decoded.release(); }
+            if (!blob || blob.type !== 'image/webp') throw Error('Este navegador não conseguiu preparar a fotografia em WebP. Tente outro navegador.');
+            const m = await api('upload/', blob, 'image/webp');
+            m.alt = index == null ? file.name.replace(/\.[^.]+$/, '').slice(0, 250) || 'Fotografia da casa' : media[index].alt;
+            if (index == null) media.push(m); else media[index] = m;
+            dirty = true; drawPhotos();
+          }
+          msg('Fotografias preparadas. Reveja as miniaturas e guarde a ficha.');
+        } catch (error) {
+          const message = error?.message || 'Não foi possível preparar as fotografias.';
+          el('photo-status').textContent = `${message} ${media.length} fotografia(s) preparada(s). Pode voltar a escolher as restantes.`;
+          throw Error(message + ' Verifique as miniaturas junto às fotografias.');
+        } finally {
+          el('files').value = '';
         }
-        el('files').value = '';
-        msg('Fotografias preparadas. Guarde a ficha.');
       });
     }
     el('files').onchange = (e) => upload(e.target.files);
