@@ -498,7 +498,7 @@
             'li',
             v.at +
               ' UTC · ' +
-              v.unit +
+              (units.find((u) => u.slug === v.unit)?.data.name_for_site || 'Casa removida') +
               ' · ' +
               states[v.action] +
               ' · ' +
@@ -581,7 +581,7 @@
       media = structuredClone(d.media || []);
       el('heading').textContent = current ? 'Editar casa' : 'Adicionar casa';
       el('ref').textContent = current
-        ? 'Identificador: ' + current.id + ' · ' + states[current.state]
+        ? 'Estado: ' + states[current.state]
         : '';
       for (const [k, i] of inputs) {
         const v = k.split('.').reduce((a, p) => a?.[p], d);
@@ -609,8 +609,8 @@
             button('Eliminar definitivamente', () => {
               if (
                 prompt(
-                  'Para eliminar, escreva a referência ' + current.slug,
-                ) === current.slug
+                  'Para eliminar definitivamente esta casa, escreva ELIMINAR',
+                ) === 'ELIMINAR'
               )
                 task(async () => {
                   await api('eliminar/', {

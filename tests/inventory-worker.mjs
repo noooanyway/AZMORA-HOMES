@@ -571,7 +571,19 @@ try {
         true,
         'contactos mobile',
       );
+      // Legacy identifiers and slugs remain in storage but must not appear in the ADMIN.
+      const legacyData={...unit.data,name_for_site:'Casa legada sintética'};
+      await db.prepare('INSERT INTO inventory(id,slug,data,state,revision,actor,updated) VALUES (?,?,?,?,?,?,?)')
+        .bind('exposul-teste','exposul-teste',JSON.stringify(legacyData),'archived',1,'teste',new Date().toISOString()).run();
       await page.goto(base + 'admin/');
+      await page.locator('#list .unit').filter({hasText:'Casa legada sintética'}).getByRole('button',{name:'Abrir ficha'}).click();
+      assert.equal(await page.locator('#ref').innerText(),'Estado: Arquivada');
+      assert.doesNotMatch(await page.locator('#edit').innerText(),/exposul/i);
+      page.once('dialog',d=>{assert.doesNotMatch(d.message(),/exposul/i);return d.accept('ELIMINAR');});
+      await page.getByRole('button',{name:'Eliminar definitivamente'}).click();
+      await page.getByText('Casa eliminada.').waitFor();
+      assert.equal(await db.prepare('SELECT id FROM inventory WHERE id=?').bind('exposul-teste').first(),null);
+      assert.doesNotMatch(await page.locator('#events').innerText(),/exposul/i);
       await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
       await page.locator('#list .unit').first().waitFor();
       failSettingsLoad = true;
