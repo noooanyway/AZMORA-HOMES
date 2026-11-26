@@ -1,3 +1,17 @@
+# Preparação para publicação — lista única atual
+
+- [ ] Proprietários confirmam destino/ilhas, transporte, entrega, IVA, custos, visitas, inspeção, equipamentos, ausência de financiamento e preços não negociáveis; rever textos livres e dados já publicados no ADMIN, não inspecionados nesta revisão local.
+- [ ] Identificar o responsável pelo tratamento; obter validação e aprovação jurídica das políticas finais antes de as publicar, e alinhar a informação pública de privacidade.
+- [ ] Confirmar Access/MFA, permissões, destinatários internos, domínio, bindings, Web Analytics desativado, e deployment anterior apto a rollback.
+- [ ] Durante uma janela coordenada, suspender e drenar escritas, efetuar backup D1/R2 privado, validar integridade e ensaiar restauro completo isolado; guardar uma segunda cópia protegida. Se não se conseguir garantir a pausa ou a reposição, parar.
+- [ ] Verificar migrações remotas e aplicar 0005 apenas após confirmação da lista e autorização; não aplicar automaticamente outras migrações pendentes.
+- [ ] Após aprovação, fazer push/deployment, confirmar a versão e testar catálogo, conteúdos, ADMIN/CRM, formulários, segurança, privacidade, SEO e ausência de beacon em HTML e rede, conforme [procedimento de publicação e rollback](PUBLICACAO_E_ROLLBACK.md).
+- [ ] Só reabrir escritas depois das verificações e coordenar a recolha/eliminação dos dados de teste. Para rollback dos dados, preservar o estado posterior e ensaiar reconciliação; não sobrepor cópia antiga à D1 ativa.
+
+Abaixo preserva-se o histórico das fases anteriores. O estado acima prevalece.
+
+---
+
 > **Estado local mais recente:** campos comerciais centrais e FAQ automáticas implementados; execução de testes locais documentada em [Consistência e testes](CONSISTENCIA_E_TESTES.md). Rever conteúdos livres personalizados antes da publicação e confirmar as pendências legais e operacionais. Os estados seguintes são históricos.
 
 > **Estado histórico da execução anterior:** finalização incompleta; persistem referências comerciais duplicadas e testes funcionais individuais em falta. Consultar [matriz de consistência e testes](CONSISTENCIA_E_TESTES.md). Os registos abaixo são históricos. Não considerar a versão local pronta para publicação.

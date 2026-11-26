@@ -14,6 +14,7 @@ const server = createServer(async (req, res) => {
     if (!file.startsWith(dist + sep)) throw Error('path');
     const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.woff2':'font/woff2', '.svg':'image/svg+xml', '.json':'application/json' };
     res.setHeader('Content-Type', mime[extname(file)] || 'application/octet-stream');
+    if (process.env.TEST_SLOW_SCRIPTS === '1' && extname(file) === '.js') await new Promise(resolve => setTimeout(resolve, 400));
     res.end(await readFile(file));
   } catch { res.statusCode=404; res.end(); }
 });
@@ -35,9 +36,9 @@ try {
   assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:favoritos')),null);
   await page.reload();assert.equal(await page.locator(`#saved [data-card="${favName}"]`).isVisible(),true);
   await page.goto(root+'casas/');await page.locator('button[data-compare]').nth(0).click();await page.locator('button[data-compare]').nth(1).click();
-  await page.locator('#compareLink').click();assert.equal(await page.locator('#tablehost table').count(),1);
+  await page.locator('#compareLink').click();await page.locator('#tablehost table').waitFor({state:'visible'});assert.equal(await page.locator('#tablehost table').count(),1);
   assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:comparar')),null);
-  await page.reload();assert.equal(await page.locator('#tablehost table').count(),1);
+  await page.reload();await page.locator('#tablehost table').waitFor({state:'visible'});assert.equal(await page.locator('#tablehost table').count(),1);
   await page.getByRole('button',{name:'Tema do site'}).click();await page.getByRole('button',{name:'Escuro',exact:true}).click();assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
   assert.equal(await page.evaluate(()=>localStorage.getItem('azmora:theme')),null);
   await page.goto(root);await page.locator('[data-consent-open]').click();await page.getByRole('button',{name:'Aceitar todos'}).click();
