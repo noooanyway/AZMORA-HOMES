@@ -1,3 +1,5 @@
+> **Estado atual:** o documento único para Rúben e Filipa e a lista de respostas pendentes estão em [APROVACAO_FINAL_PROPRIETARIOS.md](APROVACAO_FINAL_PROPRIETARIOS.md). O texto seguinte é histórico; não repetir perguntas já respondidas.
+
 # Azmora Homes — entrega aos responsáveis e tarefas técnicas
 
 **Documento de coordenação — 25/11/2026. Não é parecer jurídico, política aprovada nem autorização de publicação.** Destinatários: Ruben e Filipa, com apoio dos seus profissionais. O programador é responsável pelo desenvolvimento e gestão técnica do website; não é, por esse facto, responsável pela atividade, vendedor ou responsável pelo tratamento. A definição jurídica depende dos factos e da validação competente.

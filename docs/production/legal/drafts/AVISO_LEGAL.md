@@ -1,37 +1,16 @@
 # Aviso legal
 
-> **MINUTA INTERNA — NÃO PUBLICAR.** Preparada em 25/11/2026 para revisão dos proprietários e do seu jurista. Os campos `[PENDENTE]`, as alternativas e as notas de revisão exigem resolução; nenhuma afirmação de aprovação jurídica ou de conformidade é feita. O website publicado pode divergir da D.1 local.
+> **MINUTA INTERNA — NÃO PUBLICAR.** Sujeita à confirmação dos responsáveis e a validação jurídica; os campos [PENDENTE] têm de ser resolvidos. Descreve a implementação local revista; verificar a configuração efetiva antes da publicação.
 
-## Identificação do operador
-Designação comercial: **Azmora Homes**.
-
-Operador / nome legal: [PENDENTE — NOME COMPLETO DA PESSOA OU ENTIDADE RESPONSÁVEL PELO WEBSITE].
-
-NIF/NIPC: [PENDENTE — NÚMERO APROVADO PARA PUBLICAÇÃO].
-
-Endereço legal: [PENDENTE — ENDEREÇO GEOGRÁFICO A INDICAR APÓS VALIDAÇÃO].
-
-Registos aplicáveis: [PENDENTE — IDENTIFICAÇÃO E NÚMEROS, SE APLICÁVEL].
-
-Entidade vendedora e responsável pela faturação: [PENDENTE — CONFIRMAR IDENTIDADE E RELAÇÃO COM O OPERADOR].
-
-A inexistência de morada de atendimento presencial não identifica nem substitui o endereço legal. Não se afirma que a Azmora Homes seja uma sociedade.
+## Identificação
+Designação comercial: Azmora Homes. Operador do website: [PENDENTE — nome ou denominação legal completa]. NIF/NIPC: [PENDENTE]. Morada ou sede: [PENDENTE]. Registo e número, se aplicáveis: [PENDENTE — identificar ou confirmar não aplicável]. A identidade do vendedor deve ser confirmada se for diferente do operador: [PENDENTE]. Não se presume que a marca corresponda a uma sociedade. A ausência de morada de atendimento presencial não substitui a identificação ou endereço legal aplicável.
 
 ## Contactos
-Email: geral@azmorahomes.pt
+Email comercial: geral@azmorahomes.pt. Telefones: +351 913 667 365 e +351 961 533 260, chamadas para a rede móvel nacional. WhatsApp: +351 913 667 365. Atendimento: dias úteis, das 08h00 às 17h00, em português, inglês e francês. Não há morada de atendimento presencial comunicada; visitas à unidade são feitas mediante marcação prévia e deslocação ao local.
 
-Telefone: +351 913 667 365 e +351 961 533 260 — chamada para a rede móvel nacional.
-
-WhatsApp: +351 913 667 365 — https://wa.me/351913667365
-
-Atendimento: segunda a sexta-feira, das 08h00 às 17h00, em português, inglês e francês.
-
-Instagram confirmado pelos responsáveis: https://www.instagram.com/azmorahomes/ [PENDENTE — A LIGAÇÃO AINDA NÃO ESTÁ IMPLEMENTADA NO CÓDIGO PÚBLICO].
+Facebook: https://www.facebook.com/azmorahomes. Instagram: https://www.instagram.com/azmorahomes/. São ligações externas diretas.
 
 ## Objeto e reclamações
-O website apresenta casas móveis em segunda mão e permite solicitar informações. As condições de qualquer eventual compra são comunicadas separadamente. Para reclamações pode contactar o operador pelos meios acima e [PENDENTE — INDICAR, APÓS VERIFICAÇÃO, CANAL E INSCRIÇÃO NO LIVRO DE RECLAMAÇÕES ELETRÓNICO, SE APLICÁVEIS]. [PENDENTE — IDENTIFICAR ENTIDADES DE RESOLUÇÃO ALTERNATIVA DE LITÍGIOS A QUE O OPERADOR ESTEJA EFETIVAMENTE VINCULADO, OS RESPETIVOS CONTACTOS E ENDEREÇOS, QUANDO A INFORMAÇÃO SEJA EXIGIDA.] Não se presume adesão nem se afirma que um registo esteja ativo.
+O website apresenta casas móveis em segunda mão e permite pedir informações. O envio de um pedido não constitui reserva ou compra. Para reclamações: [PENDENTE — confirmar canal e enquadramento do Livro de Reclamações Eletrónico, se aplicável]. [PENDENTE — identificar informação de resolução alternativa de litígios exigível e entidades pertinentes após validação; não presumir adesão.] A indicação de um centro no website não substitui a verificação das obrigações efetivamente aplicáveis.
 
-A informação sobre dados pessoais e tecnologias de armazenamento consta das respetivas políticas, a disponibilizar depois de aprovadas. [PENDENTE — APROVAÇÃO JURÍDICA E DATA DE VIGÊNCIA.]
-
----
-**Fontes para revisão, não fazem parte do texto público:** [RGPD, artigos 5.º, 6.º, 12.º–14.º e capítulo V](https://eur-lex.europa.eu/eli/reg/2016/679/oj); [Lei n.º 41/2004, artigo 5.º](https://diariodarepublica.pt/dr/legislacao-consolidada/lei/2004-106523049); [DL n.º 7/2004, artigo 10.º](https://diariodarepublica.pt/dr/detalhe/decreto-lei/7-2004-240775); [EDPB, orientações 2/2023](https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-of-art-53-of-eprivacy-directive_en); auditorias internas D.2 e D.3. A aplicabilidade e redação vigente devem ser validadas pelo jurista.
+As políticas de privacidade e de cookies explicam os respetivos tratamentos e escolhas depois de aprovadas e publicadas. [PENDENTE — revisão jurídica e data de vigência.]

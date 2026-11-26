@@ -1,3 +1,5 @@
+> **Estado atual:** consultar a lista consolidada e as quatro minutas em [APROVACAO_FINAL_PROPRIETARIOS.md](APROVACAO_FINAL_PROPRIETARIOS.md); os registos abaixo são históricos e não representam uma lista adicional de perguntas.
+
 # Dados legais, comerciais e aceitação pendente
 
 Confirmar com o proprietário e, quando adequado, apoio jurídico: denominação legal, NIF, morada, contactos, horário e responsável pelo tratamento; política de retenção e bases jurídicas reais; condições de venda, IVA, garantias e direitos do consumidor; transporte até/dentro de cada ilha, instalação e exclusões; informação de resolução de litígios e Livro de Reclamações. Não publicar números ou condições não confirmadas. Definir responsáveis, destinatários, subcontratantes, localização/transferências, gestão de pedidos de acesso/apagamento e reaplicação de eliminações após restauros. O RGPD exige informação adequada e mecanismos de exercício de direitos; ver https://www.cnpd.pt/cidadaos/direitos/. A existência do texto não é validação jurídica.

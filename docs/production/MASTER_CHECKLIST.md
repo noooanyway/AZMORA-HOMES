@@ -1,14 +1,22 @@
-# Preparação para publicação — lista única atual
+# Estado atual — preparação para entrega (26/11/2026)
 
-- [ ] Proprietários confirmam destino/ilhas, transporte, entrega, IVA, custos, visitas, inspeção, equipamentos, ausência de financiamento e preços não negociáveis; rever textos livres e dados já publicados no ADMIN, não inspecionados nesta revisão local.
-- [ ] Identificar o responsável pelo tratamento; obter validação e aprovação jurídica das políticas finais antes de as publicar, e alinhar a informação pública de privacidade.
-- [ ] Confirmar Access/MFA, permissões, destinatários internos, domínio, bindings, Web Analytics desativado, e deployment anterior apto a rollback.
-- [ ] Durante uma janela coordenada, suspender e drenar escritas, efetuar backup D1/R2 privado, validar integridade e ensaiar restauro completo isolado; guardar uma segunda cópia protegida. Se não se conseguir garantir a pausa ou a reposição, parar.
-- [ ] Verificar migrações remotas e aplicar 0005 apenas após confirmação da lista e autorização; não aplicar automaticamente outras migrações pendentes.
-- [ ] Após aprovação, fazer push/deployment, confirmar a versão e testar catálogo, conteúdos, ADMIN/CRM, formulários, segurança, privacidade, SEO e ausência de beacon em HTML e rede, conforme [procedimento de publicação e rollback](PUBLICACAO_E_ROLLBACK.md).
-- [ ] Só reabrir escritas depois das verificações e coordenar a recolha/eliminação dos dados de teste. Para rollback dos dados, preservar o estado posterior e ensaiar reconciliação; não sobrepor cópia antiga à D1 ativa.
+## Concluído localmente
 
-Abaixo preserva-se o histórico das fases anteriores. O estado acima prevalece.
+- Gestão do catálogo, CRM e configurações do website; redes sociais, painel de preferências e informação comercial central; testes locais e restauro sintético descritos em `CONSISTENCIA_E_TESTES.md`.
+- Quatro minutas internas atualizadas e reunidas, com uma lista única de respostas e checklist de aprovação, em `APROVACAO_FINAL_PROPRIETARIOS.md` e `.txt`. Não estão aprovadas nem publicadas.
+- Informação pública local sobre preferências corrigida para distinguir autorização e utilização temporária. Não substituir por minutas incompletas.
+
+## Pendências atuais — uma única lista
+
+- [ ] **Proprietários:** responder apenas às questões do documento de aprovação: identificação do operador e responsável pelo tratamento, contacto de direitos/EPD se aplicável, reclamações/RAL, retenções, titularidade/contratos/transferências, duração da escolha e direitos sobre conteúdos. Esclarecer âmbito de revisão elétrica e canalização apenas se se pretender afirmar que se realiza em todas as casas. Confirmar alterações aos factos comerciais já comunicados e rever dados efetivamente publicados no ADMIN; não se leu a D1 remota.
+- [ ] **Jurista/profissional competente:** validar as quatro minutas, enquadramento dos direitos e reclamações, fundamentos, retenções, tecnologias e transferências; resolver os campos pendentes antes da aprovação e publicação.
+- [ ] **Programador, após receção dos textos aprovados:** implementar as quatro páginas ou secções e ligações adequadas, atualizar a política ligada no formulário e testar acessibilidade, dispositivos e ausência de conteúdo interno no build. A estrutura atual só tem `/privacidade/` e `/termos/` (informação legal); ainda não disponibiliza quatro documentos finais distintos.
+- [ ] **Publicação — adiada:** confirmar configuração/ausência de Analytics e acesso; coordenar backup D1/R2 real, verificação e restauro isolado; listar migrações e aplicar a 0005 apenas com autorização; push/deployment e testes reais conforme `PUBLICACAO_E_ROLLBACK.md`.
+
+**Opcional ou adiado:** backups automáticos e melhorias de segurança previamente adiadas mantêm a decisão anterior. Não se desenvolvem contratos de venda, documentos operacionais ou gerador no ADMIN.
+
+Os registos seguintes são histórico; o estado acima prevalece.
+
 
 ---
 
