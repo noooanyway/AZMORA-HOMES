@@ -48,3 +48,7 @@ node tests/inventory-worker.mjs
 O ensaio usa D1 e R2 efémeros, chaves geradas para o teste e uma resposta JWKS local. O domínio de ensaio só é usado pelo simulador. O teste de interface requer Chrome instalado. O build de produção usa a origem real definida na Cloudflare.
 
 **Validação das dependências.** A implementação foi validada com Astro 7.4.13 e o adaptador Cloudflare 14.4.9. O build usa uma configuração de compilação separada e coloca o Worker do Pages em `dist-cloudflare/client/_worker.js`. Publique apenas o diretório `client`. O ponto de entrada limita as rotas dinâmicas e os assets estáticos versionados são servidos pelo Pages. Execute `npm audit` ao atualizar o lockfile. A validação local não inclui a política MFA, as permissões nem os backups da conta de produção.
+
+## Configurações do website — desenvolvimento ainda não concluído
+
+Existe uma primeira categoria local, **Configurações do website**, para contactos, horários, idiomas e ligações sociais. Permite guardar rascunho, pré-visualizar, publicar e recuperar uma versão. O email público não altera os destinatários do CRM. As restantes categorias continuam por implementar e a funcionalidade não está pronta para produção. A migração `0005_site_settings.sql` não foi aplicada remotamente. Inventário e CRM mantêm os procedimentos acima.

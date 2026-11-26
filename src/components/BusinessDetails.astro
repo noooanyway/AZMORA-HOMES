@@ -1,5 +1,6 @@
 ---
-import { company, contacts, preview } from '../lib/site';
+import { company, getContacts, preview } from '../lib/site';
+const contacts = getContacts(Astro.locals);
 const { mode = 'contact' } = Astro.props as { mode?: 'contact' | 'footer' | 'legal' };
 type Field = { label: string; value: string; placeholder: string; href?: string; caption?: string };
 const identity: Field[] = [
@@ -10,10 +11,12 @@ const identity: Field[] = [
 const channels: Field[] = [
   { label: 'Email', value: contacts.email, placeholder: 'Email comercial a definir', href: contacts.email ? 'mailto:' + contacts.email : '' },
   ...(mode === 'contact' ? [] : [{ label: 'Telemóvel', value: contacts.phoneHref ? contacts.phone : '', placeholder: 'Telemóvel comercial a definir', href: contacts.phoneHref, caption: contacts.phoneCaption }]),
+  { label: 'Telemóvel', value: contacts.secondPhone, placeholder: '', href: contacts.secondPhone ? 'tel:' + contacts.secondPhone.replace(/[^\d+]/g, '') : '', caption: /^(?:\+351)?9\d{8}$/.test(contacts.secondPhone.replace(/[^\d+]/g, '')) ? 'Chamada para a rede móvel nacional' : '' },
   { label: 'Morada da empresa', value: company.registeredAddress, placeholder: 'Morada da empresa a definir' },
 ];
 const visits: Field[] = [
-  { label: 'Horário', value: company.openingHours, placeholder: 'Horário de atendimento a definir' },
+  { label: 'Horário', value: contacts.openingHours, placeholder: 'Horário de atendimento a definir' },
+  { label: 'Idiomas de atendimento', value: contacts.languages, placeholder: '' },
   { label: 'Local de visita', value: company.visitAddress, placeholder: 'Local e condições de visita a definir' },
 ];
 const fields = (mode === 'legal'

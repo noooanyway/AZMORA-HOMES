@@ -91,3 +91,7 @@ foreach ($objeto in $objetos) {
 ```
 
 Não executado sobre recursos reais; ensaiar primeiro com dados fictícios. Objetos podem mudar entre a exportação D1 e a cópia R2; esta verificação deteta alterações observadas durante a listagem, mas não cria um snapshot atómico.
+
+## Base experimental de configurações do website
+
+A migração local `0005_site_settings.sql` prevê rascunhos, publicação e histórico, mas a funcionalidade está incompleta e a migração não está autorizada para produção. O export D1 inclui as novas tabelas se a migração for aplicada. O verificador local confere a presença conjunta, os JSON e a correspondência do publicado com o histórico; restauro sintético isolado foi testado, mas restauro real e validação operacional integral continuam pendentes. Antes de aplicar qualquer migração remota: backup privado D1/R2, atualizar a validação para contemplar o esquema efetivo, testar restauro isolado e obter autorização específica. Não ativar backups automáticos.

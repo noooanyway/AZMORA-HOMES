@@ -25,7 +25,8 @@ if ($('#missing-house') && location.pathname.startsWith(base + 'casas/')) {
 const keys = { fav: 'azmora:favoritos', compare: 'azmora:comparar' };
 function read(key: keyof typeof keys): string[] {
   try {
-    const a: unknown = JSON.parse(localStorage.getItem(keys[key]) || '[]');
+    const consent = JSON.parse(localStorage.getItem('azmora:consent-v1') || 'null');
+    const a: unknown = consent?.preferences === true ? JSON.parse(localStorage.getItem(keys[key]) || '[]') : [];
     return Array.isArray(a)
       ? [
           ...new Set(
@@ -40,10 +41,27 @@ function read(key: keyof typeof keys): string[] {
   }
 }
 const state = { fav: read('fav'), compare: read('compare') };
+// A URL fragment carries only the visitor's requested selection to the relevant page;
+// it is not sent in HTTP requests. It can remain visible in history or a shared URL.
+const fragment = new URLSearchParams(location.hash.slice(1));
+const kind = fragment.get('selecao');
+if ((kind === 'fav' && $('#saved')) || (kind === 'compare' && $('#comparison'))) {
+  const ids = (fragment.get('casas') || '').split(',').filter(id => units.has(id));
+  if (kind === 'fav') state.fav = [...new Set(ids)];
+  else state.compare = [...new Set(ids)].slice(0, 3);
+}
+function selectionHref(path: string, kind: 'fav' | 'compare', ids: string[]) {
+  const query = new URLSearchParams({ selecao: kind, casas: ids.join(',') });
+  return base + path + (ids.length ? '#' + query : '');
+}
 function save(key: keyof typeof keys, ids: string[]) {
   state[key] = ids;
   try {
-    localStorage.setItem(keys[key], JSON.stringify(ids));
+    const consent = JSON.parse(localStorage.getItem('azmora:consent-v1') || 'null');
+    if (consent?.preferences === true) {
+      if (ids.length) localStorage.setItem(keys[key], JSON.stringify(ids));
+      else localStorage.removeItem(keys[key]);
+    }
   } catch {}
   render();
 }
@@ -85,6 +103,11 @@ function render() {
   const counter = $('[data-fav-count]')!;
   counter.textContent = String(state.fav.length);
   counter.hidden = !state.fav.length;
+  const activeKind = $('#saved') ? 'fav' : $('#comparison') ? 'compare' : null;
+  if (activeKind && fragment.get('selecao') === activeKind) {
+    const q = new URLSearchParams({ selecao: activeKind, casas: state[activeKind].join(',') });
+    history.replaceState(history.state, '', location.pathname + location.search + '#' + q);
+  }
   const favhost = $('#saved');
   if (favhost) {
     favhost.hidden = false;
@@ -96,6 +119,9 @@ function render() {
     a.hidden = !state.fav.length;
     a.href = contact(state.fav);
   }
+  all<HTMLAnchorElement>('.favlink, [data-favorites-nav]').forEach(link => {
+    link.href = selectionHref('favoritos/', 'fav', state.fav);
+  });
   const ids = state.compare;
   $('#tray')!.hidden = !ids.length || !!$('#comparison');
   document.body.classList.toggle('has-tray', !$('#tray')!.hidden);
@@ -110,6 +136,7 @@ function render() {
     }),
   );
   const link = $<HTMLAnchorElement>('#compareLink')!;
+  link.href = selectionHref('comparar/', 'compare', ids);
   link.textContent = 'Comparar (' + ids.length + '/3)';
   link.setAttribute('aria-disabled', String(ids.length < 2));
   const host = $('#tablehost');
@@ -195,6 +222,16 @@ document.addEventListener('click', (e) => {
   }
 });
 window.addEventListener('pageshow', () => render());
+window.addEventListener('azmora-consent', () => {
+  try {
+    const consent = JSON.parse(localStorage.getItem('azmora:consent-v1') || 'null');
+    if (consent?.preferences === true) {
+      for (const key of ['fav', 'compare'] as const) {
+        if (state[key].length) localStorage.setItem(keys[key], JSON.stringify(state[key]));
+      }
+    }
+  } catch {}
+});
 window.addEventListener('storage', () => {
   state.fav = read('fav');
   state.compare = read('compare');

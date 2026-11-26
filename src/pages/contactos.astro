@@ -4,7 +4,8 @@ import Layout from '../layouts/Layout.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import CallContact from '../components/CallContact.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { contacts, detail, url, pageHouses } from '../lib/site';
+import { getContacts, detail, url, pageHouses } from '../lib/site';
+const contacts = getContacts(Astro.locals);
 const houses = pageHouses(Astro.locals);
 const native = Astro.locals.contactBackend === true;
 const endpoint = native ? url('api/contactos/') : contacts.form;
@@ -51,6 +52,7 @@ const typologies = [
         <CallContact />
         <BusinessDetails />
         <SocialLinks whatsappOnly />
+        <SocialLinks socialOnly />
       </aside>
 
       <form

@@ -13,6 +13,9 @@ const browser = await chromium.launch({
 });
 const root = process.env.TEST_URL || 'http://127.0.0.1:4321/AZMORA-HOMES/';
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await page.addInitScript(() => {
+  try { if (!localStorage.getItem('azmora:consent-v1')) localStorage.setItem('azmora:consent-v1', JSON.stringify({ version: 1, preferences: true, analytics: false })); } catch {}
+});
 page.setDefaultTimeout(10000);
 page.setDefaultNavigationTimeout(60000);
 const errors = [];

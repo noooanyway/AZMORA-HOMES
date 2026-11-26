@@ -4,6 +4,9 @@ import { fields, limited, dimensions, stripMetadata } from './inventory.mjs';
 import html from './panel.html?raw';
 import contactPanel from './contact-panel.mjs?raw';
 import { adminContacts } from './contacts.mjs';
+import { readSettings, saveContactDraft, publishSettings, restoreSettings } from './settings-store.mjs';
+import company from '../src/data/company.json';
+import settingsPanel from './settings-panel.mjs?raw';
 const reply = (message, status) => Response.json({ message }, { status });
 export const ALL = async ({ request, params }) => {
   const env = bindings,
@@ -11,6 +14,25 @@ export const ALL = async ({ request, params }) => {
   if (!actor) return reply('Acesso reservado à administração.', 403);
   const action = params.action?.replace(/\/$/, '') || '',
     db = env.DB;
+  if (action.startsWith('configuracoes')) {
+    try {
+      if (request.method === 'GET' && action === 'configuracoes') {
+        const settings = await readSettings(db);
+        const history = await db.prepare('SELECT id,published_revision,actor,created_at FROM site_settings_history ORDER BY id DESC LIMIT 30').all();
+        const defaults = {phone:company.phone,secondPhone:company.secondPhone,whatsapp:company.whatsapp,email:company.email,openingHours:company.openingHours,timezone:'Europe/Lisbon',languages:company.languages,social:company.social};
+        return Response.json({ ...settings, defaults, history: history.results });
+      }
+      if (request.method !== 'POST') return reply('Método inválido.',405);
+      if (request.headers.get('Content-Type') !== 'application/json') return reply('Formato inválido.',415);
+      const input = JSON.parse(new TextDecoder().decode(await limited(request,100000)));
+      let ok;
+      if (action === 'configuracoes-guardar') ok = await saveContactDraft(db,input.revision,input.contacts,actor);
+      else if (action === 'configuracoes-publicar') ok = await publishSettings(db,input.revision,actor);
+      else if (action === 'configuracoes-recuperar') ok = await restoreSettings(db,input.revision,input.historyId,actor);
+      else return reply('Operação inexistente.',404);
+      return ok ? Response.json({ok:true}) : reply('As configurações foram alteradas por outra pessoa. Reabra-as.',409);
+    } catch (e) { return reply(e instanceof SyntaxError ? 'Dados inválidos.' : 'Não foi possível guardar as configurações. Verifique os dados e volte a tentar.',400); }
+  }
   if (action.startsWith('contacto')) {
     try {
       return await adminContacts(request, env, action, actor);
@@ -27,6 +49,7 @@ export const ALL = async ({ request, params }) => {
       return new Response(
         html
           .replace('/* CONTACTS */', contactPanel)
+          .replace('/* SETTINGS */', settingsPanel)
           .replace(
             '<script type="module">',
             '<script nonce="' + nonce + '" type="module">',

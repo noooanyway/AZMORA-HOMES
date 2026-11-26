@@ -13,6 +13,7 @@ import Brand from '../components/Brand.astro';
 import CallContact from '../components/CallContact.astro';
 import BusinessDetails from '../components/BusinessDetails.astro';
 import SocialLinks from '../components/SocialLinks.astro';
+import Consent from '../components/Consent.astro';
 import { url, preview, complaintsUrl, pageHouses } from '../lib/site';
 const houses = pageHouses(Astro.locals);
 import { previousCatalogNumber } from '../lib/catalog';
@@ -50,7 +51,8 @@ const nav = [
         const root = document.documentElement;
         let preference;
         try {
-          const saved = localStorage.getItem(key);
+          const consent = JSON.parse(localStorage.getItem('azmora:consent-v1') || 'null');
+          const saved = consent?.preferences === true ? localStorage.getItem(key) : null;
           if (['light', 'dark', 'gold'].includes(saved)) preference = saved;
         } catch {}
 
@@ -69,7 +71,8 @@ const nav = [
             button.addEventListener('click', () => {
               preference = button.dataset.themeChoice === 'system' ? undefined : button.dataset.themeChoice;
               try {
-                if (preference) localStorage.setItem(key, preference);
+                const consent = JSON.parse(localStorage.getItem('azmora:consent-v1') || 'null');
+                if (consent?.preferences === true && preference) localStorage.setItem(key, preference);
                 else localStorage.removeItem(key);
               } catch {}
               apply();
@@ -129,7 +132,7 @@ const nav = [
             ...nav,
             ['Favoritos', 'favoritos/'],
             ['Contacte-nos', 'contactos/'],
-          ].map(([s, p]) => <a href={url(p)}>{s}</a>)
+          ].map(([s, p]) => <a href={url(p)} data-favorites-nav={p === 'favoritos/' ? '' : undefined}>{s}</a>)
         }
       </nav>
     </dialog><dialog id="theme-menu" aria-labelledby="theme-title">
@@ -172,12 +175,13 @@ const nav = [
         <div class="footer-bottom">
           <nav aria-label="Informação legal">
             <a href={url('privacidade/')}>Privacidade</a>
+            <button type="button" class="consent-footer" data-consent-open>Gerir preferências de privacidade</button>
             <a href={url('termos/')}>Informação legal</a>
             <a href={complaintsUrl}>Livro de Reclamações</a>
           </nav>
         </div>
       </div>
-    </footer><aside id="tray" hidden>
+    </footer><Consent /><aside id="tray" hidden>
       <Columns2 size={18} /><span id="traynames"></span><a
         class="btn light"
         id="compareLink"

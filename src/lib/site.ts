@@ -13,17 +13,12 @@ export const priceRequest = (h: House) =>
 export const pageHouses = (locals: App.Locals): House[] => import.meta.env.INVENTORY_LIVE ? (locals.houses ?? []) : houses;
 export const company = business;
 export const complaintsUrl = company.complaintsUrl || 'https://www.livroreclamacoes.pt/Inicio/';
-const phone = company.phone.trim();
-const dial = phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
-export const contacts = {
-  email: company.email,
-  phone,
-  phoneHref: /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '',
-  phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '',
-  whatsapp: company.whatsapp,
-  whatsappHref: `https://wa.me/${company.whatsapp}`,
-  form: '',
+export const getContacts = (locals: App.Locals) => {
+  const c = locals.siteSettings?.contacts ?? { ...company, timezone: 'Europe/Lisbon' };
+  const phone = c.phone.trim(), dial = phone.replace(/[^\d+]/g, '').replace(/^00/, '+');
+  const whatsapp = c.whatsapp.replace(/\D/g, '');
+  return { ...c, phone, phoneHref: /^\+?\d{9,15}$/.test(dial) ? 'tel:' + dial : '', phoneCaption: /^(?:\+351)?9\d{8}$/.test(dial) ? 'Chamada para a rede móvel nacional' : '', whatsapp, whatsappHref: /^\d{9,15}$/.test(whatsapp) ? 'https://wa.me/' + whatsapp : '', form: '' };
 };
-
-export const houseWhatsApp = (houseName: string) =>
-  `${contacts.whatsappHref}?${new URLSearchParams({ text: `Olá! Gostaria de obter mais informações sobre a casa ${houseName}.` })}`;
+export const contacts = getContacts({});
+export const houseWhatsApp = (houseName: string, c = contacts) =>
+  `${c.whatsappHref}?${new URLSearchParams({ text: `Olá! Gostaria de obter mais informações sobre a casa ${houseName}.` })}`;

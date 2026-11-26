@@ -1,14 +1,15 @@
 ---
 import { Facebook, Instagram } from 'lucide-astro';
-import { company, contacts, preview } from '../lib/site';
-const { whatsappOnly = false } = Astro.props as { whatsappOnly?: boolean };
+import { getContacts, preview } from '../lib/site';
+const contacts = getContacts(Astro.locals);
+const { whatsappOnly = false, socialOnly = false } = Astro.props as { whatsappOnly?: boolean; socialOnly?: boolean };
 const whatsappUrl = contacts.whatsappHref;
 const links = [
   ...(!whatsappOnly ? [
-    { label: 'Instagram', href: company.social.instagram, Icon: Instagram },
-    { label: 'Facebook', href: company.social.facebook, Icon: Facebook },
+    { label: 'Instagram', href: contacts.social.instagram, Icon: Instagram },
+    { label: 'Facebook', href: contacts.social.facebook, Icon: Facebook },
   ] : []),
-  { label: 'WhatsApp', href: whatsappUrl },
+  ...(!socialOnly ? [{ label: 'WhatsApp', href: whatsappUrl }] : []),
 ].filter(({ href }) => href || preview);
 ---
 

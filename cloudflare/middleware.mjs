@@ -10,6 +10,11 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       "SELECT data FROM inventory WHERE state='live' ORDER BY rowid",
     ).all();
     ctx.locals.houses = results.map((row) => JSON.parse(row.data));
+    // During rollout older databases have no settings table; use the built-in values.
+    try {
+      const settings = await bindings.DB.prepare('SELECT published FROM site_settings WHERE id=1').first();
+      if (settings) ctx.locals.siteSettings = JSON.parse(settings.published);
+    } catch { ctx.locals.siteSettings = {}; }
   }
   let response = await next();
   response.headers.set('Cache-Control', 'private, no-store');

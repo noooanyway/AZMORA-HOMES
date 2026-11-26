@@ -1,6 +1,7 @@
 ---
 import { Phone } from 'lucide-astro';
-import { contacts, preview } from '../lib/site';
+import { getContacts, preview } from '../lib/site';
+const contacts = getContacts(Astro.locals);
 
 const { mode = 'panel' } = Astro.props as { mode?: 'header' | 'panel' };
 const callLabel = `Ligar para a Azmora Homes, ${contacts.phone}${contacts.phoneCaption ? `. ${contacts.phoneCaption}` : ''}`;

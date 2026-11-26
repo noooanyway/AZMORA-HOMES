@@ -1,0 +1,11 @@
+.consent-panel { position: fixed; z-index: 100; inset: auto 1rem 1rem; max-width: 760px; margin-inline: auto; padding: 1.25rem; border: 1px solid var(--line, #c7c8bc); border-radius: 14px; background: var(--surface, #fffdf8); color: var(--ink, #183a2e); box-shadow: 0 12px 48px #0004; max-height: calc(100dvh - 2rem); overflow: auto; }
+.consent-panel[hidden], #consent-options[hidden] { display: none; }
+.consent-content h2 { font-size: 1.4rem; margin: 0 0 .4rem; }
+.consent-content p { margin: .4rem 0 .8rem; }
+.consent-content a { text-decoration: underline; }
+.consent-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.consent-actions .btn { flex: 1 1 170px; justify-content: center; }
+#consent-options { display: grid; gap: .5rem; padding-top: .8rem; }
+#consent-options label { display: flex; gap: .6rem; align-items: flex-start; }
+#consent-options input { width: 1.15rem; height: 1.15rem; flex: none; }
+.consent-footer { border: 0; padding: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; text-align: left; }

@@ -95,6 +95,25 @@ try {
     return JSON.parse(text);
   };
 
+  // Draft remains private until publish; restores original public defaults.
+  assert.equal((await call('admin/configuracoes/')).status,403);
+  const cfg = await json(await admin('configuracoes'));
+  assert.equal(cfg.revision,0);
+  const c = { ...cfg.defaults, phone:'+351 911 222 333', secondPhone:'+351 911 444 555', whatsapp:'351911222333', email:'loja@example.test', openingHours:'Terça a sábado', languages:'Português e inglês', timezone:'Atlantic/Azores', social:{instagram:'https://www.instagram.com/teste/',facebook:'https://www.facebook.com/teste'} };
+  assert.equal((await admin('configuracoes-guardar',{revision:0,contacts:c})).status,200);
+  let htmlBefore = await (await call('contactos/')).text();
+  assert.doesNotMatch(htmlBefore,/\+351 911 222 333/);
+  assert.equal((await admin('configuracoes-publicar',{revision:0})).status,409);
+  assert.equal((await admin('configuracoes-publicar',{revision:1})).status,200);
+  let htmlAfter = await (await call('contactos/')).text();
+  assert.match(htmlAfter,/\+351 911 222 333/);
+  assert.match(htmlAfter,/tel:\+351911222333/);
+  for (const text of ['911 444 555','loja@example.test','Terça a sábado','Português e inglês','instagram.com/teste','facebook.com/teste']) assert.ok(htmlAfter.includes(text),text);
+  assert.equal((await admin('configuracoes-guardar',{revision:2,contacts:{...c,email:'<script>'}})).status,400);
+  const now = await json(await admin('configuracoes'));
+  assert.equal((await admin('configuracoes-recuperar',{revision:now.revision,historyId:cfg.history[0].id})).status,200);
+  const htmlRestore = await (await call('contactos/')).text();
+  assert.doesNotMatch(htmlRestore,/\+351 911 222 333/);
   for (const [route, expected] of [
     ['', 'Outra forma'],
     ['casas/', 'Explore as'],
@@ -177,6 +196,10 @@ try {
     'admin/guardar/',
     'admin/upload/',
     'admin/eliminar/',
+    'admin/configuracoes/',
+    'admin/configuracoes-guardar/',
+    'admin/configuracoes-publicar/',
+    'admin/configuracoes-recuperar/',
     'admin/contactos/',
     'admin/contacto/',
     'admin/contactos-exportar/',
@@ -427,6 +450,21 @@ try {
       await page.goto(base + 'admin/');
       await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
       await page.locator('#list .unit').first().waitFor();
+      await page.getByRole('button',{name:'Configurações do website'}).click();
+      await page.locator('#settings-form input[name="phone"]').waitFor();
+      await page.locator('#settings-form input[name="phone"]').fill('+351 919 222 333');
+      await page.getByRole('button',{name:'Pré-visualizar',exact:true}).click();
+      assert.match(await page.locator('#settings-preview-content').innerText(),/919 222 333/);
+      await page.locator('#settings-preview-close').click();
+      await page.getByRole('button',{name:'Guardar rascunho'}).click();
+      await page.getByText('Rascunho guardado.').waitFor();
+      page.once('dialog',d=>d.accept()); await page.getByRole('button',{name:'Publicar alterações',exact:true}).click();
+      await page.getByText('Alterações publicadas.').waitFor();
+      assert.match(await (await call('contactos/')).text(), /919 222 333/);
+      page.once('dialog',d=>d.accept()); await page.locator('#settings-history button').last().click();
+      await page.getByText('Versão recuperada.').waitFor();
+      assert.doesNotMatch(await (await call('contactos/')).text(), /919 222 333/);
+      await page.getByRole('button',{name:'Inventário',exact:true}).click();
       await page.reload();
       await page.getByRole('button', { name: /Pedidos de contacto/ }).click();
       assert.equal(await page.locator('#show-contacts').getAttribute('aria-pressed'),'true');

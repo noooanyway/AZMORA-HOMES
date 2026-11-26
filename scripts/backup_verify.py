@@ -19,6 +19,21 @@ def verify(sql_file, photos):
         tables = {name for (name,) in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
         if not required <= tables:
             raise ValueError('Tabelas essenciais em falta.')
+        # Legacy exports predate website settings; new exports must include both tables.
+        settings_tables = {'site_settings', 'site_settings_history'}
+        present = settings_tables & tables
+        if present and present != settings_tables:
+            raise ValueError('Configurações incompletas no backup.')
+        if present:
+            row = db.execute('SELECT draft,published,revision,published_revision FROM site_settings WHERE id=1').fetchone()
+            if not row or not isinstance(json.loads(row[0]), dict) or not isinstance(json.loads(row[1]), dict) or row[2] < 0 or row[3] < 0:
+                raise ValueError('Configurações inválidas no backup.')
+            snapshot = db.execute('SELECT data FROM site_settings_history WHERE published_revision=? ORDER BY id DESC LIMIT 1', (row[3],)).fetchone()
+            if not snapshot or json.loads(snapshot[0]) != json.loads(row[1]):
+                raise ValueError('Histórico publicado não corresponde às configurações.')
+            for (data,) in db.execute('SELECT data FROM site_settings_history'):
+                if not isinstance(json.loads(data), dict):
+                    raise ValueError('Histórico de configurações inválido.')
         references = set()
         for (raw,) in db.execute('SELECT data FROM inventory'):
             for photo in json.loads(raw).get('media', []):

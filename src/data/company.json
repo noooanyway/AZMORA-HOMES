@@ -5,9 +5,11 @@
   "registeredAddress": "",
   "visitAddress": "",
   "phone": "+351 913 667 365",
+  "secondPhone": "+351 961 533 260",
+  "languages": "Português, inglês e francês",
   "whatsapp": "351913667365",
   "email": "geral@azmorahomes.pt",
-  "openingHours": "",
+  "openingHours": "Segunda a sexta-feira, das 08h00 às 17h00",
   "privacyEmail": "geral@azmorahomes.pt",
   "privacyBasis": "",
   "privacyRetention": "",
@@ -18,7 +20,7 @@
   "ralUrl": "",
   "complaintsUrl": "",
   "social": {
-    "instagram": "",
-    "facebook": ""
+    "instagram": "https://www.instagram.com/azmorahomes/",
+    "facebook": "https://www.facebook.com/azmorahomes"
   }
 }

@@ -1,0 +1,26 @@
+---
+import '../styles/consent.css';
+import { url } from '../lib/site';
+---
+<section id="consent-panel" class="consent-panel" aria-labelledby="consent-title" hidden>
+  <div class="consent-content">
+    <h2 id="consent-title">As suas preferências de privacidade</h2>
+    <p>Utilizamos tecnologias de segurança. Com a sua autorização, podemos guardar preferências neste navegador. Pode consultar a <a href={url('privacidade/')}>informação de privacidade</a> e alterar a sua escolha no rodapé.</p>
+    <div class="consent-actions">
+      <button class="btn primary" type="button" data-consent="accept">Aceitar todos</button>
+      <button class="btn primary" type="button" data-consent="reject">Recusar opcionais</button>
+      <button class="btn light" type="button" data-consent="customize" aria-expanded="false" aria-controls="consent-options">Personalizar preferências</button>
+    </div>
+    <div id="consent-options" hidden>
+      <p>A segurança e o funcionamento essencial estão sempre ativos.</p>
+      <label><input type="checkbox" id="consent-preferences" /> Guardar tema, favoritos e comparação neste navegador</label>
+      <p>Sem esta opção, as seleções podem ser abertas temporariamente nas páginas de favoritos e comparação; o tema não é guardado para outras páginas.</p>
+      <button class="btn light" type="button" data-consent="save">Guardar escolha</button>
+    </div>
+    <p id="consent-status" role="status"></p>
+    <button type="button" class="consent-footer" data-consent="dismiss" hidden>Continuar nesta página</button>
+  </div>
+</section>
+<script>
+  import '../scripts/consent';
+</script>

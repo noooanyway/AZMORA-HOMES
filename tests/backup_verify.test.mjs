@@ -33,3 +33,16 @@ test('restauro isolado recupera inventário, pedidos, histórico e referência d
     assert.equal(restore.status,0,restore.stderr);
   } finally { rmSync(root,{recursive:true,force:true}); }
 });
+
+
+test('restauro isolado valida rascunho, publicado e histórico de configurações', () => {
+  const root=mkdtempSync(path.join(tmpdir(),'azmora-settings-restore-'));
+  try {
+    const photos=path.join(root,'photos'), sql=path.join(root,'backup.sql');mkdirSync(photos);
+    const core=`CREATE TABLE inventory(data TEXT); CREATE TABLE uploads(id); CREATE TABLE activity(id); CREATE TABLE contact_requests(id); CREATE TABLE contact_history(id); CREATE TABLE contact_limits(id); CREATE TABLE contact_tokens(id);`;
+    const settings=`CREATE TABLE site_settings(id INTEGER,draft TEXT,published TEXT,revision INTEGER,published_revision INTEGER); INSERT INTO site_settings VALUES(1,'{"contacts":{"phone":"+351 919 222 333"}}','{"contacts":{"phone":"+351 913 667 365"}}',2,1); CREATE TABLE site_settings_history(published_revision INTEGER,data TEXT,id INTEGER); INSERT INTO site_settings_history VALUES(1,'{"contacts":{"phone":"+351 913 667 365"}}',1);`;
+    writeFileSync(sql,core+settings);const run=()=>spawnSync('python',['scripts/backup_verify.py',sql,photos],{encoding:'utf8'});assert.equal(run().status,0);
+    writeFileSync(sql,core+settings+` UPDATE site_settings SET published='{}';`);assert.equal(run().status,1);
+    writeFileSync(sql,core+` CREATE TABLE site_settings(id INTEGER);`);assert.equal(run().status,1);
+  } finally {rmSync(root,{recursive:true,force:true});}
+});

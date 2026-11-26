@@ -7,7 +7,7 @@ import CallContact from '../../components/CallContact.astro';
 import HouseHighlights from '../../components/HouseHighlights.astro';
 import HouseTechnical from '../../components/HouseTechnical.astro';
 import '../../styles/house-detail.css';
-import { url, detail, priceRequest, houseWhatsApp, pageHouses, houses as staticHouses } from '../../lib/site';
+import { url, detail, priceRequest, houseWhatsApp, getContacts, pageHouses, houses as staticHouses } from '../../lib/site';
 const houses = pageHouses(Astro.locals);
 import { price, status, type House } from '../../lib/catalog';
 import {
@@ -94,9 +94,9 @@ const related = houses
         </p><a
           class="btn primary"
           href={priceRequest(h)}>Pedir preço e disponibilidade</a>
-        <a class="btn light" href={houseWhatsApp(h.name_for_site)} target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+        {getContacts(Astro.locals).whatsappHref && <a class="btn light" href={houseWhatsApp(h.name_for_site, getContacts(Astro.locals))} target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>}
         <CallContact />
-        <p>Preço com IVA e transporte até à ilha, nas condições do orçamento. Transporte dentro da ilha, descarga, preparação do terreno, instalação e ligações são da responsabilidade do cliente.</p>
+        <p>Preço com IVA e transporte até ao porto marítimo da ilha de destino, nas condições do orçamento. Transporte dentro da ilha, descarga, preparação do terreno, instalação e ligações são da responsabilidade do cliente.</p>
         <a class="under summary-guide-link" href={url('#como-funciona')}>O que confirmar sobre a entrega</a><div class="actions">
           <button data-fav={h.media_slug}><Heart size={16} />Favoritos</button><button
             data-compare={h.media_slug}><Columns2 size={16} />Comparar</button>
