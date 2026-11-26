@@ -1,14 +1,28 @@
 # Backoffice da Azmora Homes
 
+> **Redesign local de 26/11/2026:** cartões e ações rápidas concluídos; [testes, limites e passos de publicação](production/VALIDACAO_INVENTARIO_ADMIN.md). As instruções de gestão seguintes descrevem esta versão local, ainda sem push/deployment nesta execução.
+
 > **Inventário híbrido — implementação local, ainda não publicada:** a funcionalidade descrita abaixo depende da migração aditiva 0006 e da publicação coordenada do código. Não foi aplicada à D1 remota.
 
 ## Gestão por unidade e por modelo
 
-Cada ficha representa uma casa física. Em **Por unidade** pode procurar, abrir, duplicar e editar cada ficha; preço, fotografias e características permanecem individuais. Em **Por modelo** vê um resumo exclusivamente interno das casas não arquivadas. Para juntar unidades, abra cada ficha e escreva ou selecione exatamente o mesmo **Grupo de modelo (interno)**. Sem essa associação explícita ficam em «Sem grupo de modelo». Alterar o grupo não modifica as outras unidades.
+Cada ficha representa uma casa física. **Por unidade** apresenta cada casa com fotografia, nome, situação comercial, publicação, modelo, tipologia e preço (ou «Preço sob consulta»). Use **Abrir ficha** para editar e **← Inventário** para regressar. **Cartões** e **Lista compacta** funcionam nas duas vistas, sem alterar dados nem publicar anúncios.
 
-Os totais de disponíveis, reservadas e vendidas usam a situação comercial das unidades não arquivadas; «Por confirmar / em breve» também inclui estados antigos desconhecidos. O **stock conhecido** soma disponíveis e reservadas, sem incluir vendidas nem presumir que as restantes estão disponíveis. Os números de publicadas e de rascunhos referem-se à publicação e não devem ser somados aos estados comerciais.
+Em **Por modelo**, cada cartão apresenta a fotografia representativa, grupo, tipologias, disponíveis, reservadas, vendidas, por confirmar/em breve e **stock comercial** (disponíveis + reservadas). As contagens são calculadas a partir das unidades não arquivadas, incluindo rascunhos; não são quantidades editáveis. As arquivadas têm uma contagem separada e continuam acessíveis por **Consultar unidades**, sem integrar o stock. Os totais de publicadas e rascunhos são independentes dos estados comerciais.
 
-Na ficha escolha **Situação comercial**: disponível, reservada, vendida, em breve ou a confirmar. Para cancelar uma reserva volte a selecionar o estado correto; para concluir uma venda escolha vendida. Guarde a ficha e aguarde a confirmação. O estado de publicação é independente: publicar torna a ficha pública, rascunho ou arquivo retiram-na do site. Se outra pessoa guardar primeiro, reabra a ficha e reveja antes de voltar a guardar.
+Associe unidades do mesmo modelo através de **Grupo de modelo (interno)** na ficha. Uma casa sem grupo aparece separadamente, identificada pelo nome; não é agrupada automaticamente com casas sem relação. O grupo é interno e não substitui a identidade, fotografias, preço ou características individuais.
+
+**Filtros:** pesquisa por nome, marca, modelo e referência; filtros de publicação, situação comercial, grupo e tipologia; ordenação por nome, alterações recentes ou preço crescente. Os indicadores superiores são clicáveis: limpam os outros filtros e mostram as unidades correspondentes. Em vista por modelo, os filtros escolhem os modelos apresentados; as contagens e ações continuam a abranger todas as unidades desse modelo. O painel informa esta distinção.
+
+**Ações no cartão de modelo:**
+
+- **Adicionar unidade:** escolha a ficha de origem quando há várias. Abre uma cópia na ficha existente, com fotografias/características/preço para revisão, referência interna vazia e situação «A confirmar». Só cria a unidade ao guardar; a original não é alterada. Reveja todos os dados antes de guardar como rascunho ou publicar.
+- **Reservar:** disponível → reservada. **Cancelar reserva:** reservada → disponível. **Registar venda:** disponível ou reservada → vendida. As arquivadas e os estados desconhecidos não são candidatos a estas operações.
+- **Consultar unidades:** abre diretamente a ficha quando há apenas uma; com várias, permite escolher, incluindo as arquivadas.
+- Quando há várias candidatas, o seletor mostra fotografia, nome, modelo/tipologia/referência, situação/publicação e preço. Não se escolhe por identificadores técnicos. **Cancelar** ou Escape fecha sem gravar; o foco regressa ao botão de origem.
+- Uma única candidata dispensa o seletor. As mudanças de situação exigem confirmação com o nome da casa. Os botões sem candidatas ficam desativados.
+
+As ações rápidas conservam o estado de publicação: uma unidade publicada atualiza o catálogo público; um rascunho permanece privado. Fotografias e características não são modificadas. O servidor valida os campos, a autenticação e a revisão; se outra pessoa guardar primeiro, rejeita a operação, o inventário recarrega e mostra o aviso. Reveja o estado atual antes de voltar a agir. As transições ficam no histórico comercial e a gravação no histórico de atividade, com autor e data; requerem a migração 0006 já existente. Este redesign não cria uma nova migração.
 
 O catálogo público mostra separadamente apenas as unidades publicadas disponíveis, reservadas ou vendidas; os estados por confirmar continuam acessíveis pelas fichas já publicadas, sem serem classificados como disponíveis. As casas reservadas e vendidas remetem para alternativas disponíveis. As vendas realizadas após a migração passam a ter histórico comercial. A secção «Casas vendidas» mostra até três casas vendidas e publicadas, dando prioridade às vendas com registo cronológico fiável; as restantes podem aparecer sem data. A secção fica oculta se não houver casas vendidas publicadas. Não se inventam datas de vendas antigas.
 

@@ -2,6 +2,7 @@ import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
 import { generateKeyPair, exportJWK, SignJWT } from 'jose';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { testInventoryAdmin } from './inventory-admin-browser.mjs';
 import { build } from 'esbuild';
 const origin = process.env.TEST_ORIGIN || 'https://www.azmorahomes.pt',
   base = origin + (process.env.TEST_BASE_PATH || '/AZMORA-HOMES/'),
@@ -13,7 +14,7 @@ const jwk = { ...(await exportJWK(publicKey)), alg: 'RS256', kid: 'local' };
 const token = await new SignJWT({ type: 'app', email: 'owner@example.test' })
   .setIssuedAt()
   .setSubject('owner')
-  .setExpirationTime('5m')
+  .setExpirationTime('15m') // Local-only JWT covers the extended visual browser suite.
   .setIssuer(issuer)
   .setAudience('local')
   .setProtectedHeader({ kid: 'local', alg: 'RS256' })
@@ -693,10 +694,7 @@ try {
       assert.doesNotMatch(await page.locator('#events').innerText(),/exposul/i);
       await db.prepare('UPDATE contact_requests SET notes=? WHERE id=?').bind('Nota anterior de teste',contactInput.id).run();
       await page.locator('#list .unit').first().waitFor();
-      await page.locator('#view-models').click();
-      assert.match(await page.locator('#groups').innerText(), /Modelo visual sintético/);
-      assert.match(await page.locator('#groups').innerText(), /Disponíveis: 2/);
-      await page.locator('#view-units').click();
+      await testInventoryAdmin({page, db, admin, json, call, base, template:unit.data, getUnit});
       const realFirst=(await json(await admin('dados'))).units.find(x=>x.id===a0.id);
       await page.locator('#list .unit').filter({hasText:realFirst.data.name_for_site}).getByRole('button',{name:'Abrir ficha'}).click();
       await page.getByLabel('Grupo de modelo (interno)').fill('Grupo editado no navegador');
@@ -864,7 +862,7 @@ try {
       assert.equal(await page.locator('#peek').evaluate(e => document.activeElement === e),true);
       await page.getByRole('button', { name: 'Guardar rascunho' }).click();
       await page
-        .locator('.unit')
+        .locator('#list .unit')
         .filter({ hasText: 'Casa de ensaio' })
         .waitFor();
       const draft = (await json(await admin('dados'))).units.find(

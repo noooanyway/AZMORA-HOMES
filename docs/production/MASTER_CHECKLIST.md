@@ -1,3 +1,18 @@
+# Atualização local — redesign do inventário ADMIN (26/11/2026)
+
+Estado desta intervenção: redesign concluído localmente; ver [matriz de validação](VALIDACAO_INVENTARIO_ADMIN.md) e [manual do ADMIN](../BACKOFFICE_AZMORA.md). Esta secção prevalece para o redesign; as secções anteriores preservadas abaixo são histórico e preparação da publicação.
+
+- [x] Cartões por unidade e modelo, fotografias, tipologias, quantidades e stock calculados, lista compacta nas duas vistas.
+- [x] Adicionar por cópia, reservar, cancelar reserva, vender e consultar unidades; seletor visual quando há várias candidatas e confirmações por unidade.
+- [x] Preservar fichas, fotografias, características, publicação, validação no servidor, histórico e controlo de concorrência; sem nova migração.
+- [x] Testes específicos de ações, privacidade dos rascunhos, disponibilidade pública, filtros, contagens, concorrência e navegação; 24 combinações de vista/layout nas seis larguras pedidas, mais seis seletores.
+- [x] Suite de 36 testes, tipos, build Cloudflare, Worker/browser, restauro sintético da suite e diff check. Evidência e limites na matriz ligada acima.
+- [x] Manual atualizado; alterações anteriores preservadas.
+- [ ] Publicação futura: reconfirmar pendências remotas (último registo: 0006), coordenar cópia D1/R2 e restauro isolado, aplicar a migração existente se ainda necessária e publicar somente com autorização. Nenhuma destas operações foi realizada nesta execução.
+- [ ] Após publicação: verificar login real, ações e imagens com os responsáveis; estes devem confirmar os grupos e estados efetivos das unidades. Não alterar dados reais a partir de suposições.
+
+---
+
 > **Inventário híbrido — implementado e testado localmente, não publicado:** consultar o manual do ADMIN e [procedimento 0006](ATUALIZACAO_INVENTARIO_0006.md). Antes de qualquer publicação futura é indispensável confirmar o inventário real, coordenar uma janela de escrita, obter e verificar backup D1/R2 com restauro isolado, conferir as migrações pendentes e aplicar apenas a nova 0006 de forma coordenada antes do deployment. Não executar os imports iniciais nem substituir ou reinicializar a D1. Validar a aplicação com as unidades reais e reabrir as escritas após os testes. A migração cria apenas histórico comercial e triggers; não altera os registos existentes. Agrupamentos devem ser atribuídos manualmente. Sem registo fiável não se infere a data de venda antiga.
 
 > **Estado verificado por leitura — 26/11/2026:** 0001–0005 aplicadas, incluindo as tabelas de configurações; 0006 é a única migração local pendente. A correção anterior do ADMIN foi enviada; o funcionamento autenticado continua por confirmar. Uma cópia D1 foi verificada em memória; falta cópia e restauro conjunto D1/R2. As tarefas atuais estão na [checklist essencial atualizada](CHECKLIST_LANCAMENTO_ESSENCIAL.md). As secções seguintes preservam o histórico.

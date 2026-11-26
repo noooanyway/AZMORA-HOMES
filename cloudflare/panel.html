@@ -72,24 +72,47 @@
       flex-wrap: wrap;
       align-items: center;
     }
-    .stats > div {
-      padding: 12px;
-      background: #ebe5d8;
-      flex: 1;
-      min-width: 105px;
+    .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(135px,1fr)); align-items:stretch; }
+    .stats > button { padding:12px; background:#ebe5d8; text-align:left; }
+    .stats strong { display:block; font:32px Georgia; }
+    .row > input, .row > select { min-width:0; max-width:100%; flex:1 1 190px; }
+    .view-controls { margin:16px 0; }
+    #dash button[aria-pressed="true"] { background:#234237; color:white; }
+    .unit { border-top:1px solid #c9c3b4; padding:14px 0; display:flex; align-items:center; justify-content:space-between; gap:12px; min-width:0; }
+    .inventory-view { margin:20px 0; }
+    .inventory-view .unit-body { min-width:0; overflow-wrap:anywhere; flex:1; }
+    .inventory-view h3 { margin:0; font-size:1.1rem; }
+    .inventory-view .unit-body { display:flex; flex-direction:column; gap:10px; }
+    .inventory-view .unit-body > .actions { margin-top:auto; align-items:stretch; }
+    .inventory-view .actions button { flex:1 1 120px; }
+    .inventory-photo { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; background:#ebe5d8; }
+    .photo-placeholder { display:grid; place-content:center; color:#526b5e; text-align:center; }
+    .cards-view { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); gap:18px; }
+    .cards-view .unit { flex-direction:column; align-items:stretch; justify-content:flex-start; padding:0; background:#fffdf8; border:1px solid #ded8cb; border-radius:8px; overflow:hidden; }
+    .cards-view .unit-body { padding:4px 16px 16px; }
+    .inventory-view:not(.cards-view) .inventory-photo { width:100px; flex:0 0 100px; }
+    .inventory-view:not(.cards-view) .actions button { flex:0 1 auto; }
+    .model-counts { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0; }
+    .model-counts span { padding:6px 8px; background:#f2eee4; border-radius:4px; font-size:.9rem; }
+    .model-stock { margin:0; font-weight:600; }
+    #unit-choice { width:min(680px,94vw); border-radius:8px; }
+    #unit-choice[open] { display:flex; flex-direction:column; }
+    #unit-choice h2 { margin-top:0; flex-shrink:0; }
+    #unit-choice-help, #unit-choice-cancel { flex-shrink:0; }
+    #unit-options { display:grid; grid-auto-rows:max-content; align-content:start; gap:12px; margin:16px 0; overflow-y:auto; min-height:0; }
+    .unit-option { display:flex; gap:12px; align-items:center; text-align:left; width:100%; min-width:0; }
+    .unit-option .inventory-photo { width:85px; flex:0 0 85px; }
+    .unit-option .choice-info { min-width:0; overflow-wrap:anywhere; }
+    .choice-info > span { display:block; }
+    @media(max-width:480px) {
+      .inventory-view:not(.cards-view) .unit { align-items:flex-start; }
+      .inventory-view:not(.cards-view) .inventory-photo { width:72px; flex-basis:72px; }
+      .inventory-view:not(.cards-view) .model-counts { grid-template-columns:1fr; }
+      #unit-choice { padding:16px; }
+      .unit-option { padding:8px; }
+      .unit-option .inventory-photo { width:64px; flex-basis:64px; }
     }
-    .stats strong {
-      display: block;
-      font: 32px Georgia;
-    }
-    .unit {
-      border-top: 1px solid #c9c3b4;
-      padding: 14px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
+    .unit-meta { color:#526b5e; font-size:.9rem; }
     .unit small,
     label {
       display: block;
@@ -307,6 +330,7 @@
     </dialog>
     <section id="dash">
       <h1>Inventário de casas</h1>
+      <p>Os estados comerciais excluem casas arquivadas; publicação e rascunhos são contagens independentes.</p>
       <div class="stats" id="stats"></div>
       <h2>Catálogo</h2>
       <div class="row">
@@ -323,12 +347,18 @@
         ><select aria-label="Ordenação" id="sort">
           <option>Nome</option>
           <option>Alterações recentes</option>
+          <option>Preço crescente</option>
         </select>
+        <select id="commercial-filter" aria-label="Filtrar situação comercial"><option value="">Todas as situações</option><option value="disponivel">Disponíveis</option><option value="reservado">Reservadas</option><option value="vendido">Vendidas</option><option value="pending">Por confirmar</option><option value="stock">Stock comercial</option></select>
+        <select id="model-filter" aria-label="Filtrar modelo"><option value="">Todos os modelos</option></select>
+        <select id="type-filter" aria-label="Filtrar tipologia"><option value="">Todas as tipologias</option></select>
       </div>
-      <div class="row"><button type="button" id="view-units" aria-pressed="true">Por unidade</button><button type="button" id="view-models" aria-pressed="false">Por modelo</button></div>
-      <p id="group-help" hidden>Os totais excluem casas arquivadas. Associe manualmente cada casa a um grupo de modelo na ficha. O stock conhecido inclui disponíveis e reservadas; as casas por confirmar são apresentadas à parte.</p>
-      <div id="groups" hidden></div>
-      <div id="list"></div>
+      <div class="row view-controls"><button type="button" id="view-units" aria-pressed="true">Por unidade</button><button type="button" id="view-models" aria-pressed="false">Por modelo</button></div>
+      <p id="group-help" hidden>As contagens e ações abrangem todas as unidades não arquivadas do modelo, mesmo com filtros ativos. O stock comercial inclui disponíveis e reservadas. «Por confirmar / em breve» inclui estados ainda não classificados. Associe cada casa a um grupo de modelo na ficha; casas sem grupo aparecem separadamente. As unidades arquivadas continuam acessíveis, mas não contam para o stock.</p>
+      <div class="row"><button type="button" id="layout-cards" aria-pressed="true">Cartões</button><button type="button" id="layout-list" aria-pressed="false">Lista compacta</button></div>
+      <p id="inventory-results" role="status"></p>
+      <div id="groups" class="inventory-view cards-view" hidden></div>
+      <div id="list" class="inventory-view cards-view"></div>
       <h2>Atividade recente</h2>
       <ul id="events"></ul>
       <h2>Alterações comerciais recentes</h2>
@@ -366,6 +396,12 @@
       </form>
       <div id="manage" class="actions"></div>
     </section>
+    <dialog id="unit-choice" aria-labelledby="unit-choice-title" aria-describedby="unit-choice-help">
+      <h2 id="unit-choice-title">Escolher unidade</h2>
+      <p id="unit-choice-help">Selecione a unidade pretendida. Nenhuma alteração será guardada nesta seleção.</p>
+      <div id="unit-options"></div>
+      <button type="button" id="unit-choice-cancel">Cancelar</button>
+    </dialog>
     <dialog id="preview" aria-label="Pré-visualização da casa">
       <button id="closePreview">Fechar</button>
       <div id="sample"></div>
@@ -441,6 +477,14 @@
         busy = false;
       }
     }
+    el('layout-cards').onclick = () => setLayout(true);
+    el('layout-list').onclick = () => setLayout(false);
+    function setLayout(cards) {
+      for (const id of ['list', 'groups']) el(id).classList.toggle('cards-view', cards);
+      el('layout-cards').setAttribute('aria-pressed', String(cards));
+      el('layout-list').setAttribute('aria-pressed', String(!cards));
+    }
+    for (const id of ['commercial-filter','model-filter','type-filter']) el(id).onchange = draw;
     el('view-units').onclick = () => setInventoryView(false);
     el('view-models').onclick = () => setInventoryView(true);
     function setInventoryView(grouped) {
@@ -450,13 +494,59 @@
       el('groups').hidden = !grouped;
       el('group-help').hidden = !grouped;
     }
+    const priceLabel = (u) => u.data.public_price_eur == null ? 'Preço sob consulta' : new Intl.NumberFormat('pt-PT', {style:'currency',currency:'EUR'}).format(u.data.public_price_eur);
+    const groupKey = (u) => u.data.inventory_group?.trim() ? 'model:' + u.data.inventory_group.trim().normalize('NFKC').toLocaleLowerCase('pt-PT') : 'unit:' + u.id;
+    function inventoryPhoto(u) {
+      const cover = u?.data.media?.[0];
+      if (!cover) { const placeholder = node('div', 'Sem fotografia'); placeholder.className = 'inventory-photo photo-placeholder'; return placeholder; }
+      const photo = document.createElement('img');
+      photo.className = 'inventory-photo';
+      photo.src = base + 'foto/?key=' + encodeURIComponent(cover.small || cover.src);
+      photo.alt = cover.alt || 'Fotografia da casa';
+      photo.loading = 'lazy'; photo.width = 400; photo.height = 300;
+      photo.style.height = 'auto';
+      return photo;
+    }
+    async function chooseUnit(items, title) {
+      if (!items.length) { msg('Não há unidades elegíveis para esta operação.'); return null; }
+      if (items.length === 1) return items[0];
+      const dialog = el('unit-choice');
+      el('unit-choice-title').textContent = title;
+      return new Promise((resolve) => {
+        let selected = null;
+        el('unit-options').replaceChildren(...items.map((u) => {
+          const choice = button('', () => { selected = u; dialog.close(); });
+          choice.className = 'unit-option';
+          const info = node('span', ''); info.className = 'choice-info';
+          info.append(node('strong', u.data.name_for_site), node('span', [u.data.model,u.data.typology,u.data.reference_azmora].filter(Boolean).join(' · ')), node('span', states[u.state] + ' · ' + (stock[u.data.availability] || 'Estado não classificado')), node('span', priceLabel(u)));
+          choice.append(inventoryPhoto(u), info); return choice;
+        }));
+        dialog.addEventListener('close', () => resolve(selected), {once:true});
+        el('unit-choice-cancel').onclick = () => dialog.close();
+        dialog.showModal();
+      });
+    }
+    async function changeAvailability(items, to, label) {
+      const u = await chooseUnit(items, label + ' — escolher unidade');
+      if (!u || !confirm(label + ': ' + u.data.name_for_site + '?\n' + (u.state === 'live' ? 'O estado será atualizado no catálogo público.' : 'A unidade continuará como rascunho.'))) return;
+      await task(async () => {
+        try {
+          await api('guardar/', {id:u.id,revision:u.revision,state:u.state,data:{...u.data,availability:to}});
+        } catch (error) {
+          // Refresh stale revisions without retrying or overwriting another owner's change.
+          try { await load(); } catch { /* Keep the original operation error visible. */ }
+          throw error;
+        }
+        await load(); msg('Situação comercial atualizada.');
+      });
+    }
     function draw() {
       const text = el('search').value.toLocaleLowerCase('pt'),
         filter = el('filter').value;
       const active = units.filter((u) => u.state !== 'archived');
       el('stats').replaceChildren(
         ...Object.entries({
-          Total: units.length,
+          'Stock comercial': active.filter((u) => ['disponivel','reservado'].includes(u.data.availability)).length,
           Disponíveis: active.filter(
             (u) => u.data.availability === 'disponivel',
           ).length,
@@ -468,19 +558,38 @@
           Arquivadas: units.filter((u) => u.state === 'archived').length,
           Publicadas: units.filter((u) => u.state === 'live').length,
           Rascunhos: units.filter((u) => u.state === 'draft').length,
-        }).map(([k, v]) => {
-          const n = node('div', k);
+        }).map(([k, v], index) => {
+          const n = button(k, () => {
+            const commercial = {'Stock comercial':'stock','Disponíveis':'disponivel','Reservadas':'reservado','Vendidas':'vendido','Por confirmar / em breve':'pending'};
+            const publication = {'Arquivadas':'archived','Publicadas':'live','Rascunhos':'draft'};
+            el('search').value = ''; el('model-filter').value = ''; el('type-filter').value = '';
+            setInventoryView(false);
+            el('commercial-filter').value = commercial[k] || '';
+            el('filter').value = publication[k] || '';
+            draw();
+            el('stats').children[index].focus({preventScroll:true});
+          });
           n.prepend(node('strong', v));
           return n;
         }),
       );
+      for (const [id, field] of [['model-filter','inventory_group'],['type-filter','typology']]) {
+        const selected=el(id).value, values=[...new Set(units.map(u=>u.data[field]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt'));
+        el(id).replaceChildren(new Option(id==='model-filter'?'Todos os modelos':'Todas as tipologias',''),...values.map(v=>new Option(v,v)));
+        el(id).value=values.includes(selected) ? selected : '';
+      }
+      const commercial = el('commercial-filter').value;
       const found = units
         .filter(
           (u) =>
             (!filter || u.state === filter) &&
+            (!el('model-filter').value || u.data.inventory_group === el('model-filter').value) &&
+            (!el('type-filter').value || u.data.typology === el('type-filter').value) &&
+            (!commercial || (u.state !== 'archived' && (commercial === 'stock' ? ['disponivel','reservado'].includes(u.data.availability) : commercial === 'pending' ? !['disponivel','reservado','vendido'].includes(u.data.availability) : u.data.availability === commercial))) &&
             [
               u.data.name_for_site,
               u.data.brand,
+              u.data.model,
               u.data.reference_azmora,
               u.data.inventory_group,
               u.slug,
@@ -490,41 +599,69 @@
               .includes(text),
         )
         .sort((a, b) =>
-          el('sort').selectedIndex
+          el('sort').selectedIndex === 1
             ? b.updated.localeCompare(a.updated)
-            : a.data.name_for_site.localeCompare(b.data.name_for_site, 'pt'),
+            : el('sort').selectedIndex === 2
+              ? (a.data.public_price_eur ?? Infinity) - (b.data.public_price_eur ?? Infinity)
+              : a.data.name_for_site.localeCompare(b.data.name_for_site, 'pt'),
         );
       el('list').replaceChildren(
         ...found.map((u) => {
           const row = node('article', '');
           row.className = 'unit';
-          const title = node('strong', u.data.name_for_site);
-          title.append(
-            node('small', states[u.state] + ' · ' + (stock[u.data.availability] || 'Estado não classificado')),
-          );
-          row.append(
-            title,
-            button('Abrir ficha', () => open(u)),
-          );
+          const photo = inventoryPhoto(u);
+          const body = node('div', ''); body.className = 'unit-body';
+          const title = node('h3', u.data.name_for_site);
+          const details = node('span', [u.data.model, u.data.typology, u.data.public_price_eur == null ? 'Preço sob consulta' : new Intl.NumberFormat('pt-PT', {style:'currency',currency:'EUR'}).format(u.data.public_price_eur)].filter(Boolean).join(' · '));
+          details.className = 'unit-meta';
+          title.append(node('small', states[u.state] + ' · ' + (stock[u.data.availability] || 'Estado não classificado')), details);
+          body.append(title, button('Abrir ficha', () => open(u)));
+          row.append(photo, body);
           return row;
         }),
       );
       if (!found.length) el('list').textContent = 'Nenhuma casa encontrada.';
-      const groups = new Map();
-      for (const u of found.filter((u) => u.state !== 'archived')) {
-        const label = u.data.inventory_group?.trim() || '';
-        const key = label ? label.normalize('NFKC').toLocaleLowerCase('pt-PT') : '';
-        if (!groups.has(key)) groups.set(key, { label: label || 'Sem grupo de modelo', units: [] });
-        groups.get(key).units.push(u);
+      // Filters select models; model totals and operations always use all actual units.
+      const matchingKeys = new Set(found.map(groupKey));
+      const modelGroups = new Map();
+      for (const u of units) {
+        const key = groupKey(u);
+        if (!matchingKeys.has(key)) continue;
+        if (!modelGroups.has(key)) modelGroups.set(key, { label: u.data.inventory_group?.trim() || u.data.name_for_site, units: [] });
+        modelGroups.get(key).units.push(u);
       }
-      el('groups').replaceChildren(...[...groups.values()].map((group) => {
+      const orderedGroups = [...matchingKeys].map(key => modelGroups.get(key));
+      el('groups').replaceChildren(...orderedGroups.map((group) => {
         const row = node('article', ''); row.className = 'unit';
-        const counts = Object.fromEntries(['disponivel','reservado','vendido'].map((state) => [state, group.units.filter((u) => u.data.availability === state).length]));
-        const pending = group.units.length - counts.disponivel - counts.reservado - counts.vendido;
-        row.append(node('strong', group.label), node('p', 'Disponíveis: ' + counts.disponivel + ' · Reservadas: ' + counts.reservado + ' · Vendidas: ' + counts.vendido + ' · Por confirmar / em breve: ' + pending + ' · Stock conhecido: ' + (counts.disponivel + counts.reservado)));
-        return row;
+        const activeUnits = group.units.filter(u => u.state !== 'archived');
+        const eligible = (states) => activeUnits.filter(u => states.includes(u.data.availability));
+        const counts = Object.fromEntries(['disponivel','reservado','vendido'].map(state => [state, eligible([state]).length]));
+        const pending = activeUnits.length - counts.disponivel - counts.reservado - counts.vendido;
+        const body = node('div', ''); body.className = 'unit-body';
+        row.append(inventoryPhoto(activeUnits.find(u => u.data.media?.length) || group.units.find(u => u.data.media?.length)));
+        const typologies = [...new Set(group.units.map(u => u.data.typology).filter(Boolean))].join(' / ');
+        const meta = node('span', [typologies || 'Tipologia por confirmar', group.units[0].data.inventory_group?.trim() ? '' : 'Sem grupo de modelo'].filter(Boolean).join(' · ')); meta.className = 'unit-meta';
+        const quantities = node('div',''); quantities.className = 'model-counts';
+        for (const [label,value] of [['Disponíveis',counts.disponivel],['Reservadas',counts.reservado],['Vendidas',counts.vendido],['Por confirmar / em breve',pending]]) quantities.append(node('span', label + ': ' + value));
+        const total = node('p', 'Stock comercial: ' + (counts.disponivel + counts.reservado)); total.className = 'model-stock';
+        body.append(node('h3', group.label),meta,quantities,total);
+        const archived = group.units.length - activeUnits.length;
+        if (archived) body.append(node('small', archived + ' unidade(s) arquivada(s), fora das contagens.'));
+        const actions = node('div',''); actions.className='actions';
+        actions.append(button('Adicionar unidade', async () => {
+          const u = await chooseUnit(group.units, 'Adicionar unidade — escolher ficha de origem');
+          if (u) { open(u,true); msg('Nova unidade por confirmar. Reveja fotografias, características e preço antes de guardar. A unidade original mantém-se intacta.'); }
+        }));
+        for (const [label,from,to] of [['Reservar',['disponivel'],'reservado'],['Cancelar reserva',['reservado'],'disponivel'],['Registar venda',['disponivel','reservado'],'vendido']]) {
+          const items = eligible(from);
+          const action = button(label, () => changeAvailability(items,to,label));
+          action.disabled = !items.length; actions.append(action);
+        }
+        actions.append(button('Consultar unidades', async () => { const u = await chooseUnit(group.units, 'Consultar unidades do modelo'); if (u) open(u); }));
+        body.append(actions); row.append(body); return row;
       }));
-      if (!groups.size) el('groups').textContent = 'Nenhuma casa não arquivada encontrada.';
+      if (!modelGroups.size) el('groups').textContent = 'Nenhum modelo encontrado.';
+      el('inventory-results').textContent = found.length + ' unidade(s) correspondem aos filtros · ' + modelGroups.size + ' modelo(s).';
       el('commercial-events').replaceChildren(...commercialEvents.map((v) => node('li',
         v.changed_at + ' UTC · ' + (units.find(u => u.id === v.inventory_id)?.data.name_for_site || 'Casa removida') +
         ' · ' + (stock[v.old_state] || 'Não registado / outro') + ' → ' + (stock[v.new_state] || 'Não registado / outro') + ' · ' + v.actor)));
