@@ -1,3 +1,14 @@
+# Correção local — modelos em várias categorias (26/11/2026)
+
+- [x] Um modelo com unidades disponíveis, reservadas e vendidas aparece uma vez em cada categoria aplicável, sem quantidades públicas.
+- [x] Uma única ficha/URL por modelo; página inicial inclui vendas de modelos que ainda têm disponibilidade.
+- [x] Cenários mistos, privacidade de rascunhos, pesquisa no browser e regressão Worker/ADMIN cobertos pelos testes de stock.
+- [ ] Publicar esta correção de código e verificar as três categorias no site real. Não requer migração ou alteração do inventário.
+
+Ver [evidência da gestão de stock](STOCK_POR_MODELO.md). As notas anteriores abaixo são preservadas como histórico.
+
+---
+
 # Atualização — stock por modelo e dados reais (26/11/2026)
 
 Esta secção prevalece quanto ao inventário e às migrações.

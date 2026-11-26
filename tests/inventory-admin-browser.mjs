@@ -103,7 +103,7 @@ export async function testInventoryAdmin({
       const html = await (await call('casas/?estado=' + category)).text();
       assert.equal(
         html.includes('data-card="' + u.slug + '"'),
-        category === state,
+        states.includes(category),
         'Public category ' + category,
       );
     }

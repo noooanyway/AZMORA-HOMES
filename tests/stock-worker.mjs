@@ -131,6 +131,11 @@ try {
     const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.route('**/*',async route=>{
       const r=route.request();if(!r.url().startsWith(origin))return route.abort();
+      const assetPath=new URL(r.url()).pathname;
+      if(assetPath.startsWith('/_astro/')){
+        const file='dist-cloudflare/client'+assetPath;
+        return route.fulfill({body:fs.readFileSync(file),contentType:assetPath.endsWith('.js')?'application/javascript':assetPath.endsWith('.css')?'text/css':'application/octet-stream'});
+      }
       const response=await mf.dispatchFetch(r.url(),{method:r.method(),headers:{...r.headers(),'Cf-Access-Jwt-Assertion':token},body:r.postDataBuffer()||undefined});
       const headers=Object.fromEntries(response.headers);delete headers['content-encoding'];delete headers['transfer-encoding'];
       await route.fulfill({status:response.status,headers,body:Buffer.from(await response.arrayBuffer())});
@@ -161,6 +166,35 @@ try {
     await page.getByText('Stock adicionado. Quantidades atualizadas. Mantém-se a publicação do modelo e um único anúncio público.',{exact:true}).waitFor();
     assert.equal((await json(await admin('dados'))).units.length,countBefore+2);
     assert.equal((await json(await call('api/casas/'))).length,catalog.length);
+    // Real mixed-stock journey: sell one, reserve another, keep one available.
+    const groupUnits=(await json(await admin('dados'))).units.filter(u=>u.state==='live' && u.data.inventory_group===groupLabel);
+    assert.ok(groupUnits.length>=3);
+    for(const [i,availability] of ['disponivel','reservado','vendido'].entries()){
+      const u=groupUnits[i];
+      await json(await admin('guardar',{id:u.id,revision:u.revision,state:'live',data:{...u.data,availability}}));
+    }
+    for(const category of ['disponivel','reservado','vendido']){
+      const listed=await json(await call('api/casas/?estado='+category));
+      const matches=listed.filter(h=>groupUnits.some(u=>u.slug===h.id));
+      assert.equal(matches.length,1);assert.equal(matches[0].availability,category);
+      assert.ok(!JSON.stringify(matches).includes('inventory_group'));
+      assert.ok(!JSON.stringify(matches).includes('quantity'));
+      await page.goto(base+'casas/?estado='+category);
+      await page.locator('[data-view="grid"][aria-pressed="true"]').waitFor();
+      const cards=page.locator('#results [data-card="'+matches[0].id+'"]');
+      assert.equal(await cards.count(),1);assert.ok(await cards.isVisible());
+      await page.locator('[name=q]').fill('ZZZ_MODELO_INEXISTENTE');
+      await cards.waitFor({state:'hidden'});
+      await page.locator('[name=q]').fill('');
+      await cards.waitFor({state:'visible'});
+      const embedded=JSON.parse(await page.locator('#catalog-data').textContent());
+      assert.equal(embedded.find(h=>h.id===matches[0].id).availability,category);
+    }
+    const sitemap=await (await call('sitemap.xml')).text();
+    assert.equal(sitemap.split('/casas/'+groupUnits[0].slug+'/').length-1,1);
+    const homepage=await (await call('')).text();
+    const sales=homepage.split('<h2>Casas vendidas</h2>')[1]?.split('</section>')[0];
+    assert.ok(sales && sales.includes(groupUnits[0].slug));
     assert.deepEqual(errors,[]);
   } finally {await browser.close();}
   console.log('OK: stock por quantidade, autenticação, validação, concorrência, agrupamento público, privacidade, cartões em seis larguras e remoção/eliminação pelo browser.');

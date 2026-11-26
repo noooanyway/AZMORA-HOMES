@@ -17,7 +17,7 @@ const hero =
   available.find((h) => h.media.length);
 const types = [...new Set(available.map((h) => h.typology).filter(Boolean))];
 // Known sale events come first; older listings without an event keep their existing order.
-const sold = houses.filter(h => h.availability === 'vendido')
+const sold = (Astro.locals.soldHouses ?? houses.filter(h => h.availability === 'vendido'))
   .sort((a, b) => (b.sale_order ?? 0) - (a.sale_order ?? 0)).slice(0, 3);
 const content = Astro.locals.siteSettings?.content;
 const displayedContent = content || defaults;

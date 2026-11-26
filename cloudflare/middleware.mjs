@@ -16,7 +16,11 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       if (!String(error?.message || '').includes('no such table: inventory_commercial_history')) throw error;
       ({ results } = await bindings.DB.prepare("SELECT data FROM inventory WHERE state='live' ORDER BY rowid").all());
     }
-    const catalog = publicModels(results.map((row) => ({ ...JSON.parse(row.data), sale_order: row.sale_order ?? null })));
+    const publishedUnits = results.map((row) => ({ ...JSON.parse(row.data), sale_order: row.sale_order ?? null }));
+    const requestedCategory = new URL(ctx.request.url).searchParams.get('estado');
+    const category = /^\/(casas|api\/casas)\/?$/.test(path) && ['disponivel','reservado','vendido'].includes(requestedCategory) ? requestedCategory : undefined;
+    const catalog = publicModels(publishedUnits, category);
+    if (path === '/' || path === '') ctx.locals.soldHouses = publicModels(publishedUnits, 'vendido').houses;
     ctx.locals.houses = catalog.houses;
     const requestedSlug = /^\/casas\/([^/]+)\/?$/.exec(path)?.[1];
     if (requestedSlug && catalog.aliases.has(requestedSlug)) {
