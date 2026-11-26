@@ -2,6 +2,24 @@
 
 O backup automático foi adiado. Não existe workflow de backup em `.github/workflows/`: a proposta anterior foi preservada em `docs/production/templates/backup.yml.disabled` e `scripts/backup.sh`, sem execução automática nem configuração. Não a mover ou ativar sem uma nova decisão. Não há subscrição ou armazenamento externo novo.
 
+## Correção do script — 26/11/2026
+
+A execução das 17:50 ficou incompleta depois da exportação D1. O erro reportado na antiga linha 86 era apenas o `catch` genérico; a operação que falhou foi a primeira listagem R2, na antiga linha 47. Em modo estrito, o acesso a `$page.result_info` lançava erro quando a Cloudflare omitia a propriedade na página final.
+
+Diagnóstico confirmado com GETs, sem escritas remotas: `per_page=1000` devolveu HTTP 200, `success=true` e 146 objetos, sem `result_info`; `per_page=2` devolveu dois objetos e paginação truncada com cursor. O token fornecido tinha acesso funcional; não se deve alargar permissões para resolver este erro. `result_info` e os seus campos são opcionais na [referência oficial da listagem R2](https://developers.cloudflare.com/api/resources/r2/subresources/buckets/subresources/objects/methods/list/).
+
+O SQL já descarregado (79 963 bytes) foi restaurado apenas em SQLite em memória: `integrity_check=ok` e `foreign_key_check` sem erros. O SHA-256 antes/depois é igual. A pasta original, incluindo `database.sql`, não foi escrita nem alterada; não contém fotografias nem manifesto. **Não é ainda uma cópia D1/R2 completa.**
+
+A correção está em `scripts/backup-manual.ps1` e `scripts/backup-r2.ps1`:
+
+- Aceita página final sem `result_info`. Uma página cheia sem metadados é seguida por uma consulta `start_after`, evitando presumir que terminou. Rejeita cursor ausente em página truncada, cursor repetido, objetos repetidos e metadados inválidos.
+- Faz a listagem inicial antes de exportar D1, detetando falhas de acesso/paginação antes de criar outra exportação.
+- Indica etapa, página ou número ordinal do objeto, HTTP e códigos Cloudflare. Usa mensagens conhecidas por correspondência exata; texto arbitrário, URLs, corpo de erros, chaves e dados pessoais são omitidos. Não imprime respostas brutas do Wrangler.
+- Não segue redirecionamentos. Respostas HTTP de erro não são gravadas como fotografias. Cada objeto é recebido em memória antes de gravar; o consumo de memória depende do tamanho do maior objeto. Mantém verificação de ETag/tamanho, relistagem e hashes; a ordem das propriedades JSON não provoca uma falsa alteração.
+- Preserva os ficheiros já descarregados quando falha. Não retoma nem sobrescreve uma pasta existente; uma nova execução cria uma pasta distinta. A opção `-PastaBackup` é exclusiva da verificação.
+
+Validação específica: `node --test tests/backup-manual.test.mjs tests/backup-r2.test.mjs` — 23 testes aprovados, com dados fictícios e servidor HTTP local para 401/403/404/429/500/502/302, paginação, sanitização, ETag/tamanho, relistagem, falha D1 e preservação de ficheiros. `npm test`: 56/56 aprovados; análise sintática PowerShell sem erros e `git diff --check` sem problemas. Leitura real adicional com o código corrigido: 146 objetos listados e uma amostra lida em memória com tamanho/ETag corretos. Não foi executado outro backup completo de produção, migração, restauro remoto, push ou deployment. Antes de usar a nova cópia para publicação, é necessário concluir e verificar o backup D1/R2 completo conforme o procedimento abaixo.
+
 ## Preparação, uma vez
 
 1. Usar o computador Windows do proprietário e confirmar que Node.js 24, Python 3.9 ou superior e as dependências do projeto estão instalados. Abrir PowerShell 7 (`pwsh`) e entrar no projeto:
@@ -13,7 +31,7 @@ python --version
 ```
 
 2. Se o Wrangler não estiver autenticado, executar `npx wrangler login` e concluir a autenticação no navegador. Não partilhar tokens nem colocar passwords nos comandos ou na conversa.
-3. No painel Cloudflare → R2 → Overview, anotar o **Account ID** de 32 caracteres. Em **Manage API Tokens → Create Account API token**, escolher **Admin Read only** e limitar a conta/validade conforme a interface permitir. Este token só pode ler, mas o acesso é ao R2 da conta, não apenas ao bucket. Guardar temporariamente em local seguro e revogar se deixar de ser necessário. Os tokens `Object Read only` do R2 são para a API S3 e **não funcionam** nesta API REST. Ver https://developers.cloudflare.com/r2/platform/troubleshooting/. O script pedirá o token em campo oculto; não o colocar em ficheiros, prints, capturas ou mensagens.
+3. No painel Cloudflare → R2 → Overview, anotar o **Account ID** de 32 caracteres. Em **Manage API Tokens → Create Account API token**, escolher **Admin Read only** e limitar a conta/validade conforme a interface permitir. Também foi confirmado nesta instalação o token personalizado com **Workers R2 Storage: Read**, limitado à conta correta. Este acesso REST de leitura é ao R2 da conta, não apenas ao bucket. Guardar temporariamente em local seguro e revogar se deixar de ser necessário. Os tokens `Object Read only` do R2 são para a API S3 e **não funcionam** nesta API REST. Ver https://developers.cloudflare.com/r2/platform/troubleshooting/. O script pedirá o token em campo oculto; não o colocar em ficheiros, prints, capturas ou mensagens.
 4. Confirmar espaço livre no computador e proteger a pasta com palavra-passe da conta Windows e cifragem do disco (BitLocker, se disponível). O backup não é cifrado pelo script e contém dados pessoais. Verificar a política de retenção com o proprietário.
 
 ## Fazer a cópia
@@ -25,7 +43,7 @@ Set-Location 'C:\Users\Utilizador\Documents\ChatGPT\AZMORA HOMES'
 .\scripts\backup-manual.ps1
 ```
 
-Introduzir o Account ID e o token R2 quando solicitado. O script exporta a D1 com o Wrangler, lista o bucket `azmora-fotos`, descarrega todos os objetos e respetivos metadados, confere tamanho e ETag, relista o bucket para detetar mudanças, verifica integridade SQLite e referências de fotografias e cria hashes SHA-256. A pasta resultante fica em `C:\Users\Utilizador\Azmora-Backups-Privados\AAAA-MM-DD_HH-mm-ss_identificador`, contendo `database.sql`, `photos`, `r2-metadata.json` e `manifest.json`.
+Introduzir o Account ID e o token R2 quando solicitado. O script valida primeiro a listagem do bucket `azmora-fotos`, exporta a D1 com o Wrangler, descarrega todos os objetos e respetivos metadados, confere tamanho e ETag, relista o bucket para detetar mudanças, verifica integridade SQLite e referências de fotografias e cria hashes SHA-256. A pasta resultante fica em `C:\Users\Utilizador\Azmora-Backups-Privados\AAAA-MM-DD_HH-mm-ss_identificador`, contendo `database.sql`, `photos`, `r2-metadata.json` e `manifest.json`.
 
 Só uma pasta com manifesto que passe na verificação é uma cópia concluída. Se houver erro, a pasta parcial é mantida para diagnóstico e **não deve ser considerada backup**. Se o R2 mudar durante a cópia, ou contiver nomes que não possam ser representados com segurança no Windows, o processo falha em vez de omitir ficheiros. A D1 e o R2 são obtidos sequencialmente, não num snapshot atómico; evitar alterações de inventário durante o backup. O ETag, tamanho e HTTPS detetam alterações durante a descarga; SHA-256 permite detetar alterações posteriores locais, mas não é uma assinatura externa nem compara obrigatoriamente um hash criptográfico fornecido pelo R2.
 
@@ -35,7 +53,7 @@ Para voltar a verificar uma cópia, substituir o caminho pelo indicado no fim da
 .\scripts\backup-manual.ps1 -Verificar -PastaBackup 'C:\Users\Utilizador\Azmora-Backups-Privados\NOME-DA-PASTA'
 ```
 
-O verificador recria a D1 em memória, verifica `PRAGMA integrity_check`, a lista de objetos, os hashes locais e que as imagens referidas pelo inventário existem. Não verifica o conteúdo visual de todas as imagens, nem garante um snapshot temporal atómico. O token não é guardado pelo script. Não foi executado um backup real nesta intervenção; foi testada apenas a verificação com dados sintéticos. A API REST R2 impõe limites de frequência; se uma conta tiver muitos objetos, rever os limites e eventuais falhas antes de confiar no procedimento.
+O verificador recria a D1 em memória, verifica `PRAGMA integrity_check`, a lista de objetos, os hashes locais e que as imagens referidas pelo inventário existem. Não verifica o conteúdo visual de todas as imagens, nem garante um snapshot temporal atómico. O token não é guardado pelo script. A validação atual da correção está descrita no início deste documento: diagnóstico remoto apenas em leitura, D1 original verificada em memória e backup completo ensaiado com dados sintéticos; ainda não foi concluída uma nova cópia real D1/R2. A API REST R2 impõe limites de frequência; se uma conta tiver muitos objetos, rever os limites e eventuais falhas antes de confiar no procedimento.
 
 ## Recuperação isolada — antes de qualquer reposição real
 
