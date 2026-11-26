@@ -1,3 +1,5 @@
+> **Atualização de 26/11/2026 — migração 0005:** aplicada na D1 remota por autorização do responsável. Antes da operação foi exportada uma cópia privada da D1 e verificada por restauro SQLite em memória e `integrity_check`; inventário, pedidos e histórico tinham as mesmas contagens após a migração. A lista remota indicou que não restam migrações pendentes. Não foi feita cópia R2 nesta operação e a verificação não garante um snapshot atómico entre serviços. O commit local `6076517`, que melhora o diagnóstico e recuperação do painel, ainda necessita de push e deployment para chegar ao site público. Testar o ADMIN real antes de considerar o problema resolvido.
+
 # Estado atual — preparação para entrega (26/11/2026)
 
 ## Concluído localmente
