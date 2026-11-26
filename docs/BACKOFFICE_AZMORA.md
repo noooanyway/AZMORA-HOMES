@@ -1,5 +1,17 @@
 # Backoffice da Azmora Homes
 
+> **Inventário híbrido — implementação local, ainda não publicada:** a funcionalidade descrita abaixo depende da migração aditiva 0006 e da publicação coordenada do código. Não foi aplicada à D1 remota.
+
+## Gestão por unidade e por modelo
+
+Cada ficha representa uma casa física. Em **Por unidade** pode procurar, abrir, duplicar e editar cada ficha; preço, fotografias e características permanecem individuais. Em **Por modelo** vê um resumo exclusivamente interno das casas não arquivadas. Para juntar unidades, abra cada ficha e escreva ou selecione exatamente o mesmo **Grupo de modelo (interno)**. Sem essa associação explícita ficam em «Sem grupo de modelo». Alterar o grupo não modifica as outras unidades.
+
+Os totais de disponíveis, reservadas e vendidas usam a situação comercial das unidades não arquivadas; «Por confirmar / em breve» também inclui estados antigos desconhecidos. O **stock conhecido** soma disponíveis e reservadas, sem incluir vendidas nem presumir que as restantes estão disponíveis. Os números de publicadas e de rascunhos referem-se à publicação e não devem ser somados aos estados comerciais.
+
+Na ficha escolha **Situação comercial**: disponível, reservada, vendida, em breve ou a confirmar. Para cancelar uma reserva volte a selecionar o estado correto; para concluir uma venda escolha vendida. Guarde a ficha e aguarde a confirmação. O estado de publicação é independente: publicar torna a ficha pública, rascunho ou arquivo retiram-na do site. Se outra pessoa guardar primeiro, reabra a ficha e reveja antes de voltar a guardar.
+
+O catálogo público mostra separadamente apenas as unidades publicadas disponíveis, reservadas ou vendidas; os estados por confirmar continuam acessíveis pelas fichas já publicadas, sem serem classificados como disponíveis. As casas reservadas e vendidas remetem para alternativas disponíveis. As vendas realizadas após a migração passam a ter histórico comercial. A secção «Casas vendidas» mostra até três casas vendidas e publicadas, dando prioridade às vendas com registo cronológico fiável; as restantes podem aparecer sem data. A secção fica oculta se não houver casas vendidas publicadas. Não se inventam datas de vendas antigas.
+
 > **Estado atual local:** o ADMIN permite editar e publicar configurações em conjunto. A pré-visualização é textual; ao recuperar uma versão, reveja as secções indicadas e o aviso sobre rascunhos. Existem textos comerciais repetidos que ainda precisam de reconciliação antes de usar o editor em produção. As instruções técnicas antigas abaixo são históricas; para operação diária use a secção de configurações no final deste documento.
 
 **Atualização de 24/11/2026:** para o domínio definitivo, contactos, variáveis e comandos de corte, seguir [Preparação final para produção](PRODUCAO_2026-11-24.md). O caminho de produção é agora `/admin/` em `https://www.azmorahomes.pt`; as referências abaixo a `/AZMORA-HOMES/` descrevem a configuração anterior. Não repetir os imports iniciais numa base já existente.
@@ -10,7 +22,7 @@ Abra **/admin** no domínio comercial. Entre com a sua conta autorizada e valide
 
 Arraste as fotografias para a ficha ou selecione vários ficheiros. Reveja cada legenda, use **Anterior**, **Seguinte** ou **Usar como capa** e confirme o resultado em **Pré-visualizar**. A pré-visualização é um resumo privado dos campos em edição. **Publicar alterações** atualiza o catálogo, a ficha, as escolhas no formulário, a comparação e o sitemap. Guardar uma ficha publicada como rascunho retira-a do catálogo após confirmação. As alterações à casa só ficam guardadas quando a operação termina com sucesso.
 
-**Duplicar ficha** cria uma nova unidade ao guardar. Confirme as fotografias, o equipamento, o preço e a situação da nova unidade antes de publicar. **Arquivar** retira o anúncio do site. Abra o filtro **Arquivados** para recuperar a ficha como rascunho. A eliminação definitiva exige que a unidade esteja arquivada e que o administrador escreva a referência apresentada. Se duas pessoas editarem a mesma ficha, a segunda recebe um aviso para a reabrir.
+**Duplicar ficha** cria uma nova unidade ao guardar. Confirme as fotografias, o equipamento, o preço e a situação da nova unidade antes de publicar. **Arquivar** retira o anúncio do site. Abra o filtro **Arquivados** para recuperar a ficha como rascunho. A eliminação definitiva exige que a unidade esteja arquivada e que o administrador escreva «ELIMINAR». Se duas pessoas editarem a mesma ficha, a segunda recebe um aviso para a reabrir.
 
 ## Funcionamento
 
@@ -53,7 +65,7 @@ O ensaio usa D1 e R2 efémeros, chaves geradas para o teste e uma resposta JWKS 
 
 ## Configurações do website — desenvolvimento ainda não concluído
 
-Existe uma primeira categoria local, **Configurações do website**, para contactos, horários, idiomas e ligações sociais. Permite guardar rascunho, pré-visualizar, publicar e recuperar uma versão. O email público não altera os destinatários do CRM. As restantes categorias continuam por implementar e a funcionalidade não está pronta para produção. A migração `0005_site_settings.sql` não foi aplicada remotamente. Inventário e CRM mantêm os procedimentos acima.
+**Nota histórica:** esta secção descrevia a primeira versão do editor. A migração 0005 foi aplicada e as categorias de conteúdos foram implementadas posteriormente; consultar as instruções mais atuais neste manual e a master checklist. O email público não altera os destinatários do CRM.
 
 
 ## Configurações do website — ensaio local
