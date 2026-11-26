@@ -1,5 +1,17 @@
 # Backoffice da Azmora Homes
 
+## Atualização local — stock e anúncio por modelo (26/11/2026)
+
+- **Adicionar stock** permite indicar de 1 a 50 casas físicas e escolher Disponíveis ou Por confirmar. Copia as características da unidade escolhida, associa automaticamente o grupo de origem e mantém a sua publicação. Quantidades são sempre calculadas a partir das fichas físicas, não de um número sem registos. Não adicionar cópias de teste para representar stock real.
+- **Adicionar unidade / Duplicar ficha** mantém a edição detalhada; ao guardar, associa a nova unidade e a origem ao mesmo grupo. Abandonar a edição não altera a origem.
+- **Catálogo público:** um anúncio por grupo explícito, sem quantidades, referências internas ou lista de unidades. A disponibilidade dá prioridade a Disponível, Reservada, Por confirmar, Em breve e Vendida, considerando apenas unidades publicadas. Unidades em rascunho não alteram o anúncio público. A ficha usa as características/preço de uma unidade no estado apresentado; mantém o URL da primeira unidade publicada e redireciona os URLs das outras publicadas. Não agrupa automaticamente casas diferentes da mesma marca.
+- **Retirar do inventário / Retirar unidade:** arquiva pelo cartão, retira do stock e da publicação, preservando dados. No cartão de uma unidade arquivada, **Eliminar cópia** exige escrever ELIMINAR. A eliminação afeta apenas a unidade escolhida; não apaga fotografias partilhadas.
+- Para corrigir grupos antigos, atribua exatamente o mesmo **Grupo de modelo (interno)** às fichas do mesmo modelo. Casas com características comerciais diferentes não devem ser agrupadas por mera semelhança do nome.
+- Quantidades e stock comercial destacados nos cartões são internos. Disponíveis + reservadas formam o stock comercial; vendidas, por confirmar e arquivadas são identificadas separadamente.
+
+Esta atualização de código ainda requer publicação. A atualização dos dados de produção foi autorizada separadamente: 15 casas originais disponíveis/publicadas; três cópias de teste Atlas arquivadas; dois testes anteriores mantidos arquivados.
+
+
 > **Redesign local de 26/11/2026:** cartões e ações rápidas concluídos; [testes, limites e passos de publicação](production/VALIDACAO_INVENTARIO_ADMIN.md). As instruções de gestão seguintes descrevem esta versão local, ainda sem push/deployment nesta execução.
 
 > **Inventário híbrido — implementação local, ainda não publicada:** a funcionalidade descrita abaixo depende da migração aditiva 0006 e da publicação coordenada do código. Não foi aplicada à D1 remota.

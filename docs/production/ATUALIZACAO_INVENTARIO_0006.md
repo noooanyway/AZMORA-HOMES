@@ -1,5 +1,8 @@
 # Atualização do inventário — migração 0006
 
+> Estado mais recente (26/11/2026): nova consulta remota confirmou **zero migrações pendentes**. A 0006 já está aplicada; não voltar a aplicá-la nem criar outra para stock por modelo. Os passos abaixo são o procedimento histórico, condicionado à listagem real. Ver STOCK_POR_MODELO.md.
+
+
 > Atualização de 26/11/2026: restauro integral do backup real e ensaio 0006/ADMIN/rollback aprovados. Ver [evidência e limites](RESTAURO_0006_VALIDADO.md). Produção inalterada; atualizar o backup se houve novas escritas e reconfirmar pendências antes da intervenção real.
 
 Preparação local. Não aplicada em produção. As consultas de 26/11/2026 identificaram apenas 0006 pendente; confirmar novamente no momento da intervenção.

@@ -1,3 +1,17 @@
+# Atualização — stock por modelo e dados reais (26/11/2026)
+
+Esta secção prevalece quanto ao inventário e às migrações.
+
+- [x] Consulta remota: nenhuma migração pendente; 0006 já aplicada antes desta intervenção. Não foi aplicada uma migração nesta execução.
+- [x] Por instrução explícita do responsável: 15 casas originais publicadas como Disponível; três cópias Atlas de teste arquivadas; dois testes anteriores preservados arquivados.
+- [x] Backup D1 anterior, ensaio isolado e comparação após alteração: 20 registos preservados, fotografias/CRM/configurações/migrações inalterados e históricos anteriores mantidos. API pública confirmou 15 disponíveis e zero anúncios de teste/cópia.
+- [x] Implementação local: adicionar stock por quantidade, associação ao grupo na duplicação, anúncio único por grupo, quantidades privadas e remoção pelo cartão.
+- [ ] Publicar a atualização de código após validação final; testar ações do ADMIN no deployment publicado. Não foi feito push/deployment nesta intervenção.
+
+Evidência e limites: [gestão de stock por modelo](STOCK_POR_MODELO.md).
+
+---
+
 # Estado atual — restauro real validado (26/11/2026)
 
 Esta secção prevalece sobre os registos históricos abaixo quanto ao backup e à migração 0006. Evidência: [restauro integral validado](RESTAURO_0006_VALIDADO.md).

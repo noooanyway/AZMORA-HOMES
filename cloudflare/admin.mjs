@@ -148,6 +148,21 @@ export const ALL = async ({ request, params }) => {
   if (input.id && !existing) return reply('Casa inexistente.', 404);
   if (existing && existing.revision !== input.revision)
     return reply('A ficha foi alterada. Reabra-a antes de guardar.', 409);
+  if (action === 'adicionar-unidades') {
+    if (!existing || existing.state === 'archived' || !Number.isInteger(input.quantity) || input.quantity < 1 || input.quantity > 50 || !['disponivel','por_confirmar'].includes(input.availability))
+      return reply('Escolha uma ficha ativa e entre 1 e 50 unidades, com situação confirmada.', 400);
+    const source = JSON.parse(existing.data);
+    const group = source.inventory_group?.trim() || source.name_for_site.slice(0, 120);
+    const statements = [];
+    for (let n = 0; n < input.quantity; n++) {
+      const id = crypto.randomUUID(), slug = 'unidade-' + id;
+      const data = {...source, id, media_slug:slug, inventory_group:group, reference_azmora:null, featured:false, availability:input.availability, publish:existing.state === 'live'};
+      statements.push(db.prepare('INSERT INTO inventory(id,slug,data,state,actor) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM inventory WHERE id=? AND revision=?)').bind(id,slug,JSON.stringify(data),existing.state,actor,existing.id,existing.revision));
+    }
+    statements.push(db.prepare('UPDATE inventory SET data=?,actor=?,revision=revision+1,updated=CURRENT_TIMESTAMP WHERE id=? AND revision=?').bind(JSON.stringify({...source,inventory_group:group}),actor,existing.id,existing.revision));
+    const results = await db.batch(statements);
+    return results.at(-1).meta.changes ? Response.json({ok:true}) : reply('A ficha foi alterada. Reabra-a.',409);
+  }
   if (action === 'eliminar') {
     if (
       !existing ||
@@ -225,6 +240,19 @@ export const ALL = async ({ request, params }) => {
     publish: state === 'live',
     catalogue_preview_allowed: false,
   };
+  if (!existing && input.source) {
+    if (typeof input.source !== 'object' || typeof input.source.id !== 'string' || !Number.isInteger(input.source.revision)) return reply('Origem da unidade inválida.',400);
+    const source = await db.prepare('SELECT * FROM inventory WHERE id=?').bind(input.source.id).first();
+    if (!source || source.revision !== input.source.revision) return reply('A ficha de origem foi alterada. Reabra-a.',409);
+    const sourceData = JSON.parse(source.data);
+    const group = sourceData.inventory_group?.trim() || sourceData.name_for_site.slice(0,120);
+    data.inventory_group = group;
+    const results = await db.batch([
+      db.prepare('INSERT INTO inventory(id,slug,data,state,actor) SELECT ?,?,?,?,? WHERE EXISTS(SELECT 1 FROM inventory WHERE id=? AND revision=?)').bind(id,slug,JSON.stringify(data),state,actor,source.id,source.revision),
+      db.prepare('UPDATE inventory SET data=?,actor=?,revision=revision+1,updated=CURRENT_TIMESTAMP WHERE id=? AND revision=?').bind(JSON.stringify({...sourceData,inventory_group:group}),actor,source.id,source.revision),
+    ]);
+    return results[0].meta.changes ? Response.json({ok:true,id}) : reply('A ficha de origem foi alterada. Reabra-a.',409);
+  }
   const result = existing
     ? await db
         .prepare(

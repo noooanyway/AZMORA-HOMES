@@ -80,7 +80,7 @@ try {
     for (const stmt of statements) await db.prepare(stmt).run();
   }
   // Deliberately mark only two local fixtures available; production is never touched.
-  await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','disponivel','$.inventory_group','Modelo visual sintético') WHERE slug IN ('ohara-734-com-terraco-t2','irm-super-mercure-t2')").run();
+  await db.prepare("UPDATE inventory SET data=json_set(data,'$.availability','disponivel','$.inventory_group',slug) WHERE slug IN ('ohara-734-com-terraco-t2','irm-super-mercure-t2')").run();
   const call = (path, opts = {}) => mf.dispatchFetch(base + path, opts);
   const admin = (action, body) =>
     call('admin/' + (action ? action + '/' : ''), {
@@ -423,7 +423,7 @@ try {
   const updateUnit = async (row, values, state = row.state) => admin('guardar', {id:row.id,revision:row.revision,state,data:{...row.data,...values}});
   let a = await getUnit(a0.id), b = await getUnit(b0.id);
   await json(await updateUnit(a,{name_for_site:'Unidade sintética A',inventory_group:'Modelo secreto sintético'}));
-  await json(await updateUnit(b,{name_for_site:'Unidade sintética B',inventory_group:'Modelo secreto sintético'}));
+  await json(await updateUnit(b,{name_for_site:'Unidade sintética B',inventory_group:'Modelo secreto sintético B'}));
   a=await getUnit(a0.id); b=await getUnit(b0.id);
   await json(await updateUnit(a,{availability:'reservado'}));
   await json(await updateUnit(b,{availability:'reservado'}));
@@ -480,7 +480,7 @@ try {
   const dashboard = await json(await admin('dados'));
   assert.equal(dashboard.units.length, 16);
   const unit = dashboard.units[0],
-    data = { ...unit.data, name_for_site: 'Teste de inventário' };
+    data = { ...unit.data, inventory_group:null, name_for_site: 'Teste de inventário' };
 
   const original = unit.data.name_for_site;
   const changed = {
@@ -701,7 +701,7 @@ try {
       await page.locator('#form').getByRole('button',{name:'Publicar alterações'}).click();
       await page.getByText('Alterações guardadas.').waitFor();
       assert.equal((await getUnit(a0.id)).data.inventory_group,'Grupo editado no navegador');
-      await db.prepare("UPDATE inventory SET data=json_set(data,'$.inventory_group','Modelo visual sintético') WHERE id=?").bind(a0.id).run();
+      await db.prepare("UPDATE inventory SET data=json_set(data,'$.inventory_group',slug) WHERE id=?").bind(a0.id).run();
       await page.reload();
       await page.locator('#list .unit').first().waitFor();
       failSettingsLoad = true;

@@ -78,7 +78,13 @@ export async function testInventoryAdmin({
       assert.ok(content.includes(text), text + ' in ' + content);
   }
   async function publicState(u, state) {
+    const units = (await json(await admin('dados'))).units.filter(x => x.state === 'live' && x.data.inventory_group === group);
+    const first = units[0];
+    const states = units.map(x => x.data.availability);
+    state = ['disponivel','reservado','por_confirmar','em_breve','vendido'].find(x => states.includes(x));
+    u = {...u,slug:first.slug};
     const data = await json(await call('api/casas/'));
+    assert.equal(data.filter(x => units.some(unit => unit.slug === x.id)).length,1, 'Apenas um anúncio público por modelo');
     const publicUnit = data.find((x) => x.id === u.slug);
     assert.ok(publicUnit, 'Published unit must remain public');
     assert.equal(publicUnit.availability, state);

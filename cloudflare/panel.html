@@ -94,7 +94,9 @@
     .inventory-view:not(.cards-view) .actions button { flex:0 1 auto; }
     .model-counts { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:0; }
     .model-counts span { padding:6px 8px; background:#f2eee4; border-radius:4px; font-size:.9rem; }
-    .model-stock { margin:0; font-weight:600; }
+    .model-stock { margin:0; font-weight:600; font-size:1.25rem; padding:12px; background:#e4ece6; border-radius:6px; }
+    #stock-choice { width:min(520px,94vw); border-radius:12px; }
+    #stock-choice label { display:grid; gap:8px; margin:16px 0; }
     #unit-choice { width:min(680px,94vw); border-radius:8px; }
     #unit-choice[open] { display:flex; flex-direction:column; }
     #unit-choice h2 { margin-top:0; flex-shrink:0; }
@@ -108,7 +110,9 @@
       .inventory-view:not(.cards-view) .unit { align-items:flex-start; }
       .inventory-view:not(.cards-view) .inventory-photo { width:72px; flex-basis:72px; }
       .inventory-view:not(.cards-view) .model-counts { grid-template-columns:1fr; }
-      #unit-choice { padding:16px; }
+      #stock-choice { width:min(520px,94vw); border-radius:12px; }
+    #stock-choice label { display:grid; gap:8px; margin:16px 0; }
+    #unit-choice { padding:16px; }
       .unit-option { padding:8px; }
       .unit-option .inventory-photo { width:64px; flex-basis:64px; }
     }
@@ -526,6 +530,35 @@
         dialog.showModal();
       });
     }
+    function chooseStock(u) {
+      return new Promise(resolve => {
+        const dialog = node('dialog',''); dialog.id='stock-choice';
+        const title=node('h2','Adicionar stock'); title.id='stock-choice-title';dialog.setAttribute('aria-labelledby',title.id);
+        const form=document.createElement('form');
+        const amountLabel=node('label','Quantidade de casas físicas a adicionar');
+        const amount=document.createElement('input');amount.type='number';amount.min='1';amount.max='50';amount.step='1';amount.value='1';amount.required=true;amountLabel.append(amount);
+        const stateLabel=node('label','Situação das novas unidades');
+        const state=document.createElement('select');
+        state.add(new Option('Por confirmar','por_confirmar'));state.add(new Option('Disponíveis para venda','disponivel'));stateLabel.append(state);
+        const actions=node('div','');actions.className='actions';
+        const cancel=button('Cancelar',()=>dialog.close());
+        const submit=document.createElement('button');submit.type='submit';submit.textContent='Adicionar ao stock';
+        let result=null;
+        form.onsubmit=e=>{e.preventDefault();if(!form.reportValidity())return;result={quantity:Number(amount.value),availability:state.value};dialog.close();};
+        actions.append(cancel,submit);form.append(amountLabel,stateLabel,node('p','Confirme que estas casas existem. Copiamos as características para revisão e mantemos a publicação do modelo. Não criamos anúncios repetidos.'),actions);
+        dialog.append(title,node('p',u.data.inventory_group || u.data.name_for_site),form);document.body.append(dialog);
+        dialog.addEventListener('close',()=>{dialog.remove();resolve(result);},{once:true});dialog.showModal();amount.focus();
+      });
+    }
+    async function removeUnit(u) {
+      if (u.state === 'archived') {
+        if (prompt('Eliminar definitivamente esta unidade: ' + u.data.name_for_site + '? Escreva ELIMINAR. As outras unidades não são eliminadas.') !== 'ELIMINAR') return;
+        await task(async () => { await api('eliminar/', {id:u.id,revision:u.revision,confirm:u.slug}); await load(); msg('Unidade eliminada.'); });
+      } else {
+        if (!confirm('Retirar ' + u.data.name_for_site + ' do stock e do site? A unidade fica arquivada e pode ser recuperada.')) return;
+        await task(async () => { await api('guardar/', {id:u.id,revision:u.revision,state:'archived',data:u.data}); await load(); msg('Unidade arquivada. Pode eliminá-la no cartão ou recuperá-la na ficha.'); });
+      }
+    }
     async function changeAvailability(items, to, label) {
       const u = await chooseUnit(items, label + ' — escolher unidade');
       if (!u || !confirm(label + ': ' + u.data.name_for_site + '?\n' + (u.state === 'live' ? 'O estado será atualizado no catálogo público.' : 'A unidade continuará como rascunho.'))) return;
@@ -615,7 +648,7 @@
           const details = node('span', [u.data.model, u.data.typology, u.data.public_price_eur == null ? 'Preço sob consulta' : new Intl.NumberFormat('pt-PT', {style:'currency',currency:'EUR'}).format(u.data.public_price_eur)].filter(Boolean).join(' · '));
           details.className = 'unit-meta';
           title.append(node('small', states[u.state] + ' · ' + (stock[u.data.availability] || 'Estado não classificado')), details);
-          body.append(title, button('Abrir ficha', () => open(u)));
+          body.append(title, button('Abrir ficha', () => open(u)), button(u.state === 'archived' ? 'Eliminar cópia' : 'Retirar do inventário', () => removeUnit(u)));
           row.append(photo, body);
           return row;
         }),
@@ -644,13 +677,21 @@
         const quantities = node('div',''); quantities.className = 'model-counts';
         for (const [label,value] of [['Disponíveis',counts.disponivel],['Reservadas',counts.reservado],['Vendidas',counts.vendido],['Por confirmar / em breve',pending]]) quantities.append(node('span', label + ': ' + value));
         const total = node('p', 'Stock comercial: ' + (counts.disponivel + counts.reservado)); total.className = 'model-stock';
-        body.append(node('h3', group.label),meta,quantities,total);
+        body.append(node('h3', group.label),meta,total,quantities);
         const archived = group.units.length - activeUnits.length;
+        body.append(node('small', 'Quantidades internas · um anúncio público por modelo.'));
         if (archived) body.append(node('small', archived + ' unidade(s) arquivada(s), fora das contagens.'));
         const actions = node('div',''); actions.className='actions';
         actions.append(button('Adicionar unidade', async () => {
           const u = await chooseUnit(group.units, 'Adicionar unidade — escolher ficha de origem');
-          if (u) { open(u,true); msg('Nova unidade por confirmar. Reveja fotografias, características e preço antes de guardar. A unidade original mantém-se intacta.'); }
+          if (u) { open(u,true); msg('Reveja a unidade antes de guardar. Para acrescentar várias unidades internas, utilize Adicionar stock.'); }
+        }));
+        actions.append(button('Adicionar stock', async () => {
+          const u = await chooseUnit(activeUnits, 'Adicionar stock — escolher características');
+          if (!u) return;
+          const choice = await chooseStock(u);
+          if (!choice) return;
+          await task(async () => { await api('adicionar-unidades/', {id:u.id,revision:u.revision,...choice}); await load(); msg('Stock adicionado. Quantidades atualizadas. Mantém-se a publicação do modelo e um único anúncio público.'); });
         }));
         for (const [label,from,to] of [['Reservar',['disponivel'],'reservado'],['Cancelar reserva',['reservado'],'disponivel'],['Registar venda',['disponivel','reservado'],'vendido']]) {
           const items = eligible(from);
@@ -658,6 +699,7 @@
           action.disabled = !items.length; actions.append(action);
         }
         actions.append(button('Consultar unidades', async () => { const u = await chooseUnit(group.units, 'Consultar unidades do modelo'); if (u) open(u); }));
+        actions.append(button('Retirar unidade', async () => { const u = await chooseUnit(group.units, 'Retirar unidade — escolher casa'); if (u) await removeUnit(u); }));
         body.append(actions); row.append(body); return row;
       }));
       if (!modelGroups.size) el('groups').textContent = 'Nenhum modelo encontrado.';
@@ -753,7 +795,9 @@
       }
       el('fields').append(f);
     }
+    let duplicateSource = null;
     function open(u, duplicate = false) {
+      duplicateSource = duplicate ? {id:u.id,revision:u.revision} : null;
       current = duplicate ? null : u;
       const d = u?.data || {};
       el('inventory-groups').replaceChildren(...[...new Set(units.map(x => x.data.inventory_group?.trim()).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'pt')).map(value => { const option = document.createElement('option'); option.value = value; return option; }));
@@ -875,6 +919,7 @@
           id: current?.id,
           revision: current?.revision,
           data: data(),
+          source: duplicateSource,
           state,
         });
         await finish('Alterações guardadas.');

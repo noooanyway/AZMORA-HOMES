@@ -1,3 +1,4 @@
+import { publicModels } from './public-models.mjs';
 import { env as bindings } from 'cloudflare:workers';
 import { defineMiddleware } from 'astro:middleware';
 export const onRequest = defineMiddleware(async (ctx, next) => {
@@ -15,7 +16,12 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       if (!String(error?.message || '').includes('no such table: inventory_commercial_history')) throw error;
       ({ results } = await bindings.DB.prepare("SELECT data FROM inventory WHERE state='live' ORDER BY rowid").all());
     }
-    ctx.locals.houses = results.map((row) => ({ ...JSON.parse(row.data), sale_order: row.sale_order ?? null }));
+    const catalog = publicModels(results.map((row) => ({ ...JSON.parse(row.data), sale_order: row.sale_order ?? null })));
+    ctx.locals.houses = catalog.houses;
+    const requestedSlug = /^\/casas\/([^/]+)\/?$/.exec(path)?.[1];
+    if (requestedSlug && catalog.aliases.has(requestedSlug)) {
+      return new Response(null, {status:302,headers:{Location:base + '/casas/' + catalog.aliases.get(requestedSlug) + '/', 'Cache-Control':'no-store'}});
+    }
     // During rollout older databases have no settings table; use the built-in values.
     try {
       const settings = await bindings.DB.prepare('SELECT published FROM site_settings WHERE id=1').first();

@@ -1,3 +1,4 @@
+import { publicModels } from './public-models.mjs';
 import { limited } from './inventory.mjs';
 
 export const islands = [
@@ -208,16 +209,12 @@ export async function submitContact(request, env, send = fetch) {
       ? Response.json({ ok: true, id: existing.id })
       : reply('O pedido foi alterado. Atualize a página antes de enviar.', 409);
   const houses = [];
+  const rows = data.houses.length ? (await db.prepare("SELECT data FROM inventory WHERE state='live' ORDER BY rowid").all()).results : [];
+  const catalog = publicModels(rows.map(row => JSON.parse(row.data)));
   for (const slug of data.houses) {
-    const house = await db
-      .prepare("SELECT data FROM inventory WHERE slug=? AND state='live'")
-      .bind(slug)
-      .first();
-    if (!house)
-      return reply(
-        'Uma casa selecionada já não está disponível. Atualize a seleção.',
-      );
-    const listing = JSON.parse(house.data);
+    const canonical = catalog.aliases.get(slug) || slug;
+    const listing = catalog.houses.find(h => h.media_slug === canonical);
+    if (!listing) return reply('Uma casa selecionada já não está disponível. Atualize a seleção.');
     if (['reservado', 'vendido'].includes(listing.availability))
       return reply('Uma casa selecionada está reservada ou vendida. Atualize a seleção para escolher alternativas.');
     houses.push({ slug, name: listing.name_for_site });
