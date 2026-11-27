@@ -105,3 +105,14 @@ Para rever antes de publicar, use **Pré-visualizar**: o painel mostra um resumo
 Os campos SEO vazios utilizam os metadados automáticos. As alterações são servidas no HTML público após publicação sem novo deployment; o build estático mantém os valores incorporados. Fotografias e casas são geridas no inventário existente. Políticas legais e destinatários de notificações não são editáveis aqui. O uso real em produção só é possível depois de migrar e publicar com autorização e realizar verificações.
 
 **FAQ e informação comercial:** no campo «Origem da resposta», escolha uma área comercial para preencher a resposta automaticamente ou «Resposta personalizada» para texto livre. A pergunta, a ordem e a visibilidade continuam editáveis. A pré-visualização mostra o texto comercial atual do formulário. Revise os textos livres da página inicial, Sobre Nós e perguntas personalizadas para não repetirem condições comerciais, que devem ser mantidas na secção Informação comercial. Perguntas antigas exatamente iguais aos valores originais são associadas automaticamente; perguntas alteradas são preservadas como texto livre.
+
+
+## Duplicar uma ficha ou adicionar stock (27/11/2026)
+
+- **Duplicar ficha** cria uma casa independente, em rascunho e com disponibilidade por confirmar. Mostra confirmação, remove o grupo herdado e conserva os restantes campos e fotografias como ponto de partida. Reveja descrição, medidas, equipamento, fotografias, marca e modelo antes de publicar. Não publique condições herdadas que não correspondam à nova casa.
+- **Adicionar unidade** no cartão por modelo serve para outra casa física do mesmo modelo. Mostra confirmação e conserva o agrupamento. O servidor exige esta escolha explícita e rejeita marca, modelo ou tipologia diferentes da origem.
+- **Adicionar stock** mantém a gestão de quantidades internas; não cria anúncios repetidos dentro da mesma categoria.
+- Uma casa diferente já agrupada incorretamente deve ter o campo **Grupo de modelo (interno)** vazio ou um grupo próprio. Alterar apenas o nome não altera o grupo.
+- Os exemplos nos campos da ficha são placeholders, nunca valores automaticamente guardados.
+
+A O’Hara T3 publicada e a O’Hara T3 arquivada foram retiradas do grupo Atlas e associadas ao seu próprio grupo. A publicação e os estados foram preservados. A descrição e as medidas herdadas da Atlas precisam de confirmação pelos proprietários.

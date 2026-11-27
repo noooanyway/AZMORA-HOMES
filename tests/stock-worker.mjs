@@ -195,6 +195,28 @@ try {
     const homepage=await (await call('')).text();
     const sales=homepage.split('<h2>Casas vendidas</h2>')[1]?.split('</section>')[0];
     assert.ok(sales && sales.includes(groupUnits[0].slug));
+    await page.goto(base+'admin/');await page.locator('#list article').first().waitFor();
+    await page.locator('#list article').filter({hasText:source.data.name_for_site}).first().getByRole('button',{name:'Abrir ficha',exact:true}).click();
+    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Duplicar ficha',exact:true}).click();
+    assert.equal(await page.locator('#heading').textContent(),'Editar casa');
+    page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Duplicar ficha',exact:true}).click();
+    assert.equal(await page.getByLabel('Grupo de modelo (interno)').inputValue(),'');
+    await page.getByLabel('Nome da casa',{exact:true}).fill('Casa independente QA');
+    await page.getByLabel('Marca',{exact:true}).fill('Outra marca');
+    await page.getByLabel('Modelo',{exact:true}).fill('Outro modelo');
+    await page.locator('#fields').getByLabel('Situação comercial').selectOption('disponivel');
+    await page.getByRole('button',{name:'Publicar alterações',exact:true}).click();
+    await page.getByText('Alterações guardadas.',{exact:true}).waitFor();
+    const independent=(await json(await admin('dados'))).units.find(u=>u.data.name_for_site==='Casa independente QA');
+    assert.ok(!independent.data.inventory_group);
+    assert.ok((await json(await call('api/casas/'))).some(h=>h.id===independent.slug));
+    assert.equal((await call('casas/'+independent.slug+'/')).status,200);
+    const original=(await json(await admin('dados'))).units.find(u=>u.id===source.id);
+    const forbidden=await admin('guardar',{state:'draft',source:{id:original.id,revision:original.revision,mode:'same-model'},data:{...original.data,brand:'Different'}});
+    assert.equal(forbidden.status,400);
+    await page.getByRole('button',{name:'Adicionar casa',exact:true}).click();
+    assert.equal(await page.getByLabel('Nome da casa',{exact:true}).inputValue(),'');
+    assert.match(await page.getByLabel('Nome da casa',{exact:true}).getAttribute('placeholder'),/Ex\.:/);
     assert.deepEqual(errors,[]);
   } finally {await browser.close();}
   console.log('OK: stock por quantidade, autenticação, validação, concorrência, agrupamento público, privacidade, cartões em seis larguras e remoção/eliminação pelo browser.');

@@ -1,3 +1,19 @@
+# Correção de duplicação e acabamento visual — 27/11/2026
+
+- [x] Duplicar ficha cria anúncio independente; adicionar unidade mantém explicitamente o modelo, com confirmação e validação no servidor.
+- [x] Exemplos nos campos de criação, sem preencher dados fictícios.
+- [x] Validação: 64 testes automatizados; `astro check` sem erros (dois avisos informativos preexistentes de returnValue); builds estático e Cloudflare; `tests/stock-worker.mjs` com cancelamento/aceitação de duplicação, publicação independente, rejeição de marca incompatível e placeholders; Worker/ADMIN e `git diff --check`.
+- [x] Ensaio visual: botões alinhados sem separador a 360/390/768/1440 px; secção vendidas nos temas claro/escuro. Capturas locais em `.qa/sold-section-*`.
+- [x] Grupo das duas O’Hara T3 corrigido na D1 a pedido do utilizador; a publicada disponível aparece na API pública. A arquivada continua arquivada.
+- [x] Comparação dos backups antes/depois: 23 registos preservados, só grupo/revisão/autor/data alterados em duas fichas e duas entradas de atividade acrescentadas. Uploads, CRM, configurações e histórico comercial inalterados. Backups privados em `correcao-grupo-2026-11-27`.
+- [x] Removida divisória assimétrica do catálogo; secção de vendidas com fundo próprio nos dois temas.
+- [ ] Proprietários: rever descrição, medidas e equipamentos da O’Hara T3 que foram copiados da Atlas.
+- [ ] Publicar as correções locais de ADMIN/Worker e apresentação em conjunto; não requer migração. Depois atualizar as abas do ADMIN e confirmar a duplicação em produção. Nenhum push ou deployment nesta execução.
+
+As secções seguintes preservam o histórico; esta nota distingue a correção de dados já aplicada do código ainda local.
+
+---
+
 # Correção local — envio de fotografias no iPhone (27/11/2026)
 
 - [x] Alternativa automática JPEG quando a exportação WebP falha; libertação de memória por fotografia.

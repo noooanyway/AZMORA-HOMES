@@ -248,7 +248,8 @@ export async function testInventoryAdmin({
     'Todos os campos originais e media preservados; histórico comercial contém transições e autor exatos',
   );
 
-  // Add from the chosen source, explicitly review and save the new independent unit.
+  // Explicit confirmation before adding a unit of the same model.
+  page.once('dialog', d => d.accept());
   await card()
     .getByRole('button', { name: 'Adicionar unidade', exact: true })
     .click();
@@ -507,6 +508,7 @@ export async function testInventoryAdmin({
     single.data.name_for_site,
   );
   await page.locator('#back').click();
+  page.once('dialog', d => d.accept());
   await singleCard.getByRole('button', { name: 'Adicionar unidade' }).click();
   assert.equal(
     await page.locator('#unit-choice').evaluate((d) => d.open),

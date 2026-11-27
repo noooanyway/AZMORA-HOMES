@@ -684,7 +684,7 @@
         const actions = node('div',''); actions.className='actions';
         actions.append(button('Adicionar unidade', async () => {
           const u = await chooseUnit(group.units, 'Adicionar unidade — escolher ficha de origem');
-          if (u) { open(u,true); msg('Reveja a unidade antes de guardar. Para acrescentar várias unidades internas, utilize Adicionar stock.'); }
+          if (u) { open(u,true,true); msg('Reveja a unidade antes de guardar. Para acrescentar várias unidades internas, utilize Adicionar stock.'); }
         }));
         actions.append(button('Adicionar stock', async () => {
           const u = await chooseUnit(activeUnits, 'Adicionar stock — escolher características');
@@ -789,6 +789,7 @@
           for (const [value, title] of Object.entries(stock))
             i.add(new Option(title, value));
         i.required = ['brand', 'name_for_site'].includes(k);
+        if (i.tagName !== 'SELECT') i.placeholder = ({name_for_site:'Ex.: O’Hara 834 — T3',brand:'Ex.: O’Hara',model:'Ex.: 834',inventory_group:'Deixe vazio para um anúncio independente',reference_azmora:'Ex.: AZ-023',description_azmora:'Descreva esta casa: disposição, equipamento e estado real.',typology:'Ex.: T3',condition:'Ex.: Usada',year:'Ex.: 2018',public_price_eur:'Vazio = preço sob consulta',equipment_summary:'Um equipamento confirmado por linha',seo_title:'Vazio = título automático',seo_description:'Vazio = resumo automático'}[k] || (t === 'num' ? 'Valor confirmado; deixe vazio se desconhecido' : 'Indique apenas informação confirmada'));
         inputs.set(k, i);
         l.append(i);
         g.append(l);
@@ -796,8 +797,9 @@
       el('fields').append(f);
     }
     let duplicateSource = null;
-    function open(u, duplicate = false) {
-      duplicateSource = duplicate ? {id:u.id,revision:u.revision} : null;
+    function open(u, duplicate = false, sameModel = false) {
+      if (duplicate && !confirm(sameModel ? 'Adicionar uma unidade do MESMO modelo? Ficará no mesmo grupo e anúncio. Para uma casa diferente, use Duplicar ficha.' : 'Criar uma CASA DIFERENTE a partir desta ficha? O grupo será removido para criar um anúncio independente. Reveja todas as características e fotografias copiadas antes de publicar.')) return;
+      duplicateSource = duplicate && sameModel ? {id:u.id,revision:u.revision,mode:'same-model'} : null;
       current = duplicate ? null : u;
       const d = u?.data || {};
       el('inventory-groups').replaceChildren(...[...new Set(units.map(x => x.data.inventory_group?.trim()).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'pt')).map(value => { const option = document.createElement('option'); option.value = value; return option; }));
@@ -806,7 +808,7 @@
       el('heading').textContent = current ? 'Editar casa' : 'Adicionar casa';
       el('ref').textContent = current
         ? 'Estado: ' + states[current.state]
-        : '';
+        : duplicate ? (sameModel ? 'Nova unidade do mesmo modelo. Reveja os dados copiados.' : 'Nova casa independente. Reveja descrição, medidas, equipamento e fotografias herdados.') : 'Preencha apenas informações confirmadas. Os exemplos não são valores guardados.';
       for (const [k, i] of inputs) {
         const v = k.split('.').reduce((a, p) => a?.[p], d);
         if (k === 'availability') {
@@ -821,6 +823,7 @@
       }
       if (duplicate) {
         inputs.get('name_for_site').value += ' (cópia)';
+        if (!sameModel) inputs.get('inventory_group').value = '';
         inputs.get('reference_azmora').value = '';
         inputs.get('availability').value = 'por_confirmar';
       }

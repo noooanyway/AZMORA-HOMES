@@ -249,6 +249,8 @@ export const ALL = async ({ request, params }) => {
     const source = await db.prepare('SELECT * FROM inventory WHERE id=?').bind(input.source.id).first();
     if (!source || source.revision !== input.source.revision) return reply('A ficha de origem foi alterada. Reabra-a.',409);
     const sourceData = JSON.parse(source.data);
+    if (input.source.mode !== 'same-model') return reply('Escolha explicitamente adicionar uma unidade do mesmo modelo ou duplicar como casa independente. Atualize o ADMIN.',400);
+    if (['brand','model','typology'].some(key => (sourceData[key] || '').trim().toLocaleLowerCase('pt-PT') !== (data[key] || '').trim().toLocaleLowerCase('pt-PT'))) return reply('Marca, modelo ou tipologia diferentes da origem. Use Duplicar ficha para criar uma casa independente.',400);
     const group = sourceData.inventory_group?.trim() || sourceData.name_for_site.slice(0,120);
     data.inventory_group = group;
     const results = await db.batch([
