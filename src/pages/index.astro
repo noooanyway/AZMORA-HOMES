@@ -91,10 +91,15 @@ const featured = content?.home.featured.length ? content.home.featured.flatMap(s
         )
       }<p class="muted">Preços e disponibilidade sob consulta.</p>
     </section>
-    {sold.length > 0 && <section class="section">
-      <div class="section-heading"><h2>Casas vendidas</h2><a class="under" href={url('casas/?estado=vendido')}>Ver casas vendidas</a></div>
-      <div class="cards">{sold.map(h => <Card h={h} />)}</div>
+  </div>
+    {sold.length > 0 && <section class="section sold-section" aria-label="Casas vendidas">
+      <div class="wrap">
+        <span class="sold-accent" aria-hidden="true"></span>
+        <div class="section-heading"><h2>Casas vendidas</h2><a class="under" href={url('casas/?estado=vendido')}>Ver casas vendidas</a></div>
+        <div class="cards">{sold.map(h => <Card h={h} />)}</div>
+      </div>
     </section>}
+  <div class="wrap">
     {
       brands.length > 0 && (
         <div class="brands">
@@ -109,3 +114,18 @@ const featured = content?.home.featured.length ? content.home.featured.flatMap(s
     </section>
   </div></Layout
 >
+
+<style is:global>
+  .sold-section {
+    background: var(--tint);
+    border-block: 1px solid var(--line);
+    padding-block: clamp(42px, 5vw, 72px);
+  }
+  .sold-section .sold-accent {
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: var(--rust);
+    margin-bottom: 18px;
+  }
+</style>
