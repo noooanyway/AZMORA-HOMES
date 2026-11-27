@@ -6,7 +6,7 @@ const count = z.number().int().min(0).max(100).nullable();
 const path = z
   .string()
   .max(220)
-  .regex(/^images\/(?:casas\/[a-z0-9-]+|uploads)\/[a-z0-9-]+\.(?:webp|avif)$/);
+  .regex(/^images\/(?:casas\/[a-z0-9-]+|uploads)\/[a-z0-9-]+\.(?:webp|avif|jpg)$/);
 const picture = z.object({
   src: path,
   small: path,

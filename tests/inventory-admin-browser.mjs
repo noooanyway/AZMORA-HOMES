@@ -473,6 +473,7 @@ export async function testInventoryAdmin({
     .locator('.unit-option')
     .filter({ hasText: 'QA unidade arquivada' })
     .click();
+  await page.locator('#edit').waitFor({state:'visible'});
   assert.equal(await page.locator('#ref').innerText(), 'Estado: Arquivada');
   await page.locator('#back').click();
   assert.equal(await page.locator('#groups').isVisible(), true);

@@ -1,3 +1,4 @@
+import { prepareJpeg } from './jpeg.mjs';
 import { env as bindings } from 'cloudflare:workers';
 import { authorize } from './access.mjs';
 import { fields, limited, dimensions, stripMetadata } from './inventory.mjs';
@@ -91,7 +92,7 @@ export const ALL = async ({ request, params }) => {
     }
     if (action === 'foto') {
       const key = new URL(request.url).searchParams.get('key') || '';
-      if (!/^images\/[a-z0-9/-]+\.(webp|avif)$/.test(key))
+      if (!/^images\/[a-z0-9/-]+\.(webp|avif|jpg)$/.test(key))
         return reply('Fotografia inválida.', 400);
       const file = await env.PHOTOS.get(key);
       return file
@@ -99,7 +100,7 @@ export const ALL = async ({ request, params }) => {
             headers: {
               'Content-Type': key.endsWith('avif')
                 ? 'image/avif'
-                : 'image/webp',
+                : key.endsWith('.jpg') ? 'image/jpeg' : 'image/webp',
             },
           })
         : reply('Fotografia em falta.', 404);
@@ -108,18 +109,21 @@ export const ALL = async ({ request, params }) => {
   }
   if (request.method !== 'POST') return reply('Método inválido.', 405);
   if (action === 'upload') {
-    if (request.headers.get('Content-Type') !== 'image/webp')
+    const mime = request.headers.get('Content-Type');
+    if (!['image/webp','image/jpeg'].includes(mime))
       return reply('Formato inválido.', 415);
     let bytes, dim;
     try {
-      bytes = stripMetadata(await limited(request, 3 * 1024 * 1024));
-      dim = dimensions(bytes);
+      const raw = await limited(request, 3 * 1024 * 1024);
+      if (mime === 'image/jpeg') {
+        const jpeg = prepareJpeg(raw); bytes=jpeg.bytes; dim={width:jpeg.width,height:jpeg.height};
+      } else { bytes = stripMetadata(raw); dim = dimensions(bytes); }
     } catch (e) {
       return reply(e.message, 400);
     }
-    const path = 'images/uploads/' + crypto.randomUUID() + '.webp';
+    const path = 'images/uploads/' + crypto.randomUUID() + (mime === 'image/jpeg' ? '.jpg' : '.webp');
     await env.PHOTOS.put(path, bytes, {
-      httpMetadata: { contentType: 'image/webp' },
+      httpMetadata: { contentType: mime },
     });
     await db
       .prepare('INSERT INTO uploads VALUES(?,?,?)')

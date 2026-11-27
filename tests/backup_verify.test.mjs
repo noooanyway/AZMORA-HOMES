@@ -14,6 +14,8 @@ test('verificador aceita cópia coerente e rejeita fotografia em falta ou caminh
     const make=(src)=>writeFileSync(sql,`CREATE TABLE inventory(data TEXT); INSERT INTO inventory VALUES('${JSON.stringify({media:[{src}]})}'); CREATE TABLE uploads(id); CREATE TABLE activity(id); CREATE TABLE contact_requests(id); CREATE TABLE contact_history(id); CREATE TABLE contact_limits(id); CREATE TABLE contact_tokens(id);`);
     const run=()=>spawnSync('python',['scripts/backup_verify.py',sql,photos],{encoding:'utf8'});
     make('images/uploads/fixture.webp');assert.equal(run().status,0);
+    writeFileSync(path.join(photos,'images','uploads','fixture.jpg'),'synthetic JPEG');
+    make('images/uploads/fixture.jpg');assert.equal(run().status,0);
     make('images/uploads/missing.webp');assert.equal(run().status,1);
     make('../../outside');assert.equal(run().status,1);
     writeFileSync(sql,'not SQL');assert.equal(run().status,1);

@@ -6,7 +6,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
-PHOTO = re.compile(r'^images/(?:uploads|casas/[a-z0-9-]+)/[a-z0-9-]+\.(?:webp|avif)$')
+PHOTO = re.compile(r'^images/(?:uploads|casas/[a-z0-9-]+)/[a-z0-9-]+\.(?:webp|avif|jpg)$')
 
 def verify(sql_file, photos):
     root = Path(photos).resolve(strict=True)

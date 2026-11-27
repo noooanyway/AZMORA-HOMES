@@ -98,6 +98,19 @@ try {
     return JSON.parse(text);
   };
 
+  // Upload validation checks actual bytes, not only the declared MIME type.
+  const uploadsBefore=(await db.prepare('SELECT count(*) AS n FROM uploads').first()).n;
+  for(const [mime,body,status] of [
+    ['image/jpeg',Buffer.from('<script>invalid</script>'),400],
+    ['image/jpeg',fs.readFileSync('tests/fixtures/canvas.jpg').subarray(0,30),400],
+    ['image/webp',fs.readFileSync('tests/fixtures/canvas.jpg'),400],
+    ['image/png',fs.readFileSync('tests/fixtures/canvas.jpg'),415],
+  ]){
+    const response=await call('admin/upload/',{method:'POST',headers:{Origin:origin,'Cf-Access-Jwt-Assertion':token,'Content-Type':mime},body});
+    assert.equal(response.status,status);
+  }
+  assert.equal((await db.prepare('SELECT count(*) AS n FROM uploads').first()).n,uploadsBefore);
+
   // Draft remains private until publish; restores original public defaults.
   assert.equal((await call('admin/configuracoes/')).status,403);
   const cfg = await json(await admin('configuracoes'));
@@ -855,6 +868,21 @@ try {
             e.message + ' / ' + (await page.locator('#notice').innerText()),
           );
         });
+      // Simulate iPhone/WebKit export behavior: WebP request returns PNG, then null.
+      await page.evaluate(() => {
+        const original=HTMLCanvasElement.prototype.toBlob;
+        window.originalPhotoToBlob=original;
+        HTMLCanvasElement.prototype.toBlob=function(cb,type,quality){return original.call(this,cb,type==='image/webp'?'image/png':type,quality);};
+      });
+      await page.locator('#files').setInputFiles('tests/fixtures/canvas.jpg');
+      await page.waitForFunction(()=>document.querySelectorAll('#photos img').length===2 && document.querySelector('#files').value==='');
+      await page.evaluate(() => {
+        HTMLCanvasElement.prototype.toBlob=function(cb,type,quality){if(type==='image/webp'){cb(null);return;}return window.originalPhotoToBlob.call(this,cb,type,quality);};
+      });
+      await page.locator('#files').setInputFiles('tests/fixtures/canvas.jpg');
+      await page.waitForFunction(()=>document.querySelectorAll('#photos img').length===3 && document.querySelector('#files').value==='');
+      await page.waitForFunction(()=>[...document.querySelectorAll('#photos img')].every(img=>img.complete && img.naturalWidth>0));
+      await page.evaluate(()=>{HTMLCanvasElement.prototype.toBlob=window.originalPhotoToBlob;});
       await page.getByRole('button', { name: 'Pré-visualizar' }).click();
       await page.locator('dialog[open]').waitFor();
       assert.equal(await page.getByRole('dialog', {name:'Pré-visualização da casa'}).isVisible(), true);
@@ -868,6 +896,11 @@ try {
       const draft = (await json(await admin('dados'))).units.find(
         (x) => x.data.name_for_site === 'Casa de ensaio',
       );
+      assert.equal(draft.data.media.length,3);
+      for(const photo of draft.data.media.slice(1)){
+        assert.ok(photo.src.endsWith('.jpg'));
+        assert.equal((await call(photo.src)).status,404);
+      }
       const imagePath = draft.data.media[0].src;
       assert.equal((await call(imagePath)).status, 404);
       await json(
@@ -881,6 +914,10 @@ try {
       const image = await call(imagePath);
       assert.equal(image.status, 200);
       assert.equal(image.headers.get('Content-Type'), 'image/webp');
+      for(const photo of draft.data.media.slice(1)){
+        const jpeg=await call(photo.src);assert.equal(jpeg.status,200);assert.equal(jpeg.headers.get('Content-Type'),'image/jpeg');
+        const bytes=new Uint8Array(await jpeg.arrayBuffer());assert.equal(bytes[0],255);assert.equal(bytes[1],216);
+      }
       assert.equal(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,

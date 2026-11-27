@@ -29,7 +29,7 @@ for (const h of houses)
           '--file',
           path.resolve('public', key),
           '--content-type',
-          key.endsWith('.avif') ? 'image/avif' : 'image/webp',
+          key.endsWith('.avif') ? 'image/avif' : key.endsWith('.jpg') ? 'image/jpeg' : 'image/webp',
         ],
         { stdio: 'inherit' },
       );

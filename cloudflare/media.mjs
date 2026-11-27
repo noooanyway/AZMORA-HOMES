@@ -12,7 +12,7 @@ export const GET = async ({ params }) => {
   return photo
     ? new Response(photo.body, {
         headers: {
-          'Content-Type': key.endsWith('.avif') ? 'image/avif' : 'image/webp',
+          'Content-Type': key.endsWith('.avif') ? 'image/avif' : key.endsWith('.jpg') ? 'image/jpeg' : 'image/webp',
         },
       })
     : new Response(null, { status: 404 });

@@ -1,3 +1,12 @@
+# Correção local — envio de fotografias no iPhone (27/11/2026)
+
+- [x] Alternativa automática JPEG quando a exportação WebP falha; libertação de memória por fotografia.
+- [x] Validação/remoção de metadados no servidor, rotas de fotografias e backups adaptados a JPEG, preservando WebP/AVIF existentes.
+- [x] Testes de JPEG inválido, metadados e exportação WebP sem suporte; ver [relatório](UPLOAD_IPHONE.md).
+- [ ] Publicar conjuntamente ADMIN/Worker e confirmar seleção e envio das fotografias num iPhone real. Não requer migração nem alteração de infraestrutura.
+
+---
+
 # Correção local — modelos em várias categorias (26/11/2026)
 
 - [x] Um modelo com unidades disponíveis, reservadas e vendidas aparece uma vez em cada categoria aplicável, sem quantidades públicas.

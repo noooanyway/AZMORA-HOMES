@@ -995,7 +995,7 @@
           image.onerror = reject;
           image.src = objectUrl;
         });
-        return { image, width: image.naturalWidth, height: image.naturalHeight, release: () => URL.revokeObjectURL(objectUrl) };
+        return { image, width: image.naturalWidth, height: image.naturalHeight, release: () => { image.src = ''; URL.revokeObjectURL(objectUrl); } };
       } catch {
         URL.revokeObjectURL(objectUrl);
         throw Error('O navegador não conseguiu abrir esta fotografia. Tente uma imagem JPEG, PNG ou WebP.');
@@ -1016,21 +1016,28 @@
             let decoded;
             try { decoded = await decodePhoto(file); }
             catch { throw Error(`Não foi possível abrir a fotografia ${position + 1} neste navegador. Tente uma versão JPEG, PNG ou WebP.`); }
-            let blob;
+            let blob, canvas;
             try {
               if (!decoded.width || !decoded.height) throw Error('Fotografia sem dimensões válidas.');
               const ratio = Math.min(1, 1800 / Math.max(decoded.width, decoded.height));
-              const canvas = document.createElement('canvas');
+              canvas = document.createElement('canvas');
               canvas.width = Math.max(1, Math.round(decoded.width * ratio));
               canvas.height = Math.max(1, Math.round(decoded.height * ratio));
               const c = canvas.getContext('2d', { alpha: false });
               if (!c) throw Error('Não foi possível preparar a fotografia.');
               c.fillStyle = 'white'; c.fillRect(0, 0, canvas.width, canvas.height);
               c.drawImage(decoded.image, 0, 0, canvas.width, canvas.height);
-              blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/webp', 0.83));
-            } finally { decoded.release(); }
-            if (!blob || blob.type !== 'image/webp') throw Error('Este navegador não conseguiu preparar a fotografia em WebP. Tente outro navegador.');
-            const m = await api('upload/', blob, 'image/webp');
+              // Some browsers decode WebP but cannot encode it; unsupported export returns PNG.
+              const encode = (type, quality) => new Promise(resolve => {
+                try { canvas.toBlob(resolve, type, quality); } catch { resolve(null); }
+              });
+              blob = await encode('image/webp', 0.83);
+              if (!blob || blob.type !== 'image/webp') blob = await encode('image/jpeg', 0.85);
+              if (!blob || !['image/webp','image/jpeg'].includes(blob.type)) throw Error('Não foi possível preparar esta fotografia. As anteriores foram preservadas; volte a selecionar esta imagem.');
+              if (blob.size > 3 * 1024 * 1024) blob = await encode(blob.type, 0.65);
+              if (!blob || !['image/webp','image/jpeg'].includes(blob.type) || blob.size > 3 * 1024 * 1024) throw Error('A fotografia preparada excede o tamanho permitido. Escolha uma versão mais pequena.');
+            } finally { decoded.release(); if(canvas){canvas.width=1;canvas.height=1;} }
+            const m = await api('upload/', blob, blob.type);
             m.alt = index == null ? file.name.replace(/\.[^.]+$/, '').slice(0, 250) || 'Fotografia da casa' : media[index].alt;
             if (index == null) media.push(m); else media[index] = m;
             dirty = true; drawPhotos();
