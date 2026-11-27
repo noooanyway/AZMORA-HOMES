@@ -18,7 +18,7 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
     >
       Casas móveis em segunda mão para os Açores e a Madeira. Preços e disponibilidade sob consulta.
     </p><section id="catalog">
-      <nav class="actions" aria-label="Categorias do catálogo">
+      <nav class="catalog-categories" aria-label="Categorias do catálogo">
         <a class="btn outline" href="?estado=disponivel" aria-current={category === 'disponivel' ? 'page' : undefined}>Disponíveis</a>
         <a class="btn outline" href="?estado=reservado" aria-current={category === 'reservado' ? 'page' : undefined}>Reservadas</a>
         <a class="btn outline" href="?estado=vendido" aria-current={category === 'vendido' ? 'page' : undefined}>Vendidas</a>
@@ -82,3 +82,49 @@ import { Search, SlidersHorizontal, Grid2X2, List, ChevronDown } from 'lucide-as
     </section>
   </div></Layout
 >
+
+<style>
+  .catalog-categories {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: stretch;
+    gap: 10px;
+    width: max-content;
+    max-width: 100%;
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+  .catalog-categories a {
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .catalog-categories a:last-child {
+    position: relative;
+    margin-left: 18px;
+  }
+  .catalog-categories a:last-child::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: var(--line);
+  }
+  @media (max-width: 600px) {
+    .catalog-categories {
+      width: 100%;
+      grid-template-columns: 1.15fr 1.1fr 1fr;
+      gap: 8px;
+    }
+    .catalog-categories a {
+      padding-inline: 6px;
+      font-size: .85rem;
+    }
+    .catalog-categories a:last-child {
+      margin-left: 10px;
+    }
+    .catalog-categories a:last-child::before {
+      left: -10px;
+    }
+  }
+</style>
